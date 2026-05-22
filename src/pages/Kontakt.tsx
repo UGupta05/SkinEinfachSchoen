@@ -75,75 +75,8 @@ export const Kontakt: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Grid (Bento Style) */}
-      <section className="py-12 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Info Card 1: Address */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg flex flex-col justify-between">
-            <div>
-              <MapPin className="text-primary w-10 h-10 mb-6" />
-              <h3 className="font-display text-xl font-bold mb-4 text-primary">Anschrift</h3>
-              <address className="not-italic text-tertiary font-sans text-base leading-relaxed">
-                Lotter Straße 33<br />
-                49078 Osnabrück<br />
-                Deutschland
-              </address>
-            </div>
-            <a
-              className="inline-block mt-8 font-display text-xs font-bold text-primary border-b border-primary hover:text-secondary hover:border-secondary transition-colors uppercase tracking-wider self-start"
-              href="https://maps.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Route planen
-            </a>
-          </div>
-
-          {/* Info Card 2: Contact */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
-            <Phone className="text-primary w-10 h-10 mb-6" />
-            <h3 className="font-display text-xl font-bold mb-4 text-primary">Direktkontakt</h3>
-            <div className="space-y-4">
-              <div>
-                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">Telefon</p>
-                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="tel:+495411234567">
-                  +49 (0) 541 123 45 67
-                </a>
-              </div>
-              <div>
-                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">E-Mail</p>
-                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="mailto:hallo@skin-os.de">
-                  hallo@skin-os.de
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Info Card 3: Hours */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
-            <Clock className="text-primary w-10 h-10 mb-6" />
-            <h3 className="font-display text-xl font-bold mb-4 text-primary">Öffnungszeiten</h3>
-            <ul className="space-y-3 text-tertiary font-sans text-sm">
-              <li className="flex justify-between">
-                <span>Mo – Do:</span>
-                <span className="font-semibold text-primary">09:00 – 18:30</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Freitag:</span>
-                <span className="font-semibold text-primary">09:00 – 17:00</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Samstag:</span>
-                <span className="font-semibold text-primary">Nach Vereinbarung</span>
-              </li>
-              <li className="pt-4 text-xs italic text-slate-muted">Flexible Termine für Berufstätige möglich.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* Form & Map Section */}
-      <section className="py-24 bg-soft-shell/50 border-t border-outline-variant/10">
+      <section className="py-24 bg-soft-shell/50 border-y border-outline-variant/10">
         <div className="px-margin-mobile md:px-gutter max-w-container-max mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Form Canvas */}
@@ -321,6 +254,73 @@ export const Kontakt: React.FC = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Grid (Bento Style) */}
+      <section className="py-24 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Info Card 1: Address */}
+          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg flex flex-col justify-between">
+            <div>
+              <MapPin className="text-primary w-10 h-10 mb-6" />
+              <h3 className="font-display text-xl font-bold mb-4 text-primary">Anschrift</h3>
+              <address className="not-italic text-tertiary font-sans text-base leading-relaxed">
+                Lotter Straße 33<br />
+                49078 Osnabrück<br />
+                Deutschland
+              </address>
+            </div>
+            <a
+              className="inline-block mt-8 font-display text-xs font-bold text-primary border-b border-primary hover:text-secondary hover:border-secondary transition-colors uppercase tracking-wider self-start"
+              href="https://maps.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Route planen
+            </a>
+          </div>
+
+          {/* Info Card 2: Contact */}
+          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
+            <Phone className="text-primary w-10 h-10 mb-6" />
+            <h3 className="font-display text-xl font-bold mb-4 text-primary">Direktkontakt</h3>
+            <div className="space-y-4">
+              <div>
+                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">Telefon</p>
+                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="tel:+495411234567">
+                  +49 (0) 541 123 45 67
+                </a>
+              </div>
+              <div>
+                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">E-Mail</p>
+                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="mailto:hallo@skin-os.de">
+                  hallo@skin-os.de
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Card 3: Hours */}
+          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
+            <Clock className="text-primary w-10 h-10 mb-6" />
+            <h3 className="font-display text-xl font-bold mb-4 text-primary">Öffnungszeiten</h3>
+            <ul className="space-y-3 text-tertiary font-sans text-sm">
+              <li className="flex justify-between">
+                <span>Mo – Do:</span>
+                <span className="font-semibold text-primary">09:00 – 18:30</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Freitag:</span>
+                <span className="font-semibold text-primary">09:00 – 17:00</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Samstag:</span>
+                <span className="font-semibold text-primary">Nach Vereinbarung</span>
+              </li>
+              <li className="pt-4 text-xs italic text-slate-muted">Flexible Termine für Berufstätige möglich.</li>
+            </ul>
           </div>
         </div>
       </section>
