@@ -192,6 +192,18 @@ export const Admin: React.FC = () => {
     };
   }, [user]);
 
+  // Automatically switch status to 'pending' if date/time changes from original
+  useEffect(() => {
+    if (!selectedAppointmentForEdit) return;
+    const originalDateIso = parseGermanDateStringToIso(selectedAppointmentForEdit.date, selectedAppointmentForEdit.created_at);
+    const originalTimeIso = parseGermanTimeStringToIso(selectedAppointmentForEdit.time);
+    
+    const hasChanged = editDate !== originalDateIso || editTime !== originalTimeIso;
+    if (hasChanged && editStatus === 'confirmed') {
+      setEditStatus('pending');
+    }
+  }, [editDate, editTime, selectedAppointmentForEdit, editStatus]);
+
   const fetchAppointments = async () => {
     setLoadingData(true);
     setDataError(null);
@@ -353,6 +365,10 @@ export const Admin: React.FC = () => {
   };
 
   const grouped = getGroupedAppointments();
+
+  const originalDateIso = selectedAppointmentForEdit ? parseGermanDateStringToIso(selectedAppointmentForEdit.date, selectedAppointmentForEdit.created_at) : '';
+  const originalTimeIso = selectedAppointmentForEdit ? parseGermanTimeStringToIso(selectedAppointmentForEdit.time) : '';
+  const isRescheduled = !!selectedAppointmentForEdit && (editDate !== originalDateIso || editTime !== originalTimeIso);
 
   // Metrics
   const totalCount = appointments.length;
@@ -982,9 +998,16 @@ export const Admin: React.FC = () => {
                   className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
                 >
                   <option value="pending">Ausstehend (Prüfung)</option>
-                  <option value="confirmed">Bestätigt (Gebucht)</option>
+                  <option value="confirmed" disabled={isRescheduled}>
+                    Bestätigt (Gebucht) {isRescheduled ? ' (nur nach Zustimmung des Kunden)' : ''}
+                  </option>
                   <option value="cancelled">Storniert</option>
                 </select>
+                {isRescheduled && (
+                  <p className="text-[11px] text-primary/85 mt-2 font-sans leading-relaxed bg-primary/5 p-3 rounded-xl border border-primary/10">
+                    ℹ️ Bei einer Terminverschiebung muss der Kunde dem neuen Termin erst zustimmen. Der Termin wird daher automatisch auf <strong>"Ausstehend"</strong> gesetzt und der Kunde erhält E-Mail-Buttons zur Bestätigung.
+                  </p>
+                )}
               </div>
               
               <div>
