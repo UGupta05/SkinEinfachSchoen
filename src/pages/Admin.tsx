@@ -960,30 +960,58 @@ export const Admin: React.FC = () => {
               </div>
               
               {editStatus !== 'cancelled' && (
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
-                      Datum
-                    </label>
-                    <input
-                      type="date"
-                      value={editDate}
-                      onChange={(e) => setEditDate(e.target.value)}
-                      required
-                      className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
-                    />
+                <div className="space-y-4 border-b border-outline-variant/5 pb-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                        Datum
+                      </label>
+                      <input
+                        type="date"
+                        value={editDate}
+                        onChange={(e) => setEditDate(e.target.value)}
+                        required
+                        className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                        Uhrzeit (Freie Eingabe)
+                      </label>
+                      <input
+                        type="time"
+                        value={editTime}
+                        onChange={(e) => setEditTime(e.target.value)}
+                        required
+                        className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                      />
+                    </div>
                   </div>
+                  
                   <div>
-                    <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
-                      Uhrzeit
+                    <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-2 flex justify-between">
+                      <span>Schnellauswahl Uhrzeit</span>
+                      <span className="text-[9px] text-outline italic font-normal">Klicken zum Auswählen</span>
                     </label>
-                    <input
-                      type="time"
-                      value={editTime}
-                      onChange={(e) => setEditTime(e.target.value)}
-                      required
-                      className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
-                    />
+                    <div className="grid grid-cols-4 gap-2 max-h-32 overflow-y-auto pr-1 pb-1 scrollbar-thin scrollbar-thumb-outline-variant/20 scrollbar-track-transparent">
+                      {['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'].map((time) => {
+                        const isSelected = editTime === time;
+                        return (
+                          <button
+                            key={time}
+                            type="button"
+                            onClick={() => setEditTime(time)}
+                            className={`py-2 px-1 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 ${
+                              isSelected
+                                ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
+                                : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
+                            }`}
+                          >
+                            {time} Uhr
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}
