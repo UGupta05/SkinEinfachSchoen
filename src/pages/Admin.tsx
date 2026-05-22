@@ -276,20 +276,29 @@ export const Admin: React.FC = () => {
   const handleSaveEdit = async () => {
     if (!selectedAppointmentForEdit) return;
     
-    const formattedDate = formatDateToGermanString(editDate);
-    const formattedTime = formatTimeToGermanString(editTime);
-    
-    if (!formattedDate || !formattedTime) {
-      alert('Bitte geben Sie ein gültiges Datum und eine Uhrzeit an.');
-      return;
-    }
-    
-    await updateAppointment(selectedAppointmentForEdit.id, {
-      date: formattedDate,
-      time: formattedTime,
+    const updates: {
+      date?: string;
+      time?: string;
+      status?: 'pending' | 'confirmed' | 'cancelled';
+      status_reason?: string | null;
+    } = {
       status: editStatus,
       status_reason: editReason.trim() || null
-    });
+    };
+    
+    if (editStatus !== 'cancelled') {
+      const formattedDate = formatDateToGermanString(editDate);
+      const formattedTime = formatTimeToGermanString(editTime);
+      
+      if (!formattedDate || !formattedTime) {
+        alert('Bitte geben Sie ein gültiges Datum und eine Uhrzeit an.');
+        return;
+      }
+      updates.date = formattedDate;
+      updates.time = formattedTime;
+    }
+    
+    await updateAppointment(selectedAppointmentForEdit.id, updates);
     
     setSelectedAppointmentForEdit(null);
   };
@@ -934,32 +943,34 @@ export const Admin: React.FC = () => {
                 <p className="text-outline">{selectedAppointmentForEdit.category} • {selectedAppointmentForEdit.duration} • {selectedAppointmentForEdit.price}</p>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
-                    Datum
-                  </label>
-                  <input
-                    type="date"
-                    value={editDate}
-                    onChange={(e) => setEditDate(e.target.value)}
-                    required
-                    className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
-                  />
+              {editStatus !== 'cancelled' && (
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                      Datum
+                    </label>
+                    <input
+                      type="date"
+                      value={editDate}
+                      onChange={(e) => setEditDate(e.target.value)}
+                      required
+                      className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                      Uhrzeit
+                    </label>
+                    <input
+                      type="time"
+                      value={editTime}
+                      onChange={(e) => setEditTime(e.target.value)}
+                      required
+                      className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
-                    Uhrzeit
-                  </label>
-                  <input
-                    type="time"
-                    value={editTime}
-                    onChange={(e) => setEditTime(e.target.value)}
-                    required
-                    className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
-                  />
-                </div>
-              </div>
+              )}
               
               <div>
                 <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">

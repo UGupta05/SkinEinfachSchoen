@@ -305,7 +305,9 @@ export const getBookingUpdatedTemplate = (
   oldDate?: string,
   oldTime?: string,
   oldService?: string,
-  reason?: string
+  reason?: string,
+  id?: string,
+  baseUrl?: string
 ): string => {
   const changeDetails = (oldDate && oldDate !== date) || (oldTime && oldTime !== time) || (oldService && oldService !== serviceName)
     ? `<p style="font-size: 13px; color: #7496A8; margin-bottom: 20px;"><em>Bisheriger Termin: ${oldService || serviceName} am ${oldDate || date} um ${oldTime || time}</em></p>`
@@ -349,6 +351,18 @@ export const getBookingUpdatedTemplate = (
       </tr>
     </table>
     
+    ${id && baseUrl ? `
+    <div style="margin: 30px 0; padding: 24px; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center; font-family: sans-serif;">
+      <h3 style="margin-top: 0; color: #1e293b; font-family: 'Montserrat', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Bitte bestätigen Sie diesen Ausweichtermin</h3>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 20px; line-height: 1.5; font-family: sans-serif;">Passt Ihnen dieser neue Termin? Bitte teilen Sie uns Ihre Entscheidung per Klick mit:</p>
+      
+      <div style="margin: 10px 0;">
+        <a href="${baseUrl}/termin-antwort?id=${id}&action=accept" style="display: inline-block; background-color: #0284c7; color: #ffffff; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #0284c7; text-align: center;">Ja, Verschiebung akzeptieren</a>
+        <a href="${baseUrl}/termin-antwort?id=${id}&action=decline" style="display: inline-block; background-color: #ffffff; color: #ef4444; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #fecaca; text-align: center;">Nein, ablehnen & neu buchen</a>
+      </div>
+    </div>
+    ` : ''}
+
     <p><strong>Hinweis:</strong> Auch für den geänderten Termin gilt unsere 24-Stunden-Stornierungsfrist.</p>
     <p>Wir freuen uns auf Sie!</p>
     <p>Herzliche Grüße,<br>Ihr Team von Skin Einfach Schön</p>

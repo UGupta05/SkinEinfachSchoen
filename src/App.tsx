@@ -7,6 +7,7 @@ import { Terminbuchung } from './pages/Terminbuchung';
 import { Kontakt } from './pages/Kontakt';
 import { Shop } from './pages/Shop';
 import { Admin } from './pages/Admin';
+import { TerminAntwort } from './pages/TerminAntwort';
 import {
   JetPeel,
   IPLHaarentfernung,
@@ -44,6 +45,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/terminbuchung" element={<Terminbuchung />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/termin-antwort" element={<TerminAntwort />} />
         </Routes>
       </Layout>
     </Router>

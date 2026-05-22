@@ -33,6 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const {
+    id,
     customer_name,
     customer_email,
     service_name,
@@ -85,6 +86,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const oldService = old_record?.service_name;
 
         if (oldDate !== date || oldTime !== time || oldService !== service_name) {
+          const protocol = req.headers['x-forwarded-proto'] || 'http';
+          const baseUrl = `${protocol}://${req.headers.host}`;
+
           subject = 'Terminänderung - Skin Einfach Schön';
           html = getBookingUpdatedTemplate(
             customer_name,
@@ -96,7 +100,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             oldDate,
             oldTime,
             oldService,
-            status_reason
+            status_reason,
+            id,
+            baseUrl
           );
         } else {
           return res.status(200).json({ message: 'No actionable fields changed. Skipping.' });
