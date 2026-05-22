@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
-import { getBookingReminderTemplate } from '../helpers/emailTemplates';
+import { getBookingReminderTemplate } from '../helpers/emailTemplates.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // 1. Verify cron invocation authorization in production

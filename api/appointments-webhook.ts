@@ -4,7 +4,7 @@ import {
   getBookingConfirmedTemplate,
   getBookingCancelledTemplate,
   getBookingUpdatedTemplate
-} from './helpers/emailTemplates';
+} from './helpers/emailTemplates.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // 1. Only allow POST requests
