@@ -17,7 +17,8 @@ import {
   Filter,
   Inbox,
   Check,
-  ChevronRight
+  ChevronRight,
+  Edit
 } from 'lucide-react';
 
 interface Appointment {
@@ -35,6 +36,7 @@ interface Appointment {
   customer_phone?: string;
   notes?: string;
   status: 'pending' | 'confirmed' | 'cancelled';
+  status_reason?: string | null;
 }
 
 export const Admin: React.FC = () => {
@@ -52,6 +54,79 @@ export const Admin: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'calendar' | 'list'>('calendar');
+
+  // Edit Modal states
+  const [selectedAppointmentForEdit, setSelectedAppointmentForEdit] = useState<Appointment | null>(null);
+  const [editDate, setEditDate] = useState('');
+  const [editTime, setEditTime] = useState('');
+  const [editStatus, setEditStatus] = useState<'pending' | 'confirmed' | 'cancelled'>('pending');
+  const [editReason, setEditReason] = useState('');
+
+  // Helper to parse "Sa, 23. Mai" to ISO date "2026-05-23"
+  const parseGermanDateStringToIso = (dateStr: string, createdAtStr?: string): string => {
+    try {
+      const parts = dateStr.split(', ');
+      if (parts.length < 2) return '';
+      const dayMonth = parts[1].split('. ');
+      if (dayMonth.length < 2) return '';
+      const day = parseInt(dayMonth[0], 10);
+      const monthName = dayMonth[1].trim();
+      
+      const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+      const monthIndex = months.indexOf(monthName);
+      if (monthIndex === -1) return '';
+      
+      let year = new Date().getFullYear();
+      if (createdAtStr) {
+        year = new Date(createdAtStr).getFullYear();
+      }
+      
+      const pad = (num: number) => num.toString().padStart(2, '0');
+      return `${year}-${pad(monthIndex + 1)}-${pad(day)}`;
+    } catch (e) {
+      console.error('Error parsing German date:', e);
+      return '';
+    }
+  };
+
+  // Helper to format ISO date "2026-05-23" to German "Sa, 23. Mai"
+  const formatDateToGermanString = (isoDateStr: string): string => {
+    try {
+      const parts = isoDateStr.split('-');
+      if (parts.length !== 3) return '';
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      
+      const d = new Date(year, month, day);
+      if (isNaN(d.getTime())) return '';
+      
+      const daysOfWeek = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+      const months = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+      return `${daysOfWeek[d.getDay()]}, ${d.getDate()}. ${months[d.getMonth()]}`;
+    } catch (e) {
+      console.error('Error formatting date to German:', e);
+      return '';
+    }
+  };
+
+  // Helper to parse "14:30 Uhr" to "14:30"
+  const parseGermanTimeStringToIso = (timeStr: string): string => {
+    return timeStr.replace(' Uhr', '').trim();
+  };
+
+  // Helper to format "14:30" to "14:30 Uhr"
+  const formatTimeToGermanString = (isoTimeStr: string): string => {
+    return `${isoTimeStr} Uhr`;
+  };
+
+  const openEditModal = (app: Appointment) => {
+    setSelectedAppointmentForEdit(app);
+    setEditDate(parseGermanDateStringToIso(app.date, app.created_at));
+    setEditTime(parseGermanTimeStringToIso(app.time));
+    setEditStatus(app.status);
+    setEditReason(app.status_reason || '');
+  };
 
   // Check current session on mount
   useEffect(() => {
@@ -164,26 +239,59 @@ export const Admin: React.FC = () => {
     }
   };
 
-  const updateAppointmentStatus = async (id: string, status: 'confirmed' | 'cancelled') => {
+  const updateAppointment = async (
+    id: string,
+    updates: {
+      date?: string;
+      time?: string;
+      status?: 'pending' | 'confirmed' | 'cancelled';
+      status_reason?: string | null;
+    }
+  ) => {
     setActionLoadingId(id);
     try {
       const { error } = await supabase
         .from('appointments')
-        .update({ status })
+        .update(updates)
         .eq('id', id);
 
       if (error) throw error;
       
       // Update local state in case realtime event hasn't fired yet
       setAppointments((prev) =>
-        prev.map((app) => (app.id === id ? { ...app, status } : app))
+        prev.map((app) => (app.id === id ? { ...app, ...updates } : app))
       );
     } catch (err: any) {
-      console.error('Error updating status:', err);
-      alert('Fehler beim Aktualisieren des Status: ' + err.message);
+      console.error('Error updating appointment:', err);
+      alert('Fehler beim Aktualisieren des Termins: ' + err.message);
     } finally {
       setActionLoadingId(null);
     }
+  };
+
+  const updateAppointmentStatus = async (id: string, status: 'confirmed' | 'cancelled') => {
+    await updateAppointment(id, { status });
+  };
+
+  const handleSaveEdit = async () => {
+    if (!selectedAppointmentForEdit) return;
+    
+    const formattedDate = formatDateToGermanString(editDate);
+    const formattedTime = formatTimeToGermanString(editTime);
+    
+    if (!formattedDate || !formattedTime) {
+      alert('Bitte geben Sie ein gültiges Datum und eine Uhrzeit an.');
+      return;
+    }
+    
+    await updateAppointment(selectedAppointmentForEdit.id, {
+      date: formattedDate,
+      time: formattedTime,
+      status: editStatus,
+      status_reason: editReason.trim() || null
+    });
+    
+    setSelectedAppointmentForEdit(null);
   };
 
   const deleteAppointment = async (id: string) => {
@@ -591,10 +699,28 @@ export const Admin: React.FC = () => {
                                 <p className="italic text-outline leading-normal">{app.notes}</p>
                               </div>
                             )}
+                            {app.status_reason && (
+                              <div className="pt-2 border-t border-outline-variant/10 flex gap-2 items-start mt-2">
+                                <AlertCircle className="w-3.5 h-3.5 text-tertiary/60 shrink-0 mt-0.5" />
+                                <p className="text-[11px] text-tertiary font-medium leading-normal">
+                                  <span className="font-bold text-primary">Grund/Hinweis:</span> {app.status_reason}
+                                </p>
+                              </div>
+                            )}
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex justify-end gap-2 pl-2 border-t border-outline-variant/5 pt-4">
+                          <div className="flex justify-end gap-2 pl-2 border-t border-outline-variant/5 pt-4 flex-wrap">
+                            <button
+                              onClick={() => openEditModal(app)}
+                              disabled={actionLoadingId === app.id}
+                              className="px-2.5 py-1.5 border border-outline-variant/15 hover:bg-soft-shell text-primary rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1"
+                              title="Bearbeiten / Verschieben"
+                            >
+                              <Edit className="w-3.5 h-3.5" />
+                              <span>Bearbeiten</span>
+                            </button>
+
                             {app.status === 'pending' && (
                               <>
                                 <button
@@ -677,6 +803,12 @@ export const Admin: React.FC = () => {
                         <p className="font-semibold text-onyx-text">{app.customer_name}</p>
                         <p className="text-xs text-outline font-sans break-all">{app.customer_email}</p>
                         {app.customer_phone && <p className="text-xs text-outline font-sans">{app.customer_phone}</p>}
+                        {app.notes && <p className="text-xs text-outline font-sans italic">Notiz: {app.notes}</p>}
+                        {app.status_reason && (
+                          <p className="text-xs text-primary font-sans font-medium">
+                            Grund/Hinweis: {app.status_reason}
+                          </p>
+                        )}
                       </td>
                       <td className="p-4 md:p-6 space-y-1">
                         <p className="font-semibold text-onyx-text leading-tight">{app.service_name}</p>
@@ -701,6 +833,14 @@ export const Admin: React.FC = () => {
                       </td>
                       <td className="p-4 md:p-6 text-right">
                         <div className="flex justify-end items-center gap-2">
+                          <button
+                            onClick={() => openEditModal(app)}
+                            disabled={actionLoadingId === app.id}
+                            className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-pure-white rounded-lg transition-all"
+                            title="Bearbeiten / Verschieben"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </button>
                           {app.status === 'pending' && (
                             <>
                               <button
@@ -760,6 +900,121 @@ export const Admin: React.FC = () => {
         )}
 
       </main>
+
+      {/* Edit Appointment Modal */}
+      {selectedAppointmentForEdit && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-onyx-text/45 backdrop-blur-sm transition-opacity"
+            onClick={() => setSelectedAppointmentForEdit(null)}
+          ></div>
+          
+          <div className="relative w-full max-w-lg bg-pure-white border border-outline-variant/15 rounded-2xl shadow-2xl overflow-hidden medical-glow flex flex-col max-h-[90vh] text-left animate-in fade-in zoom-in-95 duration-200">
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-sky-accent to-primary"></div>
+            
+            <div className="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-soft-shell/25">
+              <div>
+                <h3 className="font-display text-base font-bold text-primary">Termin bearbeiten & verschieben</h3>
+                <p className="text-[10px] text-outline uppercase tracking-wider font-bold mt-0.5">
+                  Kunde: {selectedAppointmentForEdit.customer_name}
+                </p>
+              </div>
+              <button 
+                onClick={() => setSelectedAppointmentForEdit(null)}
+                className="text-outline hover:text-primary p-1.5 hover:bg-soft-shell rounded-lg transition-colors"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-5 overflow-y-auto">
+              <div className="bg-soft-shell/40 border border-outline-variant/5 rounded-xl p-4 text-xs space-y-1">
+                <p className="font-bold text-primary uppercase tracking-wider text-[9px]">Behandlung</p>
+                <p className="font-bold text-onyx-text text-sm">{selectedAppointmentForEdit.service_name}</p>
+                <p className="text-outline">{selectedAppointmentForEdit.category} • {selectedAppointmentForEdit.duration} • {selectedAppointmentForEdit.price}</p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                    Datum
+                  </label>
+                  <input
+                    type="date"
+                    value={editDate}
+                    onChange={(e) => setEditDate(e.target.value)}
+                    required
+                    className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                    Uhrzeit
+                  </label>
+                  <input
+                    type="time"
+                    value={editTime}
+                    onChange={(e) => setEditTime(e.target.value)}
+                    required
+                    className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                  Status
+                </label>
+                <select
+                  value={editStatus}
+                  onChange={(e: any) => setEditStatus(e.target.value)}
+                  className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
+                >
+                  <option value="pending">Ausstehend (Prüfung)</option>
+                  <option value="confirmed">Bestätigt (Gebucht)</option>
+                  <option value="cancelled">Storniert</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5 flex justify-between">
+                  <span>Nachricht / Grund für den Kunden</span>
+                  <span className="text-[9px] text-outline lowercase font-normal italic">Wird in die E-Mail eingefügt</span>
+                </label>
+                <textarea
+                  value={editReason}
+                  onChange={(e) => setEditReason(e.target.value)}
+                  placeholder="z.B. 'Leider müssen wir den Termin aus organisatorischen Gründen um eine Stunde verschieben.' oder 'Stornierung auf Kundenwunsch.'"
+                  rows={3}
+                  className="w-full bg-pure-white border border-outline-variant/10 p-3.5 rounded-xl text-sm text-onyx-text placeholder:text-outline/35 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all resize-none"
+                />
+              </div>
+            </div>
+            
+            <div className="p-6 border-t border-outline-variant/10 bg-soft-shell/15 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setSelectedAppointmentForEdit(null)}
+                className="px-4 py-2 border border-outline-variant/15 hover:bg-soft-shell/50 text-tertiary rounded-xl text-xs font-bold uppercase tracking-wider transition-colors active:scale-95"
+              >
+                Abbrechen
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveEdit}
+                disabled={actionLoadingId === selectedAppointmentForEdit.id}
+                className="px-5 py-2.5 bg-primary hover:opacity-90 text-pure-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all active:scale-95 disabled:bg-slate-muted/20 disabled:text-outline"
+              >
+                {actionLoadingId === selectedAppointmentForEdit.id ? (
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin mx-auto" />
+                ) : (
+                  'Speichern'
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -40,7 +40,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     time,
     price,
     duration,
-    status
+    status,
+    status_reason
   } = record;
 
   if (!customer_email) {
@@ -70,10 +71,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (oldStatus !== newStatus) {
         if (newStatus === 'confirmed') {
           subject = 'Termin bestätigt - Skin Einfach Schön';
-          html = getBookingConfirmedTemplate(customer_name, service_name, date, time, price, duration);
+          html = getBookingConfirmedTemplate(customer_name, service_name, date, time, price, duration, status_reason);
         } else if (newStatus === 'cancelled') {
           subject = 'Termin storniert - Skin Einfach Schön';
-          html = getBookingCancelledTemplate(customer_name, service_name, date, time);
+          html = getBookingCancelledTemplate(customer_name, service_name, date, time, status_reason);
         } else {
           return res.status(200).json({ message: `Status updated to ${newStatus}. No email trigger mapped.` });
         }
@@ -94,7 +95,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             duration,
             oldDate,
             oldTime,
-            oldService
+            oldService,
+            status_reason
           );
         } else {
           return res.status(200).json({ message: 'No actionable fields changed. Skipping.' });

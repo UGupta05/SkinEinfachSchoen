@@ -1,4 +1,29 @@
 import http from 'http';
+import fs from 'fs';
+import path from 'path';
+
+// Load .env manually
+try {
+  const envPath = path.resolve(process.cwd(), '.env');
+  if (fs.existsSync(envPath)) {
+    const envContent = fs.readFileSync(envPath, 'utf-8');
+    envContent.split('\n').forEach((line) => {
+      const match = line.match(/^\s*([^#=]+)\s*=\s*(.*)\s*$/);
+      if (match) {
+        const key = match[1].trim();
+        let val = match[2].trim();
+        if (val.startsWith('"') && val.endsWith('"')) {
+          val = val.substring(1, val.length - 1);
+        } else if (val.startsWith("'") && val.endsWith("'")) {
+          val = val.substring(1, val.length - 1);
+        }
+        process.env[key] = val;
+      }
+    });
+  }
+} catch (e) {
+  console.warn('Could not load .env file:', e.message);
+}
 
 const sendRequest = (method, path, body = null, headers = {}) => {
   return new Promise((resolve, reject) => {
@@ -100,7 +125,7 @@ const run = async () => {
       const payload = {
         type: 'UPDATE',
         table: 'appointments',
-        record: { ...mockAppointment, status: 'confirmed' },
+        record: { ...mockAppointment, status: 'confirmed', status_reason: 'Bestätigt! Ihr exklusiver Behandlungstermin ist nun fest gebucht.' },
         old_record: { ...mockAppointment, status: 'pending' }
       };
       const res = await sendRequest('POST', '/api/appointments-webhook', payload, webhookSecretHeaders);
@@ -113,7 +138,7 @@ const run = async () => {
       const payload = {
         type: 'UPDATE',
         table: 'appointments',
-        record: { ...mockAppointment, status: 'cancelled' },
+        record: { ...mockAppointment, status: 'cancelled', status_reason: 'Wir haben Ihren Termin storniert, da Sie uns telefonisch um eine Verschiebung gebeten haben.' },
         old_record: { ...mockAppointment, status: 'confirmed' }
       };
       const res = await sendRequest('POST', '/api/appointments-webhook', payload, webhookSecretHeaders);
@@ -126,7 +151,7 @@ const run = async () => {
       const payload = {
         type: 'UPDATE',
         table: 'appointments',
-        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30 Uhr' },
+        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30 Uhr', status_reason: 'Aufgrund einer teaminternen Fortbildung mussten wir Ihren Termin um einige Tage verschieben. Wir bitten um Verständnis.' },
         old_record: mockAppointment
       };
       const res = await sendRequest('POST', '/api/appointments-webhook', payload, webhookSecretHeaders);

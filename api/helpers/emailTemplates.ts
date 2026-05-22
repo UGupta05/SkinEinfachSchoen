@@ -215,13 +215,21 @@ export const getBookingConfirmedTemplate = (
   date: string,
   time: string,
   price: string,
-  duration: string
+  duration: string,
+  reason?: string
 ): string => {
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
     <p>gute Nachrichten! Ihr gewünschter Termin bei <strong>Skin Einfach Schön</strong> wurde erfolgreich von uns <strong>bestätigt</strong>.</p>
     <p>Wir haben die Zeit exklusiv für Sie reserviert und freuen uns darauf, Sie bei uns in der Praxis begrüßen zu dürfen. Hier sind Ihre Termindetails:</p>
     
+    ${reason ? `
+    <div style="background-color: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 8px; padding: 16px; margin: 20px 0; color: #166534; font-size: 14px; font-family: sans-serif; text-align: left;">
+      <strong style="color: #14532d; font-family: 'Montserrat', Helvetica, Arial, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Nachricht von uns:</strong>
+      ${reason}
+    </div>
+    ` : ''}
+
     <table class="details-table" role="presentation">
       <tr>
         <td class="details-label">Behandlung:</td>
@@ -261,11 +269,20 @@ export const getBookingCancelledTemplate = (
   customerName: string,
   serviceName: string,
   date: string,
-  time: string
+  time: string,
+  reason?: string
 ): string => {
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
     <p>Ihr Termin für die Behandlung <strong>${serviceName}</strong> am <strong>${date}</strong> um <strong>${time}</strong> wurde <strong>storniert</strong>.</p>
+    
+    ${reason ? `
+    <div style="background-color: #fef2f2; border-left: 4px solid #dc2626; border-radius: 8px; padding: 16px; margin: 20px 0; color: #991b1b; font-size: 14px; font-family: sans-serif; text-align: left;">
+      <strong style="color: #7f1d1d; font-family: 'Montserrat', Helvetica, Arial, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Grund für die Stornierung:</strong>
+      ${reason}
+    </div>
+    ` : ''}
+
     <p>Falls dies ein Versehen war, oder Sie einen neuen Termin vereinbaren möchten, können Sie dies gerne jederzeit online tun.</p>
     
     <div class="button-container">
@@ -287,7 +304,8 @@ export const getBookingUpdatedTemplate = (
   duration: string,
   oldDate?: string,
   oldTime?: string,
-  oldService?: string
+  oldService?: string,
+  reason?: string
 ): string => {
   const changeDetails = (oldDate && oldDate !== date) || (oldTime && oldTime !== time) || (oldService && oldService !== serviceName)
     ? `<p style="font-size: 13px; color: #7496A8; margin-bottom: 20px;"><em>Bisheriger Termin: ${oldService || serviceName} am ${oldDate || date} um ${oldTime || time}</em></p>`
@@ -296,6 +314,14 @@ export const getBookingUpdatedTemplate = (
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
     <p>Ihr Termin bei <strong>Skin Einfach Schön</strong> wurde erfolgreich <strong>geändert</strong>.</p>
+    
+    ${reason ? `
+    <div style="background-color: #f0f9ff; border-left: 4px solid #0284c7; border-radius: 8px; padding: 16px; margin: 20px 0; color: #075985; font-size: 14px; font-family: sans-serif; text-align: left;">
+      <strong style="color: #0c4a6e; font-family: 'Montserrat', Helvetica, Arial, sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Nachricht von uns:</strong>
+      ${reason}
+    </div>
+    ` : ''}
+
     <p>Hier sind die neuen Details zu Ihrem Termin:</p>
     
     ${changeDetails}
