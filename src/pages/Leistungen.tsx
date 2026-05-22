@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { TREATMENTS } from '../data/mockData';
-import { Sparkles, ArrowRight, ShieldCheck, Heart, Star } from 'lucide-react';
+import { Sparkles, ArrowRight, Heart, Star } from 'lucide-react';
 
 export const Leistungen: React.FC = () => {
   return (
