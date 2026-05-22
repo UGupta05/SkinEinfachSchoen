@@ -1407,42 +1407,20 @@ const getAvailableSlotsForDate = (dateObj: Date, durationStr: string): string[] 
   return slots;
 };
 
-// Helper to check if a slot overlaps with an expert's existing bookings
-const isExpertOverlapping = (
-  expertName: string,
-  dateStr: string,
-  slotTimeStr: string,
-  treatmentDurationMin: number,
-  appointmentsList: any[]
-): boolean => {
-  const [slotH, slotM] = slotTimeStr.split(':').map(Number);
-  const slotStart = slotH * 60 + slotM;
-  const slotEnd = slotStart + treatmentDurationMin;
 
-  const dailyExpertApps = appointmentsList.filter(app => 
-    app.date === dateStr && 
-    (app.expert === expertName || (app.expert && app.expert.includes(expertName))) &&
-    app.status !== 'cancelled'
-  );
 
-  for (const app of dailyExpertApps) {
-    if (!app.time) continue;
-    const cleanTime = app.time.replace(' Uhr', '').trim();
-    const [appH, appM] = cleanTime.split(':').map(Number);
-    if (isNaN(appH) || isNaN(appM)) continue;
-    const appStart = appH * 60 + appM;
-    const appDuration = parseDurationToMinutes(app.duration);
-    const appEnd = appStart + appDuration;
-
-    if (slotStart < appEnd && appStart < slotEnd) {
-      return true; // Overlaps!
-    }
-  }
-
-  return false;
+// Helper to check if two slot intervals overlap
+const slotOverlaps = (t1: string, d1: number, t2: string, d2: number): boolean => {
+  const [h1, m1] = t1.replace(' Uhr', '').split(':').map(Number);
+  const [h2, m2] = t2.replace(' Uhr', '').split(':').map(Number);
+  const start1 = h1 * 60 + m1;
+  const end1 = start1 + d1;
+  const start2 = h2 * 60 + m2;
+  const end2 = start2 + d2;
+  return start1 < end2 && start2 < end1;
 };
 
-// Helper to check if a slot is available based on selected expert preference
+// Helper to check if a slot is available based on selected expert preference and refined concurrency rules
 const isSlotAvailable = (
   dateStr: string,
   slotTimeStr: string,
@@ -1450,16 +1428,38 @@ const isSlotAvailable = (
   selectedExpert: string,
   appointmentsList: any[]
 ): boolean => {
-  if (selectedExpert === 'Isabel') {
-    return !isExpertOverlapping('Isabel', dateStr, slotTimeStr, treatmentDurationMin, appointmentsList);
-  } else if (selectedExpert === 'Sofia') {
-    return !isExpertOverlapping('Sofia', dateStr, slotTimeStr, treatmentDurationMin, appointmentsList);
-  } else {
-    // 'Keine Präferenz' - available if at least one expert is free
-    const isIsabelFree = !isExpertOverlapping('Isabel', dateStr, slotTimeStr, treatmentDurationMin, appointmentsList);
-    const isSofiaFree = !isExpertOverlapping('Sofia', dateStr, slotTimeStr, treatmentDurationMin, appointmentsList);
-    return isIsabelFree || isSofiaFree;
+  // Find all appointments on this date that overlap with our slot
+  const overlappingApps = appointmentsList.filter(app => {
+    if (app.date !== dateStr || app.status === 'cancelled') {
+      return false;
+    }
+    if (!app.time) return false;
+    const appDuration = parseDurationToMinutes(app.duration);
+    return slotOverlaps(slotTimeStr, treatmentDurationMin, app.time, appDuration);
+  });
+
+  // Rule 1: If there are already 2 or more overlapping appointments, the slot is fully booked for everyone.
+  if (overlappingApps.length >= 2) {
+    return false;
   }
+
+  // Rule 2: If there is exactly 1 overlapping appointment
+  if (overlappingApps.length === 1) {
+    const bookedExpert = overlappingApps[0].expert;
+    if (selectedExpert === 'Sofia') {
+      // Sofia is only available if the booked appointment is NOT for Sofia
+      return bookedExpert !== 'Sofia';
+    } else if (selectedExpert === 'Isabel') {
+      // Isabel is only available if the booked appointment is NOT for Isabel
+      return bookedExpert !== 'Isabel';
+    } else {
+      // "Keine Präferenz": since there is only 1 booking, one of the two experts must be free!
+      return true;
+    }
+  }
+
+  // Rule 3: If there are 0 overlapping appointments, the slot is available for everyone.
+  return true;
 };
 
 
@@ -1510,6 +1510,7 @@ export const Terminbuchung: React.FC = () => {
   const [availableDates] = useState(generateAvailableDates);
   
   const [existingAppointments, setExistingAppointments] = useState<any[]>([]);
+  const [refreshCounter, setRefreshCounter] = useState<number>(0);
 
   // Fetch all existing bookings for our 12 available dates to check therapist availability
   useEffect(() => {
@@ -1530,7 +1531,7 @@ export const Terminbuchung: React.FC = () => {
     };
 
     fetchExistingAppointments();
-  }, [availableDates]);
+  }, [availableDates, refreshCounter]);
 
   const selectedDateObj = availableDates.find(d => d.fullString === selectedDate)?.dateObj;
   const treatmentDurationMinutes = selectedService ? parseDurationToMinutes(selectedService.duration) : 30;
@@ -1602,6 +1603,7 @@ export const Terminbuchung: React.FC = () => {
     setConsent(false);
     setBooked(false);
     setCurrentStep(1);
+    setRefreshCounter(prev => prev + 1);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -1613,14 +1615,35 @@ export const Terminbuchung: React.FC = () => {
       let assignedExpert = selectedExpert;
       if (selectedExpert === 'Keine Präferenz') {
         const treatmentDurationMin = parseDurationToMinutes(selectedService.duration);
-        const isSofiaFree = !isExpertOverlapping('Sofia', selectedDate, selectedTime, treatmentDurationMin, existingAppointments);
-        const isIsabelFree = !isExpertOverlapping('Isabel', selectedDate, selectedTime, treatmentDurationMin, existingAppointments);
         
-        if (isSofiaFree && isIsabelFree) {
-          assignedExpert = 'Sofia'; // default if both free
-        } else if (isIsabelFree) {
+        const isSofiaBusy = existingAppointments.some(app => 
+          app.date === selectedDate && 
+          app.expert === 'Sofia' && 
+          app.status !== 'cancelled' &&
+          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
+        );
+
+        const isIsabelBusy = existingAppointments.some(app => 
+          app.date === selectedDate && 
+          app.expert === 'Isabel' && 
+          app.status !== 'cancelled' &&
+          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
+        );
+
+        const hasNoPrefOverlap = existingAppointments.some(app => 
+          app.date === selectedDate && 
+          app.expert === 'Keine Präferenz' && 
+          app.status !== 'cancelled' &&
+          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
+        );
+
+        if (isSofiaBusy) {
           assignedExpert = 'Isabel';
-        } else if (isSofiaFree) {
+        } else if (isIsabelBusy) {
+          assignedExpert = 'Sofia';
+        } else if (hasNoPrefOverlap) {
+          assignedExpert = 'Isabel';
+        } else {
           assignedExpert = 'Sofia';
         }
       }
@@ -1644,6 +1667,7 @@ export const Terminbuchung: React.FC = () => {
 
         if (error) throw error;
         setBookedExpert(assignedExpert);
+        setRefreshCounter(prev => prev + 1);
         setBooked(true);
       } catch (err: any) {
         console.error('Error submitting booking:', err);

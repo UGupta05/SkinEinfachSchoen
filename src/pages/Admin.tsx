@@ -5,6 +5,7 @@ import {
   Calendar,
   Clock,
   User,
+  Users,
   Mail,
   Phone,
   FileText,
@@ -168,7 +169,7 @@ export const Admin: React.FC = () => {
     setEditTime(parseGermanTimeStringToIso(app.time));
     setEditStatus(app.status);
     setEditReason(app.status_reason || '');
-    setEditExpert(app.expert || 'Sofia');
+    setEditExpert(app.expert || 'Keine Präferenz');
   };
 
   // Check current session on mount
@@ -762,6 +763,10 @@ export const Admin: React.FC = () => {
                               <span className="font-semibold text-onyx-text">{app.customer_name}</span>
                             </div>
                             <div className="flex items-center gap-2">
+                              <Users className="w-3.5 h-3.5 text-primary/60 shrink-0" />
+                              <span>Expertin: <strong className="text-primary">{app.expert || 'Keine Angabe'}</strong></span>
+                            </div>
+                            <div className="flex items-center gap-2">
                               <Mail className="w-3.5 h-3.5 text-primary/60 shrink-0" />
                               <a href={`mailto:${app.customer_email}`} className="hover:text-primary underline hover:decoration-sky-accent break-all">{app.customer_email}</a>
                             </div>
@@ -1110,6 +1115,7 @@ export const Admin: React.FC = () => {
                   onChange={(e: any) => setEditExpert(e.target.value)}
                   className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
                 >
+                  <option value="Keine Präferenz">Keine Präferenz</option>
                   <option value="Sofia">Sofia Khaliq-Natawan</option>
                   <option value="Isabel">Isabel Duwendag</option>
                 </select>
