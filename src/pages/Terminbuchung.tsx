@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { Sparkles, X, Check, ArrowRight, Shield, Calendar, Users, Clock } from 'lucide-react';
+import { 
+  Sparkles, 
+  X, 
+  Check, 
+  ArrowRight, 
+  Shield, 
+  Calendar, 
+  Users, 
+  Clock,
+  Smile,
+  Droplet,
+  User,
+  Activity,
+  Wind,
+  ShieldCheck,
+  TrendingUp,
+  Zap,
+  Target,
+  Search,
+  Layers,
+  Sparkle
+} from 'lucide-react';
 
 interface BookingService {
   id: string;
@@ -31,6 +52,79 @@ const CATEGORIES = [
   "IPL Haarentfernung",
   "Zusatzbehandlungen"
 ];
+
+const CATEGORY_GROUPS = [
+  {
+    name: "Übersicht",
+    categories: ["Alle"]
+  },
+  {
+    name: "Kosmetik & Hautpflege",
+    categories: [
+      "Kosmetische Behandlungen",
+      "Fruchtsäure & Peelings",
+      "ZO Skin Health",
+      "JetPeel",
+      "Hautanalyse",
+      "Zusatzbehandlungen"
+    ]
+  },
+  {
+    name: "Anti-Aging & Straffung",
+    categories: [
+      "Microneedling",
+      "Radiofrequenz Straffung",
+      "Lifting",
+      "Fraktionierte RF / Needling",
+      "Gesichtsstraffung (IPL/Laser)"
+    ]
+  },
+  {
+    name: "Dauerhafte Haarentfernung",
+    categories: [
+      "IPL Haarentfernung",
+      "IPL Pakete (Frauen)",
+      "IPL Pakete (Mann)"
+    ]
+  }
+];
+
+const getCategoryIcon = (category: string) => {
+  switch (category) {
+    case "Alle":
+      return <Layers className="w-4 h-4" />;
+    case "Kosmetische Behandlungen":
+      return <Smile className="w-4 h-4" />;
+    case "Fruchtsäure & Peelings":
+      return <Droplet className="w-4 h-4" />;
+    case "IPL Pakete (Mann)":
+      return <User className="w-4 h-4" />;
+    case "Microneedling":
+      return <Activity className="w-4 h-4" />;
+    case "JetPeel":
+      return <Wind className="w-4 h-4" />;
+    case "ZO Skin Health":
+      return <ShieldCheck className="w-4 h-4" />;
+    case "Radiofrequenz Straffung":
+      return <Zap className="w-4 h-4" />;
+    case "Lifting":
+      return <TrendingUp className="w-4 h-4" />;
+    case "Gesichtsstraffung (IPL/Laser)":
+      return <Target className="w-4 h-4" />;
+    case "Fraktionierte RF / Needling":
+      return <Activity className="w-4 h-4" />;
+    case "Hautanalyse":
+      return <Search className="w-4 h-4" />;
+    case "IPL Pakete (Frauen)":
+      return <User className="w-4 h-4 text-pink-500/80" />;
+    case "IPL Haarentfernung":
+      return <Sparkle className="w-4 h-4" />;
+    case "Zusatzbehandlungen":
+      return <Sparkles className="w-4 h-4" />;
+    default:
+      return <Sparkles className="w-4 h-4" />;
+  }
+};
 
 const BOOKING_SERVICES: BookingService[] = [
   {
@@ -1491,97 +1585,192 @@ export const Terminbuchung: React.FC = () => {
             {/* STEP 1: TREATMENT SELECTION */}
             {currentStep === 1 && (
               <div className="space-y-8">
-                {/* Category Chips */}
-                <div className="flex flex-wrap gap-3 mb-6">
-                  {CATEGORIES.map((cat) => {
-                    const isActive = selectedCategory === cat;
-                    return (
-                      <button
-                        key={cat}
-                        type="button"
-                        onClick={() => setSelectedCategory(cat)}
-                        className={`px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase transition-all shadow-sm border ${
-                          isActive
-                            ? 'bg-primary text-pure-white border-primary'
-                            : 'bg-sky-accent/10 text-slate-muted border-transparent hover:bg-sky-accent/20'
-                        }`}
-                      >
-                        {cat}
-                      </button>
-                    );
-                  })}
-                </div>
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
+                  
+                  {/* Categories Navigation Sidebar (Desktop: Vertical Sidebar, Mobile: Horizontal Scroll) */}
+                  <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-28 space-y-6">
+                    {/* Desktop Header */}
+                    <div className="hidden lg:block pb-4 border-b border-outline-variant/10">
+                      <h3 className="font-display text-xs font-bold uppercase tracking-wider text-primary">Kategorien</h3>
+                      <p className="text-[11px] text-tertiary mt-1">Wählen Sie einen Bereich aus</p>
+                    </div>
 
-                {/* Service Cards Grid */}
-                {filteredServices.length === 0 ? (
-                  <div className="bg-pure-white border border-outline-variant/10 rounded-2xl p-12 text-center medical-glow">
-                    <Sparkles className="w-10 h-10 text-outline/30 mx-auto mb-3" />
-                    <p className="text-tertiary text-sm">
-                      Keine Behandlungen in dieser Kategorie gefunden. Bitte wählen Sie eine andere Kategorie.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {filteredServices.map((service) => {
-                      const isSelected = selectedService?.id === service.id;
-                      return (
-                        <div
-                          key={service.id}
-                          onClick={() => setSelectedService(service)}
-                          className={`bg-pure-white medical-glow p-6 border group cursor-pointer hover:border-primary/30 transition-all rounded-2xl ${
-                            isSelected
-                              ? 'border-primary ring-2 ring-primary bg-primary/[0.02]'
-                              : 'border-outline-variant/10'
-                          }`}
-                        >
-                          <div className="flex justify-between items-start mb-4">
-                            <div className="flex flex-wrap gap-2">
-                              <span className="bg-sky-accent/10 text-slate-muted px-3 py-1 text-[10px] font-display font-bold uppercase tracking-widest rounded-md">
-                                {service.categoryTag}
-                              </span>
-                              {service.notBookableOnline && (
-                                <span className="bg-error/10 text-error px-3 py-1 text-[10px] font-display font-bold uppercase tracking-widest rounded-md">
-                                  Online nicht buchbar
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-primary font-bold whitespace-nowrap ml-4 shrink-0">{service.price}</span>
-                          </div>
-                          <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors text-onyx-text">
-                            {service.name}
-                          </h3>
-                          <p className="text-tertiary text-sm mb-6 line-clamp-2 leading-relaxed">
-                            {service.description}
-                          </p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-outline text-xs flex items-center gap-1.5 font-sans">
-                              <Clock className="w-3.5 h-3.5" />
-                              <span>{service.duration}</span>
-                            </span>
-                            <button
-                              type="button"
-                              className={`font-display text-xs font-bold uppercase flex items-center gap-1.5 group/btn ${
-                                service.notBookableOnline 
-                                  ? 'text-error' 
-                                  : 'text-primary'
-                              }`}
-                            >
-                              <span>
-                                {service.notBookableOnline 
-                                  ? 'Nur telefonisch' 
-                                  : isSelected 
-                                    ? 'Ausgewählt' 
-                                    : 'Auswählen'
-                                }
-                              </span>
-                              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                            </button>
+                    {/* Desktop View: Grouped Menu */}
+                    <div className="hidden lg:block space-y-6">
+                      {CATEGORY_GROUPS.map((group) => (
+                        <div key={group.name} className="space-y-2">
+                          <h4 className="text-[10px] font-display font-bold uppercase tracking-widest text-slate-muted/80 px-2">
+                            {group.name}
+                          </h4>
+                          <div className="space-y-1">
+                            {group.categories.map((cat) => {
+                              const isActive = selectedCategory === cat;
+                              const serviceCount = cat === "Alle" 
+                                ? BOOKING_SERVICES.length 
+                                : BOOKING_SERVICES.filter(s => s.categoryChip === cat).length;
+
+                              return (
+                                <button
+                                  key={cat}
+                                  type="button"
+                                  onClick={() => setSelectedCategory(cat)}
+                                  className={`w-full text-left px-3 py-2 rounded-xl font-sans text-xs font-medium transition-all duration-200 flex items-center justify-between group border ${
+                                    isActive
+                                      ? 'bg-primary text-pure-white border-primary shadow-sm font-semibold'
+                                      : 'bg-transparent text-onyx-text border-transparent hover:bg-sky-accent/5 hover:text-primary'
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-2 min-w-0">
+                                    <span className={`transition-colors shrink-0 ${
+                                      isActive ? 'text-pure-white' : 'text-slate-muted group-hover:text-primary'
+                                    }`}>
+                                      {getCategoryIcon(cat)}
+                                    </span>
+                                    <span className="truncate">{cat}</span>
+                                  </div>
+                                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 font-display ${
+                                    isActive
+                                      ? 'bg-pure-white/25 text-pure-white'
+                                      : 'bg-sky-accent/10 text-slate-muted group-hover:bg-primary/10 group-hover:text-primary'
+                                  }`}>
+                                    {serviceCount}
+                                  </span>
+                                </button>
+                              );
+                            })}
                           </div>
                         </div>
-                      );
-                    })}
+                      ))}
+                    </div>
+
+                    {/* Mobile & Tablet View: Horizontal Scroll Slider */}
+                    <div className="lg:hidden w-full overflow-hidden">
+                      <div className="text-xs font-display font-bold uppercase tracking-wider text-slate-muted mb-2 px-1">
+                        Kategorie filtern:
+                      </div>
+                      <div className="relative">
+                        <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory -mx-margin-mobile px-margin-mobile">
+                          {CATEGORIES.map((cat) => {
+                            const isActive = selectedCategory === cat;
+                            const serviceCount = cat === "Alle" 
+                              ? BOOKING_SERVICES.length 
+                              : BOOKING_SERVICES.filter(s => s.categoryChip === cat).length;
+                            
+                            return (
+                              <button
+                                key={cat}
+                                type="button"
+                                onClick={() => setSelectedCategory(cat)}
+                                className={`snap-center shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-sans text-xs font-medium transition-all shadow-sm border ${
+                                  isActive
+                                    ? 'bg-primary text-pure-white border-primary ring-1 ring-primary/20'
+                                    : 'bg-pure-white text-onyx-text border-outline-variant/10 hover:bg-sky-accent/5 hover:text-primary'
+                                }`}
+                              >
+                                <span className={isActive ? 'text-pure-white' : 'text-slate-muted'}>
+                                  {getCategoryIcon(cat)}
+                                </span>
+                                <span>{cat}</span>
+                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full font-display ${
+                                  isActive
+                                    ? 'bg-pure-white/20 text-pure-white'
+                                    : 'bg-sky-accent/10 text-slate-muted'
+                                }`}>
+                                  {serviceCount}
+                                </span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                        <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+                        <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
+                      </div>
+                    </div>
                   </div>
-                )}
+
+                  {/* Services Column */}
+                  <div className="flex-1 w-full space-y-6">
+                    {/* Header showing Selected Category and Count */}
+                    <div className="pb-3 border-b border-outline-variant/10 flex justify-between items-center">
+                      <h3 className="font-display text-sm font-bold uppercase tracking-wider text-primary">
+                        {selectedCategory}
+                      </h3>
+                      <span className="text-xs text-tertiary">
+                        {filteredServices.length} {filteredServices.length === 1 ? 'Behandlung' : 'Behandlungen'} gefunden
+                      </span>
+                    </div>
+
+                    {filteredServices.length === 0 ? (
+                      <div className="bg-pure-white border border-outline-variant/10 rounded-2xl p-12 text-center medical-glow">
+                        <Sparkles className="w-10 h-10 text-outline/30 mx-auto mb-3" />
+                        <p className="text-tertiary text-sm">
+                          Keine Behandlungen in dieser Kategorie gefunden. Bitte wählen Sie eine andere Kategorie.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {filteredServices.map((service) => {
+                          const isSelected = selectedService?.id === service.id;
+                          return (
+                            <div
+                              key={service.id}
+                              onClick={() => setSelectedService(service)}
+                              className={`bg-pure-white medical-glow p-6 border group cursor-pointer hover:border-primary/30 transition-all rounded-2xl ${
+                                isSelected
+                                  ? 'border-primary ring-2 ring-primary bg-primary/[0.02]'
+                                  : 'border-outline-variant/10'
+                              }`}
+                            >
+                              <div className="flex justify-between items-start mb-4">
+                                <div className="flex flex-wrap gap-2">
+                                  <span className="bg-sky-accent/10 text-slate-muted px-3 py-1 text-[10px] font-display font-bold uppercase tracking-widest rounded-md">
+                                    {service.categoryTag}
+                                  </span>
+                                  {service.notBookableOnline && (
+                                    <span className="bg-error/10 text-error px-3 py-1 text-[10px] font-display font-bold uppercase tracking-widest rounded-md">
+                                      Online nicht buchbar
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="text-primary font-bold whitespace-nowrap ml-4 shrink-0">{service.price}</span>
+                              </div>
+                              <h3 className="font-display text-lg font-bold mb-2 group-hover:text-primary transition-colors text-onyx-text">
+                                {service.name}
+                              </h3>
+                              <p className="text-tertiary text-sm mb-6 line-clamp-2 leading-relaxed">
+                                {service.description}
+                              </p>
+                              <div className="flex items-center justify-between">
+                                <span className="text-outline text-xs flex items-center gap-1.5 font-sans">
+                                  <Clock className="w-3.5 h-3.5" />
+                                  <span>{service.duration}</span>
+                                </span>
+                                <button
+                                  type="button"
+                                  className={`font-display text-xs font-bold uppercase flex items-center gap-1.5 group/btn ${
+                                    service.notBookableOnline 
+                                      ? 'text-error' 
+                                      : 'text-primary'
+                                  }`}
+                                >
+                                  <span>
+                                    {service.notBookableOnline 
+                                      ? 'Nur telefonisch' 
+                                      : isSelected 
+                                        ? 'Ausgewählt' 
+                                        : 'Auswählen'
+                                    }
+                                  </span>
+                                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                                </button>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
 
                 {/* Additional Info Bento */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 pt-6 border-t border-outline-variant/10">
