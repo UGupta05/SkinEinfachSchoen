@@ -1975,7 +1975,7 @@ export const Terminbuchung: React.FC = () => {
                 <img
                   alt="Klinik Innenansicht"
                   className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3RZ-fteeLH8bhnU3cIplZkcLFvJbLRp5uWClFEAuE7cbATH06FUw2Gu9jm4oARhUb8-oTJzq4-e8l14dTuUDRoVKDPoqEKR-N5vFmI-KADMuhz2dQRm6ta7YswzXDCtrsOLXF1zv59mnS-RAZIYeIzJ-KoMhsnsT7kzWn5rfW8-ZfOrZooe0PVKWZD4ApffY866dDdd--1J5Qogqw6IV1MBx5P34ywbDbKOQj5RsrFOoS094kCkzN2yclo66my9Ecj6IjtdCFtUU"
+                  src="/images/terminbuchung/clinic_interior.png"
                 />
                 <div className="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
                 <div className="absolute inset-0 flex items-center justify-center">

@@ -68,7 +68,7 @@ export const Kontakt: React.FC = () => {
             <img
               alt="SKIN Osnabrück Entrance"
               className="w-full h-full object-cover rounded-lg medical-glow border border-outline-variant/15"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMH6AR13kfrENhhFp59Z-dtACG3dEe9bTx9cxMDYq5-kEsYh2JUiIB0-myNbyBQwJ9xkSd88CoOqbJT-U-SWUj-HHr0j3_hvJd56X9E44fOaAGPIDhaQUqSMOKvDiOs7pL2SuwTkm8jDb2wZ6hADs6xPuyVuf1YgLxe0VGeMgED6xaVe4aiKppazSNMUtWC4Xo0qIiSnxSroTAq6olY7wtGxxZB0AErAsE3kPXtvO8rh_s37HkJ8guL9oa_i5aCCciNPSR7_BdmXM"
+              src="/images/kontakt/clinic_entrance.png"
             />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
           </div>
@@ -297,7 +297,7 @@ export const Kontakt: React.FC = () => {
                   <img
                     alt="Map view"
                     className="w-full h-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5PoNVosWxr1vdOGQJShUUJS0NvtbN49u1rS1iPlzPsqdo8OMe8DuaoEp5yHoDmLQmfFummmtj4dj7IgEdfHuJTwjBkksWYnirtH-gx4y9NFv3G29TMDnng4PVymvQG6vORzs1hP3N2CrHdlKUKjBbj4pzpLwpdm8sF614OWz4oZRs7OaQRFRSPwVa4b34M7xJChWm69jTVwXf4U-xDmDvKm5DvHIhaGelINdZXywBPeRlSsbriLwDccS0CSV_1BWLquZdqpDe_FE"
+                    src="/images/kontakt/clinic_map.png"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="bg-primary text-pure-white p-4 rounded-full medical-glow animate-bounce shadow-lg">

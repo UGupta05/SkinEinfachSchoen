@@ -17,7 +17,7 @@ export const JetPeel: React.FC = () => {
       ]}
       duration="ca. 60 - 90 Minuten"
       price="99,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/jetpeel.png"
     />
   );
 };
@@ -38,7 +38,7 @@ export const IPLHaarentfernung: React.FC = () => {
       ]}
       duration="ca. 30 - 75 Minuten"
       price="49,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uhEzdVdUZu-hzEDlrdJ-Hpqr5ivceWEfS9fnVL_JHLjtP_imY5MYXi1746vgctGbxHFUXKC8W9xhmOSwF2Vsk_AN7ZtSshDJRHGgq7R9Dv-E8-zpMMVBHxYEUe_-moInQM0pd7KoRprK_nQ9Ht5i3uKtCSNhatxsgZdkvzcyW9b762_kwhpe8ciVGtyi79wu5aFUWDa00JaJV0OUROOD7gVUJqPZyFCdVabdLswCly1_epgiLzKbFKzQw"
+      image="/images/treatments/ipl.png"
     />
   );
 };
@@ -59,7 +59,7 @@ export const MesoBBGlow: React.FC = () => {
       ]}
       duration="ca. 60 Minuten"
       price="79,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/meso_bb_glow.png"
     />
   );
 };
@@ -80,7 +80,7 @@ export const Microneedling: React.FC = () => {
       ]}
       duration="ca. 75 - 90 Minuten"
       price="149,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/microneedling.png"
     />
   );
 };
@@ -101,7 +101,7 @@ export const BrowLift: React.FC = () => {
       ]}
       duration="ca. 45 Minuten"
       price="39,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/brow_lift.png"
     />
   );
 };
@@ -122,7 +122,7 @@ export const Wimpernlifting: React.FC = () => {
       ]}
       duration="ca. 50 Minuten"
       price="45,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/wimpernlifting.png"
     />
   );
 };
@@ -143,7 +143,7 @@ export const KlassischeKosmetik: React.FC = () => {
       ]}
       duration="ca. 60 - 90 Minuten"
       price="59,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/cosmetics.png"
     />
   );
 };
@@ -164,7 +164,7 @@ export const FruchtsaeurePeeling: React.FC = () => {
       ]}
       duration="ca. 45 - 60 Minuten"
       price="69,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/peeling.png"
     />
   );
 };
@@ -185,7 +185,7 @@ export const VisiaHautanalyse: React.FC = () => {
       ]}
       duration="ca. 30 Minuten"
       price="29,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0uiC3Gqk2cp3uHZRDUbfJ-tW6DiL8DPm-eQnemTneiz4AfiPzLKMLqzgKM471UistzIVdmpKxNESJD7O7MzsBu5JPHXWVUTVjSgEgbbF72J6y6hlTNaGSCG8nw1QTb0NFJSjjF97kdItbkAZooSYBQk-R85_mKcJxXdorIKUkfkggN-u3Gh-2BJjczPw3rCuajq_qLLZKDdNnFC_XggSIv0myBxsZ6j9n54i8C2cqVg6T2A6DQ4XGd2JMzw"
+      image="/images/treatments/visia.png"
     />
   );
 };
@@ -206,7 +206,7 @@ export const MedicalKosmetikZO: React.FC = () => {
       ]}
       duration="ca. 75 - 90 Minuten"
       price="119,- €"
-      image="https://lh3.googleusercontent.com/aida/ADBb0ujjq4LzHsSVFcB7lFSrHRdm9h-gFs544A0N6A4MGGnSmPhOqZmOgYEnQf1f1kz9sJGMJ1Jb0Xk5nIfMwQw6RoKmL7YgI9JTSjqINxcFRksclkE1-3v6Veu9es6NwFPk4o7f3B3xXb4d7DzdVJ7t8sZIXO59dEyp5KMhSYiHyejJWG9xH8Trah7jmLV14Vl1AFTQ9eKyTwWyy_IJ-UAALjW1eucZNYAdhDE7iX2XAkPf8sPdc2VQI7qaLkQ"
+      image="/images/treatments/zo_skin_health.png"
     />
   );
 };

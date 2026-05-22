@@ -12,7 +12,7 @@ export const Home: React.FC = () => {
           <img
             alt="SKIN Clinic Background"
             className="w-full h-full object-cover opacity-80"
-            src="https://lh3.googleusercontent.com/aida/ADBb0ugQBdS4IdndXXxci7IfoxphtVDCs1P7qAdoO-q8PGtHV4tTPY4HbbuSZtELZjnYy6tnYfC84Dh9u97f1WaNw7T7ZjxmCBSAL6Uz3WWHQUhLKaT0eqHejRmQSP1GjjX_yyoQPRpnUaxSlvHpMbe69N6hTqmyLu2aCeaRA5T5LeDfnDKa9P7NZtZlOCJDkcFr0iO0M19cSG_ko4OI9Yp_nIU2szVIvjf_nD7JKZeYXt99AWUIF8Q74Pq8r0I"
+            src="/images/home/home_hero.png"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-pure-white via-pure-white/40 to-transparent"></div>
         </div>
@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
               <img
                 alt="SKIN einfach schön Logo"
                 className="h-28 md:h-36 object-contain"
-                src="https://lh3.googleusercontent.com/aida/ADBb0ujPQzzCrIPpifMEIgub4PNFHIcI415EyWbRi-fixeiWCwusOEaeyDvsNA2FpAGvPikYvJd04mPconecRjvETxKyGyyxCE3merKrcSLYGoT_0TohKKf5zlvGSK_41xZ7y0RjGhRBfFpRWmYlp60QC0S6DzXS_H8DFoWs1fI0lw4tIjAg6GtiW5psOzMkgyp2tfIMSYlq25k4vhzZPQqEzREQPSj_8IKFwczhnRWM7-kXDn7qzEtMJJiLu6E"
+                src="/images/home/logo.png"
               />
             </div>
             
@@ -91,7 +91,7 @@ export const Home: React.FC = () => {
                   <img
                     alt="Facial treatment close-up"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaaq9mkVXltt0KOwmAYiWcKO9ihGCS-V5y4rBJnvjKWFMCDCWKDYEFnMtaEokECmPYT95SnZ8VMDRcNVXoxkampQ1gqArjRd01Wi3oWmU4KOMpJ4tKfMtWdp4_pnR75-Z50qyoTdpYB5omeLMIuglquC20uAQwpVIJEgQ8grLCLSwA4fh34UrI2T60gcvabLng1g9hbdPFDJgtm5ay1Dlk8mm2Ba-rO7xXJHQgDGOdKMbIF1wkNWG34nOc3nzeVnIaXqxtxdUicng"
+                    src="/images/home/treatment_closeup.png"
                   />
                 </div>
                 <div className="bg-soft-shell p-8 medical-glow">
@@ -113,7 +113,7 @@ export const Home: React.FC = () => {
                   <img
                     alt="Modern medical clinic lobby"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuByU1oeIQermMP1XLkc9KZnt6Gl-uYcAZJrFr0KP4BfFZAAFlFwjsQS2p9NcQcTtP62a17Y1sBw97t03CEC0unoTVdKrw9EHhTSjMfv7Hs40--p11Z04jWB1CodOn6ZvGv8QwkfWSTdHyRhu8bKit8Vmcyx4suGdmQy1vHDO6ViJYU3KIbmFCGnpkYQEwDztg_tCr9ZXCwHCSZN1-b_sw9nCe9N2ofCUdXv-xzSooNTFHdVK2g3VwP9YJHuGY5KBusud78jRmV3fds"
+                    src="/images/home/clinic_lobby.png"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@ export const Home: React.FC = () => {
               <img
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 alt="Anti-Aging equipment"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJYTqT2uTi9ntMKuoWCWkrGFctznVU99mc0spxf1HT0DMdzXdvY4Vo25x4ZTj_9R1qRhOFb6Co8mOENCoarxqT5NQspkJhzK1YLUSNjWFlE7Hx7l3x2ATg6E4Pls6nhcnckVbecYxx0NZeK9RbYCiLTi_Wyz-eL8jqPfXq5Ce4v27x7vhZH23LZkgA-_LbcWbmHusiD3KWpPS0u7595nkDQHK3VGb36n77Ge48W62QBbopD8sNlzT3jbli_xub5pR9Xe9iiqXDj6Y"
+                src="/images/home/anti_aging.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx-text/80 via-onyx-text/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-8 w-full">

@@ -64,7 +64,7 @@ export const Shop: React.FC = () => {
             <img
               alt="SKIN Shop Hero"
               className="w-full h-full object-cover rounded-lg medical-glow border border-pure-white/50 shadow-lg"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw_GfuQwkYNHV780abKJSP7K_otI4UwrJwtb6TWVJC-yjPs7bZSMnmuM1-c41hwMpX3iuGPEt-lOo7ljkeIpHlJ3mmig4ART_ord8X1YqqLMhYqRr6umYstk2fFzuXpFQdmqNwbBC95KgoxelBqljWTKUM9Xfzs0N8iQAOWMXYTvu_Ur7evUX85-p6RzxJ2Iy756Jsa-s6rJJK11HBzhXOB1NcSx8MfiJwb_6CoD2sKgSFv24vmcSrYiVao94yvwBAIVLNM7uSElo"
+              src="/images/products/shop_hero.png"
             />
           </div>
         </div>
