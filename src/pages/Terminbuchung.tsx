@@ -1613,7 +1613,7 @@ export const Terminbuchung: React.FC = () => {
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                   
                   {/* Categories Navigation Sidebar (Desktop: Vertical Sidebar, Mobile: Horizontal Scroll) */}
-                  <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-28 space-y-6">
+                  <div className="w-full lg:w-64 shrink-0 lg:sticky lg:top-28 space-y-6 lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto lg:pr-2">
                     {/* Desktop Header */}
                     <div className="hidden lg:block pb-4 border-b border-outline-variant/10">
                       <h3 className="font-display text-xs font-bold uppercase tracking-wider text-primary">Kategorien</h3>
