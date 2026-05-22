@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { OPENING_HOURS } from '../config/openingHours';
 import {
   Calendar,
   Clock,
@@ -115,9 +116,48 @@ export const Admin: React.FC = () => {
     return timeStr.replace(' Uhr', '').trim();
   };
 
-  // Helper to format "14:30" to "14:30 Uhr"
+  // Helper to format "14:30" to "14:30" (no longer adds " Uhr")
   const formatTimeToGermanString = (isoTimeStr: string): string => {
-    return `${isoTimeStr} Uhr`;
+    return isoTimeStr;
+  };
+
+  // Helper to generate dynamic slots for the admin edit modal based on opening hours config
+  const getAdminTimeSlots = (isoDateStr: string): string[] => {
+    try {
+      if (!isoDateStr) return [];
+      const d = new Date(isoDateStr);
+      if (isNaN(d.getTime())) return [];
+      const dayOfWeekNum = d.getDay();
+      const config = OPENING_HOURS[dayOfWeekNum];
+      
+      // Fallback if day is configured as closed (e.g. Sat/Sun) so admin can still pick standard hours if needed physically
+      if (!config || config.isClosed) {
+        const defaultSlots = [];
+        for (let mins = 9 * 60; mins <= 18.5 * 60; mins += 30) {
+          const hours = Math.floor(mins / 60);
+          const minutes = mins % 60;
+          defaultSlots.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`);
+        }
+        return defaultSlots;
+      }
+      
+      const [startH, startM] = config.start.split(':').map(Number);
+      const [endH, endM] = config.end.split(':').map(Number);
+      
+      const startMinutes = startH * 60 + startM;
+      const endMinutes = endH * 60 + endM;
+      
+      const slots: string[] = [];
+      for (let mins = startMinutes; mins <= endMinutes; mins += 30) {
+        const hours = Math.floor(mins / 60);
+        const minutes = mins % 60;
+        slots.push(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`);
+      }
+      return slots;
+    } catch (e) {
+      console.error('Error generating admin time slots:', e);
+      return [];
+    }
   };
 
   const openEditModal = (app: Appointment) => {
@@ -994,7 +1034,7 @@ export const Admin: React.FC = () => {
                       <span className="text-[9px] text-outline italic font-normal">Klicken zum Auswählen</span>
                     </label>
                     <div className="grid grid-cols-4 gap-2 max-h-32 overflow-y-auto pr-1 pb-1 scrollbar-thin scrollbar-thumb-outline-variant/20 scrollbar-track-transparent">
-                      {['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'].map((time) => {
+                      {getAdminTimeSlots(editDate).map((time) => {
                         const isSelected = editTime === time;
                         return (
                           <button
@@ -1007,7 +1047,7 @@ export const Admin: React.FC = () => {
                                 : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
                             }`}
                           >
-                            {time} Uhr
+                            {time}
                           </button>
                         );
                       })}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { OPENING_HOURS } from '../config/openingHours';
 import { 
   Sparkles, 
   X, 
@@ -1318,7 +1319,7 @@ const BOOKING_SERVICES: BookingService[] = [
 ];
 
 
-// Helper to generate the next 12 booking dates (excluding Sundays)
+// Helper to generate the next 12 booking dates (excluding closed days based on config)
 const generateAvailableDates = () => {
   const dates = [];
   const daysOfWeek = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
@@ -1331,13 +1332,15 @@ const generateAvailableDates = () => {
     const d = new Date();
     d.setDate(d.getDate() + offset);
     
-    // 0 is Sunday
-    if (d.getDay() !== 0) {
+    const dayOfWeekNum = d.getDay();
+    const isClosed = OPENING_HOURS[dayOfWeekNum]?.isClosed;
+    
+    if (!isClosed) {
       dates.push({
-        dayName: daysOfWeek[d.getDay()],
+        dayName: daysOfWeek[dayOfWeekNum],
         dayNum: d.getDate(),
         monthName: months[d.getMonth()],
-        fullString: `${daysOfWeek[d.getDay()]}, ${d.getDate()}. ${months[d.getMonth()]}`,
+        fullString: `${daysOfWeek[dayOfWeekNum]}, ${d.getDate()}. ${months[d.getMonth()]}`,
         year: d.getFullYear(),
         dateObj: d
       });
@@ -1348,9 +1351,62 @@ const generateAvailableDates = () => {
   return dates;
 };
 
-const MORNING_SLOTS = ['09:00 Uhr', '10:30 Uhr'];
-const AFTERNOON_SLOTS = ['12:00 Uhr', '13:30 Uhr', '14:30 Uhr', '16:00 Uhr'];
-const EVENING_SLOTS = ['17:30 Uhr', '18:30 Uhr'];
+// Helper to parse treatment duration (e.g., "1 Std. 10 Min.", "45 Min.") to minutes
+const parseDurationToMinutes = (durationStr: string): number => {
+  if (!durationStr) return 30; // fallback default
+  
+  let totalMinutes = 0;
+  
+  const hourMatch = durationStr.match(/(\d+)\s*Std/);
+  if (hourMatch) {
+    totalMinutes += parseInt(hourMatch[1], 10) * 60;
+  }
+  
+  const minMatch = durationStr.match(/(\d+)\s*Min/);
+  if (minMatch) {
+    totalMinutes += parseInt(minMatch[1], 10);
+  } else if (!hourMatch) {
+    const numberMatch = durationStr.match(/(\d+)/);
+    if (numberMatch) {
+      totalMinutes += parseInt(numberMatch[1], 10);
+    }
+  }
+  
+  return totalMinutes || 30;
+};
+
+// Helper to generate dynamic slot list in 24h format based on opening hours and duration
+const getAvailableSlotsForDate = (dateObj: Date, durationStr: string): string[] => {
+  const dayOfWeekNum = dateObj.getDay();
+  const config = OPENING_HOURS[dayOfWeekNum];
+  
+  if (!config || config.isClosed) {
+    return [];
+  }
+  
+  // Parse hours and minutes from start/end configuration
+  const [startH, startM] = config.start.split(':').map(Number);
+  const [endH, endM] = config.end.split(':').map(Number);
+  
+  const startMinutes = startH * 60 + startM;
+  const endMinutes = endH * 60 + endM;
+  
+  const treatmentDuration = parseDurationToMinutes(durationStr);
+  const slots: string[] = [];
+  
+  // Generate slots in 30-minute intervals
+  for (let mins = startMinutes; mins < endMinutes; mins += 30) {
+    if (mins + treatmentDuration <= endMinutes) {
+      const hours = Math.floor(mins / 60);
+      const minutes = mins % 60;
+      const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+      slots.push(timeString);
+    }
+  }
+  
+  return slots;
+};
+
 
 export const Terminbuchung: React.FC = () => {
   const location = useLocation();
@@ -1394,6 +1450,28 @@ export const Terminbuchung: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [availableDates] = useState(generateAvailableDates);
+
+  const selectedDateObj = availableDates.find(d => d.fullString === selectedDate)?.dateObj;
+  const availableSlots = (selectedDateObj && selectedService)
+    ? getAvailableSlotsForDate(selectedDateObj, selectedService.duration)
+    : [];
+
+  const morningSlots = availableSlots.filter(s => {
+    const hours = parseInt(s.split(':')[0], 10);
+    return hours < 12;
+  });
+  const afternoonSlots = availableSlots.filter(s => {
+    const hours = parseInt(s.split(':')[0], 10);
+    return hours >= 12 && hours < 17;
+  });
+  const eveningSlots = availableSlots.filter(s => {
+    const hours = parseInt(s.split(':')[0], 10);
+    return hours >= 17;
+  });
+
+  useEffect(() => {
+    setSelectedTime('');
+  }, [selectedDate, selectedService]);
 
   // Pre-select service if passed via state or query params
   useEffect(() => {
@@ -1895,81 +1973,103 @@ export const Terminbuchung: React.FC = () => {
                 {/* Time Slot Picker Grid */}
                 <div className="pt-6 border-t border-outline-variant/10">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">Uhrzeit auswählen</h3>
-                  <p className="text-sm text-tertiary mb-6">Wählen Sie eine freie Uhrzeit am ausgewählten Tag:</p>
                   
-                  <div className="space-y-6">
-                    {/* Morning */}
-                    <div>
-                      <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Vormittag</h4>
-                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                        {MORNING_SLOTS.map((time) => {
-                          const isSelected = selectedTime === time;
-                          return (
-                            <button
-                              key={time}
-                              type="button"
-                              onClick={() => setSelectedTime(time)}
-                              className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border ${
-                                isSelected
-                                  ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
-                                  : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
-                              }`}
-                            >
-                              {time}
-                            </button>
-                          );
-                        })}
-                      </div>
+                  {!selectedDate ? (
+                    <div className="bg-soft-shell/50 border border-outline-variant/10 rounded-xl p-6 text-center">
+                      <Calendar className="w-8 h-8 text-outline/40 mx-auto mb-2 animate-pulse" />
+                      <p className="text-tertiary text-sm">
+                        Bitte wählen Sie zuerst oben ein Datum aus.
+                      </p>
                     </div>
+                  ) : availableSlots.length === 0 ? (
+                    <div className="bg-rose-500/[0.02] border border-rose-500/10 rounded-xl p-6 text-center">
+                      <Clock className="w-8 h-8 text-rose-500/40 mx-auto mb-2" />
+                      <p className="text-tertiary text-sm leading-relaxed">
+                        An diesem Tag sind online keine freien Termine für die gewählte Behandlung verfügbar.<br />
+                        Bitte wählen Sie ein anderes Datum oder kontaktieren Sie uns telefonisch.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {/* Morning */}
+                      {morningSlots.length > 0 && (
+                        <div>
+                          <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Vormittag</h4>
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                            {morningSlots.map((time) => {
+                              const isSelected = selectedTime === time;
+                              return (
+                                <button
+                                  key={time}
+                                  type="button"
+                                  onClick={() => setSelectedTime(time)}
+                                  className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 ${
+                                    isSelected
+                                      ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
+                                      : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
+                                  }`}
+                                >
+                                  {time}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
 
-                    {/* Afternoon */}
-                    <div>
-                      <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Nachmittag</h4>
-                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                        {AFTERNOON_SLOTS.map((time) => {
-                          const isSelected = selectedTime === time;
-                          return (
-                            <button
-                              key={time}
-                              type="button"
-                              onClick={() => setSelectedTime(time)}
-                              className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border ${
-                                isSelected
-                                  ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
-                                  : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
-                              }`}
-                            >
-                              {time}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
+                      {/* Afternoon */}
+                      {afternoonSlots.length > 0 && (
+                        <div>
+                          <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Nachmittag</h4>
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                            {afternoonSlots.map((time) => {
+                              const isSelected = selectedTime === time;
+                              return (
+                                <button
+                                  key={time}
+                                  type="button"
+                                  onClick={() => setSelectedTime(time)}
+                                  className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 ${
+                                    isSelected
+                                      ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
+                                      : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
+                                  }`}
+                                >
+                                  {time}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
 
-                    {/* Evening */}
-                    <div>
-                      <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Abend</h4>
-                      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                        {EVENING_SLOTS.map((time) => {
-                          const isSelected = selectedTime === time;
-                          return (
-                            <button
-                              key={time}
-                              type="button"
-                              onClick={() => setSelectedTime(time)}
-                              className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border ${
-                                isSelected
-                                  ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
-                                  : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
-                              }`}
-                            >
-                              {time}
-                            </button>
-                          );
-                        })}
-                      </div>
+                      {/* Evening */}
+                      {eveningSlots.length > 0 && (
+                        <div>
+                          <h4 className="text-[11px] font-display font-bold uppercase tracking-widest text-slate-muted mb-3">Abend</h4>
+                          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                            {eveningSlots.map((time) => {
+                              const isSelected = selectedTime === time;
+                              return (
+                                <button
+                                  key={time}
+                                  type="button"
+                                  onClick={() => setSelectedTime(time)}
+                                  className={`py-3 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 ${
+                                    isSelected
+                                      ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
+                                      : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
+                                  }`}
+                                >
+                                  {time}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Back button */}

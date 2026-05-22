@@ -79,7 +79,7 @@ const mockAppointment = {
   price: '149 €',
   duration: '60 Min.',
   date: 'Di, 26. Mai',
-  time: '14:30 Uhr',
+  time: '14:30',
   notes: 'Bitte sensible Hautpartien vorsichtig behandeln.',
   status: 'pending',
   reminded: false
@@ -151,7 +151,7 @@ const run = async () => {
       const payload = {
         type: 'UPDATE',
         table: 'appointments',
-        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30 Uhr', status_reason: 'Aufgrund einer teaminternen Fortbildung mussten wir Ihren Termin um einige Tage verschieben. Wir bitten um Verständnis.' },
+        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30', status_reason: 'Aufgrund einer teaminternen Fortbildung mussten wir Ihren Termin um einige Tage verschieben. Wir bitten um Verständnis.' },
         old_record: mockAppointment
       };
       const res = await sendRequest('POST', '/api/appointments-webhook', payload, webhookSecretHeaders);
