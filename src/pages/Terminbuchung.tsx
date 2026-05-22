@@ -20,7 +20,9 @@ import {
   Target,
   Search,
   Layers,
-  Sparkle
+  Sparkle,
+  ChevronDown,
+  ChevronRight
 } from 'lucide-react';
 
 interface BookingService {
@@ -1353,6 +1355,29 @@ export const Terminbuchung: React.FC = () => {
   const location = useLocation();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("Alle");
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({
+    "Übersicht": true,
+    "Kosmetik & Hautpflege": true,
+    "Anti-Aging & Straffung": false,
+    "Dauerhafte Haarentfernung": false,
+  });
+
+  const toggleGroup = (groupName: string) => {
+    setExpandedGroups(prev => ({
+      ...prev,
+      [groupName]: !prev[groupName]
+    }));
+  };
+
+  useEffect(() => {
+    const activeGroup = CATEGORY_GROUPS.find(g => g.categories.includes(selectedCategory));
+    if (activeGroup) {
+      setExpandedGroups(prev => ({
+        ...prev,
+        [activeGroup.name]: true
+      }));
+    }
+  }, [selectedCategory]);
   const [selectedService, setSelectedService] = useState<BookingService | null>(null);
   
   const [selectedDate, setSelectedDate] = useState<string>('');
@@ -1597,50 +1622,64 @@ export const Terminbuchung: React.FC = () => {
 
                     {/* Desktop View: Grouped Menu */}
                     <div className="hidden lg:block space-y-6">
-                      {CATEGORY_GROUPS.map((group) => (
-                        <div key={group.name} className="space-y-2">
-                          <h4 className="text-[10px] font-display font-bold uppercase tracking-widest text-slate-muted/80 px-2">
-                            {group.name}
-                          </h4>
-                          <div className="space-y-1">
-                            {group.categories.map((cat) => {
-                              const isActive = selectedCategory === cat;
-                              const serviceCount = cat === "Alle" 
-                                ? BOOKING_SERVICES.length 
-                                : BOOKING_SERVICES.filter(s => s.categoryChip === cat).length;
+                      {CATEGORY_GROUPS.map((group) => {
+                        const isExpanded = !!expandedGroups[group.name];
+                        return (
+                          <div key={group.name} className="space-y-2 border-b border-outline-variant/5 pb-3 last:border-b-0 last:pb-0">
+                            <button
+                              type="button"
+                              onClick={() => toggleGroup(group.name)}
+                              className="w-full flex items-center justify-between text-[10px] font-display font-bold uppercase tracking-widest text-slate-muted/80 hover:text-primary transition-colors text-left px-2 py-1 select-none"
+                            >
+                              <span>{group.name}</span>
+                              {isExpanded ? (
+                                <ChevronDown className="w-3.5 h-3.5 text-slate-muted/80" />
+                              ) : (
+                                <ChevronRight className="w-3.5 h-3.5 text-slate-muted/80" />
+                              )}
+                            </button>
+                            {isExpanded && (
+                              <div className="space-y-1 mt-1 transition-all duration-300">
+                                {group.categories.map((cat) => {
+                                  const isActive = selectedCategory === cat;
+                                  const serviceCount = cat === "Alle" 
+                                    ? BOOKING_SERVICES.length 
+                                    : BOOKING_SERVICES.filter(s => s.categoryChip === cat).length;
 
-                              return (
-                                <button
-                                  key={cat}
-                                  type="button"
-                                  onClick={() => setSelectedCategory(cat)}
-                                  className={`w-full text-left px-3 py-2 rounded-xl font-sans text-xs font-medium transition-all duration-200 flex items-center justify-between group border ${
-                                    isActive
-                                      ? 'bg-primary text-pure-white border-primary shadow-sm font-semibold'
-                                      : 'bg-transparent text-onyx-text border-transparent hover:bg-sky-accent/5 hover:text-primary'
-                                  }`}
-                                >
-                                  <div className="flex items-center gap-2 min-w-0">
-                                    <span className={`transition-colors shrink-0 ${
-                                      isActive ? 'text-pure-white' : 'text-slate-muted group-hover:text-primary'
-                                    }`}>
-                                      {getCategoryIcon(cat)}
-                                    </span>
-                                    <span className="truncate">{cat}</span>
-                                  </div>
-                                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 font-display ${
-                                    isActive
-                                      ? 'bg-pure-white/25 text-pure-white'
-                                      : 'bg-sky-accent/10 text-slate-muted group-hover:bg-primary/10 group-hover:text-primary'
-                                  }`}>
-                                    {serviceCount}
-                                  </span>
-                                </button>
-                              );
-                            })}
+                                  return (
+                                    <button
+                                      key={cat}
+                                      type="button"
+                                      onClick={() => setSelectedCategory(cat)}
+                                      className={`w-full text-left px-3 py-2 rounded-xl font-sans text-xs font-medium transition-all duration-200 flex items-center justify-between group border ${
+                                        isActive
+                                          ? 'bg-primary text-pure-white border-primary shadow-sm font-semibold'
+                                          : 'bg-transparent text-onyx-text border-transparent hover:bg-sky-accent/5 hover:text-primary'
+                                      }`}
+                                    >
+                                      <div className="flex items-center gap-2 min-w-0">
+                                        <span className={`transition-colors shrink-0 ${
+                                          isActive ? 'text-pure-white' : 'text-slate-muted group-hover:text-primary'
+                                        }`}>
+                                          {getCategoryIcon(cat)}
+                                        </span>
+                                        <span className="truncate">{cat}</span>
+                                      </div>
+                                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full shrink-0 font-display ${
+                                        isActive
+                                          ? 'bg-pure-white/25 text-pure-white'
+                                          : 'bg-sky-accent/10 text-slate-muted group-hover:bg-primary/10 group-hover:text-primary'
+                                      }`}>
+                                        {serviceCount}
+                                      </span>
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            )}
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
 
                     {/* Mobile & Tablet View: Horizontal Scroll Slider */}
