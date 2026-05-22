@@ -38,6 +38,7 @@ interface Appointment {
   notes?: string;
   status: 'pending' | 'confirmed' | 'cancelled';
   status_reason?: string | null;
+  expert?: string;
 }
 
 export const Admin: React.FC = () => {
@@ -62,6 +63,7 @@ export const Admin: React.FC = () => {
   const [editTime, setEditTime] = useState('');
   const [editStatus, setEditStatus] = useState<'pending' | 'confirmed' | 'cancelled'>('pending');
   const [editReason, setEditReason] = useState('');
+  const [editExpert, setEditExpert] = useState('Sofia');
 
   // Helper to parse "Sa, 23. Mai" to ISO date "2026-05-23"
   const parseGermanDateStringToIso = (dateStr: string, createdAtStr?: string): string => {
@@ -166,6 +168,7 @@ export const Admin: React.FC = () => {
     setEditTime(parseGermanTimeStringToIso(app.time));
     setEditStatus(app.status);
     setEditReason(app.status_reason || '');
+    setEditExpert(app.expert || 'Sofia');
   };
 
   // Check current session on mount
@@ -298,6 +301,7 @@ export const Admin: React.FC = () => {
       time?: string;
       status?: 'pending' | 'confirmed' | 'cancelled';
       status_reason?: string | null;
+      expert?: string;
     }
   ) => {
     setActionLoadingId(id);
@@ -333,9 +337,11 @@ export const Admin: React.FC = () => {
       time?: string;
       status?: 'pending' | 'confirmed' | 'cancelled';
       status_reason?: string | null;
+      expert?: string;
     } = {
       status: editStatus,
-      status_reason: editReason.trim() || null
+      status_reason: editReason.trim() || null,
+      expert: editExpert
     };
     
     if (editStatus !== 'cancelled') {
@@ -723,17 +729,24 @@ export const Admin: React.FC = () => {
                                 <Clock className="w-4 h-4 text-primary/75" />
                                 {app.time}
                               </span>
-                              <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
-                                app.status === 'confirmed'
-                                  ? 'bg-emerald-500/10 text-emerald-600'
-                                  : app.status === 'cancelled'
-                                  ? 'bg-rose-500/10 text-rose-600'
-                                  : 'bg-amber-500/10 text-amber-600'
-                              }`}>
-                                {app.status === 'confirmed' && 'Bestätigt'}
-                                {app.status === 'cancelled' && 'Storniert'}
-                                {app.status === 'pending' && 'Ausstehend'}
-                              </span>
+                              <div className="flex items-center gap-2">
+                                {app.expert && (
+                                  <span className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+                                    {app.expert}
+                                  </span>
+                                )}
+                                <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                                  app.status === 'confirmed'
+                                    ? 'bg-emerald-500/10 text-emerald-600'
+                                    : app.status === 'cancelled'
+                                    ? 'bg-rose-500/10 text-rose-600'
+                                    : 'bg-amber-500/10 text-amber-600'
+                                }`}>
+                                  {app.status === 'confirmed' && 'Bestätigt'}
+                                  {app.status === 'cancelled' && 'Storniert'}
+                                  {app.status === 'pending' && 'Ausstehend'}
+                                </span>
+                              </div>
                             </div>
                             
                             <div>
@@ -857,6 +870,7 @@ export const Admin: React.FC = () => {
                     <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Kunde</th>
                     <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Behandlung</th>
                     <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Datum / Zeit</th>
+                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Expertin</th>
                     <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Status</th>
                     <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary text-right">Aktionen</th>
                   </tr>
@@ -882,6 +896,15 @@ export const Admin: React.FC = () => {
                       <td className="p-4 md:p-6 space-y-1">
                         <p className="font-semibold text-onyx-text">{app.date}</p>
                         <p className="text-xs text-primary font-bold font-display">{app.time}</p>
+                      </td>
+                      <td className="p-4 md:p-6">
+                        {app.expert ? (
+                          <span className="text-[11px] font-semibold text-onyx-text bg-sky-accent/15 px-2 py-1 rounded border border-sky-accent/25">
+                            {app.expert}
+                          </span>
+                        ) : (
+                          <span className="text-xs text-outline italic">Keine Angabe</span>
+                        )}
                       </td>
                       <td className="p-4 md:p-6">
                         <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
@@ -1076,6 +1099,20 @@ export const Admin: React.FC = () => {
                     ℹ️ Bei einer Terminverschiebung muss der Kunde dem neuen Termin erst zustimmen. Der Termin wird daher automatisch auf <strong>"Ausstehend"</strong> gesetzt und der Kunde erhält E-Mail-Buttons zur Bestätigung.
                   </p>
                 )}
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-display font-bold uppercase tracking-wider text-primary mb-1.5">
+                  Behandelnde Expertin
+                </label>
+                <select
+                  value={editExpert}
+                  onChange={(e: any) => setEditExpert(e.target.value)}
+                  className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
+                >
+                  <option value="Sofia">Sofia Khaliq-Natawan</option>
+                  <option value="Isabel">Isabel Duwendag</option>
+                </select>
               </div>
               
               <div>

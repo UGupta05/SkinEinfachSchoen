@@ -82,7 +82,8 @@ const mockAppointment = {
   time: '14:30',
   notes: 'Bitte sensible Hautpartien vorsichtig behandeln.',
   status: 'pending',
-  reminded: false
+  reminded: false,
+  expert: 'Sofia'
 };
 
 const run = async () => {
@@ -147,11 +148,11 @@ const run = async () => {
     }
 
     if (action === 'modify' || action === 'all') {
-      console.log('\n[TEST 4] Triggering UPDATE Webhook (Date and time changed)...');
+      console.log('\n[TEST 4] Triggering UPDATE Webhook (Date, time and expert changed)...');
       const payload = {
         type: 'UPDATE',
         table: 'appointments',
-        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30', status_reason: 'Aufgrund einer teaminternen Fortbildung mussten wir Ihren Termin um einige Tage verschieben. Wir bitten um Verständnis.' },
+        record: { ...mockAppointment, date: 'Fr, 29. Mai', time: '10:30', expert: 'Isabel', status_reason: 'Aufgrund einer teaminternen Fortbildung mussten wir Ihren Termin um einige Tage verschieben. Wir bitten um Verständnis.' },
         old_record: mockAppointment
       };
       const res = await sendRequest('POST', '/api/appointments-webhook', payload, webhookSecretHeaders);

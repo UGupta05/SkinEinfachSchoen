@@ -172,7 +172,8 @@ export const getBookingPendingTemplate = (
   date: string,
   time: string,
   price: string,
-  duration: string
+  duration: string,
+  expert?: string
 ): string => {
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
@@ -184,6 +185,12 @@ export const getBookingPendingTemplate = (
         <td class="details-label">Behandlung:</td>
         <td class="details-value"><strong>${serviceName}</strong></td>
       </tr>
+      ${expert ? `
+      <tr>
+        <td class="details-label">Expertin:</td>
+        <td class="details-value">${expert}</td>
+      </tr>
+      ` : ''}
       <tr>
         <td class="details-label">Datum:</td>
         <td class="details-value">${date}</td>
@@ -216,7 +223,8 @@ export const getBookingConfirmedTemplate = (
   time: string,
   price: string,
   duration: string,
-  reason?: string
+  reason?: string,
+  expert?: string
 ): string => {
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
@@ -235,6 +243,12 @@ export const getBookingConfirmedTemplate = (
         <td class="details-label">Behandlung:</td>
         <td class="details-value"><strong>${serviceName}</strong></td>
       </tr>
+      ${expert ? `
+      <tr>
+        <td class="details-label">Expertin:</td>
+        <td class="details-value"><strong>${expert}</strong></td>
+      </tr>
+      ` : ''}
       <tr>
         <td class="details-label">Datum:</td>
         <td class="details-value"><strong>${date}</strong></td>
@@ -307,10 +321,13 @@ export const getBookingUpdatedTemplate = (
   oldService?: string,
   reason?: string,
   id?: string,
-  baseUrl?: string
+  baseUrl?: string,
+  expert?: string,
+  oldExpert?: string
 ): string => {
-  const changeDetails = (oldDate && oldDate !== date) || (oldTime && oldTime !== time) || (oldService && oldService !== serviceName)
-    ? `<p style="font-size: 13px; color: #7496A8; margin-bottom: 20px;"><em>Bisheriger Termin: ${oldService || serviceName} am ${oldDate || date} um ${oldTime || time}</em></p>`
+  const expertChanged = oldExpert && oldExpert !== expert;
+  const changeDetails = (oldDate && oldDate !== date) || (oldTime && oldTime !== time) || (oldService && oldService !== serviceName) || expertChanged
+    ? `<p style="font-size: 13px; color: #7496A8; margin-bottom: 20px;"><em>Bisheriger Termin: ${oldService || serviceName} am ${oldDate || date} um ${oldTime || time}${oldExpert ? ` bei ${oldExpert}` : ''}</em></p>`
     : '';
 
   const content = `
@@ -333,6 +350,12 @@ export const getBookingUpdatedTemplate = (
         <td class="details-label">Behandlung:</td>
         <td class="details-value"><strong>${serviceName}</strong></td>
       </tr>
+      ${expert ? `
+      <tr>
+        <td class="details-label">Expertin:</td>
+        <td class="details-value"><strong>${expert}</strong></td>
+      </tr>
+      ` : ''}
       <tr>
         <td class="details-label">Datum:</td>
         <td class="details-value"><strong>${date}</strong></td>
@@ -374,7 +397,8 @@ export const getBookingReminderTemplate = (
   customerName: string,
   serviceName: string,
   date: string,
-  time: string
+  time: string,
+  expert?: string
 ): string => {
   const content = `
     <h2 class="greeting">Hallo ${customerName},</h2>
@@ -386,6 +410,12 @@ export const getBookingReminderTemplate = (
         <td class="details-label">Behandlung:</td>
         <td class="details-value"><strong>${serviceName}</strong></td>
       </tr>
+      ${expert ? `
+      <tr>
+        <td class="details-label">Expertin:</td>
+        <td class="details-value"><strong>${expert}</strong></td>
+      </tr>
+      ` : ''}
       <tr>
         <td class="details-label">Datum:</td>
         <td class="details-value"><strong>${date}</strong></td>

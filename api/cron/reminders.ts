@@ -91,7 +91,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           app.customer_name,
           app.service_name,
           app.date,
-          app.time
+          app.time,
+          app.expert
         );
 
         const resendResponse = await fetch('https://api.resend.com/emails', {

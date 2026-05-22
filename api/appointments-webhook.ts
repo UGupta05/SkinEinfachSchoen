@@ -42,7 +42,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     price,
     duration,
     status,
-    status_reason
+    status_reason,
+    expert
   } = record;
 
   if (!customer_email) {
@@ -64,7 +65,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (type === 'INSERT') {
       // New booking is always pending initially
       subject = 'Ihre Terminbuchungsanfrage - Skin Einfach Schön';
-      html = getBookingPendingTemplate(customer_name, service_name, date, time, price, duration);
+      html = getBookingPendingTemplate(customer_name, service_name, date, time, price, duration, expert);
     } else if (type === 'UPDATE') {
       const oldStatus = old_record?.status;
       const newStatus = status;
@@ -72,7 +73,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       if (oldStatus !== newStatus) {
         if (newStatus === 'confirmed') {
           subject = 'Termin bestätigt - Skin Einfach Schön';
-          html = getBookingConfirmedTemplate(customer_name, service_name, date, time, price, duration, status_reason);
+          html = getBookingConfirmedTemplate(customer_name, service_name, date, time, price, duration, status_reason, expert);
         } else if (newStatus === 'cancelled') {
           subject = 'Termin storniert - Skin Einfach Schön';
           html = getBookingCancelledTemplate(customer_name, service_name, date, time, status_reason);
@@ -80,12 +81,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           return res.status(200).json({ message: `Status updated to ${newStatus}. No email trigger mapped.` });
         }
       } else {
-        // Status didn't change, check if details changed (time, date, service)
+        // Status didn't change, check if details changed (time, date, service, expert)
         const oldDate = old_record?.date;
         const oldTime = old_record?.time;
         const oldService = old_record?.service_name;
+        const oldExpert = old_record?.expert;
 
-        if (oldDate !== date || oldTime !== time || oldService !== service_name) {
+        if (oldDate !== date || oldTime !== time || oldService !== service_name || oldExpert !== expert) {
           const protocol = req.headers['x-forwarded-proto'] || 'http';
           const baseUrl = `${protocol}://${req.headers.host}`;
 
@@ -102,7 +104,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             oldService,
             status_reason,
             id,
-            baseUrl
+            baseUrl,
+            expert,
+            oldExpert
           );
         } else {
           return res.status(200).json({ message: 'No actionable fields changed. Skipping.' });
