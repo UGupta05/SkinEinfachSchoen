@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 import { 
   Sparkles, 
   X, 
@@ -1390,6 +1391,8 @@ export const Terminbuchung: React.FC = () => {
   const [consent, setConsent] = useState<boolean>(false);
   
   const [booked, setBooked] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [availableDates] = useState(generateAvailableDates);
 
   // Pre-select service if passed via state or query params
@@ -1433,10 +1436,35 @@ export const Terminbuchung: React.FC = () => {
     setCurrentStep(1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedService && selectedDate && selectedTime && name && email && consent) {
-      setBooked(true);
+      setLoading(true);
+      setErrorMsg(null);
+      try {
+        const { error } = await supabase.from('appointments').insert([{
+          service_id: selectedService.id,
+          service_name: selectedService.name,
+          category: selectedService.categoryTag,
+          price: selectedService.price,
+          duration: selectedService.duration,
+          date: selectedDate,
+          time: selectedTime,
+          customer_name: name,
+          customer_email: email,
+          customer_phone: phone,
+          notes: notes,
+          status: 'pending'
+        }]);
+
+        if (error) throw error;
+        setBooked(true);
+      } catch (err: any) {
+        console.error('Error submitting booking:', err);
+        setErrorMsg(err.message || 'Ein Fehler ist aufgetreten bei der Buchung. Bitte versuchen Sie es erneut.');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -2038,6 +2066,12 @@ export const Terminbuchung: React.FC = () => {
                       Ich stimme zu, dass meine Angaben zur Kontaktaufnahme und Zuordnung für eventuelle Rückfragen dauerhaft gespeichert werden. Sie können diese Einwilligung jederzeit widerrufen. *
                     </label>
                   </div>
+                  
+                  {errorMsg && (
+                    <div className="bg-error/10 border border-error/20 p-4 rounded-xl text-error text-xs leading-relaxed font-sans mt-4">
+                      {errorMsg}
+                    </div>
+                  )}
                 </div>
 
                 {/* Back button */}
@@ -2183,12 +2217,18 @@ export const Terminbuchung: React.FC = () => {
                   {currentStep === 3 && (
                     <button
                       type="button"
-                      disabled={!name || !email || !consent}
+                      disabled={!name || !email || !consent || loading}
                       onClick={handleSubmit}
                       className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all disabled:bg-slate-muted/20 disabled:text-outline disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center justify-center gap-2"
                     >
-                      <span>Termin buchen</span>
-                      <Check className="w-4 h-4" />
+                      {loading ? (
+                        <span>Wird gebucht...</span>
+                      ) : (
+                        <>
+                          <span>Termin buchen</span>
+                          <Check className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   )}
                 </div>

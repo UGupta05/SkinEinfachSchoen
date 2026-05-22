@@ -10,6 +10,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isAdminPath = location.pathname.startsWith('/admin');
+
+  if (isAdminPath) {
+    return <div className="min-h-screen bg-background text-on-surface font-sans">{children}</div>;
+  }
 
   useEffect(() => {
     const handleScroll = () => {

@@ -28,3 +28,8 @@ dist-ssr
 step_430_content.txt
 apply_termn_diffs.py
 Termnoptionen.txt
+
+# Environment files
+.env
+.env.*
+!.env.example
