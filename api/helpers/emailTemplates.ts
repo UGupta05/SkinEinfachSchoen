@@ -357,8 +357,8 @@ export const getBookingUpdatedTemplate = (
       <p style="font-size: 13px; color: #64748b; margin-bottom: 20px; line-height: 1.5; font-family: sans-serif;">Passt Ihnen dieser neue Termin? Bitte teilen Sie uns Ihre Entscheidung per Klick mit:</p>
       
       <div style="margin: 10px 0;">
-        <a href="${baseUrl}/termin-antwort?id=${id}&action=accept" style="display: inline-block; background-color: #0284c7; color: #ffffff; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #0284c7; text-align: center;">Ja, Verschiebung akzeptieren</a>
-        <a href="${baseUrl}/termin-antwort?id=${id}&action=decline" style="display: inline-block; background-color: #ffffff; color: #ef4444; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #fecaca; text-align: center;">Nein, ablehnen & neu buchen</a>
+        <a href="${baseUrl}/api/termin-antwort?id=${id}&action=accept" style="display: inline-block; background-color: #0284c7; color: #ffffff; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #0284c7; text-align: center;">Ja, Verschiebung akzeptieren</a>
+        <a href="${baseUrl}/api/termin-antwort?id=${id}&action=decline" style="display: inline-block; background-color: #ffffff; color: #ef4444; padding: 12px 24px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 8px; font-family: 'Montserrat', Helvetica, Arial, sans-serif; margin: 4px; border: 1px solid #fecaca; text-align: center;">Nein, ablehnen & neu buchen</a>
       </div>
     </div>
     ` : ''}
