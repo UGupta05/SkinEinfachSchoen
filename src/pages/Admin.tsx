@@ -20,7 +20,9 @@ import {
   Inbox,
   Check,
   ChevronRight,
-  Edit
+  Edit,
+  Menu,
+  X
 } from 'lucide-react';
 
 interface Appointment {
@@ -57,6 +59,7 @@ export const Admin: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'calendar' | 'list'>('calendar');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Edit Modal states
   const [selectedAppointmentForEdit, setSelectedAppointmentForEdit] = useState<Appointment | null>(null);
@@ -527,487 +530,665 @@ export const Admin: React.FC = () => {
 
   // --- DASHBOARD INTERFACE ---
   return (
-    <div className="min-h-screen bg-background flex flex-col font-sans selection:bg-primary/20">
-      {/* Header */}
-      <header className="bg-pure-white border-b border-outline-variant/10 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <span className="font-display text-primary tracking-tighter text-2xl font-bold">SKIN</span>
-            <span className="h-4 w-px bg-outline-variant/30"></span>
-            <span className="font-display text-[10px] uppercase font-bold tracking-widest text-tertiary">Admin-Portal</span>
+    <div className="min-h-screen bg-background flex font-sans selection:bg-primary/20">
+      
+      {/* Left Sidebar (Desktop: visible, Mobile: slide-in drawer) */}
+      <aside className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-pure-white border-r border-outline-variant/15 flex flex-col py-6 transition-transform duration-300 z-50 shrink-0 ${
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
+        {/* Sidebar Header */}
+        <div className="px-6 mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="font-display text-lg font-bold text-primary leading-tight">SKiN</h1>
+            <p className="text-[10px] uppercase font-bold tracking-widest text-tertiary">Admin-Portal</p>
           </div>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-semibold text-primary">{user.email}</span>
-              <span className="text-[10px] text-outline font-display font-medium uppercase tracking-wider">Praxis-Team</span>
-            </div>
-            <button
-              onClick={handleSignOut}
-              className="p-2.5 rounded-lg border border-outline-variant/15 text-tertiary hover:text-error hover:bg-error/5 hover:border-error/20 active:scale-95 transition-all"
-              title="Abmelden"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
-          </div>
+          {/* Mobile close button */}
+          <button className="md:hidden p-1.5 hover:bg-soft-shell rounded-lg text-outline" onClick={() => setSidebarOpen(false)}>
+            <X className="w-5 h-5" />
+          </button>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-8 py-10 space-y-10">
+        {/* Sidebar Nav */}
+        <nav className="flex-1 space-y-1">
+          <button
+            onClick={() => { setActiveTab('calendar'); setSidebarOpen(false); }}
+            className={`w-full flex items-center px-6 py-3 transition-colors ${
+              activeTab === 'calendar'
+                ? 'text-primary font-bold border-r-2 border-primary bg-soft-shell'
+                : 'text-tertiary hover:bg-soft-shell/50'
+            }`}
+          >
+            <Calendar className="w-4 h-4 mr-3" />
+            <span className="text-xs font-display font-bold uppercase tracking-wider">Tagesplaner</span>
+          </button>
+          <button
+            onClick={() => { setActiveTab('list'); setSidebarOpen(false); }}
+            className={`w-full flex items-center px-6 py-3 transition-colors ${
+              activeTab === 'list'
+                ? 'text-primary font-bold border-r-2 border-primary bg-soft-shell'
+                : 'text-tertiary hover:bg-soft-shell/50'
+            }`}
+          >
+            <Clock className="w-4 h-4 mr-3" />
+            <span className="text-xs font-display font-bold uppercase tracking-wider">Listenansicht</span>
+          </button>
+        </nav>
+
+        {/* Sync Button */}
+        <div className="px-6 mb-6">
+          <button
+            onClick={() => {
+              fetchAppointments();
+            }}
+            disabled={loadingData}
+            className="w-full py-3 bg-primary text-pure-white font-display text-[10px] uppercase font-bold tracking-wider rounded-lg medical-glow hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loadingData ? 'animate-spin' : ''}`} />
+            <span>Aktualisieren</span>
+          </button>
+        </div>
+
+        {/* Logout */}
+        <footer className="border-t border-outline-variant/10 pt-4">
+          <button
+            onClick={handleSignOut}
+            className="w-full flex items-center px-6 py-3 text-tertiary hover:text-error hover:bg-error/5 transition-colors"
+          >
+            <LogOut className="w-4 h-4 mr-3" />
+            <span className="text-xs font-display font-bold uppercase tracking-wider">Abmelden</span>
+          </button>
+        </footer>
+      </aside>
+
+      {/* Backdrop overlay for mobile drawer */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-onyx-text/45 backdrop-blur-sm z-40 md:hidden animate-in fade-in"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
+
+      {/* Right Content Wrapper */}
+      <div className="flex-1 flex flex-col min-w-0">
         
-        {/* KPI Row */}
-        <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] font-display font-bold uppercase tracking-wider text-outline">Anfragen Gesamt</span>
-              <div className="p-2 bg-primary/5 rounded-lg text-primary">
-                <Calendar className="w-4 h-4" />
-              </div>
-            </div>
-            <p className="text-3xl font-bold font-display text-primary">{totalCount}</p>
+        {/* Top Header Bar */}
+        <header className="sticky top-0 z-30 bg-surface-bright/80 backdrop-blur-md border-b border-outline-variant/15 flex justify-between items-center px-6 py-4">
+          <div className="flex items-center gap-4">
+            {/* Mobile Sidebar Hamburger Toggle */}
+            <button className="md:hidden p-2 hover:bg-soft-shell rounded-lg text-outline" onClick={() => setSidebarOpen(true)}>
+              <Menu className="w-5 h-5" />
+            </button>
+            <span className="font-display text-sm font-bold text-onyx-text uppercase tracking-wider">
+              {activeTab === 'calendar' ? 'Tagesplaner' : 'Listenansicht'}
+            </span>
           </div>
 
-          <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] font-display font-bold uppercase tracking-wider text-outline">Ausstehend</span>
-              <div className="p-2 bg-amber-500/5 rounded-lg text-amber-500">
-                <RefreshCw className="w-4 h-4" />
-              </div>
+          {/* User Badge */}
+          <div className="flex items-center gap-3">
+            <div className="text-right hidden sm:block">
+              <p className="text-xs font-semibold text-primary">{user.email}</p>
+              <p className="text-[9px] text-outline font-display font-medium uppercase tracking-wider">Praxis-Team</p>
             </div>
-            <p className="text-3xl font-bold font-display text-amber-500">{pendingCount}</p>
-          </div>
-
-          <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] font-display font-bold uppercase tracking-wider text-outline">Bestätigt</span>
-              <div className="p-2 bg-emerald-500/5 rounded-lg text-emerald-500">
-                <CheckCircle className="w-4 h-4" />
-              </div>
+            <span className="h-8 w-px bg-outline-variant/30 hidden sm:block"></span>
+            <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-display font-bold text-sm select-none">
+              {user.email?.[0].toUpperCase()}
             </div>
-            <p className="text-3xl font-bold font-display text-emerald-500">{confirmedCount}</p>
           </div>
+        </header>
 
-          <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] font-display font-bold uppercase tracking-wider text-outline">Storniert</span>
-              <div className="p-2 bg-rose-500/5 rounded-lg text-rose-500">
-                <XCircle className="w-4 h-4" />
-              </div>
-            </div>
-            <p className="text-3xl font-bold font-display text-rose-500">{cancelledCount}</p>
-          </div>
-        </section>
-
-        {/* Filters and Controls */}
-        <section className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4">
+        {/* Main Content Area */}
+        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto space-y-8">
           
-          {/* Tabs */}
-          <div className="flex p-1 bg-soft-shell rounded-xl self-start">
-            <button
-              onClick={() => setActiveTab('calendar')}
-              className={`px-4 py-2 rounded-lg font-display text-xs font-bold uppercase tracking-wider transition-all ${
-                activeTab === 'calendar'
-                  ? 'bg-pure-white text-primary shadow-sm'
-                  : 'text-tertiary hover:text-primary'
-              }`}
-            >
-              Tagesplaner
-            </button>
-            <button
-              onClick={() => setActiveTab('list')}
-              className={`px-4 py-2 rounded-lg font-display text-xs font-bold uppercase tracking-wider transition-all ${
-                activeTab === 'list'
-                  ? 'bg-pure-white text-primary shadow-sm'
-                  : 'text-tertiary hover:text-primary'
-              }`}
-            >
-              Listenansicht
-            </button>
-          </div>
+          {/* KPI Dashboard Summary */}
+          <section className="space-y-4">
+            <h2 className="font-display text-xs font-bold text-onyx-text uppercase tracking-wider">Heute im Überblick</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              
+              {/* Stat 1: Total */}
+              <div className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="p-2 bg-primary/5 text-primary rounded-lg">
+                    <Calendar className="w-5 h-5" />
+                  </span>
+                  <span className="text-primary font-display text-[9px] font-bold uppercase tracking-wider bg-primary/5 px-2 py-0.5 rounded">Gesamt</span>
+                </div>
+                <p className="text-[10px] font-display font-bold uppercase tracking-wider text-outline mb-1">Anfragen Gesamt</p>
+                <h3 className="font-display text-2xl font-bold text-onyx-text">{totalCount}</h3>
+              </div>
 
-          {/* Filters */}
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-2 text-xs text-tertiary">
-              <Filter className="w-3.5 h-3.5" />
-              <span>Status filtern:</span>
+              {/* Stat 2: Pending */}
+              <div className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="p-2 bg-amber-500/5 text-amber-500 rounded-lg">
+                    <RefreshCw className="w-5 h-5" />
+                  </span>
+                  <span className="text-amber-500 font-display text-[9px] font-bold uppercase tracking-wider bg-amber-500/5 px-2 py-0.5 rounded">Prüfung</span>
+                </div>
+                <p className="text-[10px] font-display font-bold uppercase tracking-wider text-outline mb-1">Ausstehend</p>
+                <h3 className="font-display text-2xl font-bold text-onyx-text">{pendingCount}</h3>
+              </div>
+
+              {/* Stat 3: Confirmed */}
+              <div className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="p-2 bg-emerald-500/5 text-emerald-500 rounded-lg">
+                    <CheckCircle className="w-5 h-5" />
+                  </span>
+                  <span className="text-emerald-500 font-display text-[9px] font-bold uppercase tracking-wider bg-emerald-500/5 px-2 py-0.5 rounded">Gebucht</span>
+                </div>
+                <p className="text-[10px] font-display font-bold uppercase tracking-wider text-outline mb-1">Bestätigt</p>
+                <h3 className="font-display text-2xl font-bold text-onyx-text">{confirmedCount}</h3>
+              </div>
+
+              {/* Stat 4: Cancelled */}
+              <div className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 flex flex-col justify-between">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="p-2 bg-rose-500/5 text-rose-500 rounded-lg">
+                    <XCircle className="w-5 h-5" />
+                  </span>
+                  <span className="text-rose-500 font-display text-[9px] font-bold uppercase tracking-wider bg-rose-500/5 px-2 py-0.5 rounded">Storniert</span>
+                </div>
+                <p className="text-[10px] font-display font-bold uppercase tracking-wider text-outline mb-1">Storniert</p>
+                <h3 className="font-display text-2xl font-bold text-onyx-text">{cancelledCount}</h3>
+              </div>
+
             </div>
-            <div className="flex gap-2">
-              {[
-                { label: 'Alle', value: 'all' },
-                { label: 'Ausstehend', value: 'pending' },
-                { label: 'Bestätigt', value: 'confirmed' },
-                { label: 'Storniert', value: 'cancelled' }
-              ].map((filter) => (
-                <button
-                  key={filter.value}
-                  onClick={() => setStatusFilter(filter.value)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                    statusFilter === filter.value
-                      ? 'bg-primary border-primary text-pure-white shadow-sm'
-                      : 'bg-pure-white border-outline-variant/10 text-tertiary hover:border-primary/20 hover:text-primary'
-                  }`}
-                >
-                  {filter.label}
-                </button>
-              ))}
+          </section>
+
+          {/* Bento Layout Main Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            
+            {/* Left Main Dashboard Column (Day Planner / List Table) - Col Span 2 */}
+            <div className="lg:col-span-2 space-y-6">
+              
+              {/* Filter block */}
+              <div className="bg-pure-white border border-outline-variant/10 p-4 rounded-xl shadow-sm flex items-center justify-between flex-wrap gap-3">
+                <div className="flex items-center gap-2 text-xs text-tertiary">
+                  <Filter className="w-3.5 h-3.5" />
+                  <span>Status filtern:</span>
+                </div>
+                <div className="flex gap-2">
+                  {[
+                    { label: 'Alle', value: 'all' },
+                    { label: 'Ausstehend', value: 'pending' },
+                    { label: 'Bestätigt', value: 'confirmed' },
+                    { label: 'Storniert', value: 'cancelled' }
+                  ].map((filter) => (
+                    <button
+                      key={filter.value}
+                      onClick={() => setStatusFilter(filter.value)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                        statusFilter === filter.value
+                          ? 'bg-primary border-primary text-pure-white shadow-sm font-bold'
+                          : 'bg-pure-white border-outline-variant/10 text-tertiary hover:border-primary/20 hover:text-primary'
+                      }`}
+                    >
+                      {filter.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Data Loading State */}
+              {loadingData && appointments.length === 0 && (
+                <div className="bg-pure-white border border-outline-variant/10 py-16 rounded-xl shadow-sm text-center space-y-4">
+                  <RefreshCw className="w-8 h-8 text-primary animate-spin mx-auto" />
+                  <p className="text-sm text-tertiary">Termindaten werden geladen...</p>
+                </div>
+              )}
+
+              {/* Error State */}
+              {dataError && (
+                <div className="bg-error/5 border border-error/20 p-6 rounded-xl text-error text-sm flex flex-col items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="w-5 h-5 shrink-0" />
+                    <span className="font-semibold">{dataError}</span>
+                  </div>
+                  <button
+                    onClick={fetchAppointments}
+                    className="px-4 py-2 border border-error/25 bg-error/5 hover:bg-error/10 text-xs font-bold uppercase rounded-lg transition-all"
+                  >
+                    Erneut versuchen
+                  </button>
+                </div>
+              )}
+
+              {/* Empty State */}
+              {!loadingData && filteredAppointments.length === 0 && (
+                <div className="bg-pure-white border border-outline-variant/10 py-16 rounded-xl shadow-sm text-center space-y-4">
+                  <Inbox className="w-12 h-12 text-outline/30 mx-auto" />
+                  <div className="space-y-1">
+                    <h3 className="font-display text-base font-bold text-primary">Keine Termine gefunden</h3>
+                    <p className="text-sm text-outline max-w-sm mx-auto px-4">
+                      Es liegen aktuell keine Terminanfragen vor, die dem ausgewählten Filter entsprechen.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* VIEW: CALENDAR / DAY PLANNER */}
+              {activeTab === 'calendar' && filteredAppointments.length > 0 && (
+                <section className="space-y-8">
+                  {Object.keys(grouped)
+                    .sort((a, b) => {
+                      const dateA = parseGermanDateStringToIso(a);
+                      const dateB = parseGermanDateStringToIso(b);
+                      return dateA.localeCompare(dateB);
+                    })
+                    .map((dateStr) => {
+                      const dayApps = grouped[dateStr];
+                      return (
+                        <div key={dateStr} className="space-y-4">
+                          {/* Day Header */}
+                          <div className="flex items-center gap-3">
+                            <h3 className="font-display text-lg font-bold text-primary flex items-center gap-2">
+                              <Calendar className="w-4 h-4 text-primary/75" />
+                              <span>{dateStr}</span>
+                            </h3>
+                            <span className="text-xs px-2.5 py-0.5 rounded-full bg-primary/5 text-primary font-bold">
+                              {dayApps.length} {dayApps.length === 1 ? 'Termin' : 'Termine'}
+                            </span>
+                          </div>
+
+                          {/* Bookings for the day */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {dayApps.map((app) => (
+                              <div
+                                key={app.id}
+                                className={`bg-pure-white border rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-6 relative overflow-hidden transition-all hover:shadow-md ${
+                                  app.status === 'confirmed'
+                                    ? 'border-emerald-500/20 shadow-emerald-500/5'
+                                    : app.status === 'cancelled'
+                                    ? 'border-rose-500/20 shadow-rose-500/5'
+                                    : 'border-outline-variant/10'
+                                }`}
+                              >
+                                {/* Accent status indicator bar */}
+                                <div className={`absolute top-0 left-0 bottom-0 w-1.5 ${
+                                  app.status === 'confirmed'
+                                    ? 'bg-emerald-500'
+                                    : app.status === 'cancelled'
+                                    ? 'bg-rose-500'
+                                    : 'bg-amber-500'
+                                }`} />
+
+                                {/* Time & Service Info */}
+                                <div className="space-y-3 pl-2">
+                                  <div className="flex justify-between items-center">
+                                    <span className="flex items-center gap-1.5 text-sm font-bold font-display text-primary">
+                                      <Clock className="w-4 h-4 text-primary/75" />
+                                      {app.time}
+                                    </span>
+                                    <div className="flex items-center gap-2">
+                                      {app.expert && (
+                                        <span className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+                                          {app.expert}
+                                        </span>
+                                      )}
+                                      <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                                        app.status === 'confirmed'
+                                          ? 'bg-emerald-500/10 text-emerald-600'
+                                          : app.status === 'cancelled'
+                                          ? 'bg-rose-500/10 text-rose-600'
+                                          : 'bg-amber-500/10 text-amber-600'
+                                      }`}>
+                                        {app.status === 'confirmed' && 'Bestätigt'}
+                                        {app.status === 'cancelled' && 'Storniert'}
+                                        {app.status === 'pending' && 'Ausstehend'}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  
+                                  <div>
+                                    <h4 className="font-display text-sm font-bold text-onyx-text leading-snug">{app.service_name}</h4>
+                                    <p className="text-[10px] text-outline mt-0.5">{app.category} • {app.duration} • {app.price}</p>
+                                  </div>
+                                </div>
+
+                                {/* Customer Details */}
+                                <div className="bg-soft-shell/50 border border-outline-variant/5 rounded-xl p-4 space-y-2.5 text-xs text-tertiary pl-6">
+                                  <div className="flex items-center gap-2">
+                                    <User className="w-3.5 h-3.5 text-primary/60 shrink-0" />
+                                    <span className="font-semibold text-onyx-text">{app.customer_name}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Users className="w-3.5 h-3.5 text-primary/60 shrink-0" />
+                                    <span>Expertin: <strong className="text-primary">{app.expert || 'Keine Angabe'}</strong></span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <Mail className="w-3.5 h-3.5 text-primary/60 shrink-0" />
+                                    <a href={`mailto:${app.customer_email}`} className="hover:text-primary underline hover:decoration-sky-accent break-all">{app.customer_email}</a>
+                                  </div>
+                                  {app.customer_phone && (
+                                    <div className="flex items-center gap-2">
+                                      <Phone className="w-3.5 h-3.5 text-primary/60 shrink-0" />
+                                      <a href={`tel:${app.customer_phone}`} className="hover:text-primary underline">{app.customer_phone}</a>
+                                    </div>
+                                  )}
+                                  {app.notes && (
+                                    <div className="pt-2 border-t border-outline-variant/10 flex gap-2 items-start mt-2">
+                                      <FileText className="w-3.5 h-3.5 text-primary/60 shrink-0 mt-0.5" />
+                                      <p className="italic text-outline leading-normal">{app.notes}</p>
+                                    </div>
+                                  )}
+                                  {app.status_reason && (
+                                    <div className="pt-2 border-t border-outline-variant/10 flex gap-2 items-start mt-2">
+                                      <AlertCircle className="w-3.5 h-3.5 text-tertiary/60 shrink-0 mt-0.5" />
+                                      <p className="text-[11px] text-tertiary font-medium leading-normal">
+                                        <span className="font-bold text-primary">Grund/Hinweis:</span> {app.status_reason}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Action Buttons */}
+                                <div className="flex justify-end gap-2 pl-2 border-t border-outline-variant/5 pt-4 flex-wrap">
+                                  <button
+                                    onClick={() => openEditModal(app)}
+                                    disabled={actionLoadingId === app.id}
+                                    className="px-2.5 py-1.5 border border-outline-variant/15 hover:bg-soft-shell text-primary rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                                    title="Bearbeiten / Verschieben"
+                                  >
+                                    <Edit className="w-3.5 h-3.5" />
+                                    <span>Bearbeiten</span>
+                                  </button>
+
+                                  {app.status === 'pending' && (
+                                    <>
+                                      <button
+                                        onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
+                                        disabled={actionLoadingId === app.id}
+                                        className="px-2.5 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-pure-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all hover:shadow-sm active:scale-95 flex items-center gap-1 cursor-pointer"
+                                      >
+                                        <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                                        <span>Bestätigen</span>
+                                      </button>
+                                      <button
+                                        onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
+                                        disabled={actionLoadingId === app.id}
+                                        className="px-2.5 py-1.5 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 text-rose-600 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                                      >
+                                        <XCircle className="w-3.5 h-3.5" />
+                                        <span>Stornieren</span>
+                                      </button>
+                                    </>
+                                  )}
+
+                                  {app.status === 'confirmed' && (
+                                    <button
+                                      onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
+                                      disabled={actionLoadingId === app.id}
+                                      className="px-3 py-1.5 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 text-rose-600 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                                    >
+                                      <XCircle className="w-3.5 h-3.5" />
+                                      <span>Stornieren</span>
+                                    </button>
+                                  )}
+
+                                  {app.status === 'cancelled' && (
+                                    <button
+                                      onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
+                                      disabled={actionLoadingId === app.id}
+                                      className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-pure-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all hover:shadow-sm active:scale-95 flex items-center gap-1 cursor-pointer"
+                                    >
+                                      <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                                      <span>Reaktivieren</span>
+                                    </button>
+                                  )}
+
+                                  <button
+                                    onClick={() => deleteAppointment(app.id)}
+                                    disabled={actionLoadingId === app.id}
+                                    className="p-1.5 text-outline hover:text-error hover:bg-error/5 border border-transparent hover:border-error/10 rounded-lg transition-all active:scale-90 cursor-pointer"
+                                    title="Löschen"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </section>
+              )}
+
+              {/* VIEW: LIST VIEW */}
+              {activeTab === 'list' && filteredAppointments.length > 0 && (
+                <section className="bg-pure-white border border-outline-variant/10 rounded-2xl shadow-sm overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-soft-shell/40 border-b border-outline-variant/10">
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Kunde</th>
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Behandlung</th>
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Datum / Zeit</th>
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Expertin</th>
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Status</th>
+                          <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary text-right">Aktionen</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-outline-variant/5 text-sm text-tertiary">
+                        {sortAppointmentsChronologically(filteredAppointments).map((app) => (
+                          <tr key={app.id} className="hover:bg-soft-shell/10 transition-colors">
+                            <td className="p-4 md:p-6 space-y-1">
+                              <p className="font-semibold text-onyx-text">{app.customer_name}</p>
+                              <p className="text-xs text-outline font-sans break-all">{app.customer_email}</p>
+                              {app.customer_phone && <p className="text-xs text-outline font-sans">{app.customer_phone}</p>}
+                              {app.notes && <p className="text-xs text-outline font-sans italic">Notiz: {app.notes}</p>}
+                              {app.status_reason && (
+                                <p className="text-xs text-primary font-sans font-medium">
+                                  Grund/Hinweis: {app.status_reason}
+                                </p>
+                              )}
+                            </td>
+                            <td className="p-4 md:p-6 space-y-1">
+                              <p className="font-semibold text-onyx-text leading-tight">{app.service_name}</p>
+                              <p className="text-[10px] text-outline uppercase tracking-wider">{app.category}</p>
+                            </td>
+                            <td className="p-4 md:p-6 space-y-1">
+                              <p className="font-semibold text-onyx-text">{app.date}</p>
+                              <p className="text-xs text-primary font-bold font-display">{app.time}</p>
+                            </td>
+                            <td className="p-4 md:p-6">
+                              {app.expert ? (
+                                <span className="text-[11px] font-semibold text-onyx-text bg-sky-accent/15 px-2 py-1 rounded border border-sky-accent/25">
+                                  {app.expert}
+                                </span>
+                              ) : (
+                                <span className="text-xs text-outline italic">Keine Angabe</span>
+                              )}
+                            </td>
+                            <td className="p-4 md:p-6">
+                              <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                                app.status === 'confirmed'
+                                  ? 'bg-emerald-500/10 text-emerald-600'
+                                  : app.status === 'cancelled'
+                                  ? 'bg-rose-500/10 text-rose-600'
+                                  : 'bg-amber-500/10 text-amber-600'
+                              }`}>
+                                {app.status === 'confirmed' && 'Bestätigt'}
+                                {app.status === 'cancelled' && 'Storniert'}
+                                {app.status === 'pending' && 'Ausstehend'}
+                              </span>
+                            </td>
+                            <td className="p-4 md:p-6 text-right">
+                              <div className="flex justify-end items-center gap-2">
+                                <button
+                                  onClick={() => openEditModal(app)}
+                                  disabled={actionLoadingId === app.id}
+                                  className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-pure-white rounded-lg transition-all cursor-pointer"
+                                  title="Bearbeiten / Verschieben"
+                                >
+                                  <Edit className="w-4 h-4" />
+                                </button>
+                                {app.status === 'pending' && (
+                                  <>
+                                    <button
+                                      onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
+                                      disabled={actionLoadingId === app.id}
+                                      className="p-2 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500 hover:text-pure-white rounded-lg transition-all cursor-pointer"
+                                      title="Bestätigen"
+                                    >
+                                      <Check className="w-4 h-4 stroke-[2.5]" />
+                                    </button>
+                                    <button
+                                      onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
+                                      disabled={actionLoadingId === app.id}
+                                      className="p-2 bg-rose-500/10 text-rose-600 hover:bg-rose-500 hover:text-pure-white rounded-lg transition-all cursor-pointer"
+                                      title="Stornieren"
+                                    >
+                                      <XCircle className="w-4 h-4" />
+                                    </button>
+                                  </>
+                                )}
+                                {app.status === 'confirmed' && (
+                                  <button
+                                    onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
+                                    disabled={actionLoadingId === app.id}
+                                    className="p-2 bg-rose-500/10 text-rose-600 hover:bg-rose-500 hover:text-pure-white rounded-lg transition-all cursor-pointer"
+                                    title="Stornieren"
+                                  >
+                                    <XCircle className="w-4 h-4" />
+                                  </button>
+                                )}
+                                {app.status === 'cancelled' && (
+                                  <button
+                                    onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
+                                    disabled={actionLoadingId === app.id}
+                                    className="p-2 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500 hover:text-pure-white rounded-lg transition-all cursor-pointer"
+                                    title="Reaktivieren"
+                                  >
+                                    <Check className="w-4 h-4 stroke-[2.5]" />
+                                  </button>
+                                )}
+                                <button
+                                  onClick={() => deleteAppointment(app.id)}
+                                  disabled={actionLoadingId === app.id}
+                                  className="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all cursor-pointer"
+                                  title="Löschen"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
+
             </div>
-          </div>
-        </section>
 
-        {/* Data Loading States */}
-        {loadingData && appointments.length === 0 && (
-          <div className="py-20 text-center space-y-4">
-            <RefreshCw className="w-8 h-8 text-primary animate-spin mx-auto" />
-            <p className="text-sm text-tertiary">Termindaten werden geladen...</p>
-          </div>
-        )}
+            {/* Right Bento Side Panel Column - Col Span 1 */}
+            <div className="space-y-6">
+              
+              {/* Studio Status Card */}
+              <div className="relative h-44 rounded-xl overflow-hidden medical-glow border border-outline-variant/10 group">
+                <img
+                  src="/images/home/clinic_lobby.png"
+                  alt="Praxis Studio"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-4 text-left">
+                  <div>
+                    <p className="text-pure-white font-display text-[9px] font-bold uppercase tracking-widest">Studio-Status: Optimal</p>
+                    <p className="text-white/85 text-[10px] font-sans">Alle Systeme laufen einwandfrei</p>
+                  </div>
+                </div>
+              </div>
 
-        {dataError && (
-          <div className="bg-error/5 border border-error/20 p-6 rounded-2xl text-error text-sm flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-            <div className="space-y-1">
-              <h4 className="font-bold">Ladefehler</h4>
-              <p>{dataError}</p>
-              <button 
-                onClick={fetchAppointments}
-                className="mt-3 px-4 py-1.5 border border-error/20 bg-error/10 hover:bg-error/20 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
-              >
-                Erneut versuchen
+              {/* Quick Links */}
+              <section className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 text-left space-y-4">
+                <h3 className="font-display text-xs font-bold text-onyx-text uppercase tracking-wider">Schnellzugriff</h3>
+                <div className="space-y-3">
+                  <a
+                    href="/terminbuchung"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center p-3 rounded-lg bg-soft-shell hover:bg-primary/5 border border-outline-variant/5 transition-all group"
+                  >
+                    <Calendar className="w-4 h-4 text-primary mr-3" />
+                    <span className="text-xs font-semibold text-tertiary group-hover:text-primary">Neuer Termin (Kunde)</span>
+                    <ChevronRight className="w-4 h-4 ml-auto text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1" />
+                  </a>
+                  
+                  <button
+                    onClick={fetchAppointments}
+                    className="w-full flex items-center p-3 rounded-lg bg-soft-shell hover:bg-primary/5 border border-outline-variant/5 transition-all group cursor-pointer"
+                  >
+                    <RefreshCw className={`w-4 h-4 text-primary mr-3 ${loadingData ? 'animate-spin' : ''}`} />
+                    <span className="text-xs font-semibold text-tertiary group-hover:text-primary">Daten synchronisieren</span>
+                    <ChevronRight className="w-4 h-4 ml-auto text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1" />
+                  </button>
+                </div>
+              </section>
+
+              {/* Recent Activity */}
+              <section className="bg-pure-white p-6 rounded-xl medical-glow border border-outline-variant/10 text-left space-y-4">
+                <h3 className="font-display text-xs font-bold text-onyx-text uppercase tracking-wider">Letzte Aktivitäten</h3>
+                <div className="space-y-4 max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
+                  {appointments.slice(0, 5).map((app) => (
+                    <div key={app.id} className="flex items-start text-xs border-b border-outline-variant/5 pb-3 last:border-0 last:pb-0">
+                      <div className={`w-2 h-2 rounded-full mt-1.5 mr-3 shrink-0 ${
+                        app.status === 'confirmed'
+                          ? 'bg-emerald-500'
+                          : app.status === 'cancelled'
+                          ? 'bg-rose-500'
+                          : 'bg-amber-500'
+                      }`} />
+                      <div className="space-y-0.5">
+                        <p className="text-onyx-text font-medium leading-normal">
+                          <strong>{app.customer_name}</strong> - {app.service_name}
+                        </p>
+                        <p className="text-[10px] text-outline">
+                          {app.date} um {app.time} ({app.expert || 'Keine Auswahl'})
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+            </div>
+
+          </div>
+
+          {/* AI Skin Diagnostics Beta Teaser */}
+          <section className="bg-onyx-text rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-outline-variant/10 text-left gap-6">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary to-transparent"></div>
+            <div className="relative z-10 text-pure-white md:w-1/2 space-y-4">
+              <span className="inline-block bg-primary/25 border border-primary/40 px-3 py-1 rounded-full font-display text-[9px] font-bold uppercase tracking-wider">AI DIAGNOSTICS PREVIEW</span>
+              <h2 className="font-display text-xl font-bold mb-2">Predictive Skin Analysis Beta</h2>
+              <p className="text-xs text-outline-variant leading-relaxed opacity-85">
+                Unser neues KI-Hautanalysetool integriert Patientenhistorie und 3D-Gesichtsscans für maximale Behandlungspräzision. Verfügbar für Isabel & Sofia ab nächster Woche.
+              </p>
+              <button className="border border-pure-white/20 hover:border-pure-white hover:bg-pure-white hover:text-onyx-text px-5 py-2 rounded-lg font-display text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer">
+                Modul aktivieren
               </button>
             </div>
-          </div>
-        )}
-
-        {/* Empty States */}
-        {!loadingData && filteredAppointments.length === 0 && (
-          <div className="bg-pure-white border border-outline-variant/10 py-20 rounded-2xl shadow-sm text-center max-w-xl mx-auto space-y-4">
-            <Inbox className="w-12 h-12 text-outline/30 mx-auto" />
-            <div className="space-y-1">
-              <h3 className="font-display text-base font-bold text-primary">Keine Termine gefunden</h3>
-              <p className="text-sm text-tertiary max-w-md mx-auto px-6">
-                Es liegen aktuell keine Terminanfragen vor, die dem ausgewählten Filter entsprechen.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* --- VIEW: CALENDAR / DAY PLANNER --- */}
-        {activeTab === 'calendar' && filteredAppointments.length > 0 && (
-          <section className="space-y-8">
-            {Object.keys(grouped)
-              .sort((a, b) => {
-                const dateA = parseGermanDateStringToIso(a);
-                const dateB = parseGermanDateStringToIso(b);
-                return dateA.localeCompare(dateB);
-              })
-              .map((dateStr) => {
-                const dayApps = grouped[dateStr];
-                return (
-                  <div key={dateStr} className="space-y-4">
-                    {/* Day Header */}
-                    <div className="flex items-center gap-3">
-                      <h3 className="font-display text-lg font-bold text-primary flex items-center gap-2">
-                        <Calendar className="w-4 h-4 text-primary/75" />
-                        <span>{dateStr}</span>
-                      </h3>
-                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-primary/5 text-primary font-bold">
-                        {dayApps.length} {dayApps.length === 1 ? 'Termin' : 'Termine'}
-                      </span>
-                    </div>
-
-                    {/* Bookings for the day */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {dayApps.map((app) => (
-                        <div
-                          key={app.id}
-                          className={`bg-pure-white border rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-6 relative overflow-hidden transition-all hover:shadow-md ${
-                            app.status === 'confirmed'
-                              ? 'border-emerald-500/20 shadow-emerald-500/5'
-                              : app.status === 'cancelled'
-                              ? 'border-rose-500/20 shadow-rose-500/5'
-                              : 'border-outline-variant/10'
-                          }`}
-                        >
-                          {/* Accent status indicator bar */}
-                          <div className={`absolute top-0 left-0 bottom-0 w-1.5 ${
-                            app.status === 'confirmed'
-                              ? 'bg-emerald-500'
-                              : app.status === 'cancelled'
-                              ? 'bg-rose-500'
-                              : 'bg-amber-500'
-                          }`} />
-
-                          {/* Time & Service Info */}
-                          <div className="space-y-3 pl-2">
-                            <div className="flex justify-between items-center">
-                              <span className="flex items-center gap-1.5 text-sm font-bold font-display text-primary">
-                                <Clock className="w-4 h-4 text-primary/75" />
-                                {app.time}
-                              </span>
-                              <div className="flex items-center gap-2">
-                                {app.expert && (
-                                  <span className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
-                                    {app.expert}
-                                  </span>
-                                )}
-                                <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
-                                  app.status === 'confirmed'
-                                    ? 'bg-emerald-500/10 text-emerald-600'
-                                    : app.status === 'cancelled'
-                                    ? 'bg-rose-500/10 text-rose-600'
-                                    : 'bg-amber-500/10 text-amber-600'
-                                }`}>
-                                  {app.status === 'confirmed' && 'Bestätigt'}
-                                  {app.status === 'cancelled' && 'Storniert'}
-                                  {app.status === 'pending' && 'Ausstehend'}
-                                </span>
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <h4 className="font-display text-sm font-bold text-onyx-text leading-snug">{app.service_name}</h4>
-                              <p className="text-[10px] text-outline mt-0.5">{app.category} • {app.duration} • {app.price}</p>
-                            </div>
-                          </div>
-
-                          {/* Customer Details */}
-                          <div className="bg-soft-shell/50 border border-outline-variant/5 rounded-xl p-4 space-y-2.5 text-xs text-tertiary pl-6">
-                            <div className="flex items-center gap-2">
-                              <User className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                              <span className="font-semibold text-onyx-text">{app.customer_name}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Users className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                              <span>Expertin: <strong className="text-primary">{app.expert || 'Keine Angabe'}</strong></span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Mail className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                              <a href={`mailto:${app.customer_email}`} className="hover:text-primary underline hover:decoration-sky-accent break-all">{app.customer_email}</a>
-                            </div>
-                            {app.customer_phone && (
-                              <div className="flex items-center gap-2">
-                                <Phone className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                                <a href={`tel:${app.customer_phone}`} className="hover:text-primary underline">{app.customer_phone}</a>
-                              </div>
-                            )}
-                            {app.notes && (
-                              <div className="pt-2 border-t border-outline-variant/10 flex gap-2 items-start mt-2">
-                                <FileText className="w-3.5 h-3.5 text-primary/60 shrink-0 mt-0.5" />
-                                <p className="italic text-outline leading-normal">{app.notes}</p>
-                              </div>
-                            )}
-                            {app.status_reason && (
-                              <div className="pt-2 border-t border-outline-variant/10 flex gap-2 items-start mt-2">
-                                <AlertCircle className="w-3.5 h-3.5 text-tertiary/60 shrink-0 mt-0.5" />
-                                <p className="text-[11px] text-tertiary font-medium leading-normal">
-                                  <span className="font-bold text-primary">Grund/Hinweis:</span> {app.status_reason}
-                                </p>
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Action Buttons */}
-                          <div className="flex justify-end gap-2 pl-2 border-t border-outline-variant/5 pt-4 flex-wrap">
-                            <button
-                              onClick={() => openEditModal(app)}
-                              disabled={actionLoadingId === app.id}
-                              className="px-2.5 py-1.5 border border-outline-variant/15 hover:bg-soft-shell text-primary rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1"
-                              title="Bearbeiten / Verschieben"
-                            >
-                              <Edit className="w-3.5 h-3.5" />
-                              <span>Bearbeiten</span>
-                            </button>
-
-                            {app.status === 'pending' && (
-                              <>
-                                <button
-                                  onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
-                                  disabled={actionLoadingId === app.id}
-                                  className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-pure-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all hover:shadow-sm active:scale-95 flex items-center gap-1"
-                                >
-                                  <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                                  <span>Bestätigen</span>
-                                </button>
-                                <button
-                                  onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
-                                  disabled={actionLoadingId === app.id}
-                                  className="px-3 py-1.5 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 text-rose-600 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1"
-                                >
-                                  <XCircle className="w-3.5 h-3.5" />
-                                  <span>Stornieren</span>
-                                </button>
-                              </>
-                            )}
-
-                            {app.status === 'confirmed' && (
-                              <button
-                                onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
-                                disabled={actionLoadingId === app.id}
-                                className="px-3 py-1.5 border border-rose-500/20 bg-rose-500/5 hover:bg-rose-500/10 text-rose-600 rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1"
-                              >
-                                <XCircle className="w-3.5 h-3.5" />
-                                <span>Stornieren</span>
-                              </button>
-                            )}
-
-                            {app.status === 'cancelled' && (
-                              <button
-                                onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
-                                disabled={actionLoadingId === app.id}
-                                className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-pure-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all hover:shadow-sm active:scale-95 flex items-center gap-1"
-                              >
-                                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                                <span>Reaktivieren</span>
-                              </button>
-                            )}
-
-                            <button
-                              onClick={() => deleteAppointment(app.id)}
-                              disabled={actionLoadingId === app.id}
-                              className="p-1.5 text-outline hover:text-error hover:bg-error/5 border border-transparent hover:border-error/10 rounded-lg transition-all active:scale-90"
-                              title="Löschen"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-          </section>
-        )}
-
-        {/* --- VIEW: LIST VIEW --- */}
-        {activeTab === 'list' && filteredAppointments.length > 0 && (
-          <section className="bg-pure-white border border-outline-variant/10 rounded-2xl shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-soft-shell/40 border-b border-outline-variant/10">
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Kunde</th>
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Behandlung</th>
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Datum / Zeit</th>
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Expertin</th>
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary">Status</th>
-                    <th className="p-4 md:p-6 text-[10px] font-display font-bold uppercase tracking-wider text-primary text-right">Aktionen</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-outline-variant/5 text-sm text-tertiary">
-                  {sortAppointmentsChronologically(filteredAppointments).map((app) => (
-                    <tr key={app.id} className="hover:bg-soft-shell/10 transition-colors">
-                      <td className="p-4 md:p-6 space-y-1">
-                        <p className="font-semibold text-onyx-text">{app.customer_name}</p>
-                        <p className="text-xs text-outline font-sans break-all">{app.customer_email}</p>
-                        {app.customer_phone && <p className="text-xs text-outline font-sans">{app.customer_phone}</p>}
-                        {app.notes && <p className="text-xs text-outline font-sans italic">Notiz: {app.notes}</p>}
-                        {app.status_reason && (
-                          <p className="text-xs text-primary font-sans font-medium">
-                            Grund/Hinweis: {app.status_reason}
-                          </p>
-                        )}
-                      </td>
-                      <td className="p-4 md:p-6 space-y-1">
-                        <p className="font-semibold text-onyx-text leading-tight">{app.service_name}</p>
-                        <p className="text-[10px] text-outline uppercase tracking-wider">{app.category}</p>
-                      </td>
-                      <td className="p-4 md:p-6 space-y-1">
-                        <p className="font-semibold text-onyx-text">{app.date}</p>
-                        <p className="text-xs text-primary font-bold font-display">{app.time}</p>
-                      </td>
-                      <td className="p-4 md:p-6">
-                        {app.expert ? (
-                          <span className="text-[11px] font-semibold text-onyx-text bg-sky-accent/15 px-2 py-1 rounded border border-sky-accent/25">
-                            {app.expert}
-                          </span>
-                        ) : (
-                          <span className="text-xs text-outline italic">Keine Angabe</span>
-                        )}
-                      </td>
-                      <td className="p-4 md:p-6">
-                        <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
-                          app.status === 'confirmed'
-                            ? 'bg-emerald-500/10 text-emerald-600'
-                            : app.status === 'cancelled'
-                            ? 'bg-rose-500/10 text-rose-600'
-                            : 'bg-amber-500/10 text-amber-600'
-                        }`}>
-                          {app.status === 'confirmed' && 'Bestätigt'}
-                          {app.status === 'cancelled' && 'Storniert'}
-                          {app.status === 'pending' && 'Ausstehend'}
-                        </span>
-                      </td>
-                      <td className="p-4 md:p-6 text-right">
-                        <div className="flex justify-end items-center gap-2">
-                          <button
-                            onClick={() => openEditModal(app)}
-                            disabled={actionLoadingId === app.id}
-                            className="p-2 bg-primary/10 text-primary hover:bg-primary hover:text-pure-white rounded-lg transition-all"
-                            title="Bearbeiten / Verschieben"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </button>
-                          {app.status === 'pending' && (
-                            <>
-                              <button
-                                onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
-                                disabled={actionLoadingId === app.id}
-                                className="p-2 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500 hover:text-pure-white rounded-lg transition-all"
-                                title="Bestätigen"
-                              >
-                                <Check className="w-4 h-4 stroke-[2.5]" />
-                              </button>
-                              <button
-                                onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
-                                disabled={actionLoadingId === app.id}
-                                className="p-2 bg-rose-500/10 text-rose-600 hover:bg-rose-500 hover:text-pure-white rounded-lg transition-all"
-                                title="Stornieren"
-                              >
-                                <XCircle className="w-4 h-4" />
-                              </button>
-                            </>
-                          )}
-                          {app.status === 'confirmed' && (
-                            <button
-                              onClick={() => updateAppointmentStatus(app.id, 'cancelled')}
-                              disabled={actionLoadingId === app.id}
-                              className="p-2 bg-rose-500/10 text-rose-600 hover:bg-rose-500 hover:text-pure-white rounded-lg transition-all"
-                              title="Stornieren"
-                            >
-                              <XCircle className="w-4 h-4" />
-                            </button>
-                          )}
-                          {app.status === 'cancelled' && (
-                            <button
-                              onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
-                              disabled={actionLoadingId === app.id}
-                              className="p-2 bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500 hover:text-pure-white rounded-lg transition-all"
-                              title="Bestätigen"
-                            >
-                              <Check className="w-4 h-4 stroke-[2.5]" />
-                            </button>
-                          )}
-                          <button
-                            onClick={() => deleteAppointment(app.id)}
-                            disabled={actionLoadingId === app.id}
-                            className="p-2 text-outline hover:text-error hover:bg-error/5 rounded-lg transition-all"
-                            title="Löschen"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="relative z-10 md:w-1/3 mt-6 md:mt-0 max-h-36 overflow-hidden rounded-lg">
+              <img
+                src="/images/treatments/visia.png"
+                alt="Diagnostics Interface"
+                className="w-full h-full object-cover opacity-50 border border-outline-variant/10 grayscale hover:grayscale-0 transition-all duration-300"
+              />
             </div>
           </section>
-        )}
 
-      </main>
+        </main>
+
+        {/* Global Footer */}
+        <footer className="py-6 border-t border-outline-variant/10 text-center">
+          <p className="font-display text-[9px] text-outline uppercase tracking-widest">
+            SKiN Einfach Schön Management System v2.4.1 © 2026
+          </p>
+        </footer>
+
+      </div>
 
       {/* Edit Appointment Modal */}
       {selectedAppointmentForEdit && (
@@ -1029,7 +1210,7 @@ export const Admin: React.FC = () => {
               </div>
               <button 
                 onClick={() => setSelectedAppointmentForEdit(null)}
-                className="text-outline hover:text-primary p-1.5 hover:bg-soft-shell rounded-lg transition-colors"
+                className="text-outline hover:text-primary p-1.5 hover:bg-soft-shell rounded-lg transition-colors cursor-pointer"
               >
                 <XCircle className="w-5 h-5" />
               </button>
@@ -1066,7 +1247,7 @@ export const Admin: React.FC = () => {
                         value={editTime}
                         onChange={(e) => setEditTime(e.target.value)}
                         required
-                        className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all"
+                        className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer"
                       />
                     </div>
                   </div>
@@ -1084,7 +1265,7 @@ export const Admin: React.FC = () => {
                             key={time}
                             type="button"
                             onClick={() => setEditTime(time)}
-                            className={`py-2 px-1 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 ${
+                            className={`py-2 px-1 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 cursor-pointer ${
                               isSelected
                                 ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
                                 : 'bg-pure-white text-tertiary border-outline-variant/10 hover:border-primary/30 hover:bg-soft-shell'
@@ -1155,7 +1336,7 @@ export const Admin: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedAppointmentForEdit(null)}
-                className="px-4 py-2 border border-outline-variant/15 hover:bg-soft-shell/50 text-tertiary rounded-xl text-xs font-bold uppercase tracking-wider transition-colors active:scale-95"
+                className="px-4 py-2 border border-outline-variant/15 hover:bg-soft-shell/50 text-tertiary rounded-xl text-xs font-bold uppercase tracking-wider transition-colors active:scale-95 cursor-pointer"
               >
                 Abbrechen
               </button>
@@ -1163,7 +1344,7 @@ export const Admin: React.FC = () => {
                 type="button"
                 onClick={handleSaveEdit}
                 disabled={actionLoadingId === selectedAppointmentForEdit.id}
-                className="px-5 py-2.5 bg-primary hover:opacity-90 text-pure-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all active:scale-95 disabled:bg-slate-muted/20 disabled:text-outline"
+                className="px-5 py-2.5 bg-primary hover:opacity-90 text-pure-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all active:scale-95 disabled:bg-slate-muted/20 disabled:text-outline cursor-pointer"
               >
                 {actionLoadingId === selectedAppointmentForEdit.id ? (
                   <RefreshCw className="w-3.5 h-3.5 animate-spin mx-auto" />
