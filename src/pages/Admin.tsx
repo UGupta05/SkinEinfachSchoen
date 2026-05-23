@@ -19,6 +19,7 @@ import {
   Filter,
   Inbox,
   Check,
+  ChevronLeft,
   ChevronRight,
   Edit,
   Menu,
@@ -58,8 +59,90 @@ export const Admin: React.FC = () => {
   const [dataError, setDataError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'calendar' | 'list'>('calendar');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'list' | 'calendar-overview'>('calendar-overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [selectedDayIso, setSelectedDayIso] = useState<string>(() => {
+    const today = new Date();
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+  });
+
+  const getGermanMonthName = (date: Date): string => {
+    const months = [
+      'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+    ];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+  };
+
+  const getIsoDateString = (d: Date): string => {
+    const pad = (num: number) => num.toString().padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  };
+
+  const getDaysInMonth = (date: Date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth(); // 0-indexed
+    
+    const firstDay = new Date(year, month, 1);
+    let startDayOfWeek = firstDay.getDay(); // 0 = Sunday, 1 = Monday
+    startDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1; // Convert to Monday-start
+    
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+    
+    const cells: { date: Date; isCurrentMonth: boolean; key: string }[] = [];
+    
+    // Add days from previous month
+    for (let i = startDayOfWeek - 1; i >= 0; i--) {
+      const d = daysInPrevMonth - i;
+      const prevDate = new Date(year, month - 1, d);
+      cells.push({
+        date: prevDate,
+        isCurrentMonth: false,
+        key: `prev-${prevDate.getFullYear()}-${prevDate.getMonth()}-${d}`
+      });
+    }
+    
+    // Add days of current month
+    for (let d = 1; d <= daysInMonth; d++) {
+      const currDate = new Date(year, month, d);
+      cells.push({
+        date: currDate,
+        isCurrentMonth: true,
+        key: `curr-${year}-${month}-${d}`
+      });
+    }
+    
+    const totalCellsNeeded = 42;
+    const nextMonthDaysToAdd = totalCellsNeeded - cells.length;
+    for (let d = 1; d <= nextMonthDaysToAdd; d++) {
+      const nextDate = new Date(year, month + 1, d);
+      cells.push({
+        date: nextDate,
+        isCurrentMonth: false,
+        key: `next-${nextDate.getFullYear()}-${nextDate.getMonth()}-${d}`
+      });
+    }
+    
+    return cells;
+  };
+
+  const handleGoToToday = () => {
+    const today = new Date();
+    setCurrentDate(today);
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    setSelectedDayIso(`${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`);
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+  };
 
   // Edit Modal states
   const [selectedAppointmentForEdit, setSelectedAppointmentForEdit] = useState<Appointment | null>(null);
@@ -551,6 +634,17 @@ export const Admin: React.FC = () => {
         {/* Sidebar Nav */}
         <nav className="flex-1 space-y-1">
           <button
+            onClick={() => { setActiveTab('calendar-overview'); setSidebarOpen(false); }}
+            className={`w-full flex items-center px-6 py-3 transition-colors ${
+              activeTab === 'calendar-overview'
+                ? 'text-primary font-bold border-r-2 border-primary bg-soft-shell'
+                : 'text-tertiary hover:bg-soft-shell/50'
+            }`}
+          >
+            <Calendar className="w-4 h-4 mr-3" />
+            <span className="text-xs font-display font-bold uppercase tracking-wider">Kalenderübersicht</span>
+          </button>
+          <button
             onClick={() => { setActiveTab('calendar'); setSidebarOpen(false); }}
             className={`w-full flex items-center px-6 py-3 transition-colors ${
               activeTab === 'calendar'
@@ -558,7 +652,7 @@ export const Admin: React.FC = () => {
                 : 'text-tertiary hover:bg-soft-shell/50'
             }`}
           >
-            <Calendar className="w-4 h-4 mr-3" />
+            <Inbox className="w-4 h-4 mr-3" />
             <span className="text-xs font-display font-bold uppercase tracking-wider">Tagesplaner</span>
           </button>
           <button
@@ -619,7 +713,7 @@ export const Admin: React.FC = () => {
               <Menu className="w-5 h-5" />
             </button>
             <span className="font-display text-sm font-bold text-onyx-text uppercase tracking-wider">
-              {activeTab === 'calendar' ? 'Tagesplaner' : 'Listenansicht'}
+              {activeTab === 'calendar-overview' ? 'Kalenderübersicht' : activeTab === 'calendar' ? 'Tagesplaner' : 'Listenansicht'}
             </span>
           </div>
 
@@ -695,8 +789,242 @@ export const Admin: React.FC = () => {
             </div>
           </section>
 
+          {/* Google Calendar Overview Tab */}
+          {activeTab === 'calendar-overview' && (
+            <div className="space-y-6 animate-in fade-in duration-200">
+              <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm space-y-6 text-left">
+                {/* Calendar Header Controls */}
+                <div className="flex justify-between items-center flex-wrap gap-4 border-b border-outline-variant/10 pb-4">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handlePrevMonth}
+                      className="p-2 border border-outline-variant/15 hover:bg-soft-shell rounded-lg text-primary transition-all cursor-pointer"
+                      title="Voriger Monat"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={handleGoToToday}
+                      className="px-3 py-1.5 border border-outline-variant/15 hover:bg-soft-shell rounded-lg text-xs font-bold uppercase tracking-wider text-primary transition-all cursor-pointer"
+                    >
+                      Heute
+                    </button>
+                    <button
+                      onClick={handleNextMonth}
+                      className="p-2 border border-outline-variant/15 hover:bg-soft-shell rounded-lg text-primary transition-all cursor-pointer"
+                      title="Nächster Monat"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                  
+                  <h3 className="font-display text-lg font-bold text-primary">
+                    {getGermanMonthName(currentDate)}
+                  </h3>
+                  
+                  {/* Status Filters replicated here for easy filtering */}
+                  <div className="flex gap-2">
+                    {[
+                      { label: 'Alle', value: 'all' },
+                      { label: 'Ausstehend', value: 'pending' },
+                      { label: 'Bestätigt', value: 'confirmed' },
+                      { label: 'Storniert', value: 'cancelled' }
+                    ].map((filter) => (
+                      <button
+                        key={filter.value}
+                        onClick={() => setStatusFilter(filter.value)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+                          statusFilter === filter.value
+                            ? 'bg-primary border-primary text-pure-white shadow-sm font-bold'
+                            : 'bg-pure-white border-outline-variant/10 text-tertiary hover:border-primary/20 hover:text-primary'
+                        }`}
+                      >
+                        {filter.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Weekday Headers */}
+                <div className="grid grid-cols-7 border border-outline-variant/10 bg-soft-shell/15 text-center py-2.5 rounded-t-xl text-[10px] font-bold text-primary tracking-wider uppercase border-b-0">
+                  {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(day => (
+                    <div key={day}>{day}</div>
+                  ))}
+                </div>
+
+                {/* Calendar Monthly Grid */}
+                <div className="grid grid-cols-7 border-l border-t border-outline-variant/10 bg-outline-variant/5 animate-in fade-in">
+                  {getDaysInMonth(currentDate).map((cell) => {
+                    const cellIso = getIsoDateString(cell.date);
+                    const isSelected = cellIso === selectedDayIso;
+                    
+                    const today = new Date();
+                    const isToday = today.getDate() === cell.date.getDate() &&
+                      today.getMonth() === cell.date.getMonth() &&
+                      today.getFullYear() === cell.date.getFullYear();
+                      
+                    const cellAppointments = filteredAppointments.filter(app => {
+                      const appIso = parseGermanDateStringToIso(app.date, app.created_at);
+                      return appIso === cellIso;
+                    }).sort((a, b) => a.time.localeCompare(b.time));
+                    
+                    return (
+                      <div
+                        key={cell.key}
+                        onClick={() => setSelectedDayIso(cellIso)}
+                        className={`relative min-h-[95px] lg:min-h-[140px] p-2 bg-pure-white border-r border-b border-outline-variant/10 flex flex-col justify-between transition-colors cursor-pointer select-none hover:bg-soft-shell/10 ${
+                          isSelected ? 'bg-primary/5 ring-1 ring-primary/25 z-10' : ''
+                        } ${!cell.isCurrentMonth ? 'bg-outline-variant/5 text-outline/35' : ''}`}
+                      >
+                        {/* Day Number Header */}
+                        <div className="flex justify-between items-center mb-1">
+                          <span className={`text-[9px] font-bold tracking-wider ${
+                            cell.isCurrentMonth ? 'text-primary/70' : 'text-outline/30'
+                          }`}>
+                            {cellAppointments.length > 0 && `${cellAppointments.length} Term.`}
+                          </span>
+                          
+                          <span className={`text-xs font-semibold w-6 h-6 flex items-center justify-center rounded-full ${
+                            isToday
+                              ? 'bg-primary text-pure-white font-bold'
+                              : cell.isCurrentMonth
+                              ? 'text-onyx-text'
+                              : 'text-outline/40'
+                          }`}>
+                            {cell.date.getDate()}
+                          </span>
+                        </div>
+
+                        {/* Appointments Content */}
+                        <div className="flex-1 flex flex-col gap-1 overflow-y-auto max-h-[50px] lg:max-h-[95px] pr-0.5 scrollbar-thin scrollbar-thumb-outline-variant/20 scrollbar-track-transparent">
+                          {/* Desktop view items */}
+                          <div className="hidden sm:flex flex-col gap-1">
+                            {cellAppointments.map(app => (
+                              <div
+                                key={app.id}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openEditModal(app);
+                                }}
+                                className={`px-1.5 py-0.5 rounded text-[10px] font-sans font-bold flex items-center justify-between gap-1 overflow-hidden whitespace-nowrap cursor-pointer transition-all hover:brightness-95 hover:scale-[1.01] ${
+                                  app.status === 'confirmed'
+                                    ? 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20'
+                                    : app.status === 'cancelled'
+                                    ? 'bg-rose-500/10 text-rose-600 border border-rose-500/20'
+                                    : 'bg-amber-500/10 text-amber-600 border border-amber-500/20'
+                                }`}
+                                title={`${app.time} - ${app.customer_name}\n${app.service_name}\nExpertin: ${app.expert || 'Keine Auswahl'}`}
+                              >
+                                <span className="truncate">{app.time} - {app.customer_name}</span>
+                                {app.expert && app.expert !== 'Keine Präferenz' && (
+                                  <span className="text-[8px] px-1 bg-primary/10 text-primary rounded shrink-0 font-bold uppercase">
+                                    {app.expert[0]}
+                                  </span>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Mobile view dots */}
+                          <div className="flex sm:hidden gap-0.5 justify-center mt-1 flex-wrap">
+                            {cellAppointments.map(app => (
+                              <span
+                                key={app.id}
+                                className={`w-1.5 h-1.5 rounded-full ${
+                                  app.status === 'confirmed'
+                                    ? 'bg-emerald-500'
+                                    : app.status === 'cancelled'
+                                    ? 'bg-rose-500'
+                                    : 'bg-amber-500'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Appointments details list for selected day */}
+              <div className="bg-pure-white border border-outline-variant/10 p-6 rounded-2xl shadow-sm text-left space-y-4">
+                <h3 className="font-display text-sm font-bold text-primary flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-primary/75" />
+                  <span>Termine am {formatDateToGermanString(selectedDayIso) || selectedDayIso}</span>
+                </h3>
+                
+                {filteredAppointments.filter(app => parseGermanDateStringToIso(app.date, app.created_at) === selectedDayIso).length === 0 ? (
+                  <p className="text-xs text-outline italic">Keine Termine für diesen Tag.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {filteredAppointments
+                      .filter(app => parseGermanDateStringToIso(app.date, app.created_at) === selectedDayIso)
+                      .sort((a, b) => a.time.localeCompare(b.time))
+                      .map(app => (
+                        <div
+                          key={app.id}
+                          className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-soft-shell/30 border border-outline-variant/5 rounded-xl gap-4 animate-in fade-in duration-150"
+                        >
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-display text-xs font-bold text-primary">{app.time} Uhr</span>
+                              <span className={`text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                                app.status === 'confirmed'
+                                  ? 'bg-emerald-500/10 text-emerald-600'
+                                  : app.status === 'cancelled'
+                                  ? 'bg-rose-500/10 text-rose-600'
+                                  : 'bg-amber-500/10 text-amber-600'
+                              }`}>
+                                {app.status === 'confirmed' && 'Bestätigt'}
+                                {app.status === 'cancelled' && 'Storniert'}
+                                {app.status === 'pending' && 'Ausstehend'}
+                              </span>
+                              {app.expert && (
+                                <span className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+                                  {app.expert}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs font-bold text-onyx-text">{app.service_name}</p>
+                            <p className="text-xs text-tertiary">Kunde: {app.customer_name} ({app.customer_email})</p>
+                            {app.notes && <p className="text-xs text-outline italic">Notiz: {app.notes}</p>}
+                            {app.status_reason && (
+                              <p className="text-xs text-primary font-medium">
+                                Grund/Hinweis: {app.status_reason}
+                              </p>
+                            )}
+                          </div>
+                          
+                          <div className="flex gap-2 w-full sm:w-auto justify-end">
+                            <button
+                              onClick={() => openEditModal(app)}
+                              className="px-3 py-1.5 bg-pure-white border border-outline-variant/15 hover:bg-soft-shell text-primary rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                            >
+                              <Edit className="w-3.5 h-3.5" />
+                              <span>Bearbeiten</span>
+                            </button>
+                            {app.status === 'pending' && (
+                              <button
+                                onClick={() => updateAppointmentStatus(app.id, 'confirmed')}
+                                className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-pure-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all active:scale-95 flex items-center gap-1 cursor-pointer"
+                              >
+                                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                                <span>Bestätigen</span>
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Bento Layout Main Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          {activeTab !== 'calendar-overview' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             
             {/* Left Main Dashboard Column (Day Planner / List Table) - Col Span 2 */}
             <div className="lg:col-span-2 space-y-6">
@@ -1154,30 +1482,8 @@ export const Admin: React.FC = () => {
               </section>
 
             </div>
-
           </div>
-
-          {/* AI Skin Diagnostics Beta Teaser */}
-          <section className="bg-onyx-text rounded-xl p-8 relative overflow-hidden flex flex-col md:flex-row items-center justify-between border border-outline-variant/10 text-left gap-6">
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary to-transparent"></div>
-            <div className="relative z-10 text-pure-white md:w-1/2 space-y-4">
-              <span className="inline-block bg-primary/25 border border-primary/40 px-3 py-1 rounded-full font-display text-[9px] font-bold uppercase tracking-wider">AI DIAGNOSTICS PREVIEW</span>
-              <h2 className="font-display text-xl font-bold mb-2">Predictive Skin Analysis Beta</h2>
-              <p className="text-xs text-outline-variant leading-relaxed opacity-85">
-                Unser neues KI-Hautanalysetool integriert Patientenhistorie und 3D-Gesichtsscans für maximale Behandlungspräzision. Verfügbar für Isabel & Sofia ab nächster Woche.
-              </p>
-              <button className="border border-pure-white/20 hover:border-pure-white hover:bg-pure-white hover:text-onyx-text px-5 py-2 rounded-lg font-display text-[10px] font-bold uppercase tracking-wider transition-all active:scale-95 cursor-pointer">
-                Modul aktivieren
-              </button>
-            </div>
-            <div className="relative z-10 md:w-1/3 mt-6 md:mt-0 max-h-36 overflow-hidden rounded-lg">
-              <img
-                src="/images/treatments/visia.png"
-                alt="Diagnostics Interface"
-                className="w-full h-full object-cover opacity-50 border border-outline-variant/10 grayscale hover:grayscale-0 transition-all duration-300"
-              />
-            </div>
-          </section>
+        )}
 
         </main>
 
