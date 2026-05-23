@@ -124,6 +124,20 @@ export const Admin: React.FC = () => {
     return isoTimeStr;
   };
 
+  // Helper to sort appointments chronologically (by date and time)
+  const sortAppointmentsChronologically = (list: Appointment[]): Appointment[] => {
+    return [...list].sort((a, b) => {
+      const dateA = parseGermanDateStringToIso(a.date, a.created_at);
+      const dateB = parseGermanDateStringToIso(b.date, b.created_at);
+      if (dateA !== dateB) {
+        return dateA.localeCompare(dateB);
+      }
+      const timeA = parseGermanTimeStringToIso(a.time);
+      const timeB = parseGermanTimeStringToIso(b.time);
+      return timeA.localeCompare(timeB);
+    });
+  };
+
   // Helper to generate dynamic slots for the admin edit modal based on opening hours config
   const getAdminTimeSlots = (isoDateStr: string): string[] => {
     try {
@@ -683,8 +697,9 @@ export const Admin: React.FC = () => {
           <section className="space-y-8">
             {Object.keys(grouped)
               .sort((a, b) => {
-                // Try simple sorting (dates will be displayed in chronological order since bookings come with distinct date values)
-                return a.localeCompare(b);
+                const dateA = parseGermanDateStringToIso(a);
+                const dateB = parseGermanDateStringToIso(b);
+                return dateA.localeCompare(dateB);
               })
               .map((dateStr) => {
                 const dayApps = grouped[dateStr];
@@ -881,7 +896,7 @@ export const Admin: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-outline-variant/5 text-sm text-tertiary">
-                  {filteredAppointments.map((app) => (
+                  {sortAppointmentsChronologically(filteredAppointments).map((app) => (
                     <tr key={app.id} className="hover:bg-soft-shell/10 transition-colors">
                       <td className="p-4 md:p-6 space-y-1">
                         <p className="font-semibold text-onyx-text">{app.customer_name}</p>
