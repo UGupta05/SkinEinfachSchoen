@@ -69,8 +69,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     } else if (type === 'UPDATE') {
       const oldStatus = old_record?.status;
       const newStatus = status;
+      const oldDate = old_record?.date;
+      const oldTime = old_record?.time;
+      const oldService = old_record?.service_name;
+      const oldExpert = old_record?.expert;
 
-      if (oldStatus !== newStatus) {
+      // Check if date, time, or service changed first (rescheduling takes priority over status updates)
+      if (oldDate !== date || oldTime !== time || oldService !== service_name) {
+        const protocol = req.headers['x-forwarded-proto'] || 'http';
+        const baseUrl = `${protocol}://${req.headers.host}`;
+
+        subject = 'Terminänderung - Skin Einfach Schön';
+        html = getBookingUpdatedTemplate(
+          customer_name,
+          service_name,
+          date,
+          time,
+          price,
+          duration,
+          oldDate,
+          oldTime,
+          oldService,
+          status_reason,
+          id,
+          baseUrl,
+          expert,
+          oldExpert
+        );
+      } else if (oldStatus !== newStatus) {
         if (newStatus === 'confirmed') {
           subject = 'Termin bestätigt - Skin Einfach Schön';
           html = getBookingConfirmedTemplate(customer_name, service_name, date, time, price, duration, status_reason, expert);
@@ -81,37 +107,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           return res.status(200).json({ message: `Status updated to ${newStatus}. No email trigger mapped.` });
         }
       } else {
-        // Status didn't change, check if details changed (time, date, service)
-        // Do NOT send email updates if only the expert changed
-        const oldDate = old_record?.date;
-        const oldTime = old_record?.time;
-        const oldService = old_record?.service_name;
-        const oldExpert = old_record?.expert;
-
-        if (oldDate !== date || oldTime !== time || oldService !== service_name) {
-          const protocol = req.headers['x-forwarded-proto'] || 'http';
-          const baseUrl = `${protocol}://${req.headers.host}`;
-
-          subject = 'Terminänderung - Skin Einfach Schön';
-          html = getBookingUpdatedTemplate(
-            customer_name,
-            service_name,
-            date,
-            time,
-            price,
-            duration,
-            oldDate,
-            oldTime,
-            oldService,
-            status_reason,
-            id,
-            baseUrl,
-            expert,
-            oldExpert
-          );
-        } else {
-          return res.status(200).json({ message: 'No actionable fields changed (or only expert changed). Skipping.' });
-        }
+        return res.status(200).json({ message: 'No actionable fields changed (or only expert changed). Skipping.' });
       }
     } else {
       return res.status(200).json({ message: `Unhandled event type: ${type}. Skipping.` });
