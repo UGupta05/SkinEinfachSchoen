@@ -25,8 +25,8 @@ jobs:
 
       - name: Link Project
         run: |
-          mkdir -p .supabase
-          echo "wusaqxeduuapgslopcjb" > .supabase/project-ref
+          mkdir -p supabase/.temp
+          echo "wusaqxeduuapgslopcjb" > supabase/.temp/project-ref
 
       - name: Deploy Migrations
         run: |
