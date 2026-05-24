@@ -1496,7 +1496,6 @@ export const Terminbuchung: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
   const [selectedExpert, setSelectedExpert] = useState<string>('Keine Präferenz');
-  const [bookedExpert, setBookedExpert] = useState<string>('');
   
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -1595,7 +1594,6 @@ export const Terminbuchung: React.FC = () => {
     setSelectedDate('');
     setSelectedTime('');
     setSelectedExpert('Keine Präferenz');
-    setBookedExpert('');
     setName('');
     setEmail('');
     setPhone('');
@@ -1612,41 +1610,7 @@ export const Terminbuchung: React.FC = () => {
       setLoading(true);
       setErrorMsg(null);
       
-      let assignedExpert = selectedExpert;
-      if (selectedExpert === 'Keine Präferenz') {
-        const treatmentDurationMin = parseDurationToMinutes(selectedService.duration);
-        
-        const isSofiaBusy = existingAppointments.some(app => 
-          app.date === selectedDate && 
-          app.expert === 'Sofia' && 
-          app.status !== 'cancelled' &&
-          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
-        );
-
-        const isIsabelBusy = existingAppointments.some(app => 
-          app.date === selectedDate && 
-          app.expert === 'Isabel' && 
-          app.status !== 'cancelled' &&
-          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
-        );
-
-        const hasNoPrefOverlap = existingAppointments.some(app => 
-          app.date === selectedDate && 
-          app.expert === 'Keine Präferenz' && 
-          app.status !== 'cancelled' &&
-          slotOverlaps(selectedTime, treatmentDurationMin, app.time, parseDurationToMinutes(app.duration))
-        );
-
-        if (isSofiaBusy) {
-          assignedExpert = 'Isabel';
-        } else if (isIsabelBusy) {
-          assignedExpert = 'Sofia';
-        } else if (hasNoPrefOverlap) {
-          assignedExpert = 'Isabel';
-        } else {
-          assignedExpert = 'Sofia';
-        }
-      }
+      let assignedExpert = 'Keine Präferenz';
 
       try {
         const { error } = await supabase.from('appointments').insert([{
@@ -1666,7 +1630,6 @@ export const Terminbuchung: React.FC = () => {
         }]);
 
         if (error) throw error;
-        setBookedExpert(assignedExpert);
         setRefreshCounter(prev => prev + 1);
         setBooked(true);
       } catch (err: any) {
@@ -1714,10 +1677,7 @@ export const Terminbuchung: React.FC = () => {
                 <span className="text-outline text-xs">Uhrzeit:</span>
                 <span className="col-span-2 text-onyx-text font-semibold text-xs">{selectedTime}</span>
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                <span className="text-outline text-xs">Expertin:</span>
-                <span className="col-span-2 text-onyx-text font-semibold text-xs">{bookedExpert}</span>
-              </div>
+
               {phone && (
                 <div className="grid grid-cols-3 gap-2">
                   <span className="text-outline text-xs">Telefon:</span>
@@ -2078,78 +2038,7 @@ export const Terminbuchung: React.FC = () => {
             {currentStep === 2 && (
               <div className="bg-pure-white border border-outline-variant/10 p-8 rounded-2xl medical-glow space-y-8">
                 
-                {/* Expert Picker Grid */}
                 <div>
-                  <h3 className="font-display text-lg font-bold text-primary mb-2">Expertin auswählen</h3>
-                  <p className="text-sm text-tertiary mb-4">Wählen Sie Ihre Wunsch-Behandlerin oder bleiben Sie flexibel:</p>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {/* Keine Präferenz */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedExpert('Keine Präferenz')}
-                      className={`p-4 border rounded-2xl flex flex-col items-center justify-center text-center transition-all cursor-pointer ${
-                        selectedExpert === 'Keine Präferenz'
-                          ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary medical-glow'
-                          : 'border-outline-variant/10 bg-pure-white text-on-surface hover:border-primary/30 hover:bg-soft-shell'
-                      }`}
-                    >
-                      <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-3 border border-primary/25">
-                        <Users className="w-8 h-8" />
-                      </div>
-                      <span className="text-xs font-display font-bold uppercase tracking-wider">Keine Präferenz</span>
-                      <span className="text-[10px] text-tertiary mt-1 font-sans">Beliebige Mitarbeiterin (Schnellerer Termin)</span>
-                    </button>
-
-                    {/* Sofia */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedExpert('Sofia')}
-                      className={`p-4 border rounded-2xl flex flex-col items-center justify-center text-center transition-all cursor-pointer ${
-                        selectedExpert === 'Sofia'
-                          ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary medical-glow'
-                          : 'border-outline-variant/10 bg-pure-white text-on-surface hover:border-primary/30 hover:bg-soft-shell'
-                      }`}
-                    >
-                      <div className="w-16 h-16 rounded-full overflow-hidden mb-3 border border-outline-variant/25">
-                        <img
-                          src="/images/team/sofia.jpg"
-                          alt="Sofia Khaliq-Natawan"
-                          className={`w-full h-full object-cover transition-all duration-300 ${
-                            selectedExpert === 'Sofia' ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
-                          }`}
-                        />
-                      </div>
-                      <span className="text-xs font-display font-bold uppercase tracking-wider">Sofia</span>
-                      <span className="text-[10px] text-tertiary mt-1 font-sans">Sofia Khaliq-Natawan</span>
-                    </button>
-
-                    {/* Isabel */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedExpert('Isabel')}
-                      className={`p-4 border rounded-2xl flex flex-col items-center justify-center text-center transition-all cursor-pointer ${
-                        selectedExpert === 'Isabel'
-                          ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary medical-glow'
-                          : 'border-outline-variant/10 bg-pure-white text-on-surface hover:border-primary/30 hover:bg-soft-shell'
-                      }`}
-                    >
-                      <div className="w-16 h-16 rounded-full overflow-hidden mb-3 border border-outline-variant/25">
-                        <img
-                          src="/images/team/isabel.jpg"
-                          alt="Isabel Duwendag"
-                          className={`w-full h-full object-cover transition-all duration-300 ${
-                            selectedExpert === 'Isabel' ? 'grayscale-0' : 'grayscale group-hover:grayscale-0'
-                          }`}
-                        />
-                      </div>
-                      <span className="text-xs font-display font-bold uppercase tracking-wider">Isabel</span>
-                      <span className="text-[10px] text-tertiary mt-1 font-sans">Isabel Duwendag</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div className="border-t border-outline-variant/10 pt-6">
                   <h3 className="font-display text-lg font-bold text-primary mb-2">Datum auswählen</h3>
                   <p className="text-sm text-tertiary mb-4">Bitte wählen Sie Ihren Wunschtag aus:</p>
                   
@@ -2455,12 +2344,7 @@ export const Terminbuchung: React.FC = () => {
                         </span>
                       </div>
 
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-tertiary">Expertin:</span>
-                        <span className="font-semibold text-onyx-text">
-                          {selectedExpert}
-                        </span>
-                      </div>
+
 
                       <div className="pt-4 border-t border-outline-variant/10 flex justify-between items-center text-primary font-bold text-lg">
                         <span>Gesamt</span>

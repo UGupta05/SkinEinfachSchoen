@@ -980,11 +980,16 @@ export const Admin: React.FC = () => {
                                 {app.status === 'cancelled' && 'Storniert'}
                                 {app.status === 'pending' && 'Ausstehend'}
                               </span>
-                              {app.expert && (
-                                <span className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
-                                  {app.expert}
-                                </span>
-                              )}
+                              <select
+                                value={app.expert || 'Keine Präferenz'}
+                                onChange={(e) => updateAppointment(app.id, { expert: e.target.value })}
+                                disabled={actionLoadingId === app.id}
+                                className="text-[9px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 focus:outline-none cursor-pointer hover:bg-soft-shell transition-all"
+                              >
+                                <option value="Keine Präferenz">Keine Präferenz</option>
+                                <option value="Sofia">Sofia</option>
+                                <option value="Isabel">Isabel</option>
+                              </select>
                             </div>
                             <p className="text-xs font-bold text-onyx-text">{app.service_name}</p>
                             <p className="text-xs text-tertiary">Kunde: {app.customer_name} ({app.customer_email})</p>
@@ -1181,7 +1186,17 @@ export const Admin: React.FC = () => {
                                   </div>
                                   <div className="flex items-center gap-2">
                                     <Users className="w-3.5 h-3.5 text-primary/60 shrink-0" />
-                                    <span>Expertin: <strong className="text-primary">{app.expert || 'Keine Angabe'}</strong></span>
+                                    <span className="shrink-0">Expertin:</span>
+                                    <select
+                                      value={app.expert || 'Keine Präferenz'}
+                                      onChange={(e) => updateAppointment(app.id, { expert: e.target.value })}
+                                      disabled={actionLoadingId === app.id}
+                                      className="bg-pure-white border border-outline-variant/15 px-2 py-0.5 rounded text-xs font-semibold text-primary focus:outline-none cursor-pointer hover:bg-soft-shell transition-all"
+                                    >
+                                      <option value="Keine Präferenz">Keine Präferenz</option>
+                                      <option value="Sofia">Sofia</option>
+                                      <option value="Isabel">Isabel</option>
+                                    </select>
                                   </div>
                                   <div className="flex items-center gap-2">
                                     <Mail className="w-3.5 h-3.5 text-primary/60 shrink-0" />
@@ -1320,13 +1335,16 @@ export const Admin: React.FC = () => {
                               <p className="text-xs text-primary font-bold font-display">{app.time}</p>
                             </td>
                             <td className="p-4 md:p-6">
-                              {app.expert ? (
-                                <span className="text-[11px] font-semibold text-onyx-text bg-sky-accent/15 px-2 py-1 rounded border border-sky-accent/25">
-                                  {app.expert}
-                                </span>
-                              ) : (
-                                <span className="text-xs text-outline italic">Keine Angabe</span>
-                              )}
+                              <select
+                                value={app.expert || 'Keine Präferenz'}
+                                onChange={(e) => updateAppointment(app.id, { expert: e.target.value })}
+                                disabled={actionLoadingId === app.id}
+                                className="bg-pure-white border border-outline-variant/15 px-2 py-1 rounded text-xs font-semibold text-onyx-text focus:outline-none cursor-pointer hover:bg-soft-shell transition-all"
+                              >
+                                <option value="Keine Präferenz">Keine Präferenz</option>
+                                <option value="Sofia">Sofia</option>
+                                <option value="Isabel">Isabel</option>
+                              </select>
                             </td>
                             <td className="p-4 md:p-6">
                               <span className={`text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${
