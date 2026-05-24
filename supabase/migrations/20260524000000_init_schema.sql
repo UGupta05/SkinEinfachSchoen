@@ -1,4 +1,4 @@
--- Initial database schema for Skin Einfach Schön
+-- Initial database schema for Skin Einfach Schön (Triggering Test Run)
 
 -- Create appointments table
 CREATE TABLE IF NOT EXISTS appointments (
