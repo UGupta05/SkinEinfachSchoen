@@ -24,6 +24,11 @@ CREATE TABLE IF NOT EXISTS appointments (
 -- Enable Row Level Security (RLS)
 ALTER TABLE appointments ENABLE ROW LEVEL SECURITY;
 
+-- Drop policies if they already exist to make the migration idempotent
+DROP POLICY IF EXISTS "Allow public insert" ON appointments;
+DROP POLICY IF EXISTS "Allow public select for availability" ON appointments;
+DROP POLICY IF EXISTS "Allow authenticated full access" ON appointments;
+
 -- Policy 1: Allow public / anonymous users to insert new appointments (client booking page)
 CREATE POLICY "Allow public insert" ON appointments
     FOR INSERT TO anon
@@ -40,5 +45,15 @@ CREATE POLICY "Allow authenticated full access" ON appointments
     USING (true)
     WITH CHECK (true);
 
--- Enable Realtime for the appointments table to support live dashboard updates
-alter publication supabase_realtime add table appointments;
+-- Enable Realtime for the appointments table defensively
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_publication_tables 
+        WHERE pubname = 'supabase_realtime' 
+        AND schemaname = 'public' 
+        AND tablename = 'appointments'
+    ) THEN
+        ALTER PUBLICATION supabase_realtime ADD TABLE appointments;
+    END IF;
+END $$;
