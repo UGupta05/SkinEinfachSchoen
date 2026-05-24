@@ -48,6 +48,12 @@ CREATE POLICY "Allow authenticated full access" ON appointments
 -- Enable Realtime for the appointments table defensively
 DO $$
 BEGIN
+    -- Create publication if it doesn't exist
+    IF NOT EXISTS (SELECT 1 FROM pg_publication WHERE pubname = 'supabase_realtime') THEN
+        CREATE PUBLICATION supabase_realtime;
+    END IF;
+
+    -- Add table to publication if not already member
     IF NOT EXISTS (
         SELECT 1 FROM pg_publication_tables 
         WHERE pubname = 'supabase_realtime' 
