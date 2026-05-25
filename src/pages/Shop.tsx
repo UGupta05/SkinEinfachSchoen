@@ -192,30 +192,10 @@ export const Shop: React.FC = () => {
         )}
       </section>
 
-      {/* Newsletter / Trust Section */}
-      <section className="bg-primary text-pure-white py-24 border-t border-outline-variant/10">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold mb-6">
-              Expertise direkt in Ihr Postfach.
-            </h2>
-            <p className="font-sans text-base text-primary-fixed mb-8 opacity-90 leading-relaxed max-w-lg">
-              Melden Sie sich für unseren Newsletter an und erhalten Sie exklusive Pflegetipps unserer Experten sowie 10% Rabatt auf Ihre erste Bestellung.
-            </p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-4 max-w-md">
-              <input
-                className="flex-1 bg-pure-white/10 border-none border-b border-pure-white/30 focus:border-pure-white py-4 px-4 text-pure-white placeholder:text-pure-white/40 focus:ring-0 focus:outline-none rounded-t"
-                placeholder="Ihre E-Mail Adresse"
-                required
-                type="email"
-              />
-              <button className="bg-pure-white text-primary px-8 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary-fixed transition-all rounded">
-                Abonnieren
-              </button>
-            </form>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8 md:gap-12">
+      {/* Trust Section */}
+      <section className="bg-primary text-pure-white py-16 border-t border-outline-variant/10">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             <div className="text-center flex flex-col items-center">
               <div className="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center mb-4">
                 <Shield className="w-6 h-6 text-sky-accent" />

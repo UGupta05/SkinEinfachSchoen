@@ -1420,13 +1420,22 @@ const slotOverlaps = (t1: string, d1: number, t2: string, d2: number): boolean =
   return start1 < end2 && start2 < end1;
 };
 
+interface DBAppointment {
+  id: string;
+  date: string;
+  time: string;
+  duration: string;
+  expert: string;
+  status: string;
+}
+
 // Helper to check if a slot is available based on selected expert preference and refined concurrency rules
 const isSlotAvailable = (
   dateStr: string,
   slotTimeStr: string,
   treatmentDurationMin: number,
   selectedExpert: string,
-  appointmentsList: any[]
+  appointmentsList: DBAppointment[]
 ): boolean => {
   // Find all appointments on this date that overlap with our slot
   const overlappingApps = appointmentsList.filter(app => {
@@ -1481,15 +1490,16 @@ export const Terminbuchung: React.FC = () => {
     }));
   };
 
-  useEffect(() => {
-    const activeGroup = CATEGORY_GROUPS.find(g => g.categories.includes(selectedCategory));
+  const handleCategorySelect = (cat: string) => {
+    setSelectedCategory(cat);
+    const activeGroup = CATEGORY_GROUPS.find(g => g.categories.includes(cat));
     if (activeGroup) {
       setExpandedGroups(prev => ({
         ...prev,
         [activeGroup.name]: true
       }));
     }
-  }, [selectedCategory]);
+  };
   
   const [selectedService, setSelectedService] = useState<BookingService | null>(null);
   
@@ -1508,7 +1518,7 @@ export const Terminbuchung: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [availableDates] = useState(generateAvailableDates);
   
-  const [existingAppointments, setExistingAppointments] = useState<any[]>([]);
+  const [existingAppointments, setExistingAppointments] = useState<DBAppointment[]>([]);
   const [refreshCounter, setRefreshCounter] = useState<number>(0);
 
   // Fetch all existing bookings for our 12 available dates to check therapist availability
@@ -1557,9 +1567,15 @@ export const Terminbuchung: React.FC = () => {
     return hours >= 17;
   });
 
-  useEffect(() => {
+  const selectService = (service: BookingService | null) => {
+    setSelectedService(service);
     setSelectedTime('');
-  }, [selectedDate, selectedService, selectedExpert]);
+  };
+
+  const selectDate = (date: string) => {
+    setSelectedDate(date);
+    setSelectedTime('');
+  };
 
   // Pre-select service if passed via state or query params
   useEffect(() => {
@@ -1569,7 +1585,7 @@ export const Terminbuchung: React.FC = () => {
       const found = BOOKING_SERVICES.find(s => s.id === serviceId);
       if (found) {
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setSelectedService(found);
+        selectService(found);
       }
     }
   }, [location]);
@@ -1610,7 +1626,7 @@ export const Terminbuchung: React.FC = () => {
       setLoading(true);
       setErrorMsg(null);
       
-      let assignedExpert = 'Keine Präferenz';
+      const assignedExpert = 'Keine Präferenz';
 
       try {
         const { error } = await supabase.from('appointments').insert([{
@@ -1632,9 +1648,10 @@ export const Terminbuchung: React.FC = () => {
         if (error) throw error;
         setRefreshCounter(prev => prev + 1);
         setBooked(true);
-      } catch (err: any) {
-        console.error('Error submitting booking:', err);
-        setErrorMsg(err.message || 'Ein Fehler ist aufgetreten bei der Buchung. Bitte versuchen Sie es erneut.');
+      } catch (err) {
+        const error = err as Error;
+        console.error('Error submitting booking:', error);
+        setErrorMsg(error.message || 'Ein Fehler ist aufgetreten bei der Buchung. Bitte versuchen Sie es erneut.');
       } finally {
         setLoading(false);
       }
@@ -1852,7 +1869,7 @@ export const Terminbuchung: React.FC = () => {
                                     <button
                                       key={cat}
                                       type="button"
-                                      onClick={() => setSelectedCategory(cat)}
+                                      onClick={() => handleCategorySelect(cat)}
                                       className={`w-full text-left px-3 py-2 rounded-xl font-sans text-xs font-medium transition-all duration-200 flex items-center justify-between group border ${
                                         isActive
                                           ? 'bg-primary text-pure-white border-primary shadow-sm font-semibold'
@@ -1901,7 +1918,7 @@ export const Terminbuchung: React.FC = () => {
                               <button
                                 key={cat}
                                 type="button"
-                                onClick={() => setSelectedCategory(cat)}
+                                onClick={() => handleCategorySelect(cat)}
                                 className={`snap-center shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-sans text-xs font-medium transition-all shadow-sm border ${
                                   isActive
                                     ? 'bg-primary text-pure-white border-primary ring-1 ring-primary/20'
@@ -1955,7 +1972,7 @@ export const Terminbuchung: React.FC = () => {
                           return (
                             <div
                               key={service.id}
-                              onClick={() => setSelectedService(service)}
+                              onClick={() => selectService(service)}
                               className={`bg-pure-white medical-glow p-6 border group cursor-pointer hover:border-primary/30 transition-all rounded-2xl ${
                                 isSelected
                                   ? 'border-primary ring-2 ring-primary bg-primary/[0.02]'
@@ -2049,7 +2066,7 @@ export const Terminbuchung: React.FC = () => {
                         <button
                           key={d.fullString}
                           type="button"
-                          onClick={() => setSelectedDate(d.fullString)}
+                          onClick={() => selectDate(d.fullString)}
                           className={`p-4 border rounded-xl flex flex-col items-center justify-center transition-all ${
                             isSelected
                               ? 'border-primary bg-primary/5 text-primary ring-1 ring-primary medical-glow'

@@ -78,8 +78,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
     return res.redirect(302, `/termin-antwort?${params.toString()}`);
 
-  } catch (err: any) {
-    console.error('termin-antwort handler error:', err);
+  } catch (err) {
+    const error = err as Error;
+    console.error('termin-antwort handler error:', error);
     return res.redirect(302, `/termin-antwort?result=error&reason=server_error`);
   }
 }

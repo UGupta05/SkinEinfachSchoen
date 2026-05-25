@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 import { supabase } from '../supabaseClient';
 import { OPENING_HOURS } from '../config/openingHours';
 import {
@@ -46,7 +47,7 @@ interface Appointment {
 }
 
 export const Admin: React.FC = () => {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -336,17 +337,29 @@ export const Admin: React.FC = () => {
     };
   }, [user]);
 
-  // Automatically switch status to 'pending' if date/time changes from original
-  useEffect(() => {
-    if (!selectedAppointmentForEdit) return;
-    const originalDateIso = parseGermanDateStringToIso(selectedAppointmentForEdit.date, selectedAppointmentForEdit.created_at);
-    const originalTimeIso = parseGermanTimeStringToIso(selectedAppointmentForEdit.time);
-    
-    const hasChanged = editDate !== originalDateIso || editTime !== originalTimeIso;
-    if (hasChanged && editStatus === 'confirmed') {
-      setEditStatus('pending');
+  const updateEditDate = (newDate: string) => {
+    setEditDate(newDate);
+    if (selectedAppointmentForEdit) {
+      const originalDateIso = parseGermanDateStringToIso(selectedAppointmentForEdit.date, selectedAppointmentForEdit.created_at);
+      const originalTimeIso = parseGermanTimeStringToIso(selectedAppointmentForEdit.time);
+      const hasChanged = newDate !== originalDateIso || editTime !== originalTimeIso;
+      if (hasChanged && editStatus === 'confirmed') {
+        setEditStatus('pending');
+      }
     }
-  }, [editDate, editTime, selectedAppointmentForEdit, editStatus]);
+  };
+
+  const updateEditTime = (newTime: string) => {
+    setEditTime(newTime);
+    if (selectedAppointmentForEdit) {
+      const originalDateIso = parseGermanDateStringToIso(selectedAppointmentForEdit.date, selectedAppointmentForEdit.created_at);
+      const originalTimeIso = parseGermanTimeStringToIso(selectedAppointmentForEdit.time);
+      const hasChanged = editDate !== originalDateIso || newTime !== originalTimeIso;
+      if (hasChanged && editStatus === 'confirmed') {
+        setEditStatus('pending');
+      }
+    }
+  };
 
   const fetchAppointments = async () => {
     setLoadingData(true);
@@ -359,9 +372,10 @@ export const Admin: React.FC = () => {
 
       if (error) throw error;
       setAppointments(data || []);
-    } catch (err: any) {
-      console.error('Error fetching appointments:', err);
-      setDataError(err.message || 'Fehler beim Laden der Termine.');
+    } catch (err) {
+      const error = err as Error;
+      console.error('Error fetching appointments:', error);
+      setDataError(error.message || 'Fehler beim Laden der Termine.');
     } finally {
       setLoadingData(false);
     }
@@ -377,11 +391,12 @@ export const Admin: React.FC = () => {
         password: loginPassword,
       });
       if (error) throw error;
-    } catch (err: any) {
-      console.error('Login error:', err);
-      setAuthError(err.message === 'Invalid login credentials' 
+    } catch (err) {
+      const error = err as Error;
+      console.error('Login error:', error);
+      setAuthError(error.message === 'Invalid login credentials' 
         ? 'Ungültige E-Mail-Adresse oder Passwort.' 
-        : err.message || 'Ein Fehler ist aufgetreten.');
+        : error.message || 'Ein Fehler ist aufgetreten.');
     } finally {
       setAuthLoading(false);
     }
@@ -418,9 +433,10 @@ export const Admin: React.FC = () => {
       setAppointments((prev) =>
         prev.map((app) => (app.id === id ? { ...app, ...updates } : app))
       );
-    } catch (err: any) {
-      console.error('Error updating appointment:', err);
-      alert('Fehler beim Aktualisieren des Termins: ' + err.message);
+    } catch (err) {
+      const error = err as Error;
+      console.error('Error updating appointment:', error);
+      alert('Fehler beim Aktualisieren des Termins: ' + error.message);
     } finally {
       setActionLoadingId(null);
     }
@@ -475,9 +491,10 @@ export const Admin: React.FC = () => {
 
       // Update local state in case realtime event hasn't fired yet
       setAppointments((prev) => prev.filter((app) => app.id !== id));
-    } catch (err: any) {
-      console.error('Error deleting appointment:', err);
-      alert('Fehler beim Löschen des Termins: ' + err.message);
+    } catch (err) {
+      const error = err as Error;
+      console.error('Error deleting appointment:', error);
+      alert('Fehler beim Löschen des Termins: ' + error.message);
     } finally {
       setActionLoadingId(null);
     }
@@ -1557,7 +1574,7 @@ export const Admin: React.FC = () => {
                       <input
                         type="date"
                         value={editDate}
-                        onChange={(e) => setEditDate(e.target.value)}
+                        onChange={(e) => updateEditDate(e.target.value)}
                         required
                         className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer"
                       />
@@ -1569,7 +1586,7 @@ export const Admin: React.FC = () => {
                       <input
                         type="time"
                         value={editTime}
-                        onChange={(e) => setEditTime(e.target.value)}
+                        onChange={(e) => updateEditTime(e.target.value)}
                         required
                         className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer"
                       />
@@ -1588,7 +1605,7 @@ export const Admin: React.FC = () => {
                           <button
                             key={time}
                             type="button"
-                            onClick={() => setEditTime(time)}
+                            onClick={() => updateEditTime(time)}
                             className={`py-2 px-1 text-center transition-all font-sans text-xs font-semibold rounded-lg border active:scale-95 cursor-pointer ${
                               isSelected
                                 ? 'bg-primary text-pure-white border-primary font-bold shadow-sm'
@@ -1610,7 +1627,7 @@ export const Admin: React.FC = () => {
                 </label>
                 <select
                   value={editStatus}
-                  onChange={(e: any) => setEditStatus(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setEditStatus(e.target.value as 'pending' | 'confirmed' | 'cancelled')}
                   className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
                 >
                   <option value="pending">Ausstehend (Prüfung)</option>
@@ -1632,7 +1649,7 @@ export const Admin: React.FC = () => {
                 </label>
                 <select
                   value={editExpert}
-                  onChange={(e: any) => setEditExpert(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setEditExpert(e.target.value)}
                   className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
                 >
                   <option value="Keine Präferenz">Keine Präferenz</option>

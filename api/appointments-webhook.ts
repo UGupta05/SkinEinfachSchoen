@@ -58,8 +58,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const fromEmail = process.env.RESEND_FROM_EMAIL || 'Skin Einfach Schön <onboarding@resend.dev>';
 
-  let subject = '';
-  let html = '';
+  let subject: string;
+  let html: string;
 
   try {
     if (type === 'INSERT') {
@@ -144,7 +144,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       id: resendData.id
     });
 
-  } catch (error: any) {
+  } catch (err) {
+    const error = err as Error;
     console.error('Error during webhook execution:', error);
     return res.status(500).json({
       error: 'Internal Server Error',

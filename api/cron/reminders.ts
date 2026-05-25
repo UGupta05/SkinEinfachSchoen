@@ -127,7 +127,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         sentCount++;
-      } catch (sendError: any) {
+      } catch (err) {
+        const sendError = err as Error;
         console.error(`Failed to send reminder for appointment ID ${app.id}:`, sendError);
         failures.push({ appointmentId: app.id, error: sendError.message });
       }
@@ -140,7 +141,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       failures
     });
 
-  } catch (error: any) {
+  } catch (err) {
+    const error = err as Error;
     console.error('Error during reminders cron execution:', error);
     return res.status(500).json({
       error: 'Internal Server Error',
