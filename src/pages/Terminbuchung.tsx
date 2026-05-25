@@ -1476,6 +1476,7 @@ export const Terminbuchung: React.FC = () => {
   const location = useLocation();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedCategory, setSelectedCategory] = useState<string>("Alle");
+  const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({
     "Übersicht": true,
     "Kosmetik & Hautpflege": true,
@@ -1901,13 +1902,25 @@ export const Terminbuchung: React.FC = () => {
                       })}
                     </div>
 
-                    {/* Mobile & Tablet View: Horizontal Scroll Slider */}
-                    <div className="lg:hidden w-full overflow-hidden">
+                    {/* Mobile & Tablet View: Collapsible Filter Dropdown */}
+                    <div className="lg:hidden w-full relative mb-6">
                       <div className="text-xs font-display font-bold uppercase tracking-wider text-slate-muted mb-2 px-1">
                         Kategorie filtern:
                       </div>
-                      <div className="relative">
-                        <div className="flex gap-2 overflow-x-auto pb-3 scrollbar-none snap-x snap-mandatory -mx-margin-mobile px-margin-mobile">
+                      <button
+                        type="button"
+                        onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+                        className="w-full flex items-center justify-between bg-pure-white border border-outline-variant/15 p-4 rounded-xl text-sm font-display font-bold text-primary transition-all shadow-sm focus:outline-none"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-sky-accent">{getCategoryIcon(selectedCategory)}</span>
+                          <span>{selectedCategory}</span>
+                        </div>
+                        <ChevronDown className={`w-5 h-5 text-slate-muted transition-transform ${mobileFilterOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {mobileFilterOpen && (
+                        <div className="absolute left-0 right-0 mt-2 bg-pure-white border border-outline-variant/15 rounded-xl shadow-lg z-50 max-h-[300px] overflow-y-auto p-2 space-y-1">
                           {CATEGORIES.map((cat) => {
                             const isActive = selectedCategory === cat;
                             const serviceCount = cat === "Alle" 
@@ -1918,21 +1931,24 @@ export const Terminbuchung: React.FC = () => {
                               <button
                                 key={cat}
                                 type="button"
-                                onClick={() => handleCategorySelect(cat)}
-                                className={`snap-center shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full font-sans text-xs font-medium transition-all shadow-sm border ${
+                                onClick={() => {
+                                  handleCategorySelect(cat);
+                                  setMobileFilterOpen(false);
+                                }}
+                                className={`w-full text-left px-4 py-3 rounded-lg font-sans text-xs font-semibold transition-all flex items-center justify-between ${
                                   isActive
-                                    ? 'bg-primary text-pure-white border-primary ring-1 ring-primary/20'
-                                    : 'bg-pure-white text-onyx-text border-outline-variant/10 hover:bg-sky-accent/5 hover:text-primary'
+                                    ? 'bg-primary text-pure-white font-bold'
+                                    : 'bg-transparent text-onyx-text hover:bg-sky-accent/5'
                                 }`}
                               >
-                                <span className={isActive ? 'text-pure-white' : 'text-slate-muted'}>
-                                  {getCategoryIcon(cat)}
-                                </span>
-                                <span>{cat}</span>
-                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full font-display ${
-                                  isActive
-                                    ? 'bg-pure-white/20 text-pure-white'
-                                    : 'bg-sky-accent/10 text-slate-muted'
+                                <div className="flex items-center gap-2">
+                                  <span className={isActive ? 'text-pure-white' : 'text-slate-muted'}>
+                                    {getCategoryIcon(cat)}
+                                  </span>
+                                  <span>{cat}</span>
+                                </div>
+                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${
+                                  isActive ? 'bg-pure-white/20 text-pure-white' : 'bg-sky-accent/10 text-slate-muted'
                                 }`}>
                                   {serviceCount}
                                 </span>
@@ -1940,9 +1956,7 @@ export const Terminbuchung: React.FC = () => {
                             );
                           })}
                         </div>
-                        <div className="absolute top-0 right-0 h-full w-8 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-                        <div className="absolute top-0 left-0 h-full w-8 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-                      </div>
+                      )}
                     </div>
                   </div>
 
@@ -2025,6 +2039,19 @@ export const Terminbuchung: React.FC = () => {
                             </div>
                           );
                         })}
+                      </div>
+                    )}
+
+                    {selectedService && !selectedService.notBookableOnline && (
+                      <div className="lg:hidden mt-6">
+                        <button
+                          type="button"
+                          onClick={() => setCurrentStep(2)}
+                          className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-2"
+                        >
+                          <span>Weiter zum Zeitpunkt</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </button>
                       </div>
                     )}
                   </div>
@@ -2184,8 +2211,21 @@ export const Terminbuchung: React.FC = () => {
                   )}
                 </div>
 
+                {selectedDate && selectedTime && (
+                  <div className="lg:hidden pt-4">
+                    <button
+                      type="button"
+                      onClick={() => setCurrentStep(3)}
+                      className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-2"
+                    >
+                      <span>Weiter zu Ihren Daten</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+
                 {/* Back button */}
-                <div className="pt-4 flex justify-start">
+                <div className="pt-4 flex justify-between items-center border-t border-outline-variant/10 mt-6">
                   <button
                     type="button"
                     onClick={() => setCurrentStep(1)}
@@ -2284,10 +2324,28 @@ export const Terminbuchung: React.FC = () => {
                       {errorMsg}
                     </div>
                   )}
+                  
+                  <div className="lg:hidden pt-4">
+                    <button
+                      type="button"
+                      disabled={!name || !email || !consent || loading}
+                      onClick={handleSubmit}
+                      className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all disabled:bg-slate-muted/20 disabled:text-outline disabled:cursor-not-allowed disabled:transform-none shadow-sm flex items-center justify-center gap-2"
+                    >
+                      {loading ? (
+                        <span>Wird gebucht...</span>
+                      ) : (
+                        <>
+                          <span>Termin buchen</span>
+                          <Check className="w-4 h-4" />
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Back button */}
-                <div className="pt-4 flex justify-between items-center">
+                <div className="pt-4 flex justify-between items-center border-t border-outline-variant/10">
                   <button
                     type="button"
                     onClick={() => setCurrentStep(2)}
@@ -2386,7 +2444,7 @@ export const Terminbuchung: React.FC = () => {
                 )}
 
                 {/* Action Buttons */}
-                <div className="space-y-4">
+                <div className="space-y-4 hidden lg:block">
                   {selectedService && selectedService.notBookableOnline && (
                     <div className="bg-error/5 border border-error/20 p-4 rounded-xl space-y-2 text-left">
                       <p className="text-xs font-semibold text-error uppercase tracking-wider">
@@ -2446,6 +2504,24 @@ export const Terminbuchung: React.FC = () => {
                     </button>
                   )}
                 </div>
+
+                {/* Mobile & Tablet view action buttons (separate warning block visible on mobile if not bookable) */}
+                {selectedService && selectedService.notBookableOnline && (
+                  <div className="lg:hidden bg-error/5 border border-error/20 p-4 rounded-xl space-y-2 text-left mt-4">
+                    <p className="text-xs font-semibold text-error uppercase tracking-wider">
+                      Online nicht buchbar
+                    </p>
+                    <p className="text-xs text-tertiary leading-relaxed font-sans">
+                      Diese Dienstleistung kann online nicht gebucht werden. Bitte vereinbaren Sie Ihren Termin telefonisch unter:
+                    </p>
+                    <a
+                      href="tel:+4954147054971"
+                      className="block text-center bg-error text-pure-white font-display text-xs font-bold uppercase tracking-wider py-2.5 rounded-lg hover:opacity-90 transition-all shadow-sm"
+                    >
+                      0541 / 47 05 49 71
+                    </a>
+                  </div>
+                )}
 
                 <p className="text-[10px] text-center text-outline uppercase tracking-wider">
                   Sichere Verschlüsselung Ihrer Daten
