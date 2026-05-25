@@ -173,8 +173,8 @@ const sections: Section[] = [
         text: "Diese Seite nutzt über eine API den Kartendienst Google Maps. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nZur Nutzung der Funktionen von Google Maps ist es notwendig, Ihre IP-Adresse zu speichern. Diese Informationen werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Der Anbieter dieser Seite hat keinen Einfluss auf diese Datenübertragung. Die Nutzung von Google Maps erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote und an einer leichten Auffindbarkeit der von uns auf der Website angegebenen Orte. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar.",
       },
       {
-        subtitle: "Google Web Fonts",
-        text: "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Die Google Fonts werden beim Aufruf unserer Website von Google-Servern geladen. Hierbei wird Ihre IP-Adresse an Google übermittelt. Die Einbindung dieser Google Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der einheitlichen Darstellung des Schriftbildes auf seiner Website.\n\nAnbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Weitere Informationen zu Google Web Fonts finden Sie unter https://developers.google.com/fonts/faq und in der Datenschutzerklärung von Google: https://policies.google.com/privacy",
+        subtitle: "Google Web Fonts (Lokale Einbindung)",
+        text: "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Zur Erhöhung des Datenschutzes und zur Verhinderung der Übertragung von IP-Adressen an Google-Server in den USA werden diese Google Fonts lokal auf unserem eigenen Webserver gehostet. Es findet somit beim Laden der Schriftarten keine Verbindung zu Servern von Google statt.",
       },
     ],
   },
