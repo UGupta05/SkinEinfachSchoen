@@ -5,7 +5,7 @@ import { Sparkles, ArrowRight, Heart, Star } from 'lucide-react';
 
 export const Leistungen: React.FC = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       {/* Sidebar Navigation */}
       <aside className="fixed left-0 top-20 h-[calc(100vh-80px)] w-72 bg-soft-shell border-r border-slate-muted/15 py-6 overflow-y-auto hidden lg:block">
         <div className="px-6 mb-6">
@@ -41,6 +41,40 @@ export const Leistungen: React.FC = () => {
           ))}
         </nav>
       </aside>
+
+      {/* Mobile Navigation Chip Bar */}
+      <div className="lg:hidden sticky top-20 z-40 bg-pure-white/95 backdrop-blur-md border-b border-outline-variant/10 py-4 shadow-sm w-full">
+        <div className="flex items-center gap-2 overflow-x-auto px-margin-mobile no-scrollbar w-full">
+          <NavLink
+            to="/leistungen"
+            end
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                isActive
+                  ? 'bg-primary text-pure-white'
+                  : 'bg-sky-accent/10 text-primary hover:bg-sky-accent/20'
+              }`
+            }
+          >
+            Übersicht
+          </NavLink>
+          {TREATMENTS.map((item) => (
+            <NavLink
+              key={item.id}
+              to={item.link}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                  isActive
+                    ? 'bg-primary text-pure-white'
+                    : 'bg-sky-accent/10 text-primary hover:bg-sky-accent/20'
+                }`
+              }
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </div>
+      </div>
 
       {/* Main Content Area */}
       <main className="flex-1 lg:ml-72 bg-pure-white min-h-screen">
