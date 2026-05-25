@@ -226,25 +226,21 @@ export const Kontakt: React.FC = () => {
             {/* Map Canvas */}
             <div className="space-y-12">
               <div className="h-[500px] w-full bg-surface-container overflow-hidden rounded-lg border border-outline-variant/10 medical-glow relative group">
-                <div className="w-full h-full bg-slate-100 flex items-center justify-center relative grayscale group-hover:grayscale-0 transition-all duration-700">
-                  <img
-                    alt="Map view"
-                    className="w-full h-full object-cover"
-                    src="/images/kontakt/clinic_map.png"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-primary text-pure-white p-4 rounded-full medical-glow animate-bounce shadow-lg">
-                      <MapPin className="w-6 h-6 fill-current" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6 bg-pure-white/95 backdrop-blur-md p-6 border border-outline-variant/20 rounded shadow-md">
-                    <p className="font-display text-[10px] font-bold text-primary mb-1 uppercase tracking-widest">
-                      UNSER STANDORT
-                    </p>
-                    <p className="font-sans text-xs text-on-surface leading-relaxed">
-                      Eingang Lotter Straße, Parkplätze direkt im Hof vorhanden.
-                    </p>
-                  </div>
+                <iframe
+                  title="SKIN Osnabrück Standort"
+                  src="https://maps.google.com/maps?q=Lotter%20Stra%C3%9Fe%2033,%2049078%20Osnabr%C3%BCck&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div className="absolute bottom-6 left-6 right-6 bg-pure-white/95 backdrop-blur-md p-6 border border-outline-variant/20 rounded shadow-md pointer-events-none select-none">
+                  <p className="font-display text-[10px] font-bold text-primary mb-1 uppercase tracking-widest">
+                    UNSER STANDORT
+                  </p>
+                  <p className="font-sans text-xs text-on-surface leading-relaxed">
+                    Eingang Lotter Straße, Parkplätze direkt im Hof vorhanden.
+                  </p>
                 </div>
               </div>
               <div className="bg-primary/5 p-8 border-l-4 border-primary rounded-r">
@@ -274,7 +270,7 @@ export const Kontakt: React.FC = () => {
             </div>
             <a
               className="inline-block mt-8 font-display text-xs font-bold text-primary border-b border-primary hover:text-secondary hover:border-secondary transition-colors uppercase tracking-wider self-start"
-              href="https://maps.google.com"
+              href="https://www.google.com/maps/dir/?api=1&destination=Lotter+Stra%C3%9Fe+33,+49078+Osnabr%C3%BCck"
               target="_blank"
               rel="noopener noreferrer"
             >
