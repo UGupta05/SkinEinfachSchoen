@@ -30,7 +30,7 @@ try {
     });
   }
 } catch (e) {
-  console.warn('Could not load .env file:', e.message);
+  console.warn('Could not load .env file:', e instanceof Error ? e.message : e);
 }
 
 if (!supabaseUrl || !supabaseKey) {
