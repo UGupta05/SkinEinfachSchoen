@@ -1724,7 +1724,7 @@ export const Terminbuchung: React.FC = () => {
   }
 
   return (
-    <div className="bg-background text-on-surface font-sans antialiased py-16">
+    <div className="bg-background text-on-surface font-sans antialiased pt-16 pb-28 lg:pb-16">
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
         
         {/* Booking Header & Stepper */}
@@ -2042,18 +2042,7 @@ export const Terminbuchung: React.FC = () => {
                       </div>
                     )}
 
-                    {selectedService && !selectedService.notBookableOnline && (
-                      <div className="lg:hidden mt-6">
-                        <button
-                          type="button"
-                          onClick={() => setCurrentStep(2)}
-                          className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-2"
-                        >
-                          <span>Weiter zum Zeitpunkt</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    )}
+
                   </div>
                 </div>
 
@@ -2211,18 +2200,7 @@ export const Terminbuchung: React.FC = () => {
                   )}
                 </div>
 
-                {selectedDate && selectedTime && (
-                  <div className="lg:hidden pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setCurrentStep(3)}
-                      className="w-full bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest py-4 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-2"
-                    >
-                      <span>Weiter zu Ihren Daten</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
+
 
                 {/* Back button */}
                 <div className="pt-4 flex justify-between items-center border-t border-outline-variant/10 mt-6">
@@ -2558,6 +2536,56 @@ export const Terminbuchung: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Mobile Sticky Bottom Action Bar */}
+      {selectedService && !selectedService.notBookableOnline && (currentStep === 1 || currentStep === 2) && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-pure-white/95 backdrop-blur-md border-t border-outline-variant/15 p-4 z-40 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] flex items-center justify-between gap-4 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
+          <div className="min-w-0 flex-1">
+            {currentStep === 1 ? (
+              <>
+                <p className="text-[9px] font-display font-bold uppercase tracking-wider text-slate-muted">Ausgewählt:</p>
+                <p className="text-xs font-semibold text-onyx-text truncate max-w-[200px] sm:max-w-[300px]">{selectedService.name}</p>
+              </>
+            ) : (
+              <>
+                <p className="text-[9px] font-display font-bold uppercase tracking-wider text-slate-muted">Zeitpunkt:</p>
+                <p className="text-xs font-semibold text-onyx-text truncate max-w-[200px] sm:max-w-[300px]">
+                  {selectedDate && selectedTime ? `${selectedDate.split(',')[1]} um ${selectedTime}` : 'Termin wählen'}
+                </p>
+              </>
+            )}
+          </div>
+          
+          <div className="shrink-0">
+            {currentStep === 1 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentStep(2);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="bg-primary text-pure-white px-6 py-3 rounded-xl font-display text-xs font-bold uppercase tracking-wider shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center gap-1.5"
+              >
+                <span>Weiter</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                disabled={!selectedDate || !selectedTime}
+                onClick={() => {
+                  setCurrentStep(3);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="bg-primary text-pure-white px-6 py-3 rounded-xl font-display text-xs font-bold uppercase tracking-wider shadow-md hover:opacity-90 active:scale-95 transition-all flex items-center gap-1.5 disabled:bg-slate-muted/20 disabled:text-outline disabled:cursor-not-allowed"
+              >
+                <span>Weiter</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
