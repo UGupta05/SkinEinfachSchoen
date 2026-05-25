@@ -40,6 +40,7 @@ export default {
         "on-error": "#ffffff",
         "error": "#ba1a1a",
         "error-container": "#ffdad6",
+        "tertiary": "#536870",
       },
       borderRadius: {
         "DEFAULT": "0.25rem",
@@ -78,6 +79,7 @@ export default {
         "button-text": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
         "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "600" }],
         "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+        "2xs": ["10px", { lineHeight: "1.4" }],
       },
     },
   },

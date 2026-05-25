@@ -307,12 +307,12 @@ const BOOKING_SERVICES: BookingService[] = [
   {
     id: "waxing_17",
     name: "Waxing",
-    categoryTag: "Fruchtsäure / chemisches Peeling",
-    categoryChip: "Fruchtsäure & Peelings",
+    categoryTag: "Waxing",
+    categoryChip: "Waxing",
     price: "ab 10 €",
     priceVal: 10,
     duration: "10 Min.",
-    description: "Individuelle Behandlung der Kategorie Fruchtsäure & Peelings.",
+    description: "Individuelle Behandlung der Kategorie Fruchsäure & Peelings.",
     notBookableOnline: true
   },
   {

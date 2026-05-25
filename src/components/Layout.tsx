@@ -51,8 +51,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           }`}
       >
         <nav className="flex justify-between items-center h-full px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full">
-          <Link to="/" className="font-display text-primary tracking-tighter text-2xl font-bold">
-            SKIN
+          <Link to="/" className="flex items-center">
+            <img
+              src="/images/home/logo.png"
+              alt="SKIN einfach schön"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -213,15 +217,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div>
             <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Kontakt</h4>
-            <p className="font-sans text-sm text-tertiary mb-2">Musterstraße 123</p>
-            <p className="font-sans text-sm text-tertiary mb-6">49074 Osnabrück</p>
+            <p className="font-sans text-sm text-tertiary mb-2">Lotter Straße 33</p>
+            <p className="font-sans text-sm text-tertiary mb-6">49078 Osnabrück</p>
             <a
-              href="mailto:info@skin-einfach-schoen.de"
+              href="mailto:hallo@skin-os.de"
               className="font-sans text-sm text-primary font-bold block mb-2 underline decoration-sky-accent underline-offset-4"
             >
-              info@skin-einfach-schoen.de
+              hallo@skin-os.de
             </a>
-            <p className="font-sans text-sm text-tertiary">+49 (0) 541 1234567</p>
+            <p className="font-sans text-sm text-tertiary">+49 (0) 541 123 45 67</p>
           </div>
         </div>
 

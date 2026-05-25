@@ -20,16 +20,7 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease-out;
-}
 
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* Hide scrollbars for clean horizontal layout */
 .no-scrollbar::-webkit-scrollbar {
