@@ -45,11 +45,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="min-h-screen bg-background text-on-surface flex flex-col font-sans selection:bg-primary/20">
       {/* Header / Top Navigation */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b ${scrolled
             ? 'bg-pure-white/95 backdrop-blur-md shadow-md border-outline-variant/20'
             : 'bg-pure-white/90 backdrop-blur-sm shadow-sm border-outline-variant/15'
-        }`}
+          }`}
       >
         <nav className="flex justify-between items-center h-full px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full">
           <Link to="/" className="font-display text-primary tracking-tighter text-2xl font-bold">
@@ -64,11 +63,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary ${
-                    isActive
+                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary ${isActive
                       ? 'text-primary border-b-2 border-primary pb-1'
                       : 'text-tertiary'
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
@@ -80,7 +78,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link to="/shop" className="text-primary hover:opacity-80 transition-opacity">
               <ShoppingBag className="w-6 h-6 stroke-[1.5]" />
             </Link>
-            
+
             <Link
               to="/terminbuchung"
               className="hidden md:block bg-slate-muted text-pure-white px-6 py-3 font-display text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all"
@@ -138,11 +136,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               Medical Kosmetik &amp; Ästhetik auf höchstem Niveau.
             </p>
             <div className="flex gap-4">
-              <a 
-                href="https://www.instagram.com" 
+              <a
+                href="https://www.instagram.com/skin_einfach_schoen/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-pure-white transition-all" 
+                className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-pure-white transition-all"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -151,15 +149,27 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
-              <a 
-                href="https://www.facebook.com" 
+              <a
+                href="https://www.facebook.com/skineinfachschoen/?locale=de_DE"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-pure-white transition-all" 
+                className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-pure-white transition-all"
                 aria-label="Facebook"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+              </a>
+              <a
+                href="https://www.youtube.com/@SkinEinfachSch%C3%B6n"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-primary hover:bg-primary hover:text-pure-white transition-all"
+                aria-label="YouTube"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                  <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
                 </svg>
               </a>
             </div>
