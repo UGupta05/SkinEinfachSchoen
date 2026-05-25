@@ -201,16 +201,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Rechtliches</h4>
             <ul className="space-y-4">
               <li>
-                <a href="#" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Impressum</a>
+                <Link to="/impressum" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Impressum</Link>
               </li>
               <li>
-                <a href="#" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Datenschutz</a>
-              </li>
-              <li>
-                <a href="#" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">AGB</a>
-              </li>
-              <li>
-                <a href="#" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Widerruf</a>
+                <Link to="/datenschutz" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Datenschutz</Link>
               </li>
             </ul>
           </div>

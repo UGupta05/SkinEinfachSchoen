@@ -10,6 +10,8 @@ import { Kontakt } from './pages/Kontakt';
 import { Shop } from './pages/Shop';
 import { Admin } from './pages/Admin';
 import { TerminAntwort } from './pages/TerminAntwort';
+import { Impressum } from './pages/Impressum';
+import { Datenschutz } from './pages/Datenschutz';
 import {
   JetPeel,
   IPLHaarentfernung,
@@ -48,6 +50,8 @@ function App() {
           <Route path="/terminbuchung" element={<Terminbuchung />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/termin-antwort" element={<TerminAntwort />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
         </Routes>
       </Layout>
       <Analytics />
