@@ -19,7 +19,7 @@ export const Home: React.FC = () => {
 
         <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
           <div className="max-w-2xl">
-            <div className="mb-8">
+            <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
               <img
                 alt="SKIN einfach schön Logo"
                 className="h-28 md:h-36 object-contain"
@@ -27,15 +27,24 @@ export const Home: React.FC = () => {
               />
             </div>
             
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+            <h1 
+              className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight animate-fade-in-up"
+              style={{ animationDelay: '100ms' }}
+            >
               Wissenschaftliche Präzision für Ihre natürliche Schönheit.
             </h1>
             
-            <p className="font-sans text-lg text-tertiary mb-10 leading-relaxed">
+            <p 
+              className="font-sans text-lg text-tertiary mb-10 leading-relaxed animate-fade-in-up"
+              style={{ animationDelay: '200ms' }}
+            >
               Wir kombinieren modernste medizinische Kosmetik mit einem ganzheitlichen Wohlfühlkonzept. Erleben Sie Hautpflege auf einem neuen Level an Exzellenz.
             </p>
             
-            <div className="flex flex-wrap gap-4">
+            <div 
+              className="flex flex-wrap gap-4 animate-fade-in-up"
+              style={{ animationDelay: '300ms' }}
+            >
               <Link
                 to="/leistungen"
                 className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
