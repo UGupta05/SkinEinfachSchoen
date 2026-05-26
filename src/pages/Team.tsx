@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { TESTIMONIALS } from '../data/mockData';
 
 export const Team: React.FC = () => {
   useEffect(() => {
@@ -277,122 +278,42 @@ export const Team: React.FC = () => {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div className="bg-pure-white p-8 medical-glow relative">
-              <span className="material-symbols-outlined text-sky-accent/20 text-6xl absolute top-4 right-4">
-                format_quote
-              </span>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-muted/10">
-                  <img
-                    alt="Elena S."
-                    className="w-full h-full object-cover"
-                    src="/images/team/avatar_elena.png"
-                  />
-                </div>
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-pure-white p-8 medical-glow relative flex flex-col justify-between">
                 <div>
-                  <h4 className="font-label-caps text-label-caps text-primary">Elena S.</h4>
-                  <div className="flex text-sky-accent text-[12px]">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
+                  <span className="material-symbols-outlined text-sky-accent/20 text-6xl absolute top-4 right-4">
+                    format_quote
+                  </span>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div>
+                      <h4 className="font-label-caps text-label-caps text-primary">{t.name}</h4>
+                      <div className="flex text-sky-accent text-[12px] mt-1">
+                        {[...Array(t.rating)].map((_, i) => (
+                          <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                            star
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                  <p className="font-body-md text-body-md text-tertiary">
+                    "{t.text}"
+                  </p>
                 </div>
               </div>
-              <p className="font-body-md text-body-md text-tertiary">
-                "Sofia hat meine Haut komplett verändert. Die Beratung war so ehrlich und kompetent, wie ich es noch nie erlebt habe. Ich fühle mich hier bestens aufgehoben."
-              </p>
-            </div>
+            ))}
+          </div>
 
-            {/* Testimonial 2 */}
-            <div className="bg-pure-white p-8 medical-glow relative">
-              <span className="material-symbols-outlined text-sky-accent/20 text-6xl absolute top-4 right-4">
-                format_quote
-              </span>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-muted/10">
-                  <img
-                    alt="Martina R."
-                    className="w-full h-full object-cover"
-                    src="/images/team/avatar_martina.png"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-label-caps text-label-caps text-primary">Martina R.</h4>
-                  <div className="flex text-sky-accent text-[12px]">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="font-body-md text-body-md text-tertiary">
-                "Die Atmosphäre im Studio ist pure Entspannung. Isabel ist ein absoluter Profi und hat ein unglaubliches Gespür für die Bedürfnisse meiner Haut."
-              </p>
-            </div>
-
-            {/* Testimonial 3 */}
-            <div className="bg-pure-white p-8 medical-glow relative">
-              <span className="material-symbols-outlined text-sky-accent/20 text-6xl absolute top-4 right-4">
-                format_quote
-              </span>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-muted/10">
-                  <img
-                    alt="Julian M."
-                    className="w-full h-full object-cover"
-                    src="/images/team/avatar_julian.png"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-label-caps text-label-caps text-primary">Julian M.</h4>
-                  <div className="flex text-sky-accent text-[12px]">
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                    <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      star
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="font-body-md text-body-md text-tertiary">
-                "Auch als Mann fühlt man sich hier sehr gut beraten. Kein unnötiger Schnickschnack, sondern klare Analysen und Behandlungen, die wirklich funktionieren."
-              </p>
-            </div>
+          <div className="text-center mt-12">
+            <a
+              href="https://www.google.com/maps/place/SKIN+einfach+sch%C3%B6n/@52.2743486,8.0410559,17z/data=!4m8!3m7!1s0x47ba966380c5d64d:0x2280d52723c3b036!8m2!3d52.2743486!4d8.0410559!9m1!1b1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-label-caps text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
+            >
+              Alle Rezensionen auf Google ansehen
+              <span className="material-symbols-outlined text-sm">open_in_new</span>
+            </a>
           </div>
         </div>
       </section>

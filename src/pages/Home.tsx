@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy } from 'lucide-react';
+import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 'lucide-react';
 import { TESTIMONIALS } from '../data/mockData';
 
 export const Home: React.FC = () => {
@@ -365,35 +365,46 @@ export const Home: React.FC = () => {
             {TESTIMONIALS.map((t, idx) => (
               <div
                 key={t.name}
-                className={`p-10 medical-glow rounded-lg ${
+                className={`p-10 medical-glow rounded-lg flex flex-col justify-between ${
                   idx === 1 ? 'bg-primary text-pure-white' : 'bg-soft-shell text-primary'
                 }`}
               >
-                <div className="flex gap-1 mb-6 text-sky-accent">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
-                  ))}
+                <div>
+                  <div className="flex gap-1 mb-6 text-sky-accent">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-current" />
+                    ))}
+                  </div>
+                  
+                  <p className={`font-sans text-base italic mb-8 leading-relaxed ${idx === 1 ? 'text-pure-white' : 'text-primary'}`}>
+                    "{t.text}"
+                  </p>
                 </div>
                 
-                <p className={`font-sans text-base italic mb-8 leading-relaxed ${idx === 1 ? 'text-pure-white' : 'text-primary'}`}>
-                  "{t.text}"
-                </p>
-                
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden shrink-0">
-                    <img alt={t.name} className="w-full h-full object-cover" src={t.avatar} />
-                  </div>
+                <div className="flex items-center gap-4 mt-4 border-t border-outline-variant/10 pt-4">
                   <div>
                     <h4 className={`font-display text-xs font-bold uppercase tracking-wider ${idx === 1 ? 'text-pure-white' : 'text-primary'}`}>
                       {t.name}
                     </h4>
-                    <p className={`text-[10px] font-display font-bold uppercase tracking-widest ${idx === 1 ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
+                    <p className={`text-[10px] font-display font-bold uppercase tracking-widest mt-1 ${idx === 1 ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
                       {t.role}
                     </p>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a
+              href="https://www.google.com/maps/place/SKIN+einfach+sch%C3%B6n/@52.2743486,8.0410559,17z/data=!4m8!3m7!1s0x47ba966380c5d64d:0x2280d52723c3b036!8m2!3d52.2743486!4d8.0410559!9m1!1b1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
+            >
+              Alle Rezensionen auf Google ansehen
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>
