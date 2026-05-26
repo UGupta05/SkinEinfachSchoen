@@ -176,6 +176,10 @@ const sections: Section[] = [
         subtitle: "Google Web Fonts (Lokale Einbindung)",
         text: "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Zur Erhöhung des Datenschutzes und zur Verhinderung der Übertragung von IP-Adressen an Google-Server in den USA werden diese Google Fonts lokal auf unserem eigenen Webserver gehostet. Es findet somit beim Laden der Schriftarten keine Verbindung zu Servern von Google statt.",
       },
+      {
+        subtitle: "YouTube mit erweitertem Datenschutz",
+        text: "Wir binden auf dieser Website Videos der Plattform YouTube ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nWir nutzen YouTube im erweiterten Datenschutzmodus. Dieser Modus sorgt laut YouTube dafür, dass YouTube keine Cookies über den Besucher auf dieser Website speichert, bevor dieser sich das Video ansieht. Sobald Sie die Wiedergabe eines YouTube-Videos starten, kann dies jedoch Datenverarbeitungsvorgänge auslösen. Hierauf haben wir keinen Einfluss.\n\nDie Nutzung von YouTube erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer ansprechenden Darstellung unseres Online-Angebots). Weitere Informationen zum Datenschutz bei YouTube finden Sie in der Datenschutzerklärung des Anbieters unter: https://policies.google.com/privacy",
+      },
     ],
   },
   {

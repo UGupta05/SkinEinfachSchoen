@@ -235,6 +235,118 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Video-Einblicke & Routinen */}
+      <section className="py-section-padding-lg bg-pure-white border-t border-outline-variant/10">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="text-center mb-16">
+            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
+              Erfahrungen &amp; Routinen
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+              Unsere Behandlungen im Video
+            </h2>
+          </div>
+
+          <div className="space-y-20">
+            {/* Video 1: JetPeel */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/W5CCNDCyFuw"
+                    title="Exklusive JetPeel Behandlungserfahrung"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Erfahrungsbericht
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Exklusive JetPeel Behandlungserfahrung
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Erleben Sie die revolutionäre berührungslose JetPeel-Technologie. Unsere Kundin teilt ihre persönlichen Eindrücke während der Behandlung – von der tiefenwirksamen Porenreinigung bis zum sofort sichtbaren Glow-Effekt. Wissenschaftlich fundierte Kosmetik, die man fühlen und sehen kann.
+                </p>
+                <Link
+                  to="/leistungen/jetpeel"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                >
+                  JetPeel entdecken
+                </Link>
+              </div>
+            </div>
+
+            {/* Video 2: Skin Change */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6 lg:order-2">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/OLpqOJyt7I8"
+                    title="Wie sich die Haut positiv verändert"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 lg:order-1 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Hautgesundheit
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Wie sich die Haut positiv verändert
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Hautgesundheit ist eine langfristige Reise. In diesem Video erklären wir, wie sich Ihre Haut durch gezielte, kontinuierliche Behandlungen (von sanftem Microneedling bis hin zur regenerativen Wirkstoffkosmetik) über die Jahre hinweg positiv verändert. Kontinuität und eine fundierte Hautanalyse sind der Schlüssel zur dauerhaften Schönheit.
+                </p>
+                <Link
+                  to="/terminbuchung"
+                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 transition-all text-center"
+                >
+                  Hautanalyse buchen
+                </Link>
+              </div>
+            </div>
+
+            {/* Video 3: Hand Care */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/Qc7Ay8-dTiY"
+                    title="Elegante Handpflege &amp; Self-Care Rituale"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Pflegeroutinen
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Elegante Handpflege &amp; Self-Care Rituale
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Verwöhnung bis in die Fingerspitzen. Entdecken Sie wertvolle Tipps für eine reichhaltige Handpflege-Routine, den Schutz vor UV-bedingter Hautalterung durch gezielten Sonnenschutz und die beruhigende Wirkung bewusster Self-Care. Denn elegante Hände spiegeln Ihre innere Ausstrahlung wider.
+                </p>
+                <Link
+                  to="/shop"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                >
+                  Pflegeprodukte entdecken
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-section-padding-lg bg-pure-white">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
