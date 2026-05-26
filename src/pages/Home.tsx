@@ -62,6 +62,118 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Video-Einblicke & Routinen */}
+      <section className="py-section-padding-lg bg-soft-shell border-b border-outline-variant/10">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="text-center mb-16">
+            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
+              Erfahrungen &amp; Einblicke
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+              Lernen Sie uns und unsere Behandlungen kennen
+            </h2>
+          </div>
+
+          <div className="space-y-20">
+            {/* Video 1: Wir sind Skineinfachschoen! Lerne uns kennen */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/W5CCNDCyFuw"
+                    title="Wir sind SKIN einfach schön! Lerne uns kennen"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Über Uns
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Wir sind SKIN einfach schön! Lerne uns kennen
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Willkommen in unserem Kosmetikinstitut in Osnabrück. Lernen Sie unser Team und unsere Philosophie für wissenschaftlich fundierte Hautpflege kennen. Wir begleiten Sie auf Ihrem Weg zu einer gesunden, strahlenden Haut – mit modernsten Technologien und individueller Betreuung in Wohlfühlatmosphäre.
+                </p>
+                <Link
+                  to="/team"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                >
+                  Unser Team treffen
+                </Link>
+              </div>
+            </div>
+
+            {/* Video 2: Wie sich die Haut positiv verändert */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6 lg:order-2">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/OLpqOJyt7I8"
+                    title="Wie sich die Haut positiv verändert"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 lg:order-1 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Hautgesundheit
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Wie sich die Haut positiv verändert
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Hautgesundheit ist eine langfristige Reise. In diesem Video erklären wir, wie sich Ihre Haut durch gezielte, kontinuierliche Behandlungen (von sanftem Microneedling bis hin zur regenerativen Wirkstoffkosmetik) über die Jahre hinweg positiv verändert. Kontinuität und eine fundierte Hautanalyse sind der Schlüssel zur dauerhaften Schönheit.
+                </p>
+                <Link
+                  to="/terminbuchung"
+                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 transition-all text-center"
+                >
+                  Beratungstermin buchen
+                </Link>
+              </div>
+            </div>
+
+            {/* Video 3: So läuft die dauerhafte Haarentfernung bei uns ab SKIN einfachschoen */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src="https://www.youtube-nocookie.com/embed/Qc7Ay8-dTiY"
+                    title="Ablauf der dauerhaften Haarentfernung"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+              <div className="lg:col-span-6 space-y-6">
+                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
+                  Behandlung im Fokus
+                </span>
+                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
+                  Ablauf der dauerhaften Haarentfernung
+                </h3>
+                <p className="font-sans text-base text-tertiary leading-relaxed">
+                  Störende Haare dauerhaft und schonend entfernen. Wir zeigen Ihnen Schritt für Schritt, wie eine professionelle Behandlung zur dauerhaften Haarentfernung mit modernster IPL-Technologie in unserem Studio abläuft – von der Beratung über den Schutz der Haut bis hin zum glatten Ergebnis. Schmerzfrei, sicher und effektiv.
+                </p>
+                <Link
+                  to="/leistungen/ipl"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                >
+                  Haarentfernung entdecken
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Value Propositions */}
       <section className="py-section-padding-lg bg-pure-white">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
@@ -231,118 +343,6 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
-          </div>
-        </div>
-      </section>
-
-      {/* Video-Einblicke & Routinen */}
-      <section className="py-section-padding-lg bg-pure-white border-t border-outline-variant/10">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="text-center mb-16">
-            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-              Erfahrungen &amp; Routinen
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-              Unsere Behandlungen im Video
-            </h2>
-          </div>
-
-          <div className="space-y-20">
-            {/* Video 1: JetPeel */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/W5CCNDCyFuw"
-                    title="Exklusive JetPeel Behandlungserfahrung"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-              <div className="lg:col-span-6 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Erfahrungsbericht
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Exklusive JetPeel Behandlungserfahrung
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Erleben Sie die revolutionäre berührungslose JetPeel-Technologie. Unsere Kundin teilt ihre persönlichen Eindrücke während der Behandlung – von der tiefenwirksamen Porenreinigung bis zum sofort sichtbaren Glow-Effekt. Wissenschaftlich fundierte Kosmetik, die man fühlen und sehen kann.
-                </p>
-                <Link
-                  to="/leistungen/jetpeel"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
-                >
-                  JetPeel entdecken
-                </Link>
-              </div>
-            </div>
-
-            {/* Video 2: Skin Change */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6 lg:order-2">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/OLpqOJyt7I8"
-                    title="Wie sich die Haut positiv verändert"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-              <div className="lg:col-span-6 lg:order-1 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Hautgesundheit
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Wie sich die Haut positiv verändert
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Hautgesundheit ist eine langfristige Reise. In diesem Video erklären wir, wie sich Ihre Haut durch gezielte, kontinuierliche Behandlungen (von sanftem Microneedling bis hin zur regenerativen Wirkstoffkosmetik) über die Jahre hinweg positiv verändert. Kontinuität und eine fundierte Hautanalyse sind der Schlüssel zur dauerhaften Schönheit.
-                </p>
-                <Link
-                  to="/terminbuchung"
-                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 transition-all text-center"
-                >
-                  Hautanalyse buchen
-                </Link>
-              </div>
-            </div>
-
-            {/* Video 3: Hand Care */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/Qc7Ay8-dTiY"
-                    title="Elegante Handpflege &amp; Self-Care Rituale"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
-              <div className="lg:col-span-6 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Pflegeroutinen
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Elegante Handpflege &amp; Self-Care Rituale
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Verwöhnung bis in die Fingerspitzen. Entdecken Sie wertvolle Tipps für eine reichhaltige Handpflege-Routine, den Schutz vor UV-bedingter Hautalterung durch gezielten Sonnenschutz und die beruhigende Wirkung bewusster Self-Care. Denn elegante Hände spiegeln Ihre innere Ausstrahlung wider.
-                </p>
-                <Link
-                  to="/shop"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
-                >
-                  Pflegeprodukte entdecken
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>
