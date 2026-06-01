@@ -67,8 +67,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary ${isActive
-                      ? 'text-primary border-b-2 border-primary pb-1'
+                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary nav-link-underline ${isActive
+                      ? 'text-primary active'
                       : 'text-tertiary'
                     }`}
                 >
@@ -127,7 +127,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       )}
 
       {/* Main Page Area */}
-      <main className="flex-1 pt-20">
+      <main key={location.pathname} className="flex-1 pt-20 animate-page-entrance">
         {children}
       </main>
 

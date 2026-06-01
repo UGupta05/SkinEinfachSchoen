@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 'lucide-react';
 import { TESTIMONIALS } from '../data/mockData';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export const Home: React.FC = () => {
   return (
@@ -19,45 +20,44 @@ export const Home: React.FC = () => {
 
         <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
           <div className="max-w-2xl">
-            <div className="mb-8 animate-fade-in-up" style={{ animationDelay: '0ms' }}>
-              <img
-                alt="SKIN einfach schön Logo"
-                className="h-28 md:h-36 object-contain"
-                src="/images/home/logo.png"
-              />
-            </div>
+            <ScrollReveal variant="fade-in-up" delay={100}>
+              <div className="mb-8">
+                <img
+                  alt="SKIN einfach schön Logo"
+                  className="h-28 md:h-36 object-contain"
+                  src="/images/home/logo.png"
+                />
+              </div>
+            </ScrollReveal>
             
-            <h1 
-              className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight animate-fade-in-up"
-              style={{ animationDelay: '100ms' }}
-            >
-              Wissenschaftliche Präzision für Ihre natürliche Schönheit.
-            </h1>
+            <ScrollReveal variant="fade-in-up" delay={250}>
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+                Wissenschaftliche Präzision für Ihre natürliche Schönheit.
+              </h1>
+            </ScrollReveal>
             
-            <p 
-              className="font-sans text-lg text-tertiary mb-10 leading-relaxed animate-fade-in-up"
-              style={{ animationDelay: '200ms' }}
-            >
-              Wir kombinieren modernste medizinische Kosmetik mit einem ganzheitlichen Wohlfühlkonzept. Erleben Sie Hautpflege auf einem neuen Level an Exzellenz.
-            </p>
+            <ScrollReveal variant="fade-in-up" delay={400}>
+              <p className="font-sans text-lg text-tertiary mb-10 leading-relaxed">
+                Wir kombinieren modernste medizinische Kosmetik mit einem ganzheitlichen Wohlfühlkonzept. Erleben Sie Hautpflege auf einem neuen Level an Exzellenz.
+              </p>
+            </ScrollReveal>
             
-            <div 
-              className="flex flex-wrap gap-4 animate-fade-in-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              <Link
-                to="/leistungen"
-                className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
-              >
-                Behandlung finden
-              </Link>
-              <Link
-                to="/terminbuchung"
-                className="border border-primary text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 transition-all text-center"
-              >
-                Beratungstermin
-              </Link>
-            </div>
+            <ScrollReveal variant="fade-in-up" delay={550}>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to="/leistungen"
+                  className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-[1.02] active:scale-95 transition-all text-center duration-300"
+                >
+                  Behandlung finden
+                </Link>
+                <Link
+                  to="/terminbuchung"
+                  className="border border-primary text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 hover:scale-[1.02] active:scale-95 transition-all text-center duration-300"
+                >
+                  Beratungstermin
+                </Link>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -65,20 +65,20 @@ export const Home: React.FC = () => {
       {/* Video-Einblicke & Routinen */}
       <section className="py-section-padding-lg bg-soft-shell border-b border-outline-variant/10">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="text-center mb-16">
+          <ScrollReveal variant="blur-in" className="text-center mb-16">
             <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
               Erfahrungen &amp; Einblicke
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
               Lernen Sie uns und unsere Behandlungen kennen
             </h2>
-          </div>
+          </ScrollReveal>
 
           <div className="space-y-20">
             {/* Video 1: Wir sind Skineinfachschoen! Lerne uns kennen */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+              <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
                   <iframe
                     className="absolute inset-0 w-full h-full"
                     src="https://www.youtube-nocookie.com/embed/W5CCNDCyFuw"
@@ -87,8 +87,8 @@ export const Home: React.FC = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-              </div>
-              <div className="lg:col-span-6 space-y-6">
+              </ScrollReveal>
+              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
                 <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
                   Über Uns
                 </span>
@@ -100,17 +100,17 @@ export const Home: React.FC = () => {
                 </p>
                 <Link
                   to="/team"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                 >
                   Unser Team treffen
                 </Link>
-              </div>
+              </ScrollReveal>
             </div>
 
             {/* Video 2: Wie sich die Haut positiv verändert */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6 lg:order-2">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 lg:order-2">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
                   <iframe
                     className="absolute inset-0 w-full h-full"
                     src="https://www.youtube-nocookie.com/embed/OLpqOJyt7I8"
@@ -119,8 +119,8 @@ export const Home: React.FC = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-              </div>
-              <div className="lg:col-span-6 lg:order-1 space-y-6">
+              </ScrollReveal>
+              <ScrollReveal variant="fade-in-left" className="lg:col-span-6 lg:order-1 space-y-6">
                 <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
                   Hautgesundheit
                 </span>
@@ -132,17 +132,17 @@ export const Home: React.FC = () => {
                 </p>
                 <Link
                   to="/terminbuchung"
-                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 transition-all text-center"
+                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                 >
                   Beratungstermin buchen
                 </Link>
-              </div>
+              </ScrollReveal>
             </div>
 
             {/* Video 3: So läuft die dauerhafte Haarentfernung bei uns ab SKIN einfachschoen */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10">
+              <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
+                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
                   <iframe
                     className="absolute inset-0 w-full h-full"
                     src="https://www.youtube-nocookie.com/embed/Qc7Ay8-dTiY"
@@ -151,8 +151,8 @@ export const Home: React.FC = () => {
                     allowFullScreen
                   ></iframe>
                 </div>
-              </div>
-              <div className="lg:col-span-6 space-y-6">
+              </ScrollReveal>
+              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
                 <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
                   Behandlung im Fokus
                 </span>
@@ -164,11 +164,11 @@ export const Home: React.FC = () => {
                 </p>
                 <Link
                   to="/leistungen/ipl"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 transition-all text-center"
+                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                 >
                   Haarentfernung entdecken
                 </Link>
-              </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export const Home: React.FC = () => {
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             
-            <div className="md:col-span-5 space-y-6">
+            <ScrollReveal variant="fade-in-left" className="md:col-span-5 space-y-6">
               <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
                 Expertise
               </span>
@@ -204,18 +204,18 @@ export const Home: React.FC = () => {
                   <span>Nachhaltige &amp; wirksame Wirkstoffkosmetik</span>
                 </li>
               </ul>
-            </div>
+            </ScrollReveal>
 
-            <div className="md:col-span-7 grid grid-cols-2 gap-4">
+            <ScrollReveal variant="fade-in-right" className="md:col-span-7 grid grid-cols-2 gap-4">
               <div className="space-y-4 pt-12">
                 <div className="aspect-[3/4] overflow-hidden rounded-lg">
                   <img
                     alt="Facial treatment close-up"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                     src="/images/home/treatment_closeup.png"
                   />
                 </div>
-                <div className="bg-soft-shell p-8 medical-glow">
+                <div className="bg-soft-shell p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
                   <h3 className="font-display text-3xl font-bold text-primary mb-2">98%</h3>
                   <p className="font-display text-2xs font-bold text-tertiary uppercase tracking-wider">
                     Zufriedene Kunden
@@ -224,7 +224,7 @@ export const Home: React.FC = () => {
               </div>
               
               <div className="space-y-4">
-                <div className="bg-primary text-pure-white p-8 medical-glow">
+                <div className="bg-primary text-pure-white p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
                   <h3 className="font-display text-3xl font-bold mb-2">15+</h3>
                   <p className="font-display text-2xs font-bold uppercase tracking-wider">
                     Jahre Erfahrung
@@ -233,12 +233,12 @@ export const Home: React.FC = () => {
                 <div className="aspect-[3/4] overflow-hidden rounded-lg">
                   <img
                     alt="Modern medical clinic lobby"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                     src="/images/home/clinic_lobby.png"
                   />
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
           </div>
         </div>
@@ -247,20 +247,20 @@ export const Home: React.FC = () => {
       {/* Services Bento Grid */}
       <section className="py-section-padding-lg bg-soft-shell">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="text-center mb-16">
+          <ScrollReveal variant="blur-in" className="text-center mb-16">
             <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
               Unsere Leistungen
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
               Präzision für Ihre Haut
             </h2>
-          </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-gutter">
             {/* Bento Card 1: Anti Aging */}
-            <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden medical-glow rounded-lg min-h-[400px]">
+            <ScrollReveal variant="fade-in-up" delay={0} className="md:col-span-2 md:row-span-2 relative group overflow-hidden medical-glow rounded-lg min-h-[400px]">
               <img
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 alt="Anti-Aging equipment"
                 src="/images/home/anti_aging.png"
               />
@@ -282,10 +282,10 @@ export const Home: React.FC = () => {
                   Details entdecken <span className="transition-transform group-hover/link:translate-x-2">→</span>
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Bento Card 2: Problemhaut */}
-            <div className="md:col-span-2 bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg">
+            <ScrollReveal variant="fade-in-up" delay={150} className="md:col-span-2 bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
               <div>
                 <div className="w-12 h-12 bg-primary-fixed rounded-lg flex items-center justify-center text-primary mb-6">
                   <ShieldCheck className="w-6 h-6" />
@@ -303,10 +303,10 @@ export const Home: React.FC = () => {
               >
                 Mehr erfahren <span>+</span>
               </Link>
-            </div>
+            </ScrollReveal>
 
             {/* Bento Card 3: Manuelle Kosmetik */}
-            <div className="bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg">
+            <ScrollReveal variant="fade-in-up" delay={300} className="bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
               <div>
                 <Sparkles className="text-sky-accent w-8 h-8 mb-6" />
                 <h3 className="font-display text-lg font-bold mb-3">
@@ -322,10 +322,10 @@ export const Home: React.FC = () => {
               >
                 Explore <span>↗</span>
               </Link>
-            </div>
+            </ScrollReveal>
 
             {/* Bento Card 4: Home Care */}
-            <div className="bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg">
+            <ScrollReveal variant="fade-in-up" delay={450} className="bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
               <div>
                 <Trophy className="text-primary w-8 h-8 mb-6" />
                 <h3 className="font-display text-lg font-bold text-primary mb-3">
@@ -341,7 +341,7 @@ export const Home: React.FC = () => {
               >
                 Zum Shop <span>→</span>
               </Link>
-            </div>
+            </ScrollReveal>
 
           </div>
         </div>
@@ -351,21 +351,23 @@ export const Home: React.FC = () => {
       <section className="py-section-padding-lg bg-pure-white">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
           <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-            <div className="max-w-xl">
+            <ScrollReveal variant="blur-in" className="max-w-xl">
               <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
                 Stimmen
               </span>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
                 Was unsere Kunden sagen
               </h2>
-            </div>
+            </ScrollReveal>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
             {TESTIMONIALS.map((t, idx) => (
-              <div
+              <ScrollReveal
                 key={t.name}
-                className={`p-10 medical-glow rounded-lg flex flex-col justify-between ${
+                variant="fade-in-up"
+                delay={idx * 150}
+                className={`p-10 medical-glow rounded-lg flex flex-col justify-between transition-transform duration-500 hover:scale-[1.02] ${
                   idx === 1 ? 'bg-primary text-pure-white' : 'bg-soft-shell text-primary'
                 }`}
               >
@@ -391,7 +393,7 @@ export const Home: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -411,7 +413,7 @@ export const Home: React.FC = () => {
 
       {/* CTA Section */}
       <section className="py-section-padding-lg relative overflow-hidden bg-slate-muted">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter text-center relative z-10">
+        <ScrollReveal variant="blur-in" className="max-w-container-max mx-auto px-margin-mobile md:px-gutter text-center relative z-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-pure-white mb-8">
             Bereit für Ihre Hautveränderung?
           </h2>
@@ -421,12 +423,12 @@ export const Home: React.FC = () => {
           <div className="flex justify-center">
             <Link
               to="/terminbuchung"
-              className="bg-pure-white text-primary px-12 py-5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:bg-opacity-90 transition-all text-center"
+              className="bg-pure-white text-primary px-12 py-5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
             >
               Online Termin wählen
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
     </div>
   );

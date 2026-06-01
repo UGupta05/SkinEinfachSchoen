@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Clock, Send, Check, Loader2 } from 'lucide-react';
+import { ScrollReveal } from '../components/ScrollReveal';
 
 export const Kontakt: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ export const Kontakt: React.FC = () => {
       {/* Hero Section */}
       <section className="relative pt-16 pb-24 px-margin-mobile md:px-gutter max-w-container-max mx-auto overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-          <div className="md:col-span-7 z-10">
+          <ScrollReveal variant="fade-in-left" className="md:col-span-7 z-10">
             <span className="font-display text-xs font-bold text-slate-muted mb-4 block uppercase tracking-widest">
               Wir freuen uns auf Sie
             </span>
@@ -63,15 +64,15 @@ export const Kontakt: React.FC = () => {
             <p className="font-sans text-lg text-tertiary max-w-2xl leading-relaxed">
               Haben Sie Fragen zu unseren Behandlungen oder möchten Sie eine individuelle Beratung? Unser Expertenteam in Osnabrück steht Ihnen gerne zur Verfügung.
             </p>
-          </div>
-          <div className="md:col-span-5 relative h-[300px] md:h-[400px]">
+          </ScrollReveal>
+          <ScrollReveal variant="fade-in-right" className="md:col-span-5 relative h-[300px] md:h-[400px]">
             <img
               alt="SKIN Osnabrück Entrance"
-              className="w-full h-full object-cover rounded-lg medical-glow border border-outline-variant/15"
+              className="w-full h-full object-cover rounded-lg medical-glow border border-outline-variant/15 transition-transform duration-500 hover:scale-[1.01]"
               src="/images/kontakt/clinic_entrance.png"
             />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -80,7 +81,7 @@ export const Kontakt: React.FC = () => {
         <div className="px-margin-mobile md:px-gutter max-w-container-max mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Form Canvas */}
-            <div className="bg-pure-white p-8 md:p-12 medical-glow rounded-lg border border-outline-variant/10">
+            <ScrollReveal variant="fade-in-left" className="bg-pure-white p-8 md:p-12 medical-glow rounded-lg border border-outline-variant/10">
               <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-primary">
                 Senden Sie uns eine Nachricht
               </h2>
@@ -221,10 +222,10 @@ export const Kontakt: React.FC = () => {
                   )}
                 </button>
               </form>
-            </div>
+            </ScrollReveal>
 
             {/* Map Canvas */}
-            <div className="space-y-12">
+            <ScrollReveal variant="fade-in-right" className="space-y-12">
               <div className="h-[500px] w-full bg-surface-container overflow-hidden rounded-lg border border-outline-variant/10 medical-glow relative group">
                 <iframe
                   title="SKIN Osnabrück Standort"
@@ -249,7 +250,7 @@ export const Kontakt: React.FC = () => {
                   Sie finden uns in der Nähe des Westerberg-Viertels. Kostenfreie Parkmöglichkeiten stehen unseren Patienten während der Behandlung direkt auf dem Hof zur Verfügung. Die Bushaltestelle &quot;Lotter Straße&quot; befindet sich nur 50 Meter entfernt.
                 </p>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -258,7 +259,7 @@ export const Kontakt: React.FC = () => {
       <section className="py-24 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Info Card 1: Address */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg flex flex-col justify-between">
+          <ScrollReveal variant="fade-in-up" delay={0} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg flex flex-col justify-between hover:scale-[1.02] duration-300">
             <div>
               <MapPin className="text-primary w-10 h-10 mb-6" />
               <h3 className="font-display text-xl font-bold mb-4 text-primary">Anschrift</h3>
@@ -276,10 +277,10 @@ export const Kontakt: React.FC = () => {
             >
               Route planen
             </a>
-          </div>
+          </ScrollReveal>
 
           {/* Info Card 2: Contact */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
+          <ScrollReveal variant="fade-in-up" delay={150} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg hover:scale-[1.02] duration-300">
             <Phone className="text-primary w-10 h-10 mb-6" />
             <h3 className="font-display text-xl font-bold mb-4 text-primary">Direktkontakt</h3>
             <div className="space-y-4">
@@ -296,10 +297,10 @@ export const Kontakt: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Info Card 3: Hours */}
-          <div className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg">
+          <ScrollReveal variant="fade-in-up" delay={300} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg hover:scale-[1.02] duration-300">
             <Clock className="text-primary w-10 h-10 mb-6" />
             <h3 className="font-display text-xl font-bold mb-4 text-primary">Öffnungszeiten</h3>
             <ul className="space-y-3 text-tertiary font-sans text-sm">
@@ -317,7 +318,7 @@ export const Kontakt: React.FC = () => {
               </li>
               <li className="pt-4 text-xs italic text-slate-muted">Flexible Termine für Berufstätige möglich.</li>
             </ul>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>
