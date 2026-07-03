@@ -34,7 +34,7 @@ export default function TeamPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="fade-in-right" className="relative">
-            <div className="aspect-[4/5] bg-soft-shell overflow-hidden">
+            <div className="aspect-[3/2] bg-soft-shell overflow-hidden rounded-lg">
               <img
                 alt="Sofia Khaliq-Natawan und Isabel Duwendag in der Praxis"
                 className="w-full h-full object-cover"
