@@ -1,55 +1,10 @@
 "use client";
 
-import React, { useEffect } from 'react';
-
-declare global {
-  interface Window {
-    planity: any;
-  }
-}
+import React from 'react';
 
 export const Terminbuchung: React.FC = () => {
-  useEffect(() => {
-    const container = document.getElementById('planity-booking-widget');
-    if (!container) return;
-
-    window.planity = {
-      key: process.env.NEXT_PUBLIC_PLANITY_API_KEY || '-O6_yVEoetmNMQ3ly9xo',
-      primaryColor: '#416373',
-      options: {
-        countryCode: 'DE'
-      },
-      container: container,
-      accountContainer: container,
-      appointmentContainer: container,
-      giftVoucherContainer: container,
-      onlineShopContainer: container
-    };
-
-    // Load Planity polyfills and app script dynamically
-    const polyfillsScript = document.createElement('script');
-    polyfillsScript.src = 'https://d2skjte8udjqxw.cloudfront.net/widget/production/2/polyfills.latest.js';
-    polyfillsScript.async = true;
-    document.body.appendChild(polyfillsScript);
-
-    const appScript = document.createElement('script');
-    appScript.src = 'https://d2skjte8udjqxw.cloudfront.net/widget/production/2/app.latest.js';
-    appScript.async = true;
-    document.body.appendChild(appScript);
-
-    return () => {
-      // Cleanup scripts on unmount to avoid script duplication
-      if (document.body.contains(polyfillsScript)) {
-        document.body.removeChild(polyfillsScript);
-      }
-      if (document.body.contains(appScript)) {
-        document.body.removeChild(appScript);
-      }
-      try {
-        delete window.planity;
-      } catch (e) {}
-    };
-  }, []);
+  const apiKey = process.env.NEXT_PUBLIC_PLANITY_API_KEY || '-O6_yVEoetmNMQ3ly9xo';
+  const iframeSrc = `/planity-widget.html?key=${encodeURIComponent(apiKey)}`;
 
   return (
     <div className="bg-background text-on-surface font-sans antialiased pt-16 pb-28 lg:pb-16 min-h-[90vh]">
@@ -69,10 +24,11 @@ export const Terminbuchung: React.FC = () => {
 
         {/* Planity Widget Container */}
         <div className="max-w-5xl mx-auto bg-pure-white border border-outline-variant/10 rounded-2xl shadow-sm overflow-hidden medical-glow">
-          <div 
-            id="planity-booking-widget" 
-            className="w-full min-h-[750px] md:min-h-[850px]"
-          ></div>
+          <iframe 
+            src={iframeSrc}
+            className="w-full min-h-[750px] md:min-h-[850px] border-none"
+            title="Planity Terminbuchung"
+          />
         </div>
       </div>
     </div>
