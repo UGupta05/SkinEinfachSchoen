@@ -13,7 +13,7 @@ export default function Home() {
           <img
             alt="SKIN Clinic Background"
             className="w-full h-full object-cover opacity-80"
-            src="/images/home/home_hero.png"
+            src="/images/home/home_hero.jpg"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-pure-white via-pure-white/40 to-transparent"></div>
         </div>
