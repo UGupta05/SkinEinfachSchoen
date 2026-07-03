@@ -38,7 +38,7 @@ export default function TeamPage() {
               <img
                 alt="Sofia Khaliq-Natawan und Isabel Duwendag in der Praxis"
                 className="w-full h-full object-cover"
-                src="/images/team/team_hero.png"
+                src="/images/team/team_hero.jpg"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-pure-white p-8 medical-glow hidden md:block max-w-xs transition-transform duration-500 hover:scale-[1.02]">
