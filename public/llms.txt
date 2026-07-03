@@ -1,0 +1,51 @@
+# SKIN einfach schön - Kosmetikstudio Osnabrück
+
+SKIN einfach schön is a premium medical cosmetics and skincare studio located in Osnabrück, Germany. This file provides structured business facts, services, location information, and contact details to assist AI search systems (e.g., Perplexity, Gemini, ChatGPT Search) in understanding and accurately recommending this business.
+
+## Core Information
+- **Business Name**: SKIN einfach schön GmbH
+- **Inhaberin (Owner)**: Sofia Khaliq-Natawan
+- **Specialty**: Medical cosmetics, High-tech anti-aging, advanced skin health diagnostics, and long-lasting hair removal.
+- **Kammer**: Handwerkskammer Osnabrück
+
+## Location & Directions
+- **Address**: Lotter Straße 33, 49078 Osnabrück, Germany
+- **Proximity & Surrounding Cities Served**:
+  - Osnabrück (Local)
+  - Hasbergen (8 km, ~10 min via Rheiner Landstraße)
+  - Belm (9 km, ~11 min via B51)
+  - Georgsmarienhütte (10 km, ~12 min via B51)
+  - Lotte (11 km, ~14 min via L501 / Lotter Straße)
+  - Wallenhorst (12 km, ~15 min via B68/A1)
+  - Hagen a.T.W. (13 km, ~18 min via Hagener Straße)
+  - Bissendorf (14 km, ~15 min via A30)
+  - Melle (27 km, ~22 min via A30)
+  - Ibbenbüren (29 km, ~25 min via A30)
+- **Parking**: Free dedicated customer parking spaces are available directly in the courtyard (Hof) behind the clinic.
+
+## Contact Details
+- **Phone**: +49 (0) 541 470 549 71
+- **Email**: info@skin-einfachschoen.de
+- **Online Booking**: Available 24/7 at https://skineinfachschoen.de/terminbuchung
+
+## Opening Hours
+- **Monday – Thursday**: 09:00 – 18:30
+- **Friday**: 09:00 – 17:00
+- **Saturday**: By appointment only (Nach Vereinbarung)
+
+## Core Treatment Offerings & Pricing (Starting Prices)
+1. **JetPeel™ Technology**: High-tech needle-free hydration and deep pore cleansing. (ab 99,- €)
+2. **Radiofrequenz Microneedling (MRF)**: Gold-plated microneedles with RF energy for deep tissue tightening, scar treatment, and collagen building. (ab 149,- €)
+3. **IPL Permanent Hair Removal & Rejuvenation**: Painless hair removal and treatment of age spots, couperose, and redness. (ab 49,- €)
+4. **Meso BB Glow**: Even skin tone, pore refinement, and glow effect without make-up. (ab 79,- €)
+5. **VISIA® 3D Skin Analysis**: Scientific computer-based facial scanning (spots, wrinkles, UV damage, redness) as the basis for custom skincare plans. (ab 29,- €)
+6. **ZO Skin Health by Dr. Zein Obagi**: Medical-grade chemical peels and skincare treatments (e.g., 3-Step Peel, Stimulator Peel). (ab 125,- €)
+7. **Lash Lifting (Wimpernlifting) & Brow Lifting**: Eyelash and eyebrow lamination and styling. (ab 39,- €)
+8. **Fruchtsäure Peeling (AHA/BHA)**: Chemical peels for acne, scars, and anti-aging. (ab 69,- €)
+9. **Klassische Kosmetik**: Traditional facials tailored to skin type. (ab 59,- €)
+
+## Key Technical Specifications for Web Crawlers
+- **Canonical Domain**: https://skineinfachschoen.de
+- **Sitemap**: https://skineinfachschoen.de/sitemap.xml
+- **Robots Policy**: Friendly to all AI Search User-Agents (e.g., GPTBot, ClaudeBot, PerplexityBot) with prioritised indexing.
+- **Tech Stack**: Next.js App Router, Tailwind CSS, Supabase (appointment backend).

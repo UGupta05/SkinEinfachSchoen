@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 
 interface LayoutProps {
@@ -9,8 +12,8 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
-  const isAdminPath = location.pathname.startsWith('/admin');
+  const pathname = usePathname();
+  const isAdminPath = pathname.startsWith('/admin');
 
   useEffect(() => {
     if (isAdminPath) return;
@@ -27,7 +30,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileMenuOpen(false);
-  }, [location.pathname, isAdminPath]);
+  }, [pathname, isAdminPath]);
 
   if (isAdminPath) {
     return <div className="min-h-screen bg-background text-on-surface font-sans">{children}</div>;
@@ -51,7 +54,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           }`}
       >
         <nav className="flex justify-between items-center h-full px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full">
-          <Link to="/" className="flex items-center">
+          <Link href="/" className="flex items-center">
             <img
               src="/images/home/logo.png"
               alt="SKIN einfach schön"
@@ -62,11 +65,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
+              const isActive = pathname === link.path;
               return (
                 <Link
                   key={link.name}
-                  to={link.path}
+                  href={link.path}
                   className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary nav-link-underline ${isActive
                       ? 'text-primary active'
                       : 'text-tertiary'
@@ -79,12 +82,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link to="/shop" className="text-primary hover:opacity-80 transition-opacity">
+            <Link href="/shop" className="text-primary hover:opacity-80 transition-opacity">
               <ShoppingBag className="w-6 h-6 stroke-[1.5]" />
             </Link>
 
             <Link
-              to="/terminbuchung"
+              href="/terminbuchung"
               className="hidden md:block bg-slate-muted text-pure-white px-6 py-3 font-display text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all"
             >
               Terminbuchung
@@ -108,7 +111,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             {navLinks.map((link) => (
               <Link
                 key={link.name}
-                to={link.path}
+                href={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className="font-display text-lg font-bold uppercase tracking-wider text-primary border-b border-outline-variant/10 pb-2"
               >
@@ -116,7 +119,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
             ))}
             <Link
-              to="/terminbuchung"
+              href="/terminbuchung"
               onClick={() => setMobileMenuOpen(false)}
               className="bg-primary text-pure-white py-4 text-center font-display text-xs font-bold uppercase tracking-wider hover:opacity-95 transition-all"
             >
@@ -127,7 +130,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       )}
 
       {/* Main Page Area */}
-      <main key={location.pathname} className="flex-1 pt-20 animate-page-entrance">
+      <main key={pathname} className="flex-1 pt-20 animate-page-entrance">
         {children}
       </main>
 
@@ -183,16 +186,16 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Navigation</h4>
             <ul className="space-y-4">
               <li>
-                <Link to="/leistungen" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Leistungen</Link>
+                <Link href="/leistungen" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Leistungen</Link>
               </li>
               <li>
-                <Link to="/medical-kosmetik-zo" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Medical Kosmetik ZO</Link>
+                <Link href="/medical-kosmetik-zo" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Medical Kosmetik ZO</Link>
               </li>
               <li>
-                <Link to="/team" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Team</Link>
+                <Link href="/team" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Team</Link>
               </li>
               <li>
-                <Link to="/kontakt" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Kontakt</Link>
+                <Link href="/kontakt" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Kontakt</Link>
               </li>
             </ul>
           </div>
@@ -201,10 +204,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Rechtliches</h4>
             <ul className="space-y-4">
               <li>
-                <Link to="/impressum" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Impressum</Link>
+                <Link href="/impressum" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Impressum</Link>
               </li>
               <li>
-                <Link to="/datenschutz" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Datenschutz</Link>
+                <Link href="/datenschutz" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Datenschutz</Link>
               </li>
             </ul>
           </div>

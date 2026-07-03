@@ -1,6 +1,6 @@
 import React from 'react';
 import { Shield, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 export interface TreatmentTemplateProps {
   readonly title: string;
@@ -68,13 +68,13 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
 
           <div className="pt-8 flex flex-wrap gap-4">
             <Link
-              to="/terminbuchung"
+              href="/terminbuchung"
               className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-all text-center medical-glow"
             >
               Termin Buchen
             </Link>
             <Link
-              to="/leistungen"
+              href="/leistungen"
               className="border border-outline text-tertiary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-soft-shell transition-all text-center"
             >
               Alle Leistungen

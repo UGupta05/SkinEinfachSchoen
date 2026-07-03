@@ -1,0 +1,156 @@
+export interface TreatmentDetails {
+  readonly title: string;
+  readonly category: string;
+  readonly description: string;
+  readonly points: readonly string[];
+  readonly duration: string;
+  readonly price: string;
+  readonly image: string;
+}
+
+export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
+  "jetpeel": {
+    title: "JetPeel™ Technologie",
+    category: "High-Tech Hydration & Tiefenreinigung",
+    description: "Das originale JetPeel™-Verfahren schleust Wirkstoffe wie Vitamine und Hyaluronsäure schmerzfrei und berührungsfrei tief in die Haut ein. Durch Überschallgeschwindigkeit entsteht ein feiner Aerosolstrahl, der abgestorbene Hautschüppchen sanft entfernt und die Zellen porentief mit Feuchtigkeit und Nährstoffen versorgt. Sofort sichtbarer Glow und Frischeeffekt.",
+    points: [
+      "Nadelfreie & schmerzfreie Behandlung",
+      "Tiefenwirksame Feuchtigkeitsversorgung",
+      "Ideal bei Fältchen & müder Haut",
+      "Keine Ausfallzeiten (Sofort-Effekt)",
+      "Lymphdrainage & Tiefenreinigung",
+      "Regt Mikrozirkulation & Kollagenbildung an"
+    ],
+    duration: "ca. 60 - 90 Minuten",
+    price: "99,- €",
+    image: "/images/treatments/jetpeel.png"
+  },
+  "ipl": {
+    title: "IPL Haarentfernung & Hautverjüngung",
+    category: "Lichttherapie",
+    description: "Unsere modernste IPL-Technologie (Intense Pulsed Light) bietet eine schonende, langanhaltende und sichere Lösung zur Reduzierung unerwünschter Haare im Gesicht und am Körper. Gleichzeitig eignet sich IPL hervorragend zur Verjüngung des Hautbildes, Reduzierung von Altersflecken, Couperose und vergrößerten Poren.",
+    points: [
+      "Dauerhafte Haarentfernung",
+      "Schmerzarme & hautschonende Lichtblitze",
+      "Gleichmäßige Reduktion von Pigmentflecken",
+      "Behandlung von Couperose & Rötungen",
+      "Individuell einstellbare Wellenlängen",
+      "Klinisch erprobte Sicherheit"
+    ],
+    duration: "ca. 30 - 75 Minuten",
+    price: "49,- €",
+    image: "/images/treatments/ipl.png"
+  },
+  "meso-bb-glow": {
+    title: "Meso BB Glow",
+    category: "Teint & Glow",
+    description: "Die Meso BB Glow Behandlung verleiht Ihrer Haut einen ebenmäßigen, strahlenden Teint ganz ohne tägliches Make-up. Durch ein sanftes Microneedling-Verfahren werden natürliche, feuchtigkeitsspendende Wirkstoffe zusammen mit feinsten Farbpigmenten oberflächlich in die Haut eingearbeitet. Unregelmäßigkeiten, Rötungen und Augenringe werden optisch kaschiert.",
+    points: [
+      "Ebenmäßiger Teint & seidiges Hautbild",
+      "Kaschiert Augenringe & Rötungen",
+      "Feuchtigkeits-Kick & langanhaltender Glow",
+      "Schmerzfreies Einarbeiten von Pigmenten",
+      "Porenverfeinernd & glättend",
+      "Sofortiger No-Make-Up-Look"
+    ],
+    duration: "ca. 60 Minuten",
+    price: "79,- €",
+    image: "/images/treatments/meso_bb_glow.png"
+  },
+  "microneedling": {
+    title: "Radiofrequenz Microneedling (MRF)",
+    category: "Hautstraffung",
+    description: "Das Radiofrequenz-Microneedling (MRF) gilt als die absolute High-Tech-Waffe gegen Falten, Konturverlust und Aknenarben. Sterile vergoldete Mikronadeln dringen präzise in die tiefe Dermis ein und geben an der Nadelspitze einen gezielten Wärmeimpuls ab. Dadurch zieht sich das Gewebe sofort zusammen (Shrinking-Effekt) und setzt den stärksten natürlichen Selbstheilungs- und Kollagenbildungsprozess in Gang.",
+    points: [
+      "Maximaler Anti-Aging Straffungseffekt",
+      "Linderung von Aknenarben & Dehnungsstreifen",
+      "Porenverfeinerung & verbesserte Spannkraft",
+      "Präzise computergesteuerte Eindringtiefe",
+      "Kombination aus Nadelreiz & Wärmeenergie",
+      "Langanhaltende Resultate über Monate"
+    ],
+    duration: "ca. 75 - 90 Minuten",
+    price: "149,- €",
+    image: "/images/treatments/microneedling.png"
+  },
+  "brow-lift": {
+    title: "Brow Lift & Styling",
+    category: "Augenbrauen",
+    description: "Bringen Sie Ihre Augenbrauen in Bestform. Mit unserem professionellen Brow Lifting werden die feinen Härchen dauerhaft aufgerichtet und fixiert. Lücken werden perfekt kaschiert und Ihre Brauen wirken deutlich voller, dichter und perfekt gestylt – ganz ohne Bürstchen oder Gel für bis zu 6 Wochen.",
+    points: [
+      "Voller wirkende Augenbrauen",
+      "Fixiert störrische Härchen",
+      "Kaschiert optisch kleine Lücken",
+      "Hält bis zu 6 Wochen",
+      "Inklusive Formen & Färben",
+      "Natürlicher & frischer Look"
+    ],
+    duration: "ca. 45 Minuten",
+    price: "39,- €",
+    image: "/images/treatments/brow_lift.png"
+  },
+  "wimpernlifting": {
+    title: "Wimpernlifting (Lash Lift)",
+    category: "Wimpern",
+    description: "Ein atemberaubender Augenaufschlag ganz ohne Mascara oder Zange. Das Wimpernlifting formt und biegt Ihre eigenen Naturwimpern dauerhaft nach oben. Durch die anschließende Färbung und Tiefenpflege wirken Ihre Wimpern optisch deutlich länger, dichter und perfekt geschwungen.",
+    points: [
+      "Perfekt geschwungene Naturwimpern",
+      "Optische Wimpernverlängerung",
+      "Keine Mascara oder Wimpernzange nötig",
+      "Haltbarkeit ca. 6 - 8 Wochen",
+      "Schonende Keratin-Tiefenpflege inklusive",
+      "Natürlich schöner Augenaufschlag"
+    ],
+    duration: "ca. 50 Minuten",
+    price: "45,- €",
+    image: "/images/treatments/wimpernlifting.png"
+  },
+  "klassische-kosmetik": {
+    title: "Klassische Kosmetik & Gesichtspflege",
+    category: "Gesichtsbehandlungen",
+    description: "Gönnen Sie Ihrer Haut eine Auszeit. Unsere klassischen Gesichtsbehandlungen richten sich exakt nach Ihrem aktuellen Hautbedürfnis. Jedes Treatment beinhaltet eine gründliche Hautreinigung, sanftes Peeling, intensives Ausreinigen, eine entspannende Gesichtsmassage und eine pflegende Abschlusspflege.",
+    points: [
+      "Individuelle Hautreinigung",
+      "Erholungs- & Wellness-Effekt",
+      "Befreit die Haut von Unreinheiten",
+      "Hochwertige Masken & Wirkstoffe",
+      "Entspannende Nacken- & Gesichtsmassage",
+      "Für jeden Hauttyp geeignet"
+    ],
+    duration: "ca. 60 - 90 Minuten",
+    price: "59,- €",
+    image: "/images/treatments/cosmetics.png"
+  },
+  "fruchtsaeure-peeling": {
+    title: "Fruchtsäure Peeling (AHA)",
+    category: "Hauterneuerung",
+    description: "Medizinisch kontrollierte Fruchtsäure-Peelings (AHA / BHA) helfen der Haut, sich schneller zu regenerieren und verhornte Zellen abzustoßen. Die Behandlung verfeinert die Poren, mildert Pigmentstörungen, regt die Kollagenproduktion an und reduziert Fältchen sowie Unreinheiten spürbar. Für einen strahlenden Teint.",
+    points: [
+      "Effektive Porenverfeinerung",
+      "Mildert Pigment- & Altersflecken",
+      "Glättet feine Linien & Fältchen",
+      "Unterstützt die Zellerneuerung",
+      "Reduziert Unreinheiten & Akne-Herde",
+      "Verleiht einen frischen Glow"
+    ],
+    duration: "ca. 45 - 60 Minuten",
+    price: "69,- €",
+    image: "/images/treatments/peeling.png"
+  },
+  "visia": {
+    title: "VISIA® 3D Hautanalyse",
+    category: "Diagnose & Hautanalyse",
+    description: "Mit der computergestützten VISIA® 3D-Hautanalyse blicken wir tief unter Ihre Hautoberfläche. Das System erfasst Flecken, Falten, Poren, UV-Schäden, rote Bereiche und bakterielle Rückstände. Auf dieser präzisen Basis erstellen wir Ihren maßgeschneiderten Behandlungs- und Heimpflegeplan – wissenschaftlich fundiert.",
+    points: [
+      "Detaillierte Erfassung von UV-Schäden",
+      "Poren- & Faltenanalyse in 3D",
+      "Messung der bakteriellen Belastung",
+      "Wissenschaftliche Grundlage für Heimpflege",
+      "Visualisierung von Fortschritten",
+      "Absolut schmerzfreie & schnelle Analyse"
+    ],
+    duration: "ca. 30 Minuten",
+    price: "29,- €",
+    image: "/images/treatments/visia.png"
+  }
+};
