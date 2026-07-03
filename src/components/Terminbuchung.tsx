@@ -14,7 +14,7 @@ export const Terminbuchung: React.FC = () => {
     if (!container) return;
 
     window.planity = {
-      key: '-O6_yVEoetmNMQ3ly9xo',
+      key: process.env.NEXT_PUBLIC_PLANITY_API_KEY || '-O6_yVEoetmNMQ3ly9xo',
       primaryColor: '#416373',
       options: {
         countryCode: 'DE'
