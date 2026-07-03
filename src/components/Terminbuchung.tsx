@@ -20,11 +20,7 @@ export const Terminbuchung: React.FC = () => {
       options: {
         countryCode: 'DE'
       },
-      container: container,
-      accountContainer: container,
-      appointmentContainer: container,
-      giftVoucherContainer: container,
-      onlineShopContainer: container
+      container: container
     };
 
     // Load polyfills with cache buster to force script re-evaluation on mount
