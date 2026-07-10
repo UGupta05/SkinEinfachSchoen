@@ -56,20 +56,12 @@ export const TREATMENTS: readonly TreatmentItem[] = [
     description: "Die ultimative Anti-Aging Waffe. Kombiniert Microneedling mit Radiofrequenz-Energie für maximale Kollagenstimulation und Hautstraffung."
   },
   {
-    id: "brow",
-    name: "Brow Lift",
-    category: "Augen & Brauen",
-    icon: "flare",
-    link: "/leistungen/brow-lift",
-    description: "Perfekt geformte Brauen für einen wachen, frischen Blick – langanhaltend und natürlich."
-  },
-  {
-    id: "wimpern",
-    name: "Wimpernlifting",
-    category: "Augen & Wimpern",
-    icon: "visibility",
-    link: "/leistungen/wimpernlifting",
-    description: "Professional Eyelash Extension und Lifting für atemberaubende Augenblicke jeden Tag."
+    id: "dermaneedling",
+    name: "Microneedling / Dermaneedling",
+    category: "Hauterneuerung & Kollagenaufbau",
+    icon: "spa",
+    link: "/leistungen/dermaneedling",
+    description: "Klassisches Microneedling (Dermaneedling) zur gezielten Behandlung von Narben, Fältchen und Porenverfeinerung."
   },
   {
     id: "meso",

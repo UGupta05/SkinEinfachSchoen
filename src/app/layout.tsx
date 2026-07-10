@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s | SKIN einfach schön'
   },
   description: 'Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health. Wissenschaftliche Präzision für Ihre Haut.',
-  keywords: ['Kosmetikstudio', 'Osnabrück', 'JetPeel', 'IPL Haarentfernung', 'Microneedling', 'ZO Skin Health', 'Wimpernlifting', 'Brow Lift', 'Hautanalyse'],
+  keywords: ['Kosmetikstudio', 'Osnabrück', 'JetPeel', 'IPL Haarentfernung', 'Microneedling', 'Dermaneedling', 'ZO Skin Health', 'Hautanalyse', 'Orthomolekulare Medizin', 'Zellgesundheit'],
   icons: {
     icon: '/favicon.svg',
   },

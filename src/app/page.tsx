@@ -3,56 +3,82 @@ import Link from 'next/link';
 import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 'lucide-react';
 import { TESTIMONIALS } from '../data/mockData';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { FaqAccordion } from '../components/FaqAccordion';
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "SKIN einfach schön",
+    "image": "https://skin-einfachschoen.de/images/home/logo.png",
+    "description": "Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health. Wissenschaftliche Präzision für Ihre Haut.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Lotter Straße 33",
+      "addressLocality": "Osnabrück",
+      "postalCode": "49078",
+      "addressCountry": "DE"
+    },
+    "telephone": "+4954147054971",
+    "priceRange": "$$",
+    "url": "https://skin-einfachschoen.de",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ]
+  };
+
   return (
     <div className="overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             alt="SKIN Clinic Background"
-            className="w-full h-full object-cover opacity-80"
-            src="/images/home/home_hero.jpg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-pure-white via-pure-white/40 to-transparent"></div>
+            className="w-full h-full object-cover"
+            src="/images/home/home_hero_new_3.jpg"
+          />          
         </div>
 
         <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
           <div className="max-w-2xl">
             <ScrollReveal variant="fade-in-up" delay={100}>
-              <div className="mb-8">
-                <img
-                  alt="SKIN einfach schön Logo"
-                  className="h-28 md:h-36 object-contain"
-                  src="/images/home/logo.png"
-                />
-              </div>
-            </ScrollReveal>
-            
-            <ScrollReveal variant="fade-in-up" delay={250}>
-              <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+              <h1 
+                className="font-display text-4xl md:text-5xl font-bold text-background mb-6 leading-tight"
+                style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)' }}
+              >
                 Wissenschaftliche Präzision für Ihre natürliche Schönheit.
               </h1>
             </ScrollReveal>
             
-            <ScrollReveal variant="fade-in-up" delay={400}>
-              <p className="font-sans text-lg text-tertiary mb-10 leading-relaxed">
+            <ScrollReveal variant="fade-in-up" delay={250}>
+              <p 
+                className="font-sans text-lg text-background mb-10 leading-relaxed"
+                style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15)' }}
+              >
                 Wir kombinieren modernste medizinische Kosmetik mit einem ganzheitlichen Wohlfühlkonzept. Erleben Sie Hautpflege auf einem neuen Level an Exzellenz.
               </p>
             </ScrollReveal>
             
-            <ScrollReveal variant="fade-in-up" delay={550}>
+            <ScrollReveal variant="fade-in-up" delay={400}>
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/leistungen"
-                  className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-[1.02] active:scale-95 transition-all text-center duration-300"
+                  className="bg-background text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:bg-background/90 hover:scale-[1.02] active:scale-95 transition-all text-center rounded-full duration-300"
                 >
                   Behandlung finden
                 </Link>
                 <Link
                   href="/terminbuchung"
-                  className="border border-primary text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 hover:scale-[1.02] active:scale-95 transition-all text-center duration-300"
+                  className="bg-background border border-primary text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-background/90 hover:scale-[1.02] active:scale-95 transition-all text-center rounded-full duration-300"
                 >
                   Beratungstermin
                 </Link>
@@ -212,7 +238,7 @@ export default function Home() {
                   <img
                     alt="Facial treatment close-up"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                    src="/images/home/treatment_closeup.png"
+                    src="/images/home/treatment_closeup_new.jpg"
                   />
                 </div>
                 <div className="bg-soft-shell p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
@@ -234,7 +260,7 @@ export default function Home() {
                   <img
                     alt="Modern medical clinic lobby"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                    src="/images/home/clinic_lobby.png"
+                    src="/images/home/consultation_team.jpg"
                   />
                 </div>
               </div>
@@ -261,8 +287,8 @@ export default function Home() {
             <ScrollReveal variant="fade-in-up" delay={0} className="md:col-span-2 md:row-span-2 relative group overflow-hidden medical-glow rounded-lg min-h-[400px]">
               <img
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                alt="Anti-Aging equipment"
-                src="/images/home/anti_aging.png"
+                alt="MRF Microneedling treatment"
+                src="/images/home/mrf_microneedling.jpg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx-text/80 via-onyx-text/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-8 w-full">
@@ -270,13 +296,13 @@ export default function Home() {
                   Core Treatment
                 </span>
                 <h3 className="font-display text-2xl font-bold text-pure-white mb-4">
-                  Anti-Aging &amp; Rejuvenation
+                  MRF Microneedling
                 </h3>
                 <p className="font-sans text-sm text-pure-white/80 mb-6">
-                  Revolutionäre Methoden zur Zellaktivierung und Hautstraffung ohne operative Eingriffe.
+                  Die ultimative Anti-Aging Waffe. Kombiniert Microneedling mit Radiofrequenz-Energie für maximale Kollagenstimulation und Hautstraffung.
                 </p>
                 <Link
-                  href="/leistungen"
+                  href="/leistungen/microneedling"
                   className="text-pure-white font-display text-xs font-bold flex items-center gap-2 group/link uppercase tracking-wider"
                 >
                   Details entdecken <span className="transition-transform group-hover/link:translate-x-2">→</span>
@@ -306,7 +332,7 @@ export default function Home() {
             </ScrollReveal>
 
             {/* Bento Card 3: Manuelle Kosmetik */}
-            <ScrollReveal variant="fade-in-up" delay={300} className="bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
+            <ScrollReveal variant="fade-in-up" delay={300} className="md:col-span-2 bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
               <div>
                 <Sparkles className="text-sky-accent w-8 h-8 mb-6" />
                 <h3 className="font-display text-lg font-bold mb-3">
@@ -321,25 +347,6 @@ export default function Home() {
                 className="font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-80 mt-4 text-sky-accent"
               >
                 Explore <span>↗</span>
-              </Link>
-            </ScrollReveal>
-
-            {/* Bento Card 4: Home Care */}
-            <ScrollReveal variant="fade-in-up" delay={450} className="bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-              <div>
-                <Trophy className="text-primary w-8 h-8 mb-6" />
-                <h3 className="font-display text-lg font-bold text-primary mb-3">
-                  Home Care
-                </h3>
-                <p className="font-sans text-xs text-tertiary">
-                  Individuelle Produktberatung und High-End Heimpflege.
-                </p>
-              </div>
-              <Link
-                href="/shop"
-                className="text-primary font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-75 mt-4"
-              >
-                Zum Shop <span>→</span>
               </Link>
             </ScrollReveal>
 
@@ -408,6 +415,24 @@ export default function Home() {
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-section-padding-lg bg-soft-shell/20 border-t border-outline-variant/10">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <div className="text-center mb-16">
+            <ScrollReveal variant="blur-in" className="max-w-xl mx-auto">
+              <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
+                Fragen & Antworten
+              </span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+                Häufig gestellte Fragen (FAQ)
+              </h2>
+              <div className="w-16 h-1 bg-sky-accent mx-auto"></div>
+            </ScrollReveal>
+          </div>
+          <FaqAccordion />
         </div>
       </section>
 

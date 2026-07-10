@@ -156,7 +156,7 @@ const getEmailWrapper = (title: string, contentHtml: string): string => {
         <div class="footer-title">Skin Einfach Schön</div>
         <p>Inhaberin: Sofia Khaliq-Natawan & Team</p>
         <p>Lotter Straße 33 &bull; 49078 Osnabrück</p>
-        <p>Telefon: +49 (0) 541 123 45 67 &bull; E-Mail: hallo@skin-os.de</p>
+        <p>Telefon: +49 (0) 541 123 45 67 &bull; E-Mail: info@skin-einfachschoen.de</p>
         <div class="footer-divider"></div>
         <p>&copy; ${currentYear} Skin Einfach Schön. Alle Rechte vorbehalten.</p>
       </div>

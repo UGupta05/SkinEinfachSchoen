@@ -129,7 +129,7 @@ export default async function CityLandingPage({ params }: Props) {
             <img
               alt={`Kosmetikstudio SKIN nahe ${cityData.name}`}
               className="w-full h-full object-cover rounded-2xl medical-glow border border-pure-white/50 shadow-xl"
-              src="/images/treatments/jetpeel.png"
+              src="/images/treatments/jetpeel_new.jpg"
             />
           </div>
         </div>

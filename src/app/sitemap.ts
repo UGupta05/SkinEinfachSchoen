@@ -10,9 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/leistungen',
     '/medical-kosmetik-zo',
+    '/orthomolekulare-medizin',
     '/team',
     '/kontakt',
-    '/shop',
     '/terminbuchung',
     '/impressum',
     '/datenschutz'

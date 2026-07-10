@@ -6,6 +6,7 @@ export interface TreatmentDetails {
   readonly duration: string;
   readonly price: string;
   readonly image: string;
+  readonly imageAspectRatio?: 'portrait' | 'landscape';
 }
 
 export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
@@ -23,7 +24,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 60 - 90 Minuten",
     price: "99,- €",
-    image: "/images/treatments/jetpeel.png"
+    image: "/images/treatments/jetpeel_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "ipl": {
     title: "IPL Haarentfernung & Hautverjüngung",
@@ -39,7 +41,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 30 - 75 Minuten",
     price: "49,- €",
-    image: "/images/treatments/ipl.png"
+    image: "/images/treatments/ipl_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "meso-bb-glow": {
     title: "Meso BB Glow",
@@ -55,7 +58,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 60 Minuten",
     price: "79,- €",
-    image: "/images/treatments/meso_bb_glow.png"
+    image: "/images/treatments/meso_bb_glow_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "microneedling": {
     title: "Radiofrequenz Microneedling (MRF)",
@@ -71,39 +75,25 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 75 - 90 Minuten",
     price: "149,- €",
-    image: "/images/treatments/microneedling.png"
+    image: "/images/treatments/microneedling_new.jpg",
+    imageAspectRatio: "portrait"
   },
-  "brow-lift": {
-    title: "Brow Lift & Styling",
-    category: "Augenbrauen",
-    description: "Bringen Sie Ihre Augenbrauen in Bestform. Mit unserem professionellen Brow Lifting werden die feinen Härchen dauerhaft aufgerichtet und fixiert. Lücken werden perfekt kaschiert und Ihre Brauen wirken deutlich voller, dichter und perfekt gestylt – ganz ohne Bürstchen oder Gel für bis zu 6 Wochen.",
+  "dermaneedling": {
+    title: "Microneedling / Dermaneedling",
+    category: "Hauterneuerung",
+    description: "Klassisches Microneedling (Dermaneedling) zur gezielten Behandlung von Fältchen, Narben, Pigmentflecken und Porenverfeinerung. Durch feinste Nadelpunktionen wird die hauteigene Kollagen- und Elastinsynthese angeregt, wodurch sterile Wirkstoffe tief in die Zellen eingeschleust werden.",
     points: [
-      "Voller wirkende Augenbrauen",
-      "Fixiert störrische Härchen",
-      "Kaschiert optisch kleine Lücken",
-      "Hält bis zu 6 Wochen",
-      "Inklusive Formen & Färben",
-      "Natürlicher & frischer Look"
+      "Schonende Hauterneuerung & Regeneration",
+      "Porenverfeinernd & Teint-verfeinernd",
+      "Regt Kollagen- & Elastinproduktion an",
+      "Effektive Einschleusung von Wirkstoffen",
+      "Reduziert feine Fältchen & Aknenarben",
+      "Sichtbar verfeinertes, strafferes Hautbild"
     ],
-    duration: "ca. 45 Minuten",
-    price: "39,- €",
-    image: "/images/treatments/brow_lift.png"
-  },
-  "wimpernlifting": {
-    title: "Wimpernlifting (Lash Lift)",
-    category: "Wimpern",
-    description: "Ein atemberaubender Augenaufschlag ganz ohne Mascara oder Zange. Das Wimpernlifting formt und biegt Ihre eigenen Naturwimpern dauerhaft nach oben. Durch die anschließende Färbung und Tiefenpflege wirken Ihre Wimpern optisch deutlich länger, dichter und perfekt geschwungen.",
-    points: [
-      "Perfekt geschwungene Naturwimpern",
-      "Optische Wimpernverlängerung",
-      "Keine Mascara oder Wimpernzange nötig",
-      "Haltbarkeit ca. 6 - 8 Wochen",
-      "Schonende Keratin-Tiefenpflege inklusive",
-      "Natürlich schöner Augenaufschlag"
-    ],
-    duration: "ca. 50 Minuten",
-    price: "45,- €",
-    image: "/images/treatments/wimpernlifting.png"
+    duration: "ca. 60 Minuten",
+    price: "99,- €",
+    image: "/images/treatments/dermaneedling_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "klassische-kosmetik": {
     title: "Klassische Kosmetik & Gesichtspflege",
@@ -119,7 +109,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 60 - 90 Minuten",
     price: "59,- €",
-    image: "/images/treatments/cosmetics.png"
+    image: "/images/treatments/klassische_kosmetik_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "fruchtsaeure-peeling": {
     title: "Fruchtsäure Peeling (AHA)",
@@ -135,7 +126,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 45 - 60 Minuten",
     price: "69,- €",
-    image: "/images/treatments/peeling.png"
+    image: "/images/treatments/peeling_new.jpg",
+    imageAspectRatio: "portrait"
   },
   "visia": {
     title: "VISIA® 3D Hautanalyse",
@@ -151,6 +143,7 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     ],
     duration: "ca. 30 Minuten",
     price: "29,- €",
-    image: "/images/treatments/visia.png"
+    image: "/images/treatments/visia_new.jpg",
+    imageAspectRatio: "landscape"
   }
 };

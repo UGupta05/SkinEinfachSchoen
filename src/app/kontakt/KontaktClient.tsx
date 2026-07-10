@@ -17,28 +17,46 @@ export function KontaktClient() {
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.privacy) return;
 
     setStatus('loading');
     
-    // Simulate API request
-    setTimeout(() => {
-      setStatus('success');
-      setTimeout(() => {
+    try {
+      const response = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setStatus('success');
+        setTimeout(() => {
+          setStatus('idle');
+          setFormData({
+            vorname: '',
+            nachname: '',
+            email: '',
+            telefon: '',
+            betreff: 'Beratungstermin',
+            nachricht: '',
+            privacy: false
+          });
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to submit contact form:', errorData);
+        alert('Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.');
         setStatus('idle');
-        setFormData({
-          vorname: '',
-          nachname: '',
-          email: '',
-          telefon: '',
-          betreff: 'Beratungstermin',
-          nachricht: '',
-          privacy: false
-        });
-      }, 3000);
-    }, 1500);
+      }
+    } catch (err) {
+      console.error('Error submitting contact form:', err);
+      alert('Beim Senden der Nachricht ist ein Netzwerkfehler aufgetreten. Bitte überprüfen Sie Ihre Verbindung.');
+      setStatus('idle');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -71,7 +89,7 @@ export function KontaktClient() {
             <img
               alt="SKIN Osnabrück Entrance"
               className="w-full h-full object-cover rounded-lg medical-glow border border-outline-variant/15 transition-transform duration-500 hover:scale-[1.01]"
-              src="/images/kontakt/clinic_entrance.png"
+              src="/images/kontakt/reception_new.jpg"
             />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-fixed-dim/20 rounded-full blur-3xl -z-10"></div>
           </ScrollReveal>
@@ -294,8 +312,8 @@ export function KontaktClient() {
               </div>
               <div>
                 <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">E-Mail</p>
-                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="mailto:hallo@skin-os.de">
-                  hallo@skin-os.de
+                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="mailto:info@skin-einfachschoen.de">
+                  info@skin-einfachschoen.de
                 </a>
               </div>
             </div>

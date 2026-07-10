@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface LayoutProps {
   readonly children: React.ReactNode;
@@ -39,9 +39,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navLinks = [
     { name: 'Leistungen', path: '/leistungen' },
     { name: 'Medical Kosmetik ZO', path: '/medical-kosmetik-zo' },
+    { name: 'Orthomolekulare Medizin', path: '/orthomolekulare-medizin' },
     { name: 'Team', path: '/team' },
-    { name: 'Kontakt', path: '/kontakt' },
-    { name: 'Online-Shop', path: '/shop' }
+    { name: 'Kontakt', path: '/kontakt' }
   ];
 
   return (
@@ -82,9 +82,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/shop" className="text-primary hover:opacity-80 transition-opacity">
-              <ShoppingBag className="w-6 h-6 stroke-[1.5]" />
-            </Link>
+
 
             <Link
               href="/terminbuchung"
@@ -192,6 +190,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link href="/medical-kosmetik-zo" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Medical Kosmetik ZO</Link>
               </li>
               <li>
+                <Link href="/orthomolekulare-medizin" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Orthomolekulare Medizin</Link>
+              </li>
+              <li>
                 <Link href="/team" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Team</Link>
               </li>
               <li>
@@ -217,10 +218,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <p className="font-sans text-sm text-tertiary mb-2">Lotter Straße 33</p>
             <p className="font-sans text-sm text-tertiary mb-6">49078 Osnabrück</p>
             <a
-              href="mailto:hallo@skin-os.de"
+              href="mailto:info@skin-einfachschoen.de"
               className="font-sans text-sm text-primary font-bold block mb-2 underline decoration-sky-accent underline-offset-4"
             >
-              hallo@skin-os.de
+              info@skin-einfachschoen.de
             </a>
             <p className="font-sans text-sm text-tertiary">+49 (0) 541 123 45 67</p>
           </div>

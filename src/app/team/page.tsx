@@ -238,7 +238,7 @@ export default function TeamPage() {
               <img
                 alt="Detail einer modernen Praxis"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] hover:scale-105"
-                src="/images/team/praxis.png"
+                src="/images/team/praxis_new.jpg"
               />
               <div className="absolute inset-0 bg-primary/20 pointer-events-none"></div>
             </ScrollReveal>

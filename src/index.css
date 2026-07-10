@@ -32,7 +32,7 @@
   scrollbar-width: none;  /* Firefox */
 }
 
-/* Premium keyframes and animation utilities */
+/* Premium keyframes and animation utilities following Emil Kowalski guidelines (snappy, subtle, GPU-efficient) */
 :root {
   --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -40,7 +40,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -51,7 +51,7 @@
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-32px);
+    transform: translateY(-16px);
   }
   to {
     opacity: 1;
@@ -62,7 +62,7 @@
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-32px);
+    transform: translateX(-16px);
   }
   to {
     opacity: 1;
@@ -73,7 +73,7 @@
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(32px);
+    transform: translateX(16px);
   }
   to {
     opacity: 1;
@@ -93,7 +93,7 @@
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
@@ -104,8 +104,8 @@
 @keyframes blurIn {
   from {
     opacity: 0;
-    filter: blur(12px);
-    transform: scale(0.98);
+    filter: blur(8px);
+    transform: scale(0.99);
   }
   to {
     opacity: 1;
@@ -117,7 +117,7 @@
 @keyframes pageEntrance {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -126,41 +126,41 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.8s var(--ease-luxury) forwards;
+  animation: fadeIn 0.4s var(--ease-luxury) forwards;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 1s var(--ease-luxury) forwards;
+  animation: fadeInUp 0.6s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-fade-in-down {
-  animation: fadeInDown 1s var(--ease-luxury) forwards;
+  animation: fadeInDown 0.6s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-fade-in-left {
-  animation: fadeInLeft 1s var(--ease-luxury) forwards;
+  animation: fadeInLeft 0.5s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-fade-in-right {
-  animation: fadeInRight 1s var(--ease-luxury) forwards;
+  animation: fadeInRight 0.5s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.8s var(--ease-luxury) forwards;
+  animation: scaleIn 0.4s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-blur-in {
-  animation: blurIn 1.2s var(--ease-luxury) forwards;
+  animation: blurIn 0.7s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
 .animate-page-entrance {
-  animation: pageEntrance 0.6s var(--ease-luxury) forwards;
+  animation: pageEntrance 0.4s var(--ease-luxury) forwards;
 }
 
 /* Nav links underline hover expansion effect */
@@ -186,6 +186,7 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
 
 
 

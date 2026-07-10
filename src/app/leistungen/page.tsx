@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Heart, Star, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
 export default function LeistungenOverviewPage() {
@@ -24,7 +24,7 @@ export default function LeistungenOverviewPage() {
             <img
               alt="Klinik Interieur"
               className="w-full h-full object-cover shadow-lg rounded-sm"
-              src="/images/team/praxis.png"
+              src="/images/team/praxis_new.jpg"
             />
           </ScrollReveal>
         </div>
@@ -40,7 +40,7 @@ export default function LeistungenOverviewPage() {
               <img
                 alt="IPL Treatment"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                src="/images/treatments/ipl.png"
+                src="/images/treatments/ipl_new.jpg"
               />
             </div>
             <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
@@ -66,7 +66,7 @@ export default function LeistungenOverviewPage() {
               <img
                 alt="Visia 3D"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                src="/images/treatments/visia.png"
+                src="/images/treatments/visia_new.jpg"
               />
             </div>
             <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
@@ -92,7 +92,7 @@ export default function LeistungenOverviewPage() {
               <img
                 alt="JetPeel Treatment"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                src="/images/treatments/jetpeel.png"
+                src="/images/treatments/jetpeel_new.jpg"
               />
             </div>
             <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
@@ -118,7 +118,7 @@ export default function LeistungenOverviewPage() {
               <img
                 alt="MRF Microneedling"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                src="/images/treatments/microneedling.png"
+                src="/images/treatments/microneedling_new.jpg"
               />
             </div>
             <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
@@ -138,42 +138,58 @@ export default function LeistungenOverviewPage() {
             </Link>
           </ScrollReveal>
 
-        </div>
+          {/* Service 5: Microneedling / Dermaneedling */}
+          <ScrollReveal variant="fade-in-up" delay={0} className="group">
+            <div className="overflow-hidden mb-6 aspect-[3/2] rounded-lg">
+              <img
+                alt="Microneedling / Dermaneedling"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                src="/images/treatments/dermaneedling_new.jpg"
+              />
+            </div>
+            <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
+              Hauterneuerung
+            </span>
+            <h2 className="font-display text-xl font-bold text-primary mt-2">
+              Microneedling / Dermaneedling
+            </h2>
+            <p className="font-sans text-sm text-tertiary mt-4 leading-relaxed">
+              Klassisches Microneedling (Dermaneedling) zur gezielten Behandlung von Fältchen, Narben, Pigmentflecken und Porenverfeinerung.
+            </p>
+            <Link
+              href="/leistungen/dermaneedling"
+              className="mt-6 font-display text-xs font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-wider"
+            >
+              Mehr erfahren <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+            </Link>
+          </ScrollReveal>
 
-        {/* Grid of auxiliary treatments */}
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ScrollReveal variant="fade-in-up" delay={0} className="medical-glow bg-pure-white p-8 border border-slate-muted/10 rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-            <Heart className="w-6 h-6 text-primary mb-4" />
-            <h3 className="font-display text-lg font-bold text-primary mb-2">Brow Lift</h3>
-            <p className="font-sans text-sm text-tertiary">
-              Perfekt geformte Brauen für einen wachen, frischen Blick – langanhaltend und natürlich.
+          {/* Service 6: Meso BB Glow */}
+          <ScrollReveal variant="fade-in-up" delay={150} className="group">
+            <div className="overflow-hidden mb-6 aspect-[3/2] rounded-lg">
+              <img
+                alt="Meso BB Glow"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                src="/images/treatments/meso_bb_glow_new.jpg"
+              />
+            </div>
+            <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
+              Teint &amp; Glow
+            </span>
+            <h2 className="font-display text-xl font-bold text-primary mt-2">
+              Meso BB Glow
+            </h2>
+            <p className="font-sans text-sm text-tertiary mt-4 leading-relaxed">
+              Seidiges Hautbild und ein ebenmäßiger Teint ganz ohne tägliches Make-up. Kaschiert Augenringe und Rötungen.
             </p>
-            <Link href="/leistungen/brow-lift" className="mt-4 text-xs font-display font-bold uppercase text-primary inline-block tracking-wider">
-              Details →
-            </Link>
-          </ScrollReveal>
-          
-          <ScrollReveal variant="fade-in-up" delay={150} className="medical-glow bg-pure-white p-8 border border-slate-muted/10 rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-            <Star className="w-6 h-6 text-primary mb-4" />
-            <h3 className="font-display text-lg font-bold text-primary mb-2">Wimpernlifting</h3>
-            <p className="font-sans text-sm text-tertiary">
-              Professional Eyelash Extension und Lifting für atemberaubende Augenblicke jeden Tag.
-            </p>
-            <Link href="/leistungen/wimpernlifting" className="mt-4 text-xs font-display font-bold uppercase text-primary inline-block tracking-wider">
-              Details →
+            <Link
+              href="/leistungen/meso-bb-glow"
+              className="mt-6 font-display text-xs font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-wider"
+            >
+              Mehr erfahren <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
             </Link>
           </ScrollReveal>
 
-          <ScrollReveal variant="fade-in-up" delay={300} className="medical-glow bg-pure-white p-8 border border-slate-muted/10 rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-            <Sparkles className="w-6 h-6 text-primary mb-4" />
-            <h3 className="font-display text-lg font-bold text-primary mb-2">Meso BB Glow</h3>
-            <p className="font-sans text-sm text-tertiary">
-              Seidiges Hautbild und ein ebenmäßiger Teint ganz ohne tägliches Make-up.
-            </p>
-            <Link href="/leistungen/meso-bb-glow" className="mt-4 text-xs font-display font-bold uppercase text-primary inline-block tracking-wider">
-              Details →
-            </Link>
-          </ScrollReveal>
         </div>
       </section>
 

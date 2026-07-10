@@ -22,7 +22,8 @@ export default function MedicalKosmetikZOPage() {
     ],
     duration: "ca. 75 - 90 Minuten",
     price: "119,- €",
-    image: "/images/treatments/zo_skin_health.png"
+    image: "/images/treatments/zo_skin_health_new.jpg",
+    imageAspectRatio: "portrait" as const
   };
 
   const jsonLd = {
