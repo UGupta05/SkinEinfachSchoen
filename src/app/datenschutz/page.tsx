@@ -146,6 +146,10 @@ const sections: Section[] = [
       {
         text: "Wenn Sie uns per E-Mail, Telefon oder über das Kontaktformular auf dieser Website kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.\n\nDie Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.\n\nDie von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihres Anliegens).",
       },
+      {
+        subtitle: "Resend (E-Mail-Dienstleister)",
+        text: "Für die zuverlässige Übertragung und Zustellung von Kontaktanfragen über das Online-Formular nutzen wir den E-Mail-Dienst Resend (Resend Inc., 85 2nd St, San Francisco, CA 94105, USA). Die von Ihnen eingegebenen Daten (wie Vorname, Nachname, E-Mail-Adresse, Telefonnummer, Betreff und Nachricht) werden verschlüsselt an Server von Resend übertragen und von dort an unser Empfänger-Postfach weitergeleitet. Der Einsatz von Resend erfolgt im Rahmen unseres berechtigten Interesses an einer schnellen, sicheren und technisch zuverlässigen Abwicklung unserer Kommunikation (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der Datenschutzerklärung von Resend: https://resend.com/legal/privacy-policy",
+      },
     ],
   },
   {
@@ -163,8 +167,12 @@ const sections: Section[] = [
     title: "Terminbuchung",
     content: [
       {
-        subtitle: "Supabase (Terminverwaltung)",
-        text: "Für die Online-Terminbuchung nutzen wir den Dienst Supabase (Supabase Inc., 970 Toa Payoh North, #07-04, Singapore 318992). Beim Buchen eines Termins werden Ihre eingegebenen Daten (Name, E-Mail-Adresse, gewählte Behandlung, Wunschdatum) auf den Servern von Supabase gespeichert und an uns übermittelt.\n\nDie Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Terminverwaltung). Supabase verarbeitet Daten gemäß seiner Datenschutzrichtlinie: https://supabase.com/privacy",
+        subtitle: "Planity (Online-Terminbuchung)",
+        text: "Für die Online-Terminbuchung auf unserer Website nutzen wir das Buchungs-Widget des Anbieters Planity (Planity SAS, 33 rue Lafayette, 75009 Paris, Frankreich). Wenn Sie den Buchungsprozess starten und Daten eingeben, werden diese (Name, Kontaktdaten, Wunschtermin und gebuchte Leistung) direkt an Planity übertragen und dort verarbeitet. Die Verarbeitung dieser Daten erfolgt zur Erfüllung eines Vertrags oder zur Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer komfortablen, sicheren und funktionellen Terminreservierung (Art. 6 Abs. 1 lit. f DSGVO). Weitere Details zur Datenverarbeitung finden Sie in der Datenschutzerklärung von Planity: https://www.planity.com/de-DE/datenschutz",
+      },
+      {
+        subtitle: "Supabase (Terminsynchronisierung und Verwaltung)",
+        text: "Für die Online-Terminverwaltung nutzen wir den Dienst Supabase (Supabase Inc., 970 Toa Payoh North, #07-04, Singapore 318992). Beim Buchen eines Termins werden Ihre eingegebenen Daten (Name, E-Mail-Adresse, gewählte Behandlung, Wunschdatum) auf den Servern von Supabase gespeichert und an uns übermittelt.\n\nDie Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Terminverwaltung). Supabase verarbeitet Daten gemäß seiner Datenschutzrichtlinie: https://supabase.com/privacy",
       },
     ],
   },
