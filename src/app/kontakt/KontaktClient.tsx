@@ -49,7 +49,7 @@ export function KontaktClient() {
       } else {
         const errorData = await response.json();
         console.error('Failed to submit contact form:', errorData);
-        alert('Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.');
+        alert(errorData.message || 'Beim Senden der Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.');
         setStatus('idle');
       }
     } catch (err) {

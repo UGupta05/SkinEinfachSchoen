@@ -1,7 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Simple in-memory rate limit store
+interface RateLimitInfo {
+  count: number;
+  resetTime: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitInfo>();
+
+const LIMIT = 3; // Max 3 requests
+const WINDOW_MS = 10 * 60 * 1000; // 10 minutes window
+
+// Cleanup expired entries every minute
+if (typeof global !== 'undefined') {
+  const interval = setInterval(() => {
+    const now = Date.now();
+    for (const [ip, info] of rateLimitMap.entries()) {
+      if (now > info.resetTime) {
+        rateLimitMap.delete(ip);
+      }
+    }
+  }, 60000);
+  // Ensure serverless functions don't hang if they support unref
+  if (interval && typeof interval.unref === 'function') {
+    interval.unref();
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
+    // 1. Get client IP address
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0].trim() || 
+               req.headers.get('x-real-ip') || 
+               '127.0.0.1';
+
+    // 2. Check rate limit
+    const now = Date.now();
+    const info = rateLimitMap.get(ip);
+
+    if (!info || now > info.resetTime) {
+      // New window or first request
+      rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS });
+    } else if (info.count >= LIMIT) {
+      const remainingSeconds = Math.ceil((info.resetTime - now) / 1000);
+      const remainingMinutes = Math.ceil(remainingSeconds / 60);
+      return NextResponse.json({
+        error: 'Too Many Requests',
+        message: `Zu viele Anfragen. Bitte warten Sie ${remainingMinutes} Minute(n), bevor Sie es erneut versuchen.`
+      }, { status: 429 });
+    } else {
+      info.count += 1;
+    }
+
     const payload = await req.json();
     const { vorname, nachname, email, telefon, betreff, nachricht } = payload;
 
