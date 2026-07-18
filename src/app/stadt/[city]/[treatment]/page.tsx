@@ -83,7 +83,7 @@ export default async function CityTreatmentLandingPage({ params }: Props) {
     ],
     "offers": {
       "@type": "Offer",
-      "price": treatmentData.price.replace(',- €', '').replace(' €', '').trim(),
+      "price": treatmentData.price.replace(/[^\d]/g, ''),
       "priceCurrency": "EUR"
     }
   };

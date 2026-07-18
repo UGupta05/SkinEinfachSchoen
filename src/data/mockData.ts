@@ -81,11 +81,11 @@ export const TREATMENTS: readonly TreatmentItem[] = [
   },
   {
     id: "saeure",
-    name: "Fruchtsäure Peeling",
+    name: "Fruchtsäure & TCA Peeling",
     category: "Hauterneuerung",
     icon: "science",
     link: "/leistungen/fruchtsaeure-peeling",
-    description: "Medizinisch kontrollierte Peelings für ein verfeinertes Hautbild, gemilderte Fältchen und reinere Poren."
+    description: "Medizinisch kontrollierte AHA, BHA & TCA Peelings für ein verfeinertes Hautbild, gemilderte Fältchen und reinere Poren."
   }
 ];
 

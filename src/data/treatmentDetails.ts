@@ -22,8 +22,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Lymphdrainage & Tiefenreinigung",
       "Regt Mikrozirkulation & Kollagenbildung an"
     ],
-    duration: "ca. 60 - 90 Minuten",
-    price: "99,- €",
+    duration: "ab 10 Minuten",
+    price: "ab 50,- €",
     image: "/images/treatments/jetpeel_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -39,8 +39,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Individuell einstellbare Wellenlängen",
       "Klinisch erprobte Sicherheit"
     ],
-    duration: "ca. 30 - 75 Minuten",
-    price: "49,- €",
+    duration: "ab 15 Minuten",
+    price: "ab 42,- €",
     image: "/images/treatments/ipl_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -73,8 +73,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Kombination aus Nadelreiz & Wärmeenergie",
       "Langanhaltende Resultate über Monate"
     ],
-    duration: "ca. 75 - 90 Minuten",
-    price: "149,- €",
+    duration: "ab 15 Minuten",
+    price: "ab 99,- €",
     image: "/images/treatments/microneedling_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -90,8 +90,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Reduziert feine Fältchen & Aknenarben",
       "Sichtbar verfeinertes, strafferes Hautbild"
     ],
-    duration: "ca. 60 Minuten",
-    price: "99,- €",
+    duration: "ab 40 Minuten",
+    price: "ab 225,- €",
     image: "/images/treatments/dermaneedling_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -113,19 +113,19 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
     imageAspectRatio: "portrait"
   },
   "fruchtsaeure-peeling": {
-    title: "Fruchtsäure Peeling (AHA)",
+    title: "Fruchtsäure & TCA Peeling (AHA / BHA / TCA)",
     category: "Hauterneuerung",
-    description: "Medizinisch kontrollierte Fruchtsäure-Peelings (AHA / BHA) helfen der Haut, sich schneller zu regenerieren und verhornte Zellen abzustoßen. Die Behandlung verfeinert die Poren, mildert Pigmentstörungen, regt die Kollagenproduktion an und reduziert Fältchen sowie Unreinheiten spürbar. Für einen strahlenden Teint.",
+    description: "Medizinisch kontrollierte Peelings (AHA / BHA / TCA) helfen der Haut, sich schneller zu regenerieren und verhornte Zellen abzustoßen. Die Behandlung verfeinert die Poren, mildert Pigmentstörungen, regt die Kollagenproduktion an und reduziert Fältchen sowie Unreinheiten spürbar. Für einen strahlenden Teint.",
     points: [
       "Effektive Porenverfeinerung",
       "Mildert Pigment- & Altersflecken",
       "Glättet feine Linien & Fältchen",
       "Unterstützt die Zellerneuerung",
       "Reduziert Unreinheiten & Akne-Herde",
-      "Verleiht einen frischen Glow"
+      "Schonende bis intensive Peelings (AHA / BHA / TCA)"
     ],
-    duration: "ca. 45 - 60 Minuten",
-    price: "69,- €",
+    duration: "ab 30 Minuten",
+    price: "ab 89,- €",
     image: "/images/treatments/peeling_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -141,8 +141,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Visualisierung von Fortschritten",
       "Absolut schmerzfreie & schnelle Analyse"
     ],
-    duration: "ca. 30 Minuten",
-    price: "29,- €",
+    duration: "45 Minuten",
+    price: "79,- €",
     image: "/images/treatments/visia_new.jpg",
     imageAspectRatio: "landscape"
   }
