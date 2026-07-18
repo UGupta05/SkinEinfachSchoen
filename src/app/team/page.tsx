@@ -101,6 +101,12 @@ export default function TeamPage() {
                         <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
                           check_circle
                         </span>
+                        <span>Ausbildung zur allgemeinen Heilpraktikerin mit Schwerpunkt Ästhetik</span>
+                      </li>
+                      <li className="flex items-start gap-3 text-sm text-tertiary">
+                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
+                          check_circle
+                        </span>
                         <span>Studium zur Pharmazieökonomin in Schmalkalden (2013-2014)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
