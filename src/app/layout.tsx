@@ -12,12 +12,12 @@ export const metadata: Metadata = {
   keywords: ['Kosmetikstudio', 'Osnabrück', 'JetPeel', 'IPL Haarentfernung', 'Microneedling', 'Dermaneedling', 'ZO Skin Health', 'Hautanalyse', 'Orthomolekulare Medizin', 'Zellgesundheit'],
   icons: {
     icon: [
-      { url: '/favicon.ico?v=5', sizes: 'any' },
-      { url: '/favicon.svg?v=5', type: 'image/svg+xml' },
-      { url: '/favicon.png?v=5', type: 'image/png' },
+      { url: '/favicon.png?v=10', type: 'image/png' },
+      { url: '/favicon.ico?v=10' },
+      { url: '/favicon.svg?v=10', type: 'image/svg+xml' },
     ],
-    shortcut: '/favicon.ico?v=5',
-    apple: '/apple-icon.png?v=5',
+    shortcut: '/favicon.png?v=10',
+    apple: '/favicon.png?v=10',
   },
 };
 
@@ -29,10 +29,10 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        <link rel="icon" href="/favicon.ico?v=5" sizes="any" />
-        <link rel="icon" href="/favicon.svg?v=5" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.png?v=5" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png?v=5" />
+        <link rel="icon" href="/favicon.png?v=10" type="image/png" />
+        <link rel="icon" href="/favicon.ico?v=10" />
+        <link rel="icon" href="/favicon.svg?v=10" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/favicon.png?v=10" />
       </head>
       <body>
         <Layout>{children}</Layout>
