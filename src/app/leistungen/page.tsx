@@ -190,34 +190,8 @@ export default function LeistungenOverviewPage() {
             </Link>
           </ScrollReveal>
 
-          {/* Service 7: Klassische Kosmetik */}
+          {/* Service 7: Fruchtsäure & TCA Peeling */}
           <ScrollReveal variant="fade-in-up" delay={0} className="group">
-            <div className="overflow-hidden mb-6 aspect-[3/2] rounded-lg">
-              <img
-                alt="Klassische Kosmetik"
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                src="/images/treatments/klassische_kosmetik_new.jpg"
-              />
-            </div>
-            <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">
-              Gesichtspflege
-            </span>
-            <h2 className="font-display text-xl font-bold text-primary mt-2">
-              Klassische Kosmetik
-            </h2>
-            <p className="font-sans text-sm text-tertiary mt-4 leading-relaxed">
-              Individuelle Gesichtsbehandlungen für Reinigung, Entspannung und langanhaltende Pflege.
-            </p>
-            <Link
-              href="/leistungen/klassische-kosmetik"
-              className="mt-6 font-display text-xs font-bold text-primary flex items-center gap-2 group/btn uppercase tracking-wider"
-            >
-              Mehr erfahren <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-            </Link>
-          </ScrollReveal>
-
-          {/* Service 8: Fruchtsäure & TCA Peeling */}
-          <ScrollReveal variant="fade-in-up" delay={150} className="group">
             <div className="overflow-hidden mb-6 aspect-[3/2] rounded-lg">
               <img
                 alt="Fruchtsäure Peeling"

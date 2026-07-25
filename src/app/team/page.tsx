@@ -107,7 +107,7 @@ export default function TeamPage() {
                         <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
                           check_circle
                         </span>
-                        <span>Studium zur Pharmazieökonomin in Schmalkalden (2013-2014)</span>
+                        <span>Studium zur Pharmazieökonomin in Schmalkalden (2012-2014)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
                         <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
@@ -144,7 +144,7 @@ export default function TeamPage() {
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-sky-accent/10 text-slate-muted px-4 py-1 rounded-full font-label-caps text-[10px] tracking-widest">
-                      MEDICAL COSMETICIAN
+                      MEDIZINISCHE KOSMETIKERIN
                     </span>
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export default function TeamPage() {
                       Über mich
                     </h4>
                     <p className="font-body-md text-body-md text-tertiary">
-                      Isabel bringt eine beeindruckende internationale Expertise in unser Team ein. Mit Stationen in London und Hamburg sowie langjähriger Erfahrung in dermatologischen Praxen ist sie unsere Spezialistin für anspruchsvolle medizinische Behandlungen.
+                      Seit über 20 Jahren ist die Haut meine Leidenschaft. Die Verbindung aus medizinischer Kosmetik, Dermatologie, Hautdiagnostik und Ästhetik begeistert mich jeden Tag aufs Neue. Mit Sofia verbindet mich dieselbe Vision: medizinisch fundierte Behandlungen, höchste Qualität und natürliche Ergebnisse – für gesunde, schöne Haut.
                     </p>
                   </div>
                   <div className="space-y-3">

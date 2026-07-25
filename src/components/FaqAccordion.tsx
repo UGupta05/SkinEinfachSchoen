@@ -12,7 +12,7 @@ interface FaqItem {
 const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: "Welche kosmetischen Behandlungen bieten Sie in Osnabrück an?",
-    answer: "Wir bieten ein breites Spektrum an hocheffektiven Gesichtsbehandlungen an, darunter das innovative JetPeel, Radiofrequenz-Microneedling (MRF), dauerhafte IPL-Haarentfernung, Meso BB Glow für einen ebenmäßigen Teint, klassische Kosmetikanwendungen sowie die wissenschaftlich fundierte Orthomolekulare Medizin."
+    answer: "Wir bieten ein breites Spektrum an hocheffektiven Gesichtsbehandlungen an, darunter das innovative JetPeel, Radiofrequenz-Microneedling (MRF), dauerhafte IPL-Haarentfernung, Meso BB Glow für einen ebenmäßigen Teint sowie die wissenschaftlich fundierte Orthomolekulare Medizin."
   },
   {
     question: "Warum ist eine professionelle Hautanalyse vor einer Behandlung sinnvoll?",

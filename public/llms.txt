@@ -34,15 +34,14 @@ SKIN einfach schön is a premium medical cosmetics and skincare studio located i
 - **Saturday**: By appointment only (Nach Vereinbarung)
 
 ## Core Treatment Offerings & Pricing (Starting Prices)
-1. **JetPeel™ Technology**: High-tech needle-free hydration and deep pore cleansing. (ab 99,- €)
-2. **Radiofrequenz Microneedling (MRF)**: Gold-plated microneedles with RF energy for deep tissue tightening, scar treatment, and collagen building. (ab 149,- €)
-3. **IPL Permanent Hair Removal & Rejuvenation**: Painless hair removal and treatment of age spots, couperose, and redness. (ab 49,- €)
-4. **Meso BB Glow**: Even skin tone, pore refinement, and glow effect without make-up. (ab 79,- €)
-5. **VISIA® 3D Skin Analysis**: Scientific computer-based facial scanning (spots, wrinkles, UV damage, redness) as the basis for custom skincare plans. (ab 29,- €)
+1. **JetPeel™ Technology**: High-tech needle-free hydration and deep pore cleansing. (ab 80,- €)
+2. **Radiofrequenz Microneedling (MRF)**: Gold-plated microneedles with RF energy for deep tissue tightening, scar treatment, and collagen building. (ab 259,- €)
+3. **IPL Permanent Hair Removal & Rejuvenation**: Painless hair removal and treatment of age spots, couperose, and redness. (ab 42,- €)
+4. **Meso BB Glow**: Even skin tone, pore refinement, and glow effect without make-up. (ab 259,- €)
+5. **VISIA® 3D Skin Analysis**: Scientific computer-based facial scanning (spots, wrinkles, UV damage, redness) as the basis for custom skincare plans. (79,- €)
 6. **ZO Skin Health by Dr. Zein Obagi**: Medical-grade chemical peels and skincare treatments (e.g., 3-Step Peel, Stimulator Peel). (ab 125,- €)
 7. **Lash Lifting (Wimpernlifting) & Brow Lifting**: Eyelash and eyebrow lamination and styling. (ab 39,- €)
-8. **Fruchtsäure Peeling (AHA/BHA)**: Chemical peels for acne, scars, and anti-aging. (ab 69,- €)
-9. **Klassische Kosmetik**: Traditional facials tailored to skin type. (ab 59,- €)
+8. **Fruchtsäure Peeling (AHA/BHA/TCA)**: Chemical peels for acne, scars, and anti-aging. (ab 99,- €)
 
 ## Key Technical Specifications for Web Crawlers
 - **Canonical Domain**: https://skineinfachschoen.de

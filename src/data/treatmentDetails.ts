@@ -23,7 +23,7 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Regt Mikrozirkulation & Kollagenbildung an"
     ],
     duration: "ab 10 Minuten",
-    price: "ab 50,- €",
+    price: "ab 80,- €",
     image: "/images/treatments/jetpeel_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -56,8 +56,8 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Porenverfeinernd & glättend",
       "Sofortiger No-Make-Up-Look"
     ],
-    duration: "ca. 60 Minuten",
-    price: "79,- €",
+    duration: "45 Minuten",
+    price: "ab 259,- €",
     image: "/images/treatments/meso_bb_glow_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -74,7 +74,7 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Langanhaltende Resultate über Monate"
     ],
     duration: "ab 15 Minuten",
-    price: "ab 99,- €",
+    price: "ab 259,- €",
     image: "/images/treatments/microneedling_new.jpg",
     imageAspectRatio: "portrait"
   },
@@ -88,28 +88,12 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Regt Kollagen- & Elastinproduktion an",
       "Effektive Einschleusung von Wirkstoffen",
       "Reduziert feine Fältchen & Aknenarben",
-      "Sichtbar verfeinertes, strafferes Hautbild"
+      "Sichtbar verfeinertes, strafferes Hautbild",
+      "Vorbeugung vorzeitige Hautalterung"
     ],
     duration: "ab 40 Minuten",
     price: "ab 225,- €",
     image: "/images/treatments/dermaneedling_new.jpg",
-    imageAspectRatio: "portrait"
-  },
-  "klassische-kosmetik": {
-    title: "Klassische Kosmetik & Gesichtspflege",
-    category: "Gesichtsbehandlungen",
-    description: "Gönnen Sie Ihrer Haut eine Auszeit. Unsere klassischen Gesichtsbehandlungen richten sich exakt nach Ihrem aktuellen Hautbedürfnis. Jedes Treatment beinhaltet eine gründliche Hautreinigung, sanftes Peeling, intensives Ausreinigen, eine entspannende Gesichtsmassage und eine pflegende Abschlusspflege.",
-    points: [
-      "Individuelle Hautreinigung",
-      "Erholungs- & Wellness-Effekt",
-      "Befreit die Haut von Unreinheiten",
-      "Hochwertige Masken & Wirkstoffe",
-      "Entspannende Nacken- & Gesichtsmassage",
-      "Für jeden Hauttyp geeignet"
-    ],
-    duration: "ca. 60 - 90 Minuten",
-    price: "59,- €",
-    image: "/images/treatments/klassische_kosmetik_new.jpg",
     imageAspectRatio: "portrait"
   },
   "fruchtsaeure-peeling": {
@@ -125,7 +109,7 @@ export const TREATMENT_DETAILS: Record<string, TreatmentDetails> = {
       "Schonende bis intensive Peelings (AHA / BHA / TCA)"
     ],
     duration: "ab 30 Minuten",
-    price: "ab 89,- €",
+    price: "ab 99,- €",
     image: "/images/treatments/peeling_new.jpg",
     imageAspectRatio: "portrait"
   },

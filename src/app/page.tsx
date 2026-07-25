@@ -331,19 +331,19 @@ export default function Home() {
               </Link>
             </ScrollReveal>
 
-            {/* Bento Card 3: Manuelle Kosmetik */}
+            {/* Bento Card 3: JetPeel Technology */}
             <ScrollReveal variant="fade-in-up" delay={300} className="md:col-span-2 bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
               <div>
                 <Sparkles className="text-sky-accent w-8 h-8 mb-6" />
                 <h3 className="font-display text-lg font-bold mb-3">
-                  Manuelle Kosmetik
+                  JetPeel™ Technologie
                 </h3>
                 <p className="font-sans text-xs opacity-85">
-                  Klassische Wellness-Behandlungen für Ihre Auszeit.
+                  Nadelfreie Einschleusung von Wirkstoffen mittels Hochgeschwindigkeit für porentiefe Frische.
                 </p>
               </div>
               <Link
-                href="/leistungen/klassische-kosmetik"
+                href="/leistungen/jetpeel"
                 className="font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-80 mt-4 text-sky-accent"
               >
                 Explore <span>↗</span>

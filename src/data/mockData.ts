@@ -72,14 +72,6 @@ export const TREATMENTS: readonly TreatmentItem[] = [
     description: "Seidiges Hautbild und ein ebenmäßiger Teint ganz ohne tägliches Make-up."
   },
   {
-    id: "kosmetik",
-    name: "Klassische Kosmetik",
-    category: "Gesichtspflege",
-    icon: "face",
-    link: "/leistungen/klassische-kosmetik",
-    description: "Individuelle Gesichtsbehandlungen für Reinigung, Entspannung und langanhaltende Pflege."
-  },
-  {
     id: "saeure",
     name: "Fruchtsäure & TCA Peeling",
     category: "Hauterneuerung",
