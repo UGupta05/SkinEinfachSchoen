@@ -20,10 +20,10 @@ export default function LeistungenOverviewPage() {
               Entdecken Sie unsere hochspezialisierten Behandlungen, die modernste medizinische Technik mit exklusiver Pflege vereinen. Für eine Haut, die nicht nur schön aussieht, sondern gesund strahlt.
             </p>
           </ScrollReveal>
-          <ScrollReveal variant="fade-in-right" className="flex-1 w-full h-[250px] md:h-[350px] relative">
+          <ScrollReveal variant="fade-in-right" className="flex-1 w-full relative">
             <img
               alt="Klinik Interieur"
-              className="w-full h-full object-cover shadow-lg rounded-sm"
+              className="w-full h-auto object-contain shadow-lg rounded-sm"
               src="/images/team/praxis_new.jpg"
             />
           </ScrollReveal>
