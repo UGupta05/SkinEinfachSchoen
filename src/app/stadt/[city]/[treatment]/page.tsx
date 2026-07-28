@@ -62,7 +62,7 @@ export default async function CityTreatmentLandingPage({ params }: Props) {
     "provider": {
       "@type": "LocalBusiness",
       "name": "SKIN einfach schön - Kosmetikstudio Osnabrück",
-      "telephone": "+4954147054971",
+      "telephone": "+4917655132650",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Lotter Straße 33",
@@ -243,7 +243,7 @@ export default async function CityTreatmentLandingPage({ params }: Props) {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span>0541-47054971</span>
+                  <a href="tel:+4917655132650" className="hover:text-primary transition-colors">0176-55132650</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Clock className="w-4 h-4 text-primary" />

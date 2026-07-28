@@ -49,7 +49,7 @@ export default function ImpressumPage() {
               <div className="font-sans text-body-md text-tertiary space-y-2">
                 <p>
                   <span className="font-semibold text-on-surface">Telefon:</span>{' '}
-                  <a href="tel:+4954147054971" className="text-primary hover:underline">0541-47054971</a>
+                  <a href="tel:+4917655132650" className="text-primary hover:underline">0176-55132650</a>
                 </p>
                 <p>
                   <span className="font-semibold text-on-surface">E-Mail:</span>{' '}

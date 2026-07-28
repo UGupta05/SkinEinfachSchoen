@@ -62,7 +62,7 @@ const sections: Section[] = [
       },
       {
         subtitle: "Hinweis zur verantwortlichen Stelle",
-        text: "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:\n\nSofia Natawan\nLotter Straße 33\n49078 Osnabrück\n\nTelefon: 0541-47054971\nE-Mail: info@skin-einfachschoen.de\n\nVerantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.",
+        text: "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:\n\nSofia Natawan\nLotter Straße 33\n49078 Osnabrück\n\nTelefon: 0176-55132650\nE-Mail: info@skin-einfachschoen.de\n\nVerantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.",
       },
     ],
   },

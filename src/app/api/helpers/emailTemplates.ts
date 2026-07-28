@@ -156,7 +156,7 @@ const getEmailWrapper = (title: string, contentHtml: string): string => {
         <div class="footer-title">Skin Einfach Schön</div>
         <p>Inhaberin: Sofia Khaliq-Natawan & Team</p>
         <p>Lotter Straße 33 &bull; 49078 Osnabrück</p>
-        <p>Telefon: +49 (0) 541 123 45 67 &bull; E-Mail: info@skin-einfachschoen.de</p>
+        <p>Telefon: +49 (0) 176 55132650 &bull; E-Mail: info@skin-einfachschoen.de</p>
         <div class="footer-divider"></div>
         <p>&copy; ${currentYear} Skin Einfach Schön. Alle Rechte vorbehalten.</p>
       </div>
@@ -210,7 +210,7 @@ export const getBookingPendingTemplate = (
     </table>
     
     <p class="text-muted">Bitte beachten Sie: Dies ist noch keine verbindliche Terminbestätigung. Sobald wir den Termin freigegeben haben, erhalten Sie eine separate Bestätigungs-E-Mail.</p>
-    <p>Falls Sie Fragen haben oder den Termin ändern möchten, können Sie uns gerne telefonisch unter +49 (0) 541 123 45 67 kontaktieren.</p>
+    <p>Falls Sie Fragen haben oder den Termin ändern möchten, können Sie uns gerne telefonisch unter +49 (0) 176 55132650 kontaktieren.</p>
     <p>Herzliche Grüße,<br>Ihr Team von Skin Einfach Schön</p>
   `;
   return getEmailWrapper('Ihre Terminbuchungsanfrage - Skin Einfach Schön', content);

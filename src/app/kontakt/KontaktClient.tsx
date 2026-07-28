@@ -306,8 +306,8 @@ export function KontaktClient() {
             <div className="space-y-4">
               <div>
                 <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">Telefon</p>
-                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="tel:+495411234567">
-                  +49 (0) 541 123 45 67
+                <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="tel:+4917655132650">
+                  +49 (0) 176 55132650
                 </a>
               </div>
               <div>

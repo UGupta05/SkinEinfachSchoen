@@ -19,7 +19,7 @@ export default function Home() {
       "postalCode": "49078",
       "addressCountry": "DE"
     },
-    "telephone": "+4954147054971",
+    "telephone": "+4917655132650",
     "priceRange": "$$",
     "url": "https://skin-einfachschoen.de",
     "openingHoursSpecification": [

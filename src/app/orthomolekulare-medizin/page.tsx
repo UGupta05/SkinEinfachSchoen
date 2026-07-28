@@ -78,7 +78,7 @@ export default function OrthomolekulareMedizinPage() {
         "postalCode": "49078",
         "addressCountry": "DE"
       },
-      "telephone": "+4954147054971",
+      "telephone": "+4917655132650",
       "priceRange": "$$"
     }
   };

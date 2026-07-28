@@ -48,7 +48,7 @@ export default async function CityLandingPage({ params }: Props) {
     "image": "https://skineinfachschoen.de/images/treatments/jetpeel.png",
     "@id": "https://skineinfachschoen.de/#salon",
     "url": "https://skineinfachschoen.de",
-    "telephone": "+4954147054971",
+    "telephone": "+4917655132650",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -288,7 +288,7 @@ export default async function CityLandingPage({ params }: Props) {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span>0541-47054971</span>
+                  <a href="tel:+4917655132650" className="hover:text-primary transition-colors">0176-55132650</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Clock className="w-4 h-4 text-primary" />

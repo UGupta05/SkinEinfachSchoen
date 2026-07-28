@@ -223,7 +223,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
               info@skin-einfachschoen.de
             </a>
-            <p className="font-sans text-sm text-tertiary">+49 (0) 541 123 45 67</p>
+            <a href="tel:+4917655132650" className="font-sans text-sm text-tertiary hover:text-primary transition-colors block">+49 (0) 176 55132650</a>
           </div>
         </div>
 

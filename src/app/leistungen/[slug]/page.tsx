@@ -49,7 +49,7 @@ export default async function TreatmentPage({ params }: Props) {
         "postalCode": "49078",
         "addressCountry": "DE"
       },
-      "telephone": "+4954147054971",
+      "telephone": "+4917655132650",
       "priceRange": "$$"
     },
     "offers": {
