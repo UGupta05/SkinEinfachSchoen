@@ -66,7 +66,7 @@ export default function TeamPage() {
                 <div className="aspect-square relative overflow-hidden">
                   <img
                     alt="Sofia Khaliq-Natawan"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover"
                     src="/images/team/sofia.jpg"
                   />
                   <div className="absolute top-4 left-4">
@@ -139,7 +139,7 @@ export default function TeamPage() {
                 <div className="aspect-square relative overflow-hidden">
                   <img
                     alt="Isabel Duwendag"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover"
                     src="/images/team/isabel.jpg"
                   />
                   <div className="absolute top-4 left-4">
