@@ -63,10 +63,10 @@ export default function TeamPage() {
             {/* Sofia Khaliq-Natawan */}
             <ScrollReveal variant="fade-in-up" delay={0} className="group">
               <div className="bg-pure-white medical-glow overflow-hidden transition-all duration-500 hover:-translate-y-2">
-                <div className="aspect-square relative overflow-hidden">
+                <div className="aspect-[4/5] relative overflow-hidden">
                   <img
                     alt="Sofia Khaliq-Natawan"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                     src="/images/team/sofia.jpg"
                   />
                   <div className="absolute top-4 left-4">
@@ -136,10 +136,10 @@ export default function TeamPage() {
             {/* Isabel Duwendag */}
             <ScrollReveal variant="fade-in-up" delay={150} className="group">
               <div className="bg-pure-white medical-glow overflow-hidden transition-all duration-500 hover:-translate-y-2">
-                <div className="aspect-square relative overflow-hidden">
+                <div className="aspect-[4/5] relative overflow-hidden">
                   <img
                     alt="Isabel Duwendag"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                     src="/images/team/isabel.jpg"
                   />
                   <div className="absolute top-4 left-4">
