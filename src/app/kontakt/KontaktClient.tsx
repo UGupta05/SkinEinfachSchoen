@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Clock, Send, Check, Loader2 } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
+import { ConsentMap } from '../../components/ConsentMap';
 
 export function KontaktClient() {
   const [formData, setFormData] = useState({
@@ -247,14 +248,7 @@ export function KontaktClient() {
             {/* Map Canvas */}
             <ScrollReveal variant="fade-in-right" className="space-y-12">
               <div className="h-[500px] w-full bg-surface-container overflow-hidden rounded-lg border border-outline-variant/10 medical-glow relative group">
-                <iframe
-                  title="SKIN Osnabrück Standort"
-                  src="https://maps.google.com/maps?q=Lotter%20Stra%C3%9Fe%2033,%2049078%20Osnabr%C3%BCck&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+                <ConsentMap iframeClassName="grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute bottom-6 left-6 right-6 bg-pure-white/95 backdrop-blur-md p-6 border border-outline-variant/20 rounded shadow-md pointer-events-none select-none">
                   <p className="font-display text-[10px] font-bold text-primary mb-1 uppercase tracking-widest">
                     UNSER STANDORT

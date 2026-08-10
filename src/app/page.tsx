@@ -5,6 +5,8 @@ import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 
 import { TESTIMONIALS } from '../data/mockData';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { FaqAccordion } from '../components/FaqAccordion';
+import { SITE_URL, absoluteUrl } from '../config/site';
+import { BUSINESS, AREA_SERVED } from '../config/business';
 
 export const metadata: Metadata = {
   alternates: {
@@ -16,25 +18,47 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
-    "name": "SKIN einfach schön",
-    "image": "https://skin-einfachschoen.de/images/home/logo.png",
+    "@id": `${SITE_URL}/#salon`,
+    "name": BUSINESS.name,
+    "image": absoluteUrl('/images/home/logo.png'),
+    "logo": absoluteUrl('/images/home/logo.png'),
     "description": "Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health. Wissenschaftliche Präzision für Ihre Haut.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Lotter Straße 33",
-      "addressLocality": "Osnabrück",
-      "postalCode": "49078",
-      "addressCountry": "DE"
+      "streetAddress": BUSINESS.address.street,
+      "addressLocality": BUSINESS.address.city,
+      "postalCode": BUSINESS.address.postalCode,
+      "addressCountry": BUSINESS.address.country
     },
-    "telephone": "+4917655132650",
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": BUSINESS.geo.latitude,
+      "longitude": BUSINESS.geo.longitude
+    },
+    "hasMap": BUSINESS.googleBusinessUrl,
+    "sameAs": BUSINESS.sameAs,
+    "areaServed": AREA_SERVED.map((name) => ({
+      "@type": "City",
+      "name": name
+    })),
+    "telephone": BUSINESS.telephone,
+    "email": BUSINESS.email,
     "priceRange": "$$",
-    "url": "https://skin-einfachschoen.de",
+    "currenciesAccepted": "EUR",
+    "url": SITE_URL,
+    // Mirrors src/config/openingHours.ts — keep both in sync.
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
         "opens": "09:00",
-        "closes": "18:00"
+        "closes": "18:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
       }
     ]
   };

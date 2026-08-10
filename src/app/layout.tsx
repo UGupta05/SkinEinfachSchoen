@@ -13,6 +13,31 @@ export const metadata: Metadata = {
   },
   description: 'Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health. Wissenschaftliche Präzision für Ihre Haut.',
   keywords: ['Kosmetikstudio', 'Osnabrück', 'JetPeel', 'IPL Haarentfernung', 'Microneedling', 'Dermaneedling', 'ZO Skin Health', 'Hautanalyse', 'Orthomolekulare Medizin', 'Zellgesundheit'],
+  // Controls the preview card when a link is shared on WhatsApp, Instagram,
+  // Facebook or LinkedIn. Child pages inherit this and override title/description
+  // via their own metadata export.
+  openGraph: {
+    type: 'website',
+    locale: 'de_DE',
+    siteName: 'SKIN einfach schön',
+    title: 'SKIN einfach schön | Kosmetik & Ästhetik Osnabrück',
+    description: 'Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health.',
+    url: '/',
+    images: [
+      {
+        url: '/images/home/home_hero_new_3.jpg',
+        width: 1024,
+        height: 576,
+        alt: 'Behandlungsraum von SKIN einfach schön in Osnabrück',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SKIN einfach schön | Kosmetik & Ästhetik Osnabrück',
+    description: 'Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health.',
+    images: ['/images/home/home_hero_new_3.jpg'],
+  },
   icons: {
     icon: [
       { url: '/favicon.png?v=10', type: 'image/png' },

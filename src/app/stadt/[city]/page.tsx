@@ -7,6 +7,7 @@ import { GEO_CITIES } from '../../../data/geoCities';
 import { TREATMENT_DETAILS } from '../../../data/treatmentDetails';
 import { ScrollReveal } from '../../../components/ScrollReveal';
 import { SITE_URL, absoluteUrl } from '../../../config/site';
+import { ConsentMap } from '../../../components/ConsentMap';
 
 interface Props {
   params: Promise<{
@@ -310,13 +311,7 @@ export default async function CityLandingPage({ params }: Props) {
             </div>
             
             <div className="h-[400px] bg-surface-container overflow-hidden rounded-xl border border-outline-variant/10 shadow-sm relative group">
-              <iframe
-                title={`Anfahrt aus ${cityData.name} zu SKIN einfach schön`}
-                src="https://maps.google.com/maps?q=Lotter%20Stra%C3%9Fe%2033,%2049078%20Osnabr%C3%BCck&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
-                allowFullScreen
-                loading="lazy"
-              ></iframe>
+              <ConsentMap iframeClassName="grayscale hover:grayscale-0 transition-all duration-700" />
             </div>
           </div>
         </div>

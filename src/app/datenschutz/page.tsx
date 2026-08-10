@@ -134,8 +134,8 @@ const sections: Section[] = [
     title: "Datenerfassung auf dieser Website – Cookies",
     content: [
       {
-        subtitle: "Keine Verwendung von Cookies",
-        text: "Diese Website verwendet keine Cookies und speichert keine Informationen im lokalen Speicher (localStorage/sessionStorage) Ihres Browsers. Es werden weder eigene Cookies noch Tracking-Cookies von Drittanbietern gesetzt.\n\nAnalysedaten werden über cookielose Verfahren erhoben (siehe Abschnitt \"Vercel Analytics\"). Eine Einwilligung zur Cookie-Nutzung ist daher nicht erforderlich.",
+        subtitle: "Keine einwilligungspflichtigen Cookies",
+        text: "Diese Website setzt von sich aus keine Cookies und speichert keine Informationen im lokalen Speicher (localStorage/sessionStorage) Ihres Browsers. Es werden weder eigene Cookies noch Tracking-Cookies von Drittanbietern gesetzt.\n\nAnalysedaten werden über cookielose Verfahren erhoben (siehe Abschnitt \"Vercel Analytics\"). Ein Cookie-Banner ist daher nicht erforderlich.\n\nInhalte von Drittanbietern, die Cookies setzen könnten – die Google-Maps-Karte und eingebettete YouTube-Videos – werden erst nach einem ausdrücklichen Klick Ihrerseits geladen. Ohne diesen Klick findet keine Datenübertragung an den jeweiligen Anbieter statt (siehe die Abschnitte \"Google Maps\" und \"YouTube\").",
       },
     ],
   },
@@ -191,6 +191,10 @@ const sections: Section[] = [
       {
         subtitle: "Google Web Fonts (Lokale Einbindung)",
         text: "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Zur Erhöhung des Datenschutzes und zur Verhinderung der Übertragung von IP-Adressen an Google-Server in den USA werden diese Google Fonts lokal auf unserem eigenen Webserver gehostet. Es findet somit beim Laden der Schriftarten keine Verbindung zu Servern von Google statt.",
+      },
+      {
+        subtitle: "Google Maps (Zwei-Klick-Lösung)",
+        text: "Auf unserer Kontaktseite und den regionalen Unterseiten binden wir Kartenmaterial des Dienstes Google Maps ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Karte wird nicht automatisch geladen. Stattdessen sehen Sie zunächst einen Platzhalter mit der Schaltfläche „Karte laden\". Erst wenn Sie diese Schaltfläche anklicken, wird die Karte nachgeladen und dabei Ihre IP-Adresse sowie gegebenenfalls weitere Daten an Google übertragen; Google kann hierbei Cookies setzen. Ohne Ihren Klick findet keinerlei Verbindung zu Google-Servern statt.\n\nRechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie können die Karte jederzeit einfach nicht laden; alternativ erreichen Sie unseren Standort auch über den ebenfalls bereitgestellten externen Link. Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter: https://policies.google.com/privacy",
       },
       {
         subtitle: "YouTube mit erweitertem Datenschutz",
