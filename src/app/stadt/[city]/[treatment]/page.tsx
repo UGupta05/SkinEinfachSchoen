@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { MapPin, Phone, Clock, ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Navigation } from 'lucide-react';
 import { GEO_CITIES } from '../../../../data/geoCities';
 import { TREATMENT_DETAILS } from '../../../../data/treatmentDetails';
+import { absoluteUrl } from '../../../../config/site';
 
 interface Props {
   params: Promise<{
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${treatmentData.title} ${cityData.name} | Kosmetikstudio SKIN`,
     description: `Suchen Sie eine professionelle Behandlung für ${treatmentData.title} in der Nähe von ${cityData.name}? Nur ${cityData.durationMin} Min. Fahrweg zu SKIN einfach schön in Osnabrück.`,
     alternates: {
-      canonical: `https://skineinfachschoen.de/stadt/${city}/${treatment}`,
+      canonical: absoluteUrl(`/stadt/${city}/${treatment}`),
     }
   };
 }
@@ -57,7 +58,7 @@ export default async function CityTreatmentLandingPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": `${treatmentData.title} - SKIN einfach schön`,
-    "image": `https://skineinfachschoen.de${treatmentData.image}`,
+    "image": absoluteUrl(treatmentData.image),
     "description": treatmentData.description,
     "provider": {
       "@type": "LocalBusiness",

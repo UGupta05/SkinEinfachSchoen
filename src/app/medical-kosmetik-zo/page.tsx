@@ -5,6 +5,9 @@ import { TreatmentTemplate } from '../../components/TreatmentTemplate';
 export const metadata: Metadata = {
   title: 'Medical Kosmetik ZO® Skin Health | Kosmetikstudio Osnabrück',
   description: 'Therapeutische Wirkstoffkosmetik von Dr. Zein Obagi in Osnabrück. Hochwirksam bei Pigmentstörungen, Akne, Rosacea & für nachhaltige Hautgesundheit.',
+  alternates: {
+    canonical: '/medical-kosmetik-zo',
+  },
 };
 
 export default function MedicalKosmetikZOPage() {

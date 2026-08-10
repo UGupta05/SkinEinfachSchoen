@@ -7,6 +7,9 @@ import { ScrollReveal } from '../../components/ScrollReveal';
 export const metadata: Metadata = {
   title: 'Unser Team | SKIN einfach schön Kosmetikstudio Osnabrück',
   description: 'Lernen Sie das Team von SKIN einfach schön kennen. Sofia Khaliq-Natawan (Dermo-Fach-PTA) und Isabel Duwendag (medizinische Kosmetikerin) beraten Sie kompetent.',
+  alternates: {
+    canonical: '/team',
+  },
 };
 
 export default function TeamPage() {

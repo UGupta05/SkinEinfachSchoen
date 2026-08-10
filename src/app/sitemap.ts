@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { GEO_CITIES } from '../data/geoCities';
 import { TREATMENT_DETAILS } from '../data/treatmentDetails';
+import { SITE_URL } from '../config/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://skineinfachschoen.de';
+  const baseUrl = SITE_URL;
   
   // Base Pages
   const staticPages = [
@@ -14,10 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/team',
     '/kontakt',
     '/terminbuchung',
-    '/impressum',
-    '/datenschutz'
+    '/shop',
+    // /impressum and /datenschutz are intentionally omitted: both are
+    // noindex, and listing noindex URLs in the sitemap is a mixed signal.
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    // Homepage must be listed as the canonical '/' form, not a bare origin.
+    url: route === '' ? `${baseUrl}/` : `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1.0 : 0.8,

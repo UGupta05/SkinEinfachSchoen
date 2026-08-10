@@ -1,9 +1,16 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 'lucide-react';
 import { TESTIMONIALS } from '../data/mockData';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { FaqAccordion } from '../components/FaqAccordion';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function Home() {
   const jsonLd = {

@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { absoluteUrl } from '../config/site';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -22,6 +23,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api/', '/termin-antwort'],
       }
     ],
-    sitemap: 'https://skineinfachschoen.de/sitemap.xml',
+    sitemap: absoluteUrl('/sitemap.xml'),
   };
 }

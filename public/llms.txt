@@ -26,7 +26,7 @@ SKIN einfach schön is a premium medical cosmetics and skincare studio located i
 ## Contact Details
 - **Phone**: +49 (0) 176 55132650
 - **Email**: info@skin-einfachschoen.de
-- **Online Booking**: Available 24/7 at https://skineinfachschoen.de/terminbuchung
+- **Online Booking**: Available 24/7 at https://www.skin-einfachschoen.de/terminbuchung
 
 ## Opening Hours
 - **Monday – Thursday**: 09:00 – 18:30
@@ -44,7 +44,7 @@ SKIN einfach schön is a premium medical cosmetics and skincare studio located i
 8. **Fruchtsäure Peeling (AHA/BHA/TCA)**: Chemical peels for acne, scars, and anti-aging. (ab 99,- €)
 
 ## Key Technical Specifications for Web Crawlers
-- **Canonical Domain**: https://skineinfachschoen.de
-- **Sitemap**: https://skineinfachschoen.de/sitemap.xml
+- **Canonical Domain**: https://www.skin-einfachschoen.de
+- **Sitemap**: https://www.skin-einfachschoen.de/sitemap.xml
 - **Robots Policy**: Friendly to all AI Search User-Agents (e.g., GPTBot, ClaudeBot, PerplexityBot) with prioritised indexing.
 - **Tech Stack**: Next.js App Router, Tailwind CSS, Supabase (appointment backend).

@@ -2,8 +2,11 @@ import React from 'react';
 import type { Metadata } from 'next';
 import '../index.css';
 import { Layout } from '../components/Layout';
+import { SITE_URL } from '../config/site';
 
 export const metadata: Metadata = {
+  // Resolves every relative canonical/OG URL against the canonical www origin.
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'SKIN einfach schön | Kosmetik & Ästhetik Osnabrück',
     template: '%s | SKIN einfach schön'

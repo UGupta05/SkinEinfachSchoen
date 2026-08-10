@@ -6,6 +6,7 @@ import { MapPin, Phone, Clock, ArrowRight, ShieldCheck, Star, Sparkles, Navigati
 import { GEO_CITIES } from '../../../data/geoCities';
 import { TREATMENT_DETAILS } from '../../../data/treatmentDetails';
 import { ScrollReveal } from '../../../components/ScrollReveal';
+import { SITE_URL, absoluteUrl } from '../../../config/site';
 
 interface Props {
   params: Promise<{
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Kosmetikstudio ${cityData.name} | SKIN einfach schön Kosmetik Osnabrück`,
     description: `Suchen Sie ein Kosmetikstudio nahe ${cityData.name}? SKIN einfach schön ist nur ${cityData.durationMin} Min. entfernt (Lotter Str. 33). JetPeel™, Microneedling, IPL & ZO Skin Health.`,
     alternates: {
-      canonical: `https://skineinfachschoen.de/stadt/${city}`,
+      canonical: absoluteUrl(`/stadt/${city}`),
     }
   };
 }
@@ -45,9 +46,9 @@ export default async function CityLandingPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
     "name": "SKIN einfach schön - Kosmetikstudio Osnabrück",
-    "image": "https://skineinfachschoen.de/images/treatments/jetpeel.png",
-    "@id": "https://skineinfachschoen.de/#salon",
-    "url": "https://skineinfachschoen.de",
+    "image": absoluteUrl('/images/treatments/jetpeel.png'),
+    "@id": `${SITE_URL}/#salon`,
+    "url": SITE_URL,
     "telephone": "+4917655132650",
     "priceRange": "$$",
     "address": {

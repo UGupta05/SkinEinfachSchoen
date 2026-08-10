@@ -5,6 +5,9 @@ import { TreatmentTemplate } from '../../components/TreatmentTemplate';
 export const metadata: Metadata = {
   title: 'Orthomolekulare Medizin | SKIN einfach schön Kosmetikstudio Osnabrück',
   description: 'Zellgesundheit und Nährstofftherapie für Ihre Haut. Datenbasierte Diagnostik, Laborwerte-Analyse und maßgeschneiderte Nährstoff-Cocktails für sichtbare Regeneration.',
+  alternates: {
+    canonical: '/orthomolekulare-medizin',
+  },
 };
 
 export default function OrthomolekulareMedizinPage() {

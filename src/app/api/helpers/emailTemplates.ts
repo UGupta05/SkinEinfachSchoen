@@ -1,3 +1,5 @@
+import { absoluteUrl } from '../../../config/site';
+
 const getEmailWrapper = (title: string, contentHtml: string): string => {
   const currentYear = new Date().getFullYear();
   return `<!DOCTYPE html>
@@ -300,7 +302,7 @@ export const getBookingCancelledTemplate = (
     <p>Falls dies ein Versehen war, oder Sie einen neuen Termin vereinbaren möchten, können Sie dies gerne jederzeit online tun.</p>
     
     <div class="button-container">
-      <a href="https://skineinfachschoen.de/terminbuchung" class="button">Neuen Termin buchen</a>
+      <a href="${absoluteUrl('/terminbuchung')}" class="button">Neuen Termin buchen</a>
     </div>
     
     <p style="margin-top: 30px;">Wir hoffen, Sie bald wieder bei uns begrüßen zu dürfen!</p>

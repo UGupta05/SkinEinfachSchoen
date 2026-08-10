@@ -1,7 +1,14 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/leistungen',
+  },
+};
 
 export default function LeistungenOverviewPage() {
   return (

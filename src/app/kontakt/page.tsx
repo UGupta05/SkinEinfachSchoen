@@ -5,6 +5,9 @@ import { KontaktClient } from './KontaktClient';
 export const metadata: Metadata = {
   title: 'Kontakt & Anfahrt | SKIN einfach schön Kosmetikstudio Osnabrück',
   description: 'Haben Sie Fragen oder möchten Sie einen Termin vereinbaren? Kontaktieren Sie uns per Formular, E-Mail oder rufen Sie uns in Osnabrück an.',
+  alternates: {
+    canonical: '/kontakt',
+  },
 };
 
 export default function KontaktPage() {

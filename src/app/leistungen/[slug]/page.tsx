@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${details.title} | Kosmetikstudio Osnabrück`,
     description: `${details.description.substring(0, 155)}...`,
+    alternates: {
+      canonical: `/leistungen/${slug}`,
+    },
   };
 }
 
