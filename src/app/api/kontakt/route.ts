@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createFormToken, detectSpam, escapeHtml, isValidEmail } from './spamGuard';
+
+export const dynamic = 'force-dynamic';
+
+// Hands out a signed timestamp token; POST rejects submissions without a valid one
+export async function GET() {
+  return NextResponse.json({ formToken: createFormToken() }, { headers: { 'Cache-Control': 'no-store' } });
+}
 
 // Simple in-memory rate limit store
 interface RateLimitInfo {
@@ -58,6 +66,19 @@ export async function POST(req: NextRequest) {
     if (!vorname || !nachname || !email || !nachricht) {
       return NextResponse.json({ error: 'Bad Request: Missing required fields' }, { status: 400 });
     }
+    if (!isValidEmail(email)) {
+      return NextResponse.json({
+        error: 'Bad Request: Invalid email',
+        message: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.'
+      }, { status: 400 });
+    }
+
+    // Pretend success for spam so bots get no signal to adapt
+    const spamReason = detectSpam(payload);
+    if (spamReason) {
+      console.warn(`Contact form spam blocked (${spamReason}) from ${ip}`);
+      return NextResponse.json({ success: true, message: 'Contact form message sent successfully' }, { status: 200 });
+    }
 
     const resendApiKey = process.env.RESEND_API_KEY;
     if (!resendApiKey) {
@@ -68,7 +89,7 @@ export async function POST(req: NextRequest) {
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'Skin Einfach Schön <onboarding@resend.dev>';
     const toEmail = 'info@skin-einfachschoen.de';
 
-    const subject = `Neue Kontaktanfrage: ${betreff} - von ${vorname} ${nachname}`;
+    const subject = `Neue Kontaktanfrage: ${betreff} - von ${vorname} ${nachname}`.replace(/[\r\n]+/g, ' ');
     
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
@@ -77,25 +98,25 @@ export async function POST(req: NextRequest) {
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
           <tr>
             <td style="padding: 8px 0; font-weight: bold; width: 150px; color: #4b5563;">Name:</td>
-            <td style="padding: 8px 0; color: #1f2937;">${vorname} ${nachname}</td>
+            <td style="padding: 8px 0; color: #1f2937;">${escapeHtml(vorname)} ${escapeHtml(nachname)}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">E-Mail:</td>
-            <td style="padding: 8px 0; color: #1f2937;"><a href="mailto:${email}" style="color: #02658d; text-decoration: underline;">${email}</a></td>
+            <td style="padding: 8px 0; color: #1f2937;"><a href="mailto:${escapeHtml(email)}" style="color: #02658d; text-decoration: underline;">${escapeHtml(email)}</a></td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">Telefon:</td>
-            <td style="padding: 8px 0; color: #1f2937;">${telefon || 'Nicht angegeben'}</td>
+            <td style="padding: 8px 0; color: #1f2937;">${escapeHtml(telefon) || 'Nicht angegeben'}</td>
           </tr>
           <tr>
             <td style="padding: 8px 0; font-weight: bold; color: #4b5563;">Betreff:</td>
-            <td style="padding: 8px 0; color: #1f2937;">${betreff}</td>
+            <td style="padding: 8px 0; color: #1f2937;">${escapeHtml(betreff)}</td>
           </tr>
         </table>
         
         <div style="margin-top: 25px; padding: 15px; background-color: #EFF4F6; border-radius: 6px; border-left: 4px solid #416373;">
           <h4 style="margin-top: 0; margin-bottom: 8px; color: #416373;">Nachricht:</h4>
-          <p style="margin: 0; color: #1f2937; white-space: pre-wrap; line-height: 1.5;">${nachricht}</p>
+          <p style="margin: 0; color: #1f2937; white-space: pre-wrap; line-height: 1.5;">${escapeHtml(nachricht)}</p>
         </div>
         
         <div style="margin-top: 30px; font-size: 11px; color: #9ca3af; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 15px;">

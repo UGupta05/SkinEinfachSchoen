@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapPin, Phone, Clock, Send, Check, Loader2 } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { ConsentMap } from '../../components/ConsentMap';
@@ -13,8 +13,20 @@ export function KontaktClient() {
     telefon: '',
     betreff: 'Beratungstermin',
     nachricht: '',
-    privacy: false
+    privacy: false,
+    website: '' // honeypot, must stay empty
   });
+
+  const [formToken, setFormToken] = useState('');
+
+  const loadFormToken = () => {
+    fetch('/api/kontakt', { cache: 'no-store' })
+      .then(res => res.json())
+      .then(data => setFormToken(data.formToken || ''))
+      .catch(err => console.error('Could not load form token:', err));
+  };
+
+  useEffect(loadFormToken, []);
 
   const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
@@ -30,11 +42,12 @@ export function KontaktClient() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, formToken })
       });
       
       if (response.ok) {
         setStatus('success');
+        loadFormToken();
         setTimeout(() => {
           setStatus('idle');
           setFormData({
@@ -44,7 +57,8 @@ export function KontaktClient() {
             telefon: '',
             betreff: 'Beratungstermin',
             nachricht: '',
-            privacy: false
+            privacy: false,
+            website: ''
           });
         }, 3000);
       } else {
@@ -107,6 +121,19 @@ export function KontaktClient() {
                 Senden Sie uns eine Nachricht
               </h2>
               <form onSubmit={handleSubmit} className="space-y-8">
+                {/* Honeypot: hidden from humans, filled by bots */}
+                <div aria-hidden="true" className="absolute -left-[9999px] w-px h-px overflow-hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleInputChange}
+                  />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative">
                     <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
