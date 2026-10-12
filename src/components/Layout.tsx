@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { RetinolNotice } from './RetinolNotice';
 
 interface LayoutProps {
   readonly children: React.ReactNode;
@@ -129,6 +130,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Main Page Area */}
       <main key={pathname} className="flex-1 pt-20 animate-page-entrance">
+        <RetinolNotice />
         {children}
       </main>
 
