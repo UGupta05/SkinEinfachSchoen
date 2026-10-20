@@ -156,7 +156,7 @@ export default function Home() {
                   Ablauf der dauerhaften Haarentfernung
                 </h3>
                 <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Lästige Haare langfristig und schonend reduzieren: Im Video zeigen wir Schritt für Schritt, wie die dauerhafte Haarentfernung in unserem Studio in Osnabrück abläuft, von der Beratung über den Schutz der Haut bis zum glatten Ergebnis. Wir arbeiten mit Diodenlaser, Alexandritlaser und IPL und wählen die Methode passend zu Ihrem Haut- und Haartyp.
+                  Lästige Haare langfristig und schonend entfernen: Im Video zeigen wir Schritt für Schritt, wie die dauerhafte Haarentfernung in unserem Studio in Osnabrück abläuft, von der Beratung über den Schutz der Haut bis zum glatten Ergebnis. Wir arbeiten mit Diodenlaser, Alexandritlaser und IPL und wählen die Methode passend zu Ihrem Haut- und Haartyp.
                 </p>
                 <Link
                   href="/dauerhafte-haarentfernung"
