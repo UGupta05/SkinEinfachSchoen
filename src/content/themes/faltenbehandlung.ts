@@ -52,7 +52,7 @@ export const page: ThemePage = {
       heading: 'Anti-Aging-Behandlung in Osnabrück: so gehen wir vor',
       paragraphs: [
         'Am Anfang steht meist die VISIA® 3D-Hautanalyse. Sie zeigt Falten, Hautstruktur und UV-Schäden und vergleicht die Werte mit Menschen Ihrer Altersgruppe. So sehen Sie, wo Ihre Haut steht, und wir können Behandlungen gezielt auswählen statt nach Gefühl.',
-        'Im Beratungsgespräch besprechen wir Ihre Wünsche, Ihre Pflege und mögliche Gründe, die gegen eine Methode sprechen. Daraus entsteht ein Plan aus Behandlungen im Studio und Pflege für zu Hause. Unsere Inhaberin Sofia Khaliq-Natawan ist für alle Behandlungen bei uns zertifiziert, und Isabel Duwendag bringt über 20 Jahre Erfahrung mit Haut mit.',
+        'Im Beratungsgespräch besprechen wir Ihre Wünsche, Ihre Pflege und mögliche Gründe, die gegen eine Methode sprechen. Daraus entsteht ein Plan aus Behandlungen im Studio und Pflege für zu Hause. Unsere Inhaberin Sofia Natawan ist für alle Behandlungen bei uns zertifiziert, und Isabel Duwendag bringt über 20 Jahre Erfahrung mit Haut mit.',
       ],
     },
     {

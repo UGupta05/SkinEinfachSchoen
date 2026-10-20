@@ -43,7 +43,7 @@ export default function Home() {
                 className="font-display text-4xl md:text-5xl font-bold text-background mb-6 leading-tight"
                 style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)' }}
               >
-                Ihr Kosmetikstudio in Osnabrück für gesunde, schöne Haut
+                Ihr Kosmetikstudio in Osnabrück für eine gesunde, schöne Haut
               </h1>
             </ScrollReveal>
             

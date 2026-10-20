@@ -41,7 +41,7 @@ export const page: TreatmentPage = {
       heading: 'Ausreinigung: Warum Fachwissen dabei wichtig ist',
       paragraphs: [
         'Das Ausreinigen ist der wichtigste und zugleich heikelste Teil der Behandlung. Wer Pickel selbst ausdrückt, presst den Inhalt oft tiefer ins Gewebe, verletzt die Haut mit den Fingernägeln und riskiert Entzündungen, Flecken oder kleine Narben.',
-        'Bei uns arbeiten Fachkräfte mit langjähriger Erfahrung in dermatologischen Praxen: Inhaberin Sofia Khaliq-Natawan ist Dermo-Fach-PTA, Isabel Duwendag medizinische Kosmetikerin mit über 20 Jahren Hauterfahrung. Wir tragen Handschuhe, achten genau auf Hygiene und arbeiten nur dort, wo eine Unreinheit reif ist. Stark entzündete Stellen lassen wir in Ruhe, damit sie sich nicht weiter ausbreiten.',
+        'Bei uns arbeiten Fachkräfte mit langjähriger Erfahrung in dermatologischen Praxen: Inhaberin Sofia Natawan ist Dermo-Fach-PTA, Isabel Duwendag medizinische Kosmetikerin mit über 20 Jahren Hauterfahrung. Wir tragen Handschuhe, achten genau auf Hygiene und arbeiten nur dort, wo eine Unreinheit reif ist. Stark entzündete Stellen lassen wir in Ruhe, damit sie sich nicht weiter ausbreiten.',
       ],
     },
     {

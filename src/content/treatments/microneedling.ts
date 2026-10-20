@@ -48,7 +48,7 @@ export const page: TreatmentPage = {
       paragraphs: [
         'Vor der ersten Behandlung besprechen wir Ihre Haut, Ihre Wünsche und mögliche Gegenanzeigen. Die VISIA® 3D-Hautanalyse kann dabei helfen, Poren, Falten und Pigmentierung objektiv zu erfassen und Veränderungen später zu vergleichen.',
         'Am Termin reinigen wir die Haut gründlich und desinfizieren sie. Anschließend bearbeiten wir die Haut Zone für Zone und arbeiten passende Wirkstoffe ein. Zum Schluss folgen eine beruhigende Pflege und Sonnenschutz. Insgesamt sollten Sie ab 40 Minuten einplanen. Das Studio liegt in der Lotter Straße 33 in Osnabrück, kostenfreie Parkplätze gibt es direkt im Hof.',
-        'Unser Team bringt viel Erfahrung aus dermatologischen Praxen mit: Inhaberin Sofia Khaliq-Natawan ist Dermo-Fach-PTA und für alle Behandlungen im Studio zertifiziert, Isabel Duwendag ist medizinische Kosmetikerin mit über 20 Jahren Hauterfahrung.',
+        'Unser Team bringt viel Erfahrung aus dermatologischen Praxen mit: Inhaberin Sofia Natawan ist Dermo-Fach-PTA und für alle Behandlungen im Studio zertifiziert, Isabel Duwendag ist medizinische Kosmetikerin mit über 20 Jahren Hauterfahrung.',
       ],
     },
     {

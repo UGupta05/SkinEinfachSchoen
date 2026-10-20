@@ -81,7 +81,7 @@ export const page: ThemePage = {
     {
       heading: 'Fachkunde nach NiSV und Ablauf bei SKIN in Osnabrück',
       paragraphs: [
-        'Die NiSV, die Verordnung zum Schutz vor schädlichen Wirkungen nichtionisierender Strahlung, schreibt für kosmetische Anwendungen mit Laser und IPL eine nachgewiesene Fachkunde vor. Bei uns erfolgt jede Haarentfernung mit Fachkunde nach NiSV. Inhaberin Sofia Khaliq-Natawan ist PTA und Dermo-Fach-PTA, hat eine Weiterbildung im Bereich IPL und kennt die Haut aus langjähriger Arbeit in dermatologischen Praxen und Apotheken. Laser und IPL setzen wir ausschließlich zur Haarentfernung ein.',
+        'Die NiSV, die Verordnung zum Schutz vor schädlichen Wirkungen nichtionisierender Strahlung, schreibt für kosmetische Anwendungen mit Laser und IPL eine nachgewiesene Fachkunde vor. Bei uns erfolgt jede Haarentfernung mit Fachkunde nach NiSV. Inhaberin Sofia Natawan ist PTA und Dermo-Fach-PTA, hat eine Weiterbildung im Bereich IPL und kennt die Haut aus langjähriger Arbeit in dermatologischen Praxen und Apotheken. Laser und IPL setzen wir ausschließlich zur Haarentfernung ein.',
         'Ihre Haarentfernung in Osnabrück beginnt mit einer Beratung: Wir prüfen Hauttyp, Haarfarbe und Haarstärke, fragen nach Medikamenten und Hautbesonderheiten und erklären, welche Methode wir empfehlen und warum. Termine buchen Sie online, kostenlose Parkplätze finden Sie im Hof der Lotter Straße 33.',
       ],
     },

@@ -47,7 +47,7 @@ export const page: ThemePage = {
       heading: 'Porenverkleinerung bei SKIN in Osnabrück: der Ablauf',
       paragraphs: [
         'Am Anfang steht die VISIA® 3D-Hautanalyse. Sie zeigt Poren, Textur und Talgverteilung genauer, als es mit bloßem Auge möglich ist, und dient später als Vergleich. Auf dieser Grundlage besprechen wir, welche Behandlungen in welcher Reihenfolge sinnvoll sind, und was Sie realistisch erwarten können.',
-        'Beraten werden Sie von Fachkräften mit langjähriger Erfahrung in dermatologischen Praxen. Sofia Khaliq-Natawan ist für jede Behandlung in unserem Studio zertifiziert. Sie erreichen uns in der Lotter Straße 33 in Osnabrück, geparkt wird kostenlos im Hof.',
+        'Beraten werden Sie von Fachkräften mit langjähriger Erfahrung in dermatologischen Praxen. Sofia Natawan ist für jede Behandlung in unserem Studio zertifiziert. Sie erreichen uns in der Lotter Straße 33 in Osnabrück, geparkt wird kostenlos im Hof.',
       ],
     },
     {

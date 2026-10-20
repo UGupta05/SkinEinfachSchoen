@@ -56,7 +56,7 @@ export const page: TreatmentPage = {
       paragraphs: [
         'Am Anfang steht ein ausführliches Gespräch über Ihre Wünsche, Ihre Haut und mögliche Ausschlussgründe. Auf Wunsch ergänzen wir es mit der VISIA® 3D-Hautanalyse, die Falten, Poren und Hautstruktur sichtbar macht und spätere Vergleiche erleichtert.',
         'Am Behandlungstag reinigen und desinfizieren wir die Haut gründlich. Dann stellen wir Nadeltiefe und Energie passend zu jedem Areal ein und behandeln Zone für Zone. Je nach Fläche dauert die eigentliche Behandlung ab 15 Minuten. Zum Abschluss tragen wir eine beruhigende Pflege und Sonnenschutz auf.',
-        'Spürbar ist ein Pieksen und ein kurzes Wärmegefühl. Die meisten Kundinnen und Kunden empfinden die Behandlung als gut auszuhalten, das Empfinden hängt aber vom Areal und der gewählten Intensität ab. Durchgeführt wird sie von Inhaberin Sofia Khaliq-Natawan, die für alle Behandlungen im Studio zertifiziert ist. Parkplätze finden Sie kostenfrei bei uns im Hof.',
+        'Spürbar ist ein Pieksen und ein kurzes Wärmegefühl. Die meisten Kundinnen und Kunden empfinden die Behandlung als gut auszuhalten, das Empfinden hängt aber vom Areal und der gewählten Intensität ab. Durchgeführt wird sie von Inhaberin Sofia Natawan, die für alle Behandlungen im Studio zertifiziert ist. Parkplätze finden Sie kostenfrei bei uns im Hof.',
       ],
     },
     {

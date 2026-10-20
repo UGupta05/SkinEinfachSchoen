@@ -47,7 +47,7 @@ export const page: ThemePage = {
       heading: 'Beratung zur Hautstraffung in Osnabrück',
       paragraphs: [
         'Am Anfang steht ein persönliches Gespräch in unserem Studio in der Lotter Straße. Mit der VISIA® 3D-Hautanalyse können wir Falten und Hautstruktur sichtbar machen und als Ausgangspunkt dokumentieren. Danach empfehlen wir, welche Behandlung zu Ihrer Haut passt. Wie viele Sitzungen sinnvoll sind, legen wir nach der Hautanalyse gemeinsam fest.',
-        'Inhaberin Sofia Khaliq-Natawan ist Dermo-Fach-PTA, hat lange in dermatologischen Praxen gearbeitet und ist für alle Behandlungen bei uns zertifiziert. Wir prüfen auch, ob etwas gegen eine Behandlung spricht, etwa eine Schwangerschaft, ein Herzschrittmacher oder eine akute Entzündung.',
+        'Inhaberin Sofia Natawan ist Dermo-Fach-PTA, hat lange in dermatologischen Praxen gearbeitet und ist für alle Behandlungen bei uns zertifiziert. Wir prüfen auch, ob etwas gegen eine Behandlung spricht, etwa eine Schwangerschaft, ein Herzschrittmacher oder eine akute Entzündung.',
       ],
     },
     {

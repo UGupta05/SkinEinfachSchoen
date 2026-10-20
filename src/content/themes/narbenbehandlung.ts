@@ -37,7 +37,7 @@ export const page: ThemePage = {
       heading: 'Narbenbehandlung in Osnabrück: Ablauf und Beratung',
       paragraphs: [
         'Bevor wir eine Narbe behandeln, sehen wir sie uns genau an. Die VISIA® 3D-Hautanalyse zeigt Hautstruktur und Vertiefungen und hält den Ausgangszustand fest, damit sich Veränderungen später vergleichen lassen. Danach stellen wir einen Plan zusammen, der oft mehrere Verfahren verbindet. Wie viele Sitzungen sinnvoll sind, legen wir nach der Hautanalyse gemeinsam fest.',
-        'Unser Studio liegt in der Lotter Straße 33 in Osnabrück. Inhaberin Sofia Khaliq-Natawan und Isabel Duwendag haben beide lange in dermatologischen Praxen gearbeitet. Narbenbehandlung ist Geduldsarbeit: Neues Kollagen bildet sich über Monate, die Haut verändert sich schrittweise.',
+        'Unser Studio liegt in der Lotter Straße 33 in Osnabrück. Inhaberin Sofia Natawan und Isabel Duwendag haben beide lange in dermatologischen Praxen gearbeitet. Narbenbehandlung ist Geduldsarbeit: Neues Kollagen bildet sich über Monate, die Haut verändert sich schrittweise.',
       ],
     },
     {

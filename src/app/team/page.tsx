@@ -7,8 +7,8 @@ import { ScrollReveal } from '../../components/ScrollReveal';
 
 
 export const metadata: Metadata = {
-  title: 'Team: Sofia Khaliq-Natawan & Isabel Duwendag',
-  description: 'Lernen Sie das Team von SKIN einfach schön kennen. Sofia Khaliq-Natawan (Dermo-Fach-PTA) und Isabel Duwendag (medizinische Kosmetikerin) beraten Sie kompetent.',
+  title: 'Team: Sofia Natawan & Isabel Duwendag',
+  description: 'Lernen Sie das Team von SKIN einfach schön kennen. Sofia Natawan (Dermo-Fach-PTA) und Isabel Duwendag (medizinische Kosmetikerin) beraten Sie kompetent.',
   alternates: {
     canonical: '/team',
   },
@@ -41,7 +41,7 @@ export default function TeamPage() {
           <ScrollReveal variant="fade-in-right" className="relative">
             <div className="aspect-[3/2] bg-soft-shell overflow-hidden rounded-lg relative">
               <Image
-                alt="Sofia Khaliq-Natawan und Isabel Duwendag im Studio"
+                alt="Sofia Natawan und Isabel Duwendag im Studio"
                 src="/images/team/team_hero.jpg"
                 fill
                 priority
@@ -68,12 +68,12 @@ export default function TeamPage() {
             <div className="w-20 h-1 bg-sky-accent mx-auto"></div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Sofia Khaliq-Natawan */}
+            {/* Sofia Natawan */}
             <ScrollReveal variant="fade-in-up" delay={0} className="group">
               <div className="bg-pure-white medical-glow overflow-hidden transition-all duration-500 hover:-translate-y-2">
                 <div className="aspect-[4/5] relative overflow-hidden">
                   <Image
-                    alt="Sofia Khaliq-Natawan"
+                    alt="Sofia Natawan"
                     src="/images/team/sofia.jpg"
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
@@ -88,7 +88,7 @@ export default function TeamPage() {
                 <div className="p-8 space-y-6">
                   <div>
                     <h3 className="font-headline-sm text-headline-sm text-primary">
-                      Sofia Khaliq-Natawan
+                      Sofia Natawan
                     </h3>
                     <p className="text-slate-muted font-label-caps text-xs mt-1">
                       PTA | Pharmazieökonomin | Dermo-Fach-PTA

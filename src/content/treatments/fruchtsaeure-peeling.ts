@@ -50,7 +50,7 @@ export const page: TreatmentPage = {
     {
       heading: 'Ablauf des Fruchtsäurepeelings bei SKIN in Osnabrück',
       paragraphs: [
-        'Vor dem ersten Peeling besprechen wir Ihre Pflege, Medikamente und frühere Behandlungen. Wichtig sind vor allem Retinol- oder Retinoid-Produkte, Akne-Medikamente wie Isotretinoin, Herpes-Neigung und frische Bräune. Auf Wunsch hilft eine VISIA® 3D-Hautanalyse, Pigmente und Poren genauer einzuschätzen. Unsere Inhaberin Sofia Khaliq-Natawan bringt als Dermo-Fach-PTA langjährige Erfahrung mit Wirkstoffen aus Apotheke und dermatologischen Praxen mit.',
+        'Vor dem ersten Peeling besprechen wir Ihre Pflege, Medikamente und frühere Behandlungen. Wichtig sind vor allem Retinol- oder Retinoid-Produkte, Akne-Medikamente wie Isotretinoin, Herpes-Neigung und frische Bräune. Auf Wunsch hilft eine VISIA® 3D-Hautanalyse, Pigmente und Poren genauer einzuschätzen. Unsere Inhaberin Sofia Natawan bringt als Dermo-Fach-PTA langjährige Erfahrung mit Wirkstoffen aus Apotheke und dermatologischen Praxen mit.',
         'Die Haut wird gereinigt und entfettet, empfindliche Stellen wie Augenwinkel und Nasenflügel schützen wir. Dann tragen wir die Säure mit einem Pinsel auf und beobachten die Haut während der Einwirkzeit genau. Ein Kribbeln oder leichtes Brennen ist normal. Anschließend neutralisieren oder entfernen wir das Peeling, beruhigen die Haut und tragen Pflege mit Lichtschutz auf. Je nach Peeling dauert der Termin ab 30 Minuten.',
       ],
     },
