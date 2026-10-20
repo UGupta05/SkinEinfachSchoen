@@ -32,7 +32,7 @@ export const BUSINESS = {
   ],
 } as const;
 
-/** Towns the studio draws customers from; mirrors the /stadt landing pages. */
+/** Towns the studio draws customers from; mirrors src/data/nearbyTowns.ts. */
 export const AREA_SERVED = [
   'Osnabrück',
   'Georgsmarienhütte',

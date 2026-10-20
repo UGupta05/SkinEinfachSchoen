@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { AdminPageClient } from './AdminPageClient';
 
 export const metadata: Metadata = {
-  title: 'Admin Dashboard | SKIN einfach schön',
+  title: 'Admin Dashboard',
   robots: 'noindex, nofollow',
 };
 

@@ -1,12 +1,3 @@
-export interface TreatmentItem {
-  readonly id: string;
-  readonly name: string;
-  readonly category: string;
-  readonly icon: string;
-  readonly link: string;
-  readonly description: string;
-}
-
 export interface TestimonialItem {
   readonly name: string;
   readonly role: string;
@@ -14,72 +5,6 @@ export interface TestimonialItem {
   readonly rating: number;
   readonly avatar: string;
 }
-
-export interface TeamMember {
-  readonly name: string;
-  readonly role: string;
-  readonly desc: string;
-  readonly image: string;
-}
-
-export const TREATMENTS: readonly TreatmentItem[] = [
-  {
-    id: "ipl",
-    name: "Intense Pulsed Light (IPL)",
-    category: "Anti-Aging & Haarentfernung",
-    icon: "light_mode",
-    link: "/leistungen/ipl",
-    description: "Präzise Lichttechnologie zur dauerhaften Haarentfernung und Hautverjüngung. Wirkt effektiv gegen Pigmentflecken und vaskuläre Veränderungen."
-  },
-  {
-    id: "visia",
-    name: "Visia 3D Hautanalyse",
-    category: "Hautanalyse",
-    icon: "3d_rotation",
-    link: "/leistungen/visia",
-    description: "Blicken Sie unter die Oberfläche. Unsere computergestützte Analyse macht Poren, Falten und Sonnenschäden sichtbar, um Ihre Behandlung exakt zu planen."
-  },
-  {
-    id: "jetpeel",
-    name: "JetPeel Treatment",
-    category: "High-Tech Hydration & Tiefenreinigung",
-    icon: "water_drop",
-    link: "/leistungen/jetpeel",
-    description: "Nadelfreie Einschleusung von Wirkstoffen mittels Hochgeschwindigkeit. Reinigt porentief und hydratisiert die Haut in tiefsten Schichten."
-  },
-  {
-    id: "mrf",
-    name: "MRF Microneedling",
-    category: "Straffung & Anti-Aging",
-    icon: "grid_view",
-    link: "/leistungen/microneedling",
-    description: "Die ultimative Anti-Aging Waffe. Kombiniert Microneedling mit Radiofrequenz-Energie für maximale Kollagenstimulation und Hautstraffung."
-  },
-  {
-    id: "dermaneedling",
-    name: "Microneedling / Dermaneedling",
-    category: "Hauterneuerung & Kollagenaufbau",
-    icon: "spa",
-    link: "/leistungen/dermaneedling",
-    description: "Klassisches Microneedling (Dermaneedling) zur gezielten Behandlung von Narben, Fältchen und Porenverfeinerung."
-  },
-  {
-    id: "meso",
-    name: "Meso BB Glow",
-    category: "Teint & Glow",
-    icon: "brush",
-    link: "/leistungen/meso-bb-glow",
-    description: "Seidiges Hautbild und ein ebenmäßiger Teint ganz ohne tägliches Make-up."
-  },
-  {
-    id: "saeure",
-    name: "Fruchtsäure & TCA Peeling",
-    category: "Hauterneuerung",
-    icon: "science",
-    link: "/leistungen/fruchtsaeure-peeling",
-    description: "Medizinisch kontrollierte AHA, BHA & TCA Peelings für ein verfeinertes Hautbild, gemilderte Fältchen und reinere Poren."
-  }
-];
 
 export const TESTIMONIALS: readonly TestimonialItem[] = [
   {
@@ -102,21 +27,6 @@ export const TESTIMONIALS: readonly TestimonialItem[] = [
     text: "Mein absolutes Highlight ist die JetPeel-Behandlung bei SKIN einfach schön. Meine feuchtigkeitsarme Haut sieht danach immer sofort prall, erholt und super frisch aus. Die Wirkstoffe werden spürbar tief in die Haut geschleust, ganz ohne Nadeln oder Schmerzen. Sofia berät mit einer so sympathischen, ruhigen Art, dass man sich sofort wohlfühlt. Sie schaut sich die Haut vor jeder Sitzung genau an und passt die Seren individuell an das aktuelle Hautbedürfnis an. Ich gehe jedes Mal tiefenentspannt und mit einem tollen Glow nach Hause. Einfach exzellent!",
     rating: 5,
     avatar: "/images/team/avatar_julian.png"
-  }
-];
-
-export const TEAM: readonly TeamMember[] = [
-  {
-    name: "Alexandra Becker",
-    role: "Gründerin & Fachkosmetikerin",
-    desc: "Spezialistin für medizinische Kosmetik und apparative Anti-Aging Verfahren mit über 15 Jahren Erfahrung.",
-    image: "/images/team/avatar_elena.png"
-  },
-  {
-    name: "Dr. med. Christian Schulze",
-    role: "Dermatologischer Berater",
-    desc: "Unterstützt unser Team bei medizinischen Fragen und der Entwicklung individueller Wirkstofftherapien.",
-    image: "/images/team/avatar_julian.png"
   }
 ];
 

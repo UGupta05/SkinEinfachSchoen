@@ -6,11 +6,36 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { RetinolNotice } from './RetinolNotice';
 
-interface LayoutProps {
-  readonly children: React.ReactNode;
+export interface FooterLink {
+  readonly name: string;
+  readonly path: string;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+interface LayoutProps {
+  readonly children: React.ReactNode;
+  /** Passed in from the server root layout so page copy stays out of the client bundle. */
+  readonly treatmentLinks: readonly FooterLink[];
+  readonly themeLinks: readonly FooterLink[];
+}
+
+const footerLinkClass = 'font-sans text-sm text-tertiary hover:text-primary transition-colors';
+
+function FooterColumn({ title, links }: { readonly title: string; readonly links: readonly FooterLink[] }) {
+  return (
+    <div>
+      <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">{title}</h4>
+      <ul className="space-y-3">
+        {links.map((link) => (
+          <li key={link.path}>
+            <Link href={link.path} className={footerLinkClass}>{link.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeLinks }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -136,7 +161,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Footer */}
       <footer className="w-full py-section-padding-sm bg-soft-shell border-t border-outline-variant/10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 max-w-container-max mx-auto px-margin-mobile md:px-gutter">
           <div>
             <h3 className="font-display text-lg text-primary mb-4 font-bold uppercase tracking-wider">SKIN</h3>
             <p className="font-sans text-sm text-tertiary mb-6">
@@ -182,11 +207,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           </div>
 
+          <FooterColumn title="Behandlungen" links={treatmentLinks} />
+          <FooterColumn title="Hautanliegen" links={themeLinks} />
+
           <div>
             <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Navigation</h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/leistungen" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Leistungen</Link>
+              </li>
+              <li>
+                <Link href="/preise" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Preise</Link>
               </li>
               <li>
                 <Link href="/medical-kosmetik-zo" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Medical Kosmetik ZO</Link>

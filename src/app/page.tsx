@@ -1,12 +1,16 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Sparkles, Star, ShieldCheck, CheckCircle2, Trophy, ExternalLink } from 'lucide-react';
-import { TESTIMONIALS } from '../data/mockData';
+import Image from 'next/image';
+import { Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { FaqAccordion } from '../components/FaqAccordion';
-import { SITE_URL, absoluteUrl } from '../config/site';
-import { BUSINESS, AREA_SERVED } from '../config/business';
+import { JsonLd } from '../components/JsonLd';
+import { LinkCard } from '../components/content/LinkCard';
+import { ReviewsSection } from '../components/ReviewsSection';
+import { YouTubeFacade } from '../components/YouTubeFacade';
+import { salonSchema } from '../lib/schema';
+import { THEME_LIST, themePath } from '../content';
 
 export const metadata: Metadata = {
   alternates: {
@@ -15,91 +19,43 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BeautySalon",
-    "@id": `${SITE_URL}/#salon`,
-    "name": BUSINESS.name,
-    "image": absoluteUrl('/images/home/logo.png'),
-    "logo": absoluteUrl('/images/home/logo.png'),
-    "description": "Ihr Kosmetikstudio in Osnabrück für medizinische Kosmetik, JetPeel, IPL Haarentfernung, Microneedling & ZO Skin Health. Wissenschaftliche Präzision für Ihre Haut.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": BUSINESS.address.street,
-      "addressLocality": BUSINESS.address.city,
-      "postalCode": BUSINESS.address.postalCode,
-      "addressCountry": BUSINESS.address.country
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": BUSINESS.geo.latitude,
-      "longitude": BUSINESS.geo.longitude
-    },
-    "hasMap": BUSINESS.googleBusinessUrl,
-    "sameAs": BUSINESS.sameAs,
-    "areaServed": AREA_SERVED.map((name) => ({
-      "@type": "City",
-      "name": name
-    })),
-    "telephone": BUSINESS.telephone,
-    "email": BUSINESS.email,
-    "priceRange": "$$",
-    "currenciesAccepted": "EUR",
-    "url": SITE_URL,
-    // Mirrors src/config/openingHours.ts — keep both in sync.
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        "opens": "09:00",
-        "closes": "18:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
-      }
-    ]
-  };
-
   return (
     <div className="overflow-x-hidden">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={salonSchema()} />
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            alt="SKIN Clinic Background"
-            className="w-full h-full object-cover"
+          <Image
+            alt="Behandlungsraum von SKIN einfach schön in Osnabrück"
             src="/images/home/home_hero_new_3.jpg"
-          />          
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
 
         <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
           <div className="max-w-2xl">
-            <ScrollReveal variant="fade-in-up" delay={100}>
+            <ScrollReveal variant="fade-in-up" delay={100} immediate>
               <h1 
                 className="font-display text-4xl md:text-5xl font-bold text-background mb-6 leading-tight"
                 style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)' }}
               >
-                Wissenschaftliche Präzision für Ihre natürliche Schönheit.
+                Ihr Kosmetikstudio in Osnabrück für gesunde, schöne Haut
               </h1>
             </ScrollReveal>
             
-            <ScrollReveal variant="fade-in-up" delay={250}>
+            <ScrollReveal variant="fade-in-up" delay={250} immediate>
               <p 
                 className="font-sans text-lg text-background mb-10 leading-relaxed"
                 style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15)' }}
               >
-                Wir kombinieren modernste medizinische Kosmetik mit einem ganzheitlichen Wohlfühlkonzept. Erleben Sie Hautpflege auf einem neuen Level an Exzellenz.
+                Radiofrequenz-Microneedling, JetPeel, dauerhafte Haarentfernung und medizinische Kosmetik an der Lotter Straße. Jede Behandlung beginnt bei uns mit einer gründlichen Hautanalyse und ehrlicher Beratung.
               </p>
             </ScrollReveal>
             
-            <ScrollReveal variant="fade-in-up" delay={400}>
+            <ScrollReveal variant="fade-in-up" delay={400} immediate>
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/leistungen"
@@ -136,13 +92,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
                 <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/W5CCNDCyFuw"
-                    title="Wir sind SKIN einfach schön! Lerne uns kennen"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
+                  <YouTubeFacade videoId="W5CCNDCyFuw" title="Wir sind SKIN einfach schön! Lerne uns kennen" />
                 </div>
               </ScrollReveal>
               <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
@@ -168,13 +118,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <ScrollReveal variant="fade-in-right" className="lg:col-span-6 lg:order-2">
                 <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/OLpqOJyt7I8"
-                    title="Wie sich die Haut positiv verändert"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
+                  <YouTubeFacade videoId="OLpqOJyt7I8" title="Wie sich die Haut positiv verändert" />
                 </div>
               </ScrollReveal>
               <ScrollReveal variant="fade-in-left" className="lg:col-span-6 lg:order-1 space-y-6">
@@ -200,13 +144,7 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
                 <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/Qc7Ay8-dTiY"
-                    title="Ablauf der dauerhaften Haarentfernung"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
+                  <YouTubeFacade videoId="Qc7Ay8-dTiY" title="Ablauf der dauerhaften Haarentfernung" />
                 </div>
               </ScrollReveal>
               <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
@@ -217,13 +155,13 @@ export default function Home() {
                   Ablauf der dauerhaften Haarentfernung
                 </h3>
                 <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Störende Haare dauerhaft und schonend entfernen. Wir zeigen Ihnen Schritt für Schritt, wie eine professionelle Behandlung zur dauerhaften Haarentfernung mit modernster IPL-Technologie in unserem Studio abläuft – von der Beratung über den Schutz der Haut bis hin zum glatten Ergebnis. Schmerzfrei, sicher und effektiv.
+                  Lästige Haare langfristig und schonend reduzieren: Im Video zeigen wir Schritt für Schritt, wie die dauerhafte Haarentfernung in unserem Studio in Osnabrück abläuft, von der Beratung über den Schutz der Haut bis zum glatten Ergebnis. Wir arbeiten mit Diodenlaser, Alexandritlaser und IPL und wählen die Methode passend zu Ihrem Haut- und Haartyp.
                 </p>
                 <Link
-                  href="/leistungen/ipl"
+                  href="/dauerhafte-haarentfernung"
                   className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
                 >
-                  Haarentfernung entdecken
+                  Zur dauerhaften Haarentfernung
                 </Link>
               </ScrollReveal>
             </div>
@@ -266,10 +204,13 @@ export default function Home() {
             <ScrollReveal variant="fade-in-right" className="md:col-span-7 grid grid-cols-2 gap-4">
               <div className="space-y-4 pt-12">
                 <div className="aspect-[3/4] overflow-hidden rounded-lg">
-                  <img
-                    alt="Facial treatment close-up"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                  <Image
+                    alt="Gesichtsbehandlung bei SKIN einfach schön"
                     src="/images/home/treatment_closeup_new.jpg"
+                    width={576}
+                    height={1024}
+                    sizes="(min-width: 768px) 320px, 45vw"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                   />
                 </div>
                 <div className="bg-soft-shell p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
@@ -288,10 +229,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="aspect-[3/4] overflow-hidden rounded-lg">
-                  <img
-                    alt="Modern medical clinic lobby"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+                  <Image
+                    alt="Beratung im Studio von SKIN einfach schön"
                     src="/images/home/consultation_team.jpg"
+                    width={695}
+                    height={1024}
+                    sizes="(min-width: 768px) 320px, 45vw"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                   />
                 </div>
               </div>
@@ -316,10 +260,12 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-gutter">
             {/* Bento Card 1: Anti Aging */}
             <ScrollReveal variant="fade-in-up" delay={0} className="md:col-span-2 md:row-span-2 relative group overflow-hidden medical-glow rounded-lg min-h-[400px]">
-              <img
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                alt="MRF Microneedling treatment"
+              <Image
+                alt="Radiofrequenz-Microneedling bei SKIN einfach schön in Osnabrück"
                 src="/images/home/mrf_microneedling.jpg"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-onyx-text/80 via-onyx-text/20 to-transparent"></div>
               <div className="absolute bottom-0 left-0 p-8 w-full">
@@ -327,16 +273,16 @@ export default function Home() {
                   Core Treatment
                 </span>
                 <h3 className="font-display text-2xl font-bold text-pure-white mb-4">
-                  MRF Microneedling
+                  Radiofrequenz-Microneedling (MRF)
                 </h3>
                 <p className="font-sans text-sm text-pure-white/80 mb-6">
-                  Die ultimative Anti-Aging Waffe. Kombiniert Microneedling mit Radiofrequenz-Energie für maximale Kollagenstimulation und Hautstraffung.
+                  Microneedling kombiniert mit Radiofrequenz-Wärme: für straffere Haut, feinere Poren und ein glatteres Hautbild bei Falten und Aknenarben.
                 </p>
                 <Link
-                  href="/leistungen/microneedling"
+                  href="/leistungen/radiofrequenz-microneedling"
                   className="text-pure-white font-display text-xs font-bold flex items-center gap-2 group/link uppercase tracking-wider"
                 >
-                  Details entdecken <span className="transition-transform group-hover/link:translate-x-2">→</span>
+                  Zum Radiofrequenz-Microneedling <span className="transition-transform group-hover/link:translate-x-2">→</span>
                 </Link>
               </div>
             </ScrollReveal>
@@ -348,17 +294,17 @@ export default function Home() {
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <h3 className="font-display text-xl font-bold text-primary mb-3">
-                  Problemhaut-Therapie
+                  Unreine Haut &amp; Akne
                 </h3>
                 <p className="font-sans text-sm text-tertiary">
-                  Spezialbehandlungen für Akne, Rosacea und Couperose mit medizinisch fundierten Wirkstoffen.
+                  Gesichtsreinigung, Peelings und ZO Skin Health für ein klareres Hautbild, abgestimmt auf Ihre Haut.
                 </p>
               </div>
               <Link
-                href="/medical-kosmetik-zo"
+                href="/akne-behandlung"
                 className="text-primary font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-70 mt-6"
               >
-                Mehr erfahren <span>+</span>
+                Zur Akne-Behandlung <span>+</span>
               </Link>
             </ScrollReveal>
 
@@ -367,17 +313,17 @@ export default function Home() {
               <div>
                 <Sparkles className="text-sky-accent w-8 h-8 mb-6" />
                 <h3 className="font-display text-lg font-bold mb-3">
-                  JetPeel™ Technologie
+                  JetPeel
                 </h3>
                 <p className="font-sans text-xs opacity-85">
-                  Nadelfreie Einschleusung von Wirkstoffen mittels Hochgeschwindigkeit für porentiefe Frische.
+                  Nadelfreie Tiefenreinigung und Feuchtigkeit mit einem feinen Hochdruckstrahl, für sofortigen Glow ohne Ausfallzeit.
                 </p>
               </div>
               <Link
                 href="/leistungen/jetpeel"
                 className="font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-80 mt-4 text-sky-accent"
               >
-                Explore <span>↗</span>
+                Zum JetPeel <span>↗</span>
               </Link>
             </ScrollReveal>
 
@@ -385,69 +331,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-section-padding-lg bg-pure-white">
+      {/* Skin concerns: internal links to the theme landing pages */}
+      <section className="py-section-padding-lg bg-pure-white border-b border-outline-variant/10">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-            <ScrollReveal variant="blur-in" className="max-w-xl">
-              <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-                Stimmen
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-                Was unsere Kunden sagen
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            {TESTIMONIALS.map((t, idx) => (
-              <ScrollReveal
-                key={t.name}
-                variant="fade-in-up"
-                delay={idx * 150}
-                className={`p-10 medical-glow rounded-lg flex flex-col justify-between transition-transform duration-500 hover:scale-[1.02] ${
-                  idx === 1 ? 'bg-primary text-pure-white' : 'bg-soft-shell text-primary'
-                }`}
-              >
-                <div>
-                  <div className="flex gap-1 mb-6 text-sky-accent">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className={`font-sans text-base italic mb-8 leading-relaxed ${idx === 1 ? 'text-pure-white' : 'text-primary'}`}>
-                    "{t.text}"
-                  </p>
-                </div>
-                
-                <div className="flex items-center gap-4 mt-4 border-t border-outline-variant/10 pt-4">
-                  <div>
-                    <h4 className={`font-display text-xs font-bold uppercase tracking-wider ${idx === 1 ? 'text-pure-white' : 'text-primary'}`}>
-                      {t.name}
-                    </h4>
-                    <p className={`text-[10px] font-display font-bold uppercase tracking-widest mt-1 ${idx === 1 ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
-                      {t.role}
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
+          <ScrollReveal variant="blur-in" className="text-center mb-12">
+            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
+              Ihr Hautanliegen
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+              Wobei können wir Ihnen helfen?
+            </h2>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {THEME_LIST.map((t) => (
+              <LinkCard key={t.slug} href={themePath(t.slug)} title={t.name} text={t.teaser} />
             ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <a
-              href="https://www.google.com/maps/place/SKIN+einfach+sch%C3%B6n/@52.2743486,8.0410559,17z/data=!4m8!3m7!1s0x47ba966380c5d64d:0x2280d52723c3b036!8m2!3d52.2743486!4d8.0410559!9m1!1b1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
-            >
-              Alle Rezensionen auf Google ansehen
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <LinkCard
+              href="/leistungen"
+              title="Alle Behandlungen"
+              text="Die komplette Übersicht unserer Behandlungen mit Dauer und Preisen."
+            />
           </div>
         </div>
       </section>
+
+      <ReviewsSection />
 
       {/* FAQ Section */}
       <section className="py-section-padding-lg bg-soft-shell/20 border-t border-outline-variant/10">

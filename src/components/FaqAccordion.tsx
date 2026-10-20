@@ -12,7 +12,7 @@ interface FaqItem {
 const FAQ_ITEMS: readonly FaqItem[] = [
   {
     question: "Welche kosmetischen Behandlungen bieten Sie in Osnabrück an?",
-    answer: "Wir bieten ein breites Spektrum an hocheffektiven Gesichtsbehandlungen an, darunter das innovative JetPeel, Radiofrequenz-Microneedling (MRF), dauerhafte IPL-Haarentfernung, Meso BB Glow für einen ebenmäßigen Teint sowie die wissenschaftlich fundierte Orthomolekulare Medizin."
+    answer: "Unser Schwerpunkt liegt auf Radiofrequenz-Microneedling (MRF), klassischem Microneedling, JetPeel, Gesichtsreinigung, Fruchtsäurepeelings und Meso BB Glow. Für die dauerhafte Haarentfernung arbeiten wir mit Diodenlaser, Alexandritlaser und IPL. Dazu kommen die VISIA® 3D-Hautanalyse, ZO® Skin Health und Orthomolekulare Medizin."
   },
   {
     question: "Warum ist eine professionelle Hautanalyse vor einer Behandlung sinnvoll?",
@@ -20,7 +20,7 @@ const FAQ_ITEMS: readonly FaqItem[] = [
   },
   {
     question: "Wie funktioniert die Orthomolekulare Medizin für die Haut?",
-    answer: "Die Orthomolekulare Medizin setzt auf totale Personalisierung statt des Gießkannenprinzips. Auf Basis Ihrer individuellen Laborwerte und einer fundierten Diagnostik stellen wir einen maßgeschneiderten Nährstoff-Cocktail zusammen. Dadurch erhält Ihre Haut exakt die Moleküle, die sie zur Regeneration und Barrieredezimierung benötigt."
+    answer: "Die Orthomolekulare Medizin setzt auf totale Personalisierung statt des Gießkannenprinzips. Auf Basis Ihrer individuellen Laborwerte und einer fundierten Diagnostik stellen wir einen maßgeschneiderten Nährstoff-Cocktail zusammen. Dadurch erhält Ihre Haut exakt die Moleküle, die sie zur Regeneration und eine stabile Hautbarriere benötigt."
   },
   {
     question: "Wie kann ich online einen Termin in Ihrem Studio buchen?",

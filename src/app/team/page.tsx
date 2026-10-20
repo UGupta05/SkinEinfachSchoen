@@ -1,18 +1,21 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { TESTIMONIALS } from '../../data/mockData';
+import Image from 'next/image';
+import { getReviews } from '../../lib/googleReviews';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
 export const metadata: Metadata = {
-  title: 'Unser Team | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Team: Sofia Khaliq-Natawan & Isabel Duwendag',
   description: 'Lernen Sie das Team von SKIN einfach schön kennen. Sofia Khaliq-Natawan (Dermo-Fach-PTA) und Isabel Duwendag (medizinische Kosmetikerin) beraten Sie kompetent.',
   alternates: {
     canonical: '/team',
   },
 };
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const { reviews } = await getReviews();
+
   return (
     <div className="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
       {/* Hero Section */}
@@ -37,11 +40,14 @@ export default function TeamPage() {
             </div>
           </ScrollReveal>
           <ScrollReveal variant="fade-in-right" className="relative">
-            <div className="aspect-[3/2] bg-soft-shell overflow-hidden rounded-lg">
-              <img
-                alt="Sofia Khaliq-Natawan und Isabel Duwendag in der Praxis"
-                className="w-full h-full object-cover"
+            <div className="aspect-[3/2] bg-soft-shell overflow-hidden rounded-lg relative">
+              <Image
+                alt="Sofia Khaliq-Natawan und Isabel Duwendag im Studio"
                 src="/images/team/team_hero.jpg"
+                fill
+                priority
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-pure-white p-8 medical-glow hidden md:block max-w-xs transition-transform duration-500 hover:scale-[1.02]">
@@ -67,10 +73,12 @@ export default function TeamPage() {
             <ScrollReveal variant="fade-in-up" delay={0} className="group">
               <div className="bg-pure-white medical-glow overflow-hidden transition-all duration-500 hover:-translate-y-2">
                 <div className="aspect-[4/5] relative overflow-hidden">
-                  <img
+                  <Image
                     alt="Sofia Khaliq-Natawan"
-                    className="w-full h-full object-cover object-top"
                     src="/images/team/sofia.jpg"
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-sky-accent/10 text-slate-muted px-4 py-1 rounded-full font-label-caps text-[10px] tracking-widest">
@@ -140,10 +148,12 @@ export default function TeamPage() {
             <ScrollReveal variant="fade-in-up" delay={150} className="group">
               <div className="bg-pure-white medical-glow overflow-hidden transition-all duration-500 hover:-translate-y-2">
                 <div className="aspect-[4/5] relative overflow-hidden">
-                  <img
+                  <Image
                     alt="Isabel Duwendag"
-                    className="w-full h-full object-cover object-top"
                     src="/images/team/isabel.jpg"
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="bg-sky-accent/10 text-slate-muted px-4 py-1 rounded-full font-label-caps text-[10px] tracking-widest">
@@ -244,10 +254,12 @@ export default function TeamPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade-in-right" className="md:col-span-2 relative min-h-[300px] overflow-hidden">
-              <img
-                alt="Detail einer modernen Praxis"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] hover:scale-105"
+              <Image
+                alt="Behandlungsraum im Studio von SKIN einfach schön"
                 src="/images/team/praxis_new.jpg"
+                fill
+                sizes="(min-width: 768px) 66vw, 100vw"
+                className="object-cover transition-transform duration-[1.5s] hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 pointer-events-none"></div>
             </ScrollReveal>
@@ -267,9 +279,9 @@ export default function TeamPage() {
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t, idx) => (
+            {reviews.map((t, idx) => (
               <ScrollReveal
-                key={t.name}
+                key={`${t.author}-${idx}`}
                 variant="fade-in-up"
                 delay={idx * 150}
                 className="bg-pure-white p-8 medical-glow relative flex flex-col justify-between transition-transform duration-500 hover:scale-[1.02]"
@@ -280,9 +292,9 @@ export default function TeamPage() {
                   </span>
                   <div className="flex items-center gap-4 mb-6">
                     <div>
-                      <h4 className="font-label-caps text-label-caps text-primary">{t.name}</h4>
+                      <h4 className="font-label-caps text-label-caps text-primary">{t.author}</h4>
                       <div className="flex text-sky-accent text-[12px] mt-1">
-                        {[...Array(t.rating)].map((_, i) => (
+                        {Array.from({ length: t.rating }, (_, i) => (
                           <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                             star
                           </span>
@@ -291,7 +303,7 @@ export default function TeamPage() {
                     </div>
                   </div>
                   <p className="font-body-md text-body-md text-tertiary">
-                    "{t.text}"
+                    „{t.text}“
                   </p>
                 </div>
               </ScrollReveal>
