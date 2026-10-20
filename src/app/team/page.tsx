@@ -2,12 +2,9 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getReviews } from '../../lib/googleReviews';
+import { GOOGLE_REVIEWS_URL, REVIEWS } from '../../data/reviews';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
-// Keep in sync with REVIEWS_REVALIDATE_SECONDS in src/lib/googleReviews.ts
-// (segment config must be a literal).
-export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: 'Team: Sofia Khaliq-Natawan & Isabel Duwendag',
@@ -17,9 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function TeamPage() {
-  const { reviews } = await getReviews();
-
+export default function TeamPage() {
   return (
     <div className="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
       {/* Hero Section */}
@@ -283,7 +278,7 @@ export default async function TeamPage() {
             </h2>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {reviews.map((t, idx) => (
+            {REVIEWS.map((t, idx) => (
               <ScrollReveal
                 key={`${t.author}-${idx}`}
                 variant="fade-in-up"
@@ -316,7 +311,7 @@ export default async function TeamPage() {
 
           <div className="text-center mt-12">
             <a
-              href="https://www.google.com/maps/place/SKIN+einfach+sch%C3%B6n/@52.2743486,8.0410559,17z/data=!4m8!3m7!1s0x47ba966380c5d64d:0x2280d52723c3b036!8m2!3d52.2743486!4d8.0410559!9m1!1b1"
+              href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-label-caps text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"

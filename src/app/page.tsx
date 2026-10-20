@@ -12,9 +12,6 @@ import { YouTubeFacade } from '../components/YouTubeFacade';
 import { salonSchema } from '../lib/schema';
 import { THEME_LIST, themePath } from '../content';
 
-// Keep in sync with REVIEWS_REVALIDATE_SECONDS in src/lib/googleReviews.ts
-// (segment config must be a literal).
-export const revalidate = 21600;
 
 export const metadata: Metadata = {
   alternates: {
@@ -191,10 +188,6 @@ export default function Home() {
               
               <ul className="space-y-4">
                 <li className="flex items-center gap-3 font-sans text-base text-primary">
-                  <ShieldCheck className="w-5 h-5 text-sky-accent shrink-0" />
-                  <span>Staatlich geprüfte Fachkosmetikerinnen</span>
-                </li>
-                <li className="flex items-center gap-3 font-sans text-base text-primary">
                   <Sparkles className="w-5 h-5 text-sky-accent shrink-0" />
                   <span>High-End Medical Beauty Equipment</span>
                 </li>
@@ -217,21 +210,9 @@ export default function Home() {
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
                   />
                 </div>
-                <div className="bg-soft-shell p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
-                  <h3 className="font-display text-3xl font-bold text-primary mb-2">98%</h3>
-                  <p className="font-display text-2xs font-bold text-tertiary uppercase tracking-wider">
-                    Zufriedene Kunden
-                  </p>
-                </div>
               </div>
               
               <div className="space-y-4">
-                <div className="bg-primary text-pure-white p-8 medical-glow transition-transform duration-500 hover:scale-[1.02]">
-                  <h3 className="font-display text-3xl font-bold mb-2">15+</h3>
-                  <p className="font-display text-2xs font-bold uppercase tracking-wider">
-                    Jahre Erfahrung
-                  </p>
-                </div>
                 <div className="aspect-[3/4] overflow-hidden rounded-lg">
                   <Image
                     alt="Beratung im Studio von SKIN einfach schön"

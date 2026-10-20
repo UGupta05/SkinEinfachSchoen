@@ -1,14 +1,12 @@
 import React from 'react';
 import { Star, ExternalLink } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
-import { getReviews } from '../lib/googleReviews';
+import { GOOGLE_RATING, GOOGLE_REVIEWS_URL, REVIEWS } from '../data/reviews';
 
 const formatRating = (rating: number) => rating.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-/** Homepage testimonials: best Google reviews, or curated fallback. */
-export async function ReviewsSection() {
-  const data = await getReviews();
-
+/** Homepage testimonials, hand-copied from the Google Business Profile. */
+export function ReviewsSection() {
   return (
     <section className="py-section-padding-lg bg-pure-white">
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
@@ -19,18 +17,17 @@ export async function ReviewsSection() {
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">Was unsere Kundinnen und Kunden sagen</h2>
           </ScrollReveal>
-          {data.rating !== undefined && data.count !== undefined && (
-            <p className="font-sans text-sm text-tertiary flex items-center gap-2">
-              <Star className="w-5 h-5 text-sky-accent fill-current" aria-hidden="true" />
-              <span>
-                <strong className="text-primary">{formatRating(data.rating)} von 5</strong> bei {data.count} Bewertungen auf Google
-              </span>
-            </p>
-          )}
+          <p className="font-sans text-sm text-tertiary flex items-center gap-2">
+            <Star className="w-5 h-5 text-sky-accent fill-current" aria-hidden="true" />
+            <span>
+              <strong className="text-primary">{formatRating(GOOGLE_RATING.rating)} von 5</strong> bei{' '}
+              {GOOGLE_RATING.count} Bewertungen auf Google (Stand {GOOGLE_RATING.asOf})
+            </span>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-          {data.reviews.map((r, idx) => {
+          {REVIEWS.map((r, idx) => {
             const highlighted = idx === 1;
             return (
               <ScrollReveal
@@ -54,16 +51,10 @@ export async function ReviewsSection() {
                   </div>
                   <figcaption className="mt-4 border-t border-outline-variant/10 pt-4">
                     <p className={`font-display text-xs font-bold uppercase tracking-wider ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
-                      {r.authorUrl ? (
-                        <a href={r.authorUrl} target="_blank" rel="noopener noreferrer nofollow" className="hover:underline">
-                          {r.author}
-                        </a>
-                      ) : (
-                        r.author
-                      )}
+                      {r.author}
                     </p>
                     <p className={`text-[10px] font-display font-bold uppercase tracking-widest mt-1 ${highlighted ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
-                      {data.source === 'google' ? `Google-Rezension${r.when ? ` · ${r.when}` : ''}` : r.when}
+                      Google-Rezension · {r.date}
                     </p>
                   </figcaption>
                 </figure>
@@ -74,7 +65,7 @@ export async function ReviewsSection() {
 
         <div className="text-center mt-12">
           <a
-            href={data.allReviewsUrl}
+            href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
@@ -82,9 +73,6 @@ export async function ReviewsSection() {
             Alle Rezensionen auf Google ansehen
             <ExternalLink className="w-4 h-4" aria-hidden="true" />
           </a>
-          {data.source === 'google' && (
-            <p className="font-sans text-[11px] text-tertiary mt-3">Bewertungen von Google, regelmäßig aktualisiert.</p>
-          )}
         </div>
       </div>
     </section>

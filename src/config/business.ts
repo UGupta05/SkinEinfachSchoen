@@ -19,8 +19,8 @@ export const BUSINESS = {
     country: 'DE',
   },
   geo: {
-    latitude: 52.27218,
-    longitude: 8.02672,
+    latitude: 52.2745401,
+    longitude: 8.0308096,
   },
   /** Google Business Profile — powers the map pack and the knowledge panel. */
   googleBusinessUrl: 'https://share.google/Oprx3yBlCRSAmhvFg',

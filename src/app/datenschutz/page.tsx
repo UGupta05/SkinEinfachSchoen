@@ -202,7 +202,7 @@ const sections: Section[] = [
       },
       {
         subtitle: "Google-Bewertungen",
-        text: "Auf unserer Website zeigen wir ausgewählte Bewertungen aus unserem Google-Unternehmensprofil an. Die Bewertungen ruft unser Server einmal täglich über die Google Places API ab und speichert sie zwischen. Beim Besuch unserer Website wird dadurch keine Verbindung zwischen Ihrem Browser und Google hergestellt, und es werden keine Daten von Ihnen an Google übermittelt.\n\nAngezeigt werden der von den Verfassenden bei Google hinterlegte Name, die Sternebewertung, der Bewertungstext und das ungefähre Datum. Diese Angaben haben die Verfassenden selbst bei Google veröffentlicht. Rechtsgrundlage ist unser berechtigtes Interesse an der Darstellung von Kundenmeinungen (Art. 6 Abs. 1 lit. f DSGVO). Wer nicht mehr auf unserer Website erscheinen möchte, kann die Bewertung bei Google löschen oder sich jederzeit an uns wenden.",
+        text: "Auf unserer Website zeigen wir ausgewählte Bewertungen aus unserem Google-Unternehmensprofil. Wir haben die Texte selbst aus dem Profil übernommen; beim Besuch unserer Website wird keine Verbindung zu Google hergestellt.\n\nAngezeigt werden der Vorname und der erste Buchstabe des Nachnamens, die Sternebewertung, der Bewertungstext und das Jahr der Bewertung. Diese Angaben haben die Verfassenden selbst bei Google veröffentlicht. Rechtsgrundlage ist unser berechtigtes Interesse an der Darstellung von Kundenmeinungen (Art. 6 Abs. 1 lit. f DSGVO). Wer nicht mehr auf unserer Website erscheinen möchte, kann sich jederzeit an uns wenden; wir entfernen die Bewertung dann umgehend.",
       },
     ],
   },
