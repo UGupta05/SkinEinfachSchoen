@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { TerminbuchungPageClient } from './TerminbuchungPageClient';
 
 export const metadata: Metadata = {
-  title: 'Terminbuchung online | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Termin online buchen',
   description: 'Buchen Sie Ihren Wunschtermin für Kosmetikbehandlungen, JetPeel, IPL oder Hautanalyse bequem online. Wählen Sie Datum & Uhrzeit.',
   alternates: {
     canonical: '/terminbuchung',

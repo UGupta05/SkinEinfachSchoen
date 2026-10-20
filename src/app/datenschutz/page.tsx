@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Datenschutzerklärung | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Datenschutzerklärung',
   description: 'Informationen gemäß DSGVO zum Umgang mit Ihren personenbezogenen Daten auf der Website von SKIN einfach schön.',
   robots: 'noindex, follow',
 };
@@ -194,11 +194,15 @@ const sections: Section[] = [
       },
       {
         subtitle: "Google Maps (Zwei-Klick-Lösung)",
-        text: "Auf unserer Kontaktseite und den regionalen Unterseiten binden wir Kartenmaterial des Dienstes Google Maps ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Karte wird nicht automatisch geladen. Stattdessen sehen Sie zunächst einen Platzhalter mit der Schaltfläche „Karte laden\". Erst wenn Sie diese Schaltfläche anklicken, wird die Karte nachgeladen und dabei Ihre IP-Adresse sowie gegebenenfalls weitere Daten an Google übertragen; Google kann hierbei Cookies setzen. Ohne Ihren Klick findet keinerlei Verbindung zu Google-Servern statt.\n\nRechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie können die Karte jederzeit einfach nicht laden; alternativ erreichen Sie unseren Standort auch über den ebenfalls bereitgestellten externen Link. Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter: https://policies.google.com/privacy",
+        text: "Auf unserer Kontaktseite binden wir Kartenmaterial des Dienstes Google Maps ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Karte wird nicht automatisch geladen. Stattdessen sehen Sie zunächst einen Platzhalter mit der Schaltfläche „Karte laden\". Erst wenn Sie diese Schaltfläche anklicken, wird die Karte nachgeladen und dabei Ihre IP-Adresse sowie gegebenenfalls weitere Daten an Google übertragen; Google kann hierbei Cookies setzen. Ohne Ihren Klick findet keinerlei Verbindung zu Google-Servern statt.\n\nRechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie können die Karte jederzeit einfach nicht laden; alternativ erreichen Sie unseren Standort auch über den ebenfalls bereitgestellten externen Link. Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter: https://policies.google.com/privacy",
       },
       {
-        subtitle: "YouTube mit erweitertem Datenschutz",
-        text: "Wir binden auf dieser Website Videos der Plattform YouTube ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nWir nutzen YouTube im erweiterten Datenschutzmodus. Dieser Modus sorgt laut YouTube dafür, dass YouTube keine Cookies über den Besucher auf dieser Website speichert, bevor dieser sich das Video ansieht. Sobald Sie die Wiedergabe eines YouTube-Videos starten, kann dies jedoch Datenverarbeitungsvorgänge auslösen. Hierauf haben wir keinen Einfluss.\n\nDie Nutzung von YouTube erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer ansprechenden Darstellung unseres Online-Angebots). Weitere Informationen zum Datenschutz bei YouTube finden Sie in der Datenschutzerklärung des Anbieters unter: https://policies.google.com/privacy",
+        subtitle: "YouTube (Zwei-Klick-Lösung)",
+        text: "Auf unserer Startseite zeigen wir Videos unseres YouTube-Kanals. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Videos werden nicht automatisch geladen. Sie sehen zunächst nur ein Vorschaubild, das auf unserem eigenen Server liegt. Erst wenn Sie auf die Wiedergabe-Schaltfläche klicken, wird der YouTube-Player im erweiterten Datenschutzmodus (youtube-nocookie.com) nachgeladen. Dabei werden Ihre IP-Adresse und gegebenenfalls weitere Daten an Google übertragen, und Google kann Cookies oder vergleichbare Technologien einsetzen. Ohne Ihren Klick findet keine Verbindung zu YouTube statt.\n\nRechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, die Sie durch das Anklicken der Wiedergabe-Schaltfläche erteilen. Weitere Informationen zum Datenschutz bei YouTube finden Sie unter: https://policies.google.com/privacy",
+      },
+      {
+        subtitle: "Google-Bewertungen",
+        text: "Auf unserer Website zeigen wir ausgewählte Bewertungen aus unserem Google-Unternehmensprofil. Wir haben die Texte selbst aus dem Profil übernommen; beim Besuch unserer Website wird keine Verbindung zu Google hergestellt.\n\nAngezeigt werden der Vorname und der erste Buchstabe des Nachnamens, die Sternebewertung, der Bewertungstext und das Jahr der Bewertung. Diese Angaben haben die Verfassenden selbst bei Google veröffentlicht. Rechtsgrundlage ist unser berechtigtes Interesse an der Darstellung von Kundenmeinungen (Art. 6 Abs. 1 lit. f DSGVO). Wer nicht mehr auf unserer Website erscheinen möchte, kann sich jederzeit an uns wenden; wir entfernen die Bewertung dann umgehend.",
       },
     ],
   },

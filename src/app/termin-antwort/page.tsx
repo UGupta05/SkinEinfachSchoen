@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { TerminAntwortClient } from './TerminAntwortClient';
 
 export const metadata: Metadata = {
-  title: 'Terminstatus | SKIN einfach schön',
+  title: 'Terminstatus',
   robots: 'noindex, nofollow',
 };
 

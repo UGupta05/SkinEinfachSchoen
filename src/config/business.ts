@@ -19,8 +19,8 @@ export const BUSINESS = {
     country: 'DE',
   },
   geo: {
-    latitude: 52.27218,
-    longitude: 8.02672,
+    latitude: 52.2745401,
+    longitude: 8.0308096,
   },
   /** Google Business Profile — powers the map pack and the knowledge panel. */
   googleBusinessUrl: 'https://share.google/Oprx3yBlCRSAmhvFg',
@@ -32,7 +32,7 @@ export const BUSINESS = {
   ],
 } as const;
 
-/** Towns the studio draws customers from; mirrors the /stadt landing pages. */
+/** Towns the studio draws customers from; mirrors src/data/nearbyTowns.ts. */
 export const AREA_SERVED = [
   'Osnabrück',
   'Georgsmarienhütte',

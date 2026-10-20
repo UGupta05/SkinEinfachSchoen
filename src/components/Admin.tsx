@@ -1655,7 +1655,7 @@ export const Admin: React.FC = () => {
                   className="w-full bg-pure-white border border-outline-variant/10 p-3 rounded-xl text-sm text-onyx-text focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all appearance-none cursor-pointer"
                 >
                   <option value="Keine Präferenz">Keine Präferenz</option>
-                  <option value="Sofia">Sofia Khaliq-Natawan</option>
+                  <option value="Sofia">Sofia Natawan</option>
                   <option value="Isabel">Isabel Duwendag</option>
                 </select>
               </div>
