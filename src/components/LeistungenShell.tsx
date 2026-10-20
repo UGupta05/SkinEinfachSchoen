@@ -27,7 +27,9 @@ export function LeistungenShell({
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
       {/* Sidebar Navigation */}
-      <aside className="fixed left-0 top-20 h-[calc(100vh-80px)] w-72 bg-soft-shell border-r border-slate-muted/15 py-6 overflow-y-auto hidden lg:block">
+      {/* Sticky rather than fixed, so it starts below the site-wide notice
+          above the page content instead of covering it. */}
+      <aside className="hidden lg:block sticky top-20 self-start shrink-0 h-[calc(100vh-80px)] w-72 bg-soft-shell border-r border-slate-muted/15 py-6 overflow-y-auto">
         <div className="px-6 mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
@@ -96,7 +98,7 @@ export function LeistungenShell({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 lg:ml-72 bg-pure-white min-h-screen">
+      <div className="flex-1 min-w-0 bg-pure-white min-h-screen">
         {children}
       </div>
     </div>
