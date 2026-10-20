@@ -5,6 +5,10 @@ import Image from 'next/image';
 import { getReviews } from '../../lib/googleReviews';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
+// Keep in sync with REVIEWS_REVALIDATE_SECONDS in src/lib/googleReviews.ts
+// (segment config must be a literal).
+export const revalidate = 21600;
+
 export const metadata: Metadata = {
   title: 'Team: Sofia Khaliq-Natawan & Isabel Duwendag',
   description: 'Lernen Sie das Team von SKIN einfach schön kennen. Sofia Khaliq-Natawan (Dermo-Fach-PTA) und Isabel Duwendag (medizinische Kosmetikerin) beraten Sie kompetent.',
@@ -302,7 +306,7 @@ export default async function TeamPage() {
                       </div>
                     </div>
                   </div>
-                  <p className="font-body-md text-body-md text-tertiary">
+                  <p className="font-body-md text-body-md text-tertiary whitespace-pre-line">
                     „{t.text}“
                   </p>
                 </div>

@@ -48,7 +48,7 @@ export async function ReviewsSection() {
                         <Star key={i} className="w-5 h-5 fill-current" aria-hidden="true" />
                       ))}
                     </div>
-                    <blockquote className={`font-sans text-base italic mb-8 leading-relaxed ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
+                    <blockquote className={`font-sans text-base italic mb-8 leading-relaxed whitespace-pre-line ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
                       „{r.text}“
                     </blockquote>
                   </div>
@@ -83,7 +83,7 @@ export async function ReviewsSection() {
             <ExternalLink className="w-4 h-4" aria-hidden="true" />
           </a>
           {data.source === 'google' && (
-            <p className="font-sans text-[11px] text-tertiary mt-3">Bewertungen von Google, täglich aktualisiert.</p>
+            <p className="font-sans text-[11px] text-tertiary mt-3">Bewertungen von Google, regelmäßig aktualisiert.</p>
           )}
         </div>
       </div>

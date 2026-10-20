@@ -66,10 +66,10 @@ export function salonSchema() {
   };
 }
 
-/** Parses "ab 259,- €" / "79,- €" into a number, or undefined. */
+/** Parses German prices ("ab 259,- €", "79,- €", "1.200,50 €") into a number, or undefined. */
 function parsePrice(price: string): number | undefined {
-  const match = price.match(/(\d+(?:[.,]\d+)?)/);
-  return match ? Number(match[1].replace(',', '.')) : undefined;
+  const match = price.match(/\d+(?:\.\d{3})*(?:,\d+)?/);
+  return match ? Number(match[0].replace(/\./g, '').replace(',', '.')) : undefined;
 }
 
 export function serviceSchema(input: {

@@ -3,7 +3,7 @@ import { TESTIMONIALS } from '../data/mockData';
 /**
  * Reviews from the studio's Google Business Profile via the Places API (New).
  *
- * Fetched on the server and cached for a day, so visitors' browsers never
+ * Fetched on the server and cached for a few hours, so visitors' browsers never
  * talk to Google (no consent needed). Reviewer photos are deliberately not
  * used: they are hosted on googleusercontent.com and would leak visitor IPs.
  *
@@ -46,7 +46,13 @@ interface PlacesResponse {
   reviews?: PlacesReview[];
 }
 
-const REVALIDATE_SECONDS = 60 * 60 * 24;
+/**
+ * Pages showing reviews must export the same value as `revalidate`, so they
+ * keep regenerating even when a request fails outright. Short enough that a
+ * cached error response doesn't linger; 4 calls a day stay well inside the
+ * Places API free tier.
+ */
+export const REVIEWS_REVALIDATE_SECONDS = 60 * 60 * 6;
 const MAX_REVIEWS = 3;
 /** Very short reviews ("Top!") make weak testimonials. */
 const MIN_TEXT_LENGTH = 80;
@@ -91,7 +97,7 @@ export async function getReviews(): Promise<ReviewData> {
           'X-Goog-Api-Key': apiKey,
           'X-Goog-FieldMask': 'rating,userRatingCount,reviews',
         },
-        next: { revalidate: REVALIDATE_SECONDS },
+        next: { revalidate: REVIEWS_REVALIDATE_SECONDS },
       },
     );
     if (!res.ok) {

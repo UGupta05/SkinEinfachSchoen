@@ -12,6 +12,10 @@ import { YouTubeFacade } from '../components/YouTubeFacade';
 import { salonSchema } from '../lib/schema';
 import { THEME_LIST, themePath } from '../content';
 
+// Keep in sync with REVIEWS_REVALIDATE_SECONDS in src/lib/googleReviews.ts
+// (segment config must be a literal).
+export const revalidate = 21600;
+
 export const metadata: Metadata = {
   alternates: {
     canonical: '/',
