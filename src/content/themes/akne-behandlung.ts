@@ -116,7 +116,7 @@ export const page: ThemePage = {
     {
       slug: 'jetpeel',
       reason:
-        'Reinigt die Poren mit einem feinen Flüssigkeitsstrahl, ohne die Haut zu reiben. Eine schonende Option für empfindliche, unreine Haut.',
+        'Reinigt die Poren berührungslos mit einem feinen Sprühnebel aus speziellen Seren, ohne die Haut zu reiben. Eine schonende Option für empfindliche, unreine Haut.',
     },
     {
       slug: 'visia',

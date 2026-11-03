@@ -87,7 +87,7 @@ export const page: ThemePage = {
     {
       slug: 'jetpeel',
       reason:
-        'Ein feiner Strahl aus Luft und Flüssigkeit reinigt die Haut und schleust Wirkstoffe ohne Nadeln ein. Trockenheitsfältchen wirken danach praller.',
+        'Ein feiner Sprühnebel aus Luft und hochwertigen Seren reinigt die Haut und bringt Wirkstoffe ohne Nadeln ein. Trockenheitsfältchen wirken danach praller.',
     },
     {
       slug: 'visia',

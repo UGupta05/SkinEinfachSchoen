@@ -117,7 +117,7 @@ export const page: ThemePage = {
     {
       slug: 'jetpeel',
       reason:
-        'Spült Talg und Rückstände mit einem feinen Strahl aus den Poren, ganz ohne Nadeln und ohne Ausfallzeit.',
+        'Löst Talg und Rückstände mit einem feinen Sprühnebel aus hochwertigen Seren aus den Poren, ganz ohne Nadeln und ohne Ausfallzeit.',
     },
     {
       slug: 'gesichtsreinigung',

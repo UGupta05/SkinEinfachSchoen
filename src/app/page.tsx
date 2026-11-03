@@ -301,7 +301,7 @@ export default function Home() {
                   JetPeel
                 </h3>
                 <p className="font-sans text-xs opacity-85">
-                  Nadelfreie Tiefenreinigung und Feuchtigkeit mit einem feinen Hochdruckstrahl, für sofortigen Glow ohne Ausfallzeit.
+                  Nadelfreie Tiefenreinigung mit hochwertigen Seren als feiner Sprühnebel, für sofortigen Glow ohne Ausfallzeit.
                 </p>
               </div>
               <Link

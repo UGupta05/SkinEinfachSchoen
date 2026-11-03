@@ -6,20 +6,27 @@ export const page: TreatmentPage = {
   h1: 'JetPeel in Osnabrück: Tiefenreinigung und Glow ohne Nadeln',
   metaTitle: 'JetPeel in Osnabrück',
   metaDescription:
-    'JetPeel in Osnabrück: nadelfreie Tiefenreinigung mit Hyaluronsäure und Vitaminen, sofort frischer Teint ohne Ausfallzeit. Jetzt online Termin buchen.',
+    'JetPeel in Osnabrück: nadelfreie Tiefenreinigung mit hochwertigen Seren, sofort frischer Teint ohne Ausfallzeit. Jetzt online Termin buchen.',
   eyebrow: 'Nadelfreie Gesichtsbehandlung',
   teaser:
-    'JetPeel reinigt die Haut mit einem feinen Strahl aus Luft und Flüssigkeit, versorgt sie mit Wirkstoffen und sorgt für einen frischen Teint ohne Ausfallzeit.',
+    'JetPeel reinigt die Haut mit einem feinen Sprühnebel aus Luft und hochwertigen Seren, versorgt sie mit Wirkstoffen und sorgt für einen frischen Teint ohne Ausfallzeit.',
   intro: [
-    'Mit JetPeel in Osnabrück bieten wir Ihnen bei SKIN einfach schön eine Gesichtsbehandlung, die ganz ohne Nadeln auskommt. Beim JetPeel™-Verfahren werden Druckluft und eine Kochsalz- oder Wirkstofflösung zu einem sehr feinen Strahl beschleunigt, der die Haut reinigt, sanft peelt und mit Feuchtigkeit versorgt.',
+    'Mit JetPeel in Osnabrück bieten wir Ihnen bei SKIN einfach schön eine Gesichtsbehandlung, die ganz ohne Nadeln auskommt. Ein feiner Luftstrom verwandelt hochwertige Seren in einen hauchfeinen Sprühnebel, der die Haut gründlich reinigt, sanft peelt und mit Wirkstoffen versorgt. Das Handstück berührt Ihre Haut dabei nicht.',
     'Die meisten Kundinnen und Kunden empfinden die Behandlung als kühl und erfrischend. Da die Hautoberfläche nicht verletzt wird, können Sie direkt danach in Ihren Alltag zurück. Viele kommen deshalb kurz vor einem besonderen Anlass zu uns oder nutzen JetPeel als Einstieg in eine intensivere Behandlung.',
   ],
   sections: [
     {
       heading: 'Wie wirkt JetPeel? Das Prinzip der Behandlung',
       paragraphs: [
-        'Das Gerät mischt Druckluft mit einer sterilen Kochsalzlösung oder einem Wirkstoffserum. Im Handstück wird dieses Gemisch stark beschleunigt und tritt als Strahl aus winzigen Tröpfchen aus. Die Düse wird in kurzem Abstand über das Gesicht geführt und berührt die Haut dabei kaum.',
-        'Je nach Einstellung und Lösung übernimmt der Strahl verschiedene Aufgaben. Er löst abgestorbene Hautschüppchen und Rückstände aus den Poren, massiert das Gewebe und regt den Lymphfluss an. Im letzten Schritt bringt er Wirkstoffe in die oberen Hautschichten. Reinigung, Peeling, Lymphdrainage und Pflege lassen sich so in einer einzigen Sitzung verbinden.',
+        'Die JetPeel™-Technologie stammt ursprünglich aus der Düsentechnik der Raumfahrt. Im Handstück trifft ein feiner Luftstrom auf ein flüssiges Serum und zerstäubt es in winzige Tröpfchen. Diesen feinen Sprühnebel führen wir in kurzem Abstand über das Gesicht, ohne die Haut zu berühren.',
+        'Dabei passiert zweierlei: Der Sprühnebel löst abgestorbene Hautschüppchen und Rückstände aus den Poren und sorgt so für ein sanftes Peeling. Gleichzeitig öffnet er für kurze Zeit mikrofeine Kanäle, durch die die Wirkstoffe der Seren gut in die Haut einziehen können. Dieses Prinzip nennt man Hydroporation. Zusammen mit einer sanften Lymphdrainage verbindet JetPeel Reinigung, Peeling und Pflege in einer Sitzung.',
+      ],
+    },
+    {
+      heading: 'Hochwertige Seren für Ihre Haut',
+      paragraphs: [
+        'Das Herzstück jeder JetPeel-Behandlung sind die Seren. Wir arbeiten mit hochwertigen Reinigungs- und Wirkstoffseren, die speziell für das JetPeel-Verfahren entwickelt wurden. Sie lassen sich besonders fein zerstäuben und geben ihre Wirkstoffe gut an die Haut ab.',
+        'Welche Seren wir einsetzen, richtet sich nach Ihrem Hautbild. Trockene Haut bekommt vor allem Feuchtigkeit, ein müder Teint neue Frische und unreine Haut eine klärende Pflege. So stimmen wir jede Behandlung genau auf Ihre Haut ab.',
       ],
     },
     {
@@ -29,17 +36,17 @@ export const page: TreatmentPage = {
         'Wie lange dieser Glow anhält, hängt von Ihrem Hautzustand, Ihrer Pflege zu Hause und Ihrem Lebensstil ab. Eine einzelne Behandlung sorgt für einen frischen Look im Moment. Wer Feuchtigkeitsmangel oder einen müden Teint nachhaltig verbessern möchte, plant besser eine Serie ein.',
       ],
       bullets: [
-        'Tiefenreinigung: Talg, Make-up-Reste und Schüppchen werden aus den Poren gespült',
-        'Sanftes Peeling ohne Schleifpartikel und ohne Säure',
+        'Tiefenreinigung: Talg, Make-up-Reste und Schüppchen werden aus den Poren gelöst',
+        'Sanftes Peeling ganz ohne Rubbeln und Schleifpartikel',
+        'Pflegende Wirkstoffe aus hochwertigen Seren, abgestimmt auf Ihr Hautbild',
         'Lymphdrainage, die Schwellungen etwa um die Augen sichtbar mildern kann',
-        'Einschleusen von Wirkstoffen wie Hyaluronsäure und Vitaminen',
         'Bessere Aufnahme Ihrer Pflegeprodukte nach der Reinigung',
       ],
     },
     {
       heading: 'Für wen eignet sich die JetPeel-Behandlung?',
       paragraphs: [
-        'JetPeel passt zu den meisten Hauttypen. Auch empfindliche Haut, die auf Säurepeelings oder mechanisches Rubbeln gereizt reagiert, kommt mit dem feinen Strahl oft gut zurecht, weil die Intensität sich genau einstellen lässt.',
+        'JetPeel passt zu den meisten Hauttypen. Auch empfindliche Haut, die auf Säurepeelings oder mechanisches Rubbeln gereizt reagiert, kommt mit dem feinen Sprühnebel oft gut zurecht. Das Handstück berührt die Haut nicht, und die Intensität lässt sich genau einstellen.',
         'Bei akuten Entzündungen, offenen Stellen, Lippenherpes oder frischem Sonnenbrand verschieben wir den Termin, bis sich die Haut beruhigt hat. Wenn Sie unsicher sind, sprechen Sie uns vorher an. Im Beratungsgespräch klären wir, ob JetPeel für Ihre Haut gerade das Richtige ist.',
       ],
       bullets: [
@@ -53,8 +60,8 @@ export const page: TreatmentPage = {
     {
       heading: 'Ablauf der JetPeel-Behandlung bei SKIN in Osnabrück',
       paragraphs: [
-        'Vor der ersten Behandlung sprechen wir über Ihre Haut, Ihre Pflegeroutine und Ihr Ziel. Auf Wunsch ergänzen wir das Gespräch um eine VISIA® 3D-Hautanalyse, die Poren, Pigmentierung und Rötungen sichtbar macht. So wissen wir genau, worauf wir bei der Wahl der Wirkstoffe achten sollten.',
-        'Nach der Vorreinigung führen wir das Handstück in ruhigen Bahnen über Stirn, Wangen, Nase und Kinn. Zuerst arbeiten wir mit Kochsalzlösung, um Schüppchen und Rückstände zu lösen. Es folgt die Lymphdrainage, zum Schluss die Wirkstofflösung, die wir passend zu Ihrem Hautbild auswählen. Sie hören ein leises Zischen und spüren einen kühlen Sprühnebel.',
+        'Vor der ersten Behandlung sprechen wir über Ihre Haut, Ihre Pflegeroutine und Ihr Ziel. Auf Wunsch ergänzen wir das Gespräch um eine VISIA® 3D-Hautanalyse, die Poren, Pigmentierung und Rötungen sichtbar macht. So wissen wir genau, welche Seren am besten zu Ihrer Haut passen.',
+        'Nach der Vorreinigung führen wir das Handstück in ruhigen Bahnen über Stirn, Wangen, Nase und Kinn. Zuerst reinigen wir mit einem speziellen Reinigungsserum, das Schüppchen und Rückstände aus den Poren löst. Es folgt die Lymphdrainage, zum Schluss das Wirkstoffserum, das wir passend zu Ihrem Hautbild auswählen. Sie hören ein leises Zischen und spüren einen kühlen, feinen Sprühnebel.',
         'Eine kompakte Anwendung beginnt bei 10 Minuten. Wie lange Ihre Sitzung insgesamt dauert, hängt von der behandelten Fläche und den gewählten Schritten ab. Unser Studio liegt in der Lotter Straße 33 in Osnabrück, kostenlose Parkplätze finden Sie bei uns im Hof.',
       ],
     },
@@ -62,7 +69,7 @@ export const page: TreatmentPage = {
       heading: 'Nach der Behandlung: Ausfallzeit und Pflege',
       paragraphs: [
         'Eine Ausfallzeit gibt es bei JetPeel in der Regel nicht. Manche Kundinnen haben direkt danach eine leichte Rötung, die meist nach kurzer Zeit abklingt. Sie können anschließend ins Büro oder zu Ihrer Verabredung gehen.',
-        'Damit die Haut die eingeschleusten Wirkstoffe gut aufnehmen kann, empfehlen wir, am Behandlungstag möglichst auf Make-up zu verzichten und keine Peelings oder säurehaltigen Produkte aufzutragen. Ein guter Sonnenschutz gehört ohnehin in jede Pflegeroutine. Welche Produkte zu Hause zu Ihrer Haut passen, besprechen wir gern mit Ihnen, zum Beispiel aus der Pflegelinie ZO® Skin Health.',
+        'Damit die Wirkstoffe der Seren gut einziehen können, empfehlen wir, am Behandlungstag möglichst auf Make-up zu verzichten und keine Peelings oder säurehaltigen Produkte aufzutragen. Ein guter Sonnenschutz gehört ohnehin in jede Pflegeroutine. Welche Produkte zu Hause zu Ihrer Haut passen, besprechen wir gern mit Ihnen, zum Beispiel aus der Pflegelinie ZO® Skin Health.',
       ],
     },
     {
@@ -75,7 +82,7 @@ export const page: TreatmentPage = {
     {
       heading: 'JetPeel Kosten in Osnabrück',
       paragraphs: [
-        'Eine JetPeel-Behandlung bei SKIN einfach schön erhalten Sie ab 80,- €. Der genaue Preis richtet sich nach der Dauer der Sitzung, der behandelten Fläche und den eingesetzten Wirkstoffen. Möchten Sie JetPeel mit einer weiteren Behandlung kombinieren, nennen wir Ihnen den Gesamtpreis vorab in der Beratung.',
+        'Eine JetPeel-Behandlung bei SKIN einfach schön erhalten Sie ab 80,- €. Der genaue Preis richtet sich nach der Dauer der Sitzung, der behandelten Fläche und den eingesetzten Seren. Möchten Sie JetPeel mit einer weiteren Behandlung kombinieren, nennen wir Ihnen den Gesamtpreis vorab in der Beratung.',
         'Ihren Termin können Sie bequem über unsere Online-Terminbuchung vereinbaren oder uns im Studio direkt ansprechen.',
       ],
     },
@@ -84,12 +91,17 @@ export const page: TreatmentPage = {
     {
       question: 'Tut eine JetPeel-Behandlung weh?',
       answer:
-        'Die meisten Kundinnen und Kunden empfinden JetPeel als angenehm. Sie spüren einen kühlen Strahl und leichten Druck, Nadeln kommen nicht zum Einsatz. An empfindlichen Stellen passen wir die Intensität an.',
+        'Die meisten Kundinnen und Kunden empfinden JetPeel als angenehm. Sie spüren einen kühlen, feinen Sprühnebel. Nadeln kommen nicht zum Einsatz, und das Handstück berührt die Haut nicht. An empfindlichen Stellen passen wir die Intensität an.',
+    },
+    {
+      question: 'Welche Seren werden beim JetPeel verwendet?',
+      answer:
+        'Wir verwenden hochwertige Reinigungs- und Wirkstoffseren, die speziell für das JetPeel-Verfahren entwickelt wurden. Welche davon wir einsetzen, wählen wir passend zu Ihrem Hautbild aus, zum Beispiel für mehr Feuchtigkeit, einen frischeren Teint oder unreine Haut.',
     },
     {
       question: 'Was kostet eine JetPeel-Behandlung?',
       answer:
-        'Bei uns beginnt JetPeel ab 80,- €. Der genaue Preis hängt von Dauer, Fläche und Wirkstoffen ab. Wir nennen ihn Ihnen immer vor der Behandlung.',
+        'Bei uns beginnt JetPeel ab 80,- €. Der genaue Preis hängt von Dauer, Fläche und Seren ab. Wir nennen ihn Ihnen immer vor der Behandlung.',
     },
     {
       question: 'Wie oft sollte man JetPeel machen?',
@@ -104,12 +116,12 @@ export const page: TreatmentPage = {
     {
       question: 'Was ist der Unterschied zwischen JetPeel und einer klassischen Gesichtsreinigung?',
       answer:
-        'Bei der klassischen Gesichtsreinigung werden Mitesser von Hand ausgereinigt, dazu kommen Peeling, Maske und Pflege. JetPeel arbeitet mit einem Flüssigkeitsstrahl und setzt den Schwerpunkt auf Tiefenreinigung, Feuchtigkeit und Wirkstoffe. Bei stark verstopften Poren kombinieren wir beides.',
+        'Bei der klassischen Gesichtsreinigung werden Mitesser von Hand ausgereinigt, dazu kommen Peeling, Maske und Pflege. JetPeel arbeitet berührungslos mit einem feinen Sprühnebel aus Luft und Seren und setzt den Schwerpunkt auf Tiefenreinigung, Feuchtigkeit und Wirkstoffe. Bei stark verstopften Poren kombinieren wir beides.',
     },
     {
       question: 'Ist JetPeel für empfindliche Haut geeignet?',
       answer:
-        'In vielen Fällen ja, weil weder geschliffen noch mit Säuren gearbeitet wird. Die Lösung wählen wir passend zu Ihrer Haut aus. Bei akuten Entzündungen oder Hauterkrankungen klären wir vorab, ob die Behandlung sinnvoll ist.',
+        'In vielen Fällen ja, weil nichts gerieben oder geschliffen wird und das Handstück die Haut nicht berührt. Die Seren wählen wir passend zu Ihrer Haut aus. Bei akuten Entzündungen oder Hauterkrankungen klären wir vorab, ob die Behandlung sinnvoll ist.',
     },
   ],
   benefits: [
@@ -117,7 +129,7 @@ export const page: TreatmentPage = {
     'Sofort sichtbarer Glow',
     'Keine Ausfallzeit',
     'Tiefenreinigung der Poren',
-    'Hyaluronsäure und Vitamine',
+    'Hochwertige Seren',
     'Sanfte Lymphdrainage',
     'Ideal vor besonderen Anlässen',
   ],
@@ -127,9 +139,9 @@ export const page: TreatmentPage = {
   relatedTreatments: ['gesichtsreinigung', 'fruchtsaeure-peeling', 'meso-bb-glow', 'visia'],
   image: {
     src: '/images/treatments/jetpeel_new.jpg',
-    alt: 'JetPeel in Osnabrück: Kosmetikerin führt das Handstück mit feinem Strahl über die Stirn einer entspannten Kundin',
+    alt: 'JetPeel in Osnabrück: Kosmetikerin führt das Handstück mit feinem Sprühnebel über die Stirn einer entspannten Kundin',
     width: 576,
     height: 1024,
   },
-  updatedAt: '2026-10-20',
+  updatedAt: '2026-11-03',
 };
