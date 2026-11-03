@@ -51,7 +51,6 @@ export const Terminbuchung: React.FC = () => {
             ref={iframeRef}
             src={NATIVIO_BOOKING_URL}
             title="Termin buchen"
-            loading="lazy"
             className="block w-full max-w-[720px] mx-auto border-0"
             style={{ height: 800 }}
           />

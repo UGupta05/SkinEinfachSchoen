@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import { preconnect } from 'react-dom';
 import { TerminbuchungPageClient } from './TerminbuchungPageClient';
 
 export const metadata: Metadata = {
@@ -11,6 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function TerminbuchungPage() {
+  // Open the connection to the booking widget's host while the page is still rendering.
+  preconnect('https://getnativio.de');
+
   return (
     <Suspense fallback={
       <div className="min-h-[75vh] flex items-center justify-center">
