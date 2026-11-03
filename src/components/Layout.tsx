@@ -39,28 +39,21 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const isAdminPath = pathname.startsWith('/admin');
 
   useEffect(() => {
-    if (isAdminPath) return;
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isAdminPath]);
+  }, []);
 
   useEffect(() => {
-    if (isAdminPath) return;
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'instant' });
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileMenuOpen(false);
-  }, [pathname, isAdminPath]);
-
-  if (isAdminPath) {
-    return <div className="min-h-screen bg-background text-on-surface font-sans">{children}</div>;
-  }
+  }, [pathname]);
 
   const navLinks = [
     { name: 'Leistungen', path: '/leistungen' },

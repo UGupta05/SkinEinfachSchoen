@@ -170,10 +170,6 @@ const sections: Section[] = [
         subtitle: "Nativio (Online-Terminbuchung)",
         text: "Für die Online-Terminbuchung binden wir auf unserer Website das Buchungsformular von Nativio ein (Utkarsh Gupta, Nativio, An den Hasewiesen 11a, 49086 Osnabrück). Beim Aufruf der Buchungsseite wird das Formular von getnativio.de geladen; dabei wird Ihre IP-Adresse technisch bedingt an Nativio übermittelt. Wenn Sie einen Termin buchen, werden Ihre Angaben (Name, Kontaktdaten, gewählte Leistung und Wunschtermin) an Nativio übertragen und dort für uns gespeichert. Nativio verarbeitet diese Daten ausschließlich in unserem Auftrag und nach unserer Weisung als Auftragsverarbeiter (Art. 28 DSGVO). Die Anwendung wird in Rechenzentren in Frankfurt am Main betrieben.\n\nDie Verarbeitung erfolgt zur Durchführung vorvertraglicher Maßnahmen und zur Erfüllung des Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer einfachen und zuverlässigen Terminvergabe (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der Datenschutzerklärung von Nativio: https://getnativio.de/datenschutz",
       },
-      {
-        subtitle: "Supabase (Terminsynchronisierung und Verwaltung)",
-        text: "Für die Online-Terminverwaltung nutzen wir den Dienst Supabase (Supabase Inc., 970 Toa Payoh North, #07-04, Singapore 318992). Beim Buchen eines Termins werden Ihre eingegebenen Daten (Name, E-Mail-Adresse, gewählte Behandlung, Wunschdatum) auf den Servern von Supabase gespeichert und an uns übermittelt.\n\nDie Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Terminverwaltung). Supabase verarbeitet Daten gemäß seiner Datenschutzrichtlinie: https://supabase.com/privacy",
-      },
     ],
   },
   {
@@ -211,7 +207,7 @@ const sections: Section[] = [
     title: "Internationale Datenübermittlung und EU-Vorgaben",
     content: [
       {
-        text: "Soweit personenbezogene Daten an Dritte im Ausland, insbesondere außerhalb der Europäischen Union/EWR, übertragen werden (z. B. an Vercel Inc. oder Supabase Inc. in den USA), geschieht dies auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (EU-US Data Privacy Framework) oder auf Basis geeigneter Garantien, wie insbesondere EU-Standardvertragsklauseln. Bei Fragen hierzu wenden Sie sich bitte an die im Impressum angegebene verantwortliche Stelle.",
+        text: "Soweit personenbezogene Daten an Dritte im Ausland, insbesondere außerhalb der Europäischen Union/EWR, übertragen werden (z. B. an Vercel Inc. oder Resend Inc. in den USA), geschieht dies auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (EU-US Data Privacy Framework) oder auf Basis geeigneter Garantien, wie insbesondere EU-Standardvertragsklauseln. Bei Fragen hierzu wenden Sie sich bitte an die im Impressum angegebene verantwortliche Stelle.",
       },
     ],
   },
