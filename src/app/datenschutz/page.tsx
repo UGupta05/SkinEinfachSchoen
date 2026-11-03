@@ -167,8 +167,8 @@ const sections: Section[] = [
     title: "Terminbuchung",
     content: [
       {
-        subtitle: "Planity (Online-Terminbuchung)",
-        text: "Für die Online-Terminbuchung auf unserer Website nutzen wir das Buchungs-Widget des Anbieters Planity (Planity SAS, 33 rue Lafayette, 75009 Paris, Frankreich). Wenn Sie den Buchungsprozess starten und Daten eingeben, werden diese (Name, Kontaktdaten, Wunschtermin und gebuchte Leistung) direkt an Planity übertragen und dort verarbeitet. Die Verarbeitung dieser Daten erfolgt zur Erfüllung eines Vertrags oder zur Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer komfortablen, sicheren und funktionellen Terminreservierung (Art. 6 Abs. 1 lit. f DSGVO). Weitere Details zur Datenverarbeitung finden Sie in der Datenschutzerklärung von Planity: https://www.planity.com/de-DE/datenschutz",
+        subtitle: "Nativio (Online-Terminbuchung)",
+        text: "Für die Online-Terminbuchung binden wir auf unserer Website das Buchungsformular von Nativio ein (Utkarsh Gupta, Nativio, An den Hasewiesen 11a, 49086 Osnabrück). Beim Aufruf der Buchungsseite wird das Formular von getnativio.de geladen; dabei wird Ihre IP-Adresse technisch bedingt an Nativio übermittelt. Wenn Sie einen Termin buchen, werden Ihre Angaben (Name, Kontaktdaten, gewählte Leistung und Wunschtermin) an Nativio übertragen und dort für uns gespeichert. Nativio verarbeitet diese Daten ausschließlich in unserem Auftrag und nach unserer Weisung als Auftragsverarbeiter (Art. 28 DSGVO). Die Anwendung wird in Rechenzentren in Frankfurt am Main betrieben.\n\nDie Verarbeitung erfolgt zur Durchführung vorvertraglicher Maßnahmen und zur Erfüllung des Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer einfachen und zuverlässigen Terminvergabe (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der Datenschutzerklärung von Nativio: https://getnativio.de/datenschutz",
       },
       {
         subtitle: "Supabase (Terminsynchronisierung und Verwaltung)",
