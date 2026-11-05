@@ -1,6 +1,7 @@
 import React from 'react';
 import { Shield, Clock } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ScrollReveal } from './ScrollReveal';
 
 
@@ -30,7 +31,7 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         {/* Info Column */}
-        <ScrollReveal variant="fade-in-left" className="lg:col-span-7 space-y-6 order-2 lg:order-1">
+        <ScrollReveal variant="fade-in-left" immediate className="lg:col-span-7 space-y-6 order-2 lg:order-1">
           <span className="font-display text-xs font-bold text-sky-accent uppercase tracking-widest block">
             {category}
           </span>
@@ -93,14 +94,14 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
         </ScrollReveal>
 
         {/* Image Column */}
-        <ScrollReveal variant="fade-in-right" className={`lg:col-span-5 w-full overflow-hidden rounded-lg shadow-lg order-1 lg:order-2 ${
+        <ScrollReveal variant="fade-in-right" immediate className={`relative lg:col-span-5 w-full overflow-hidden rounded-lg shadow-lg order-1 lg:order-2 ${
           imageAspectRatio === 'landscape'
             ? 'aspect-[16/10] h-auto'
             : imageAspectRatio === 'portrait'
             ? 'aspect-[9/16] h-auto md:max-h-[500px] lg:max-h-[550px] mx-auto md:max-w-[320px] lg:max-w-[340px]'
             : 'h-[350px] md:h-[450px]'
         }`}>
-          <img alt={title} className="w-full h-full object-cover" src={image} />
+          <Image alt={title} src={image} fill priority sizes="(min-width: 1024px) 400px, 90vw" className="object-cover" />
         </ScrollReveal>
 
       </div>

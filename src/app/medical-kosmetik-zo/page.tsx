@@ -1,17 +1,19 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { TreatmentTemplate } from '../../components/TreatmentTemplate';
+import { JsonLd } from '../../components/JsonLd';
+import { serviceSchema } from '../../lib/schema';
 
 export const metadata: Metadata = {
-  title: 'Medical Kosmetik ZO® Skin Health | Kosmetikstudio Osnabrück',
-  description: 'Therapeutische Wirkstoffkosmetik von Dr. Zein Obagi in Osnabrück. Hochwirksam bei Pigmentstörungen, Akne, Rosacea & für nachhaltige Hautgesundheit.',
+  title: 'ZO® Skin Health Kosmetik in Osnabrück',
+  description: 'Medical Kosmetik mit ZO® Skin Health von Dr. Zein Obagi in Osnabrück: Wirkstoffpflege bei Pigmentflecken, unreiner Haut und Hautalterung. Jetzt beraten lassen.',
   alternates: {
     canonical: '/medical-kosmetik-zo',
   },
 };
 
 export default function MedicalKosmetikZOPage() {
-  const schemaDescription = "Therapeutische Wirkstoffkosmetik von Dr. Zein Obagi in Osnabrück. Hochwirksam bei Pigmentstörungen, Akne, Rosacea & für nachhaltige Hautgesundheit.";
+  const schemaDescription = "Medical Kosmetik mit ZO® Skin Health von Dr. Zein Obagi in Osnabrück: Wirkstoffpflege bei Pigmentflecken, unreiner Haut und Hautalterung.";
 
   const description = (
     <div className="space-y-6">
@@ -64,8 +66,8 @@ export default function MedicalKosmetikZOPage() {
     points: [
       "Zelluläre Aktivierung statt reiner Oberflächenpflege",
       "GSR™: Tiefenreinigung & Talgregulation",
-      "Hocheffektiv bei Pigmentstörungen & Melasma",
-      "Korrektur von Akne, Rosacea & Rötungen",
+      "Gezielte Pflege bei Pigmentstörungen & Melasma",
+      "Unterstützung bei unreiner Haut, Rosacea & Rötungen",
       "Schutz vor HEV-Licht (Blue Light) & IR-A",
       "Medizinisch fundierte Wirkstoffe (hohe Retinol-Dosis)"
     ],
@@ -73,34 +75,16 @@ export default function MedicalKosmetikZOPage() {
     imageAspectRatio: "portrait" as const
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": details.title,
-    "serviceType": details.category,
-    "description": schemaDescription,
-    "provider": {
-      "@type": "BeautySalon",
-      "name": "SKIN einfach schön",
-      "image": "https://skin-einfachschoen.de/images/home/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Lotter Straße 33",
-        "addressLocality": "Osnabrück",
-        "postalCode": "49078",
-        "addressCountry": "DE"
-      },
-      "telephone": "+4917655132650",
-      "priceRange": "$$"
-    }
-  };
+  const jsonLd = serviceSchema({
+    name: details.title,
+    description: schemaDescription,
+    path: '/medical-kosmetik-zo',
+    image: details.image,
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <div className="pt-8">
         <TreatmentTemplate {...details} />
       </div>

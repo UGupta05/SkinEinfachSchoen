@@ -1,75 +1,59 @@
 import React from 'react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { TREATMENT_DETAILS } from '../../../data/treatmentDetails';
-import { TreatmentTemplate } from '../../../components/TreatmentTemplate';
+import { TREATMENTS, TREATMENT_SLUGS, isTreatmentSlug, treatmentPath } from '../../../content';
+import { TreatmentDetail } from '../../../components/content/TreatmentDetail';
+import { JsonLd } from '../../../components/JsonLd';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '../../../lib/schema';
 
 interface Props {
   readonly params: Promise<{ readonly slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return Object.keys(TREATMENT_DETAILS).map((slug) => ({ slug }));
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return TREATMENT_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const details = TREATMENT_DETAILS[slug];
-  if (!details) {
-    return {};
-  }
+  if (!isTreatmentSlug(slug)) return {};
+  const page = TREATMENTS[slug];
   return {
-    title: `${details.title} | Kosmetikstudio Osnabrück`,
-    description: `${details.description.substring(0, 155)}...`,
-    alternates: {
-      canonical: `/leistungen/${slug}`,
+    title: page.metaTitle,
+    description: page.metaDescription,
+    alternates: { canonical: treatmentPath(slug) },
+    openGraph: {
+      title: page.metaTitle,
+      description: page.metaDescription,
+      url: treatmentPath(slug),
+      images: [{ url: page.image.src, width: page.image.width, height: page.image.height, alt: page.image.alt }],
     },
   };
 }
 
-export default async function TreatmentPage({ params }: Props) {
+export default async function TreatmentRoute({ params }: Props) {
   const { slug } = await params;
-  const details = TREATMENT_DETAILS[slug];
-  if (!details) {
-    notFound();
-  }
-
-  // Schema.org JSON-LD for AI and Search Engine Optimization
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": details.title,
-    "serviceType": details.category,
-    "description": details.description,
-    "provider": {
-      "@type": "BeautySalon",
-      "name": "SKIN einfach schön",
-      "image": "https://skin-einfachschoen.de/images/home/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Lotter Straße 33",
-        "addressLocality": "Osnabrück",
-        "postalCode": "49078",
-        "addressCountry": "DE"
-      },
-      "telephone": "+4917655132650",
-      "priceRange": "$$"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": details.price.replace(/[^\d]/g, ''),
-      "priceCurrency": "EUR",
-      "description": `Behandlung: ${details.title} (${details.duration})`
-    }
-  };
+  if (!isTreatmentSlug(slug)) notFound();
+  const page = TREATMENTS[slug];
+  const path = treatmentPath(slug);
+  const breadcrumbs = [
+    { name: 'Startseite', path: '/' },
+    { name: 'Leistungen', path: '/leistungen' },
+    { name: page.name, path },
+  ];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <JsonLd
+        data={[
+          serviceSchema({ name: page.name, description: page.teaser, path, image: page.image.src, price: page.price }),
+          breadcrumbSchema(breadcrumbs),
+          ...(page.faqs.length > 0 ? [faqSchema(page.faqs)] : []),
+        ]}
       />
-      <TreatmentTemplate {...details} />
+      <TreatmentDetail page={page} breadcrumbs={breadcrumbs} />
     </>
   );
 }

@@ -10,6 +10,12 @@ interface ScrollRevealProps {
   readonly threshold?: number;
   readonly className?: string;
   readonly once?: boolean;
+  /**
+   * Start the animation on first paint instead of waiting for hydration and
+   * the IntersectionObserver. Use for above-the-fold content (hero, H1) so it
+   * doesn't delay Largest Contentful Paint.
+   */
+  readonly immediate?: boolean;
 }
 
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
@@ -20,11 +26,13 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   threshold = 0.05,
   className = '',
   once = true,
+  immediate = false,
 }) => {
-  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isIntersecting, setIsIntersecting] = useState(immediate);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (immediate) return;
     const currentRef = ref.current;
     if (!currentRef) return;
 
@@ -49,9 +57,12 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         observer.unobserve(currentRef);
       }
     };
-  }, [once, threshold]);
+  }, [once, threshold, immediate]);
 
-  const animationClass = isIntersecting ? `animate-${variant}` : 'opacity-0';
+  // 'reveal-pending' only hides content once the inline script in the root
+  // layout has marked the document as JS-enabled, so crawlers and visitors
+  // without JavaScript always see the content.
+  const animationClass = isIntersecting ? `animate-${variant}` : 'reveal-pending';
 
   const style: React.CSSProperties = {
     animationDelay: `${delay}ms`,

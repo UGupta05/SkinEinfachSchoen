@@ -1,9 +1,11 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { TreatmentTemplate } from '../../components/TreatmentTemplate';
+import { JsonLd } from '../../components/JsonLd';
+import { serviceSchema } from '../../lib/schema';
 
 export const metadata: Metadata = {
-  title: 'Orthomolekulare Medizin | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Orthomolekulare Medizin in Osnabrück',
   description: 'Zellgesundheit und Nährstofftherapie für Ihre Haut. Datenbasierte Diagnostik, Laborwerte-Analyse und maßgeschneiderte Nährstoff-Cocktails für sichtbare Regeneration.',
   alternates: {
     canonical: '/orthomolekulare-medizin',
@@ -64,34 +66,16 @@ export default function OrthomolekulareMedizinPage() {
     imageAspectRatio: "landscape" as const
   };
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": details.title,
-    "serviceType": details.category,
-    "description": schemaDescription,
-    "provider": {
-      "@type": "BeautySalon",
-      "name": "SKIN einfach schön",
-      "image": "https://skin-einfachschoen.de/images/home/logo.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Lotter Straße 33",
-        "addressLocality": "Osnabrück",
-        "postalCode": "49078",
-        "addressCountry": "DE"
-      },
-      "telephone": "+4917655132650",
-      "priceRange": "$$"
-    }
-  };
+  const jsonLd = serviceSchema({
+    name: details.title,
+    description: schemaDescription,
+    path: '/orthomolekulare-medizin',
+    image: details.image,
+  });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <TreatmentTemplate {...details} />
     </>
   );

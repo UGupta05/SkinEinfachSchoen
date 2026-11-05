@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Datenschutzerklärung | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Datenschutzerklärung',
   description: 'Informationen gemäß DSGVO zum Umgang mit Ihren personenbezogenen Daten auf der Website von SKIN einfach schön.',
   robots: 'noindex, follow',
 };
@@ -167,12 +167,8 @@ const sections: Section[] = [
     title: "Terminbuchung",
     content: [
       {
-        subtitle: "Planity (Online-Terminbuchung)",
-        text: "Für die Online-Terminbuchung auf unserer Website nutzen wir das Buchungs-Widget des Anbieters Planity (Planity SAS, 33 rue Lafayette, 75009 Paris, Frankreich). Wenn Sie den Buchungsprozess starten und Daten eingeben, werden diese (Name, Kontaktdaten, Wunschtermin und gebuchte Leistung) direkt an Planity übertragen und dort verarbeitet. Die Verarbeitung dieser Daten erfolgt zur Erfüllung eines Vertrags oder zur Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer komfortablen, sicheren und funktionellen Terminreservierung (Art. 6 Abs. 1 lit. f DSGVO). Weitere Details zur Datenverarbeitung finden Sie in der Datenschutzerklärung von Planity: https://www.planity.com/de-DE/datenschutz",
-      },
-      {
-        subtitle: "Supabase (Terminsynchronisierung und Verwaltung)",
-        text: "Für die Online-Terminverwaltung nutzen wir den Dienst Supabase (Supabase Inc., 970 Toa Payoh North, #07-04, Singapore 318992). Beim Buchen eines Termins werden Ihre eingegebenen Daten (Name, E-Mail-Adresse, gewählte Behandlung, Wunschdatum) auf den Servern von Supabase gespeichert und an uns übermittelt.\n\nDie Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Terminverwaltung). Supabase verarbeitet Daten gemäß seiner Datenschutzrichtlinie: https://supabase.com/privacy",
+        subtitle: "Nativio (Online-Terminbuchung)",
+        text: "Für die Online-Terminbuchung binden wir auf unserer Website das Buchungsformular von Nativio ein (Utkarsh Gupta, Nativio, An den Hasewiesen 11a, 49086 Osnabrück). Beim Aufruf der Buchungsseite wird das Formular von getnativio.de geladen; dabei wird Ihre IP-Adresse technisch bedingt an Nativio übermittelt. Wenn Sie einen Termin buchen, werden Ihre Angaben (Name, Kontaktdaten, gewählte Leistung und Wunschtermin) an Nativio übertragen und dort für uns gespeichert. Nativio verarbeitet diese Daten ausschließlich in unserem Auftrag und nach unserer Weisung als Auftragsverarbeiter (Art. 28 DSGVO). Die Anwendung wird in Rechenzentren in Frankfurt am Main betrieben.\n\nDie Verarbeitung erfolgt zur Durchführung vorvertraglicher Maßnahmen und zur Erfüllung des Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie auf Grundlage unseres berechtigten Interesses an einer einfachen und zuverlässigen Terminvergabe (Art. 6 Abs. 1 lit. f DSGVO). Weitere Informationen finden Sie in der Datenschutzerklärung von Nativio: https://getnativio.de/datenschutz",
       },
     ],
   },
@@ -194,11 +190,15 @@ const sections: Section[] = [
       },
       {
         subtitle: "Google Maps (Zwei-Klick-Lösung)",
-        text: "Auf unserer Kontaktseite und den regionalen Unterseiten binden wir Kartenmaterial des Dienstes Google Maps ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Karte wird nicht automatisch geladen. Stattdessen sehen Sie zunächst einen Platzhalter mit der Schaltfläche „Karte laden\". Erst wenn Sie diese Schaltfläche anklicken, wird die Karte nachgeladen und dabei Ihre IP-Adresse sowie gegebenenfalls weitere Daten an Google übertragen; Google kann hierbei Cookies setzen. Ohne Ihren Klick findet keinerlei Verbindung zu Google-Servern statt.\n\nRechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie können die Karte jederzeit einfach nicht laden; alternativ erreichen Sie unseren Standort auch über den ebenfalls bereitgestellten externen Link. Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter: https://policies.google.com/privacy",
+        text: "Auf unserer Kontaktseite binden wir Kartenmaterial des Dienstes Google Maps ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Karte wird nicht automatisch geladen. Stattdessen sehen Sie zunächst einen Platzhalter mit der Schaltfläche „Karte laden\". Erst wenn Sie diese Schaltfläche anklicken, wird die Karte nachgeladen und dabei Ihre IP-Adresse sowie gegebenenfalls weitere Daten an Google übertragen; Google kann hierbei Cookies setzen. Ohne Ihren Klick findet keinerlei Verbindung zu Google-Servern statt.\n\nRechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO, die Sie durch das Anklicken der Schaltfläche erteilen. Sie können die Karte jederzeit einfach nicht laden; alternativ erreichen Sie unseren Standort auch über den ebenfalls bereitgestellten externen Link. Weitere Informationen finden Sie in der Datenschutzerklärung von Google unter: https://policies.google.com/privacy",
       },
       {
-        subtitle: "YouTube mit erweitertem Datenschutz",
-        text: "Wir binden auf dieser Website Videos der Plattform YouTube ein. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nWir nutzen YouTube im erweiterten Datenschutzmodus. Dieser Modus sorgt laut YouTube dafür, dass YouTube keine Cookies über den Besucher auf dieser Website speichert, bevor dieser sich das Video ansieht. Sobald Sie die Wiedergabe eines YouTube-Videos starten, kann dies jedoch Datenverarbeitungsvorgänge auslösen. Hierauf haben wir keinen Einfluss.\n\nDie Nutzung von YouTube erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer ansprechenden Darstellung unseres Online-Angebots). Weitere Informationen zum Datenschutz bei YouTube finden Sie in der Datenschutzerklärung des Anbieters unter: https://policies.google.com/privacy",
+        subtitle: "YouTube (Zwei-Klick-Lösung)",
+        text: "Auf unserer Startseite zeigen wir Videos unseres YouTube-Kanals. Anbieter ist die Google Ireland Limited („Google\"), Gordon House, Barrow Street, Dublin 4, Irland.\n\nDie Videos werden nicht automatisch geladen. Sie sehen zunächst nur ein Vorschaubild, das auf unserem eigenen Server liegt. Erst wenn Sie auf die Wiedergabe-Schaltfläche klicken, wird der YouTube-Player im erweiterten Datenschutzmodus (youtube-nocookie.com) nachgeladen. Dabei werden Ihre IP-Adresse und gegebenenfalls weitere Daten an Google übertragen, und Google kann Cookies oder vergleichbare Technologien einsetzen. Ohne Ihren Klick findet keine Verbindung zu YouTube statt.\n\nRechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, die Sie durch das Anklicken der Wiedergabe-Schaltfläche erteilen. Weitere Informationen zum Datenschutz bei YouTube finden Sie unter: https://policies.google.com/privacy",
+      },
+      {
+        subtitle: "Google-Bewertungen",
+        text: "Auf unserer Website zeigen wir ausgewählte Bewertungen aus unserem Google-Unternehmensprofil. Wir haben die Texte selbst aus dem Profil übernommen; beim Besuch unserer Website wird keine Verbindung zu Google hergestellt.\n\nAngezeigt werden der Vorname und der erste Buchstabe des Nachnamens, die Sternebewertung, der Bewertungstext und das Jahr der Bewertung. Diese Angaben haben die Verfassenden selbst bei Google veröffentlicht. Rechtsgrundlage ist unser berechtigtes Interesse an der Darstellung von Kundenmeinungen (Art. 6 Abs. 1 lit. f DSGVO). Wer nicht mehr auf unserer Website erscheinen möchte, kann sich jederzeit an uns wenden; wir entfernen die Bewertung dann umgehend.",
       },
     ],
   },
@@ -207,7 +207,7 @@ const sections: Section[] = [
     title: "Internationale Datenübermittlung und EU-Vorgaben",
     content: [
       {
-        text: "Soweit personenbezogene Daten an Dritte im Ausland, insbesondere außerhalb der Europäischen Union/EWR, übertragen werden (z. B. an Vercel Inc. oder Supabase Inc. in den USA), geschieht dies auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (EU-US Data Privacy Framework) oder auf Basis geeigneter Garantien, wie insbesondere EU-Standardvertragsklauseln. Bei Fragen hierzu wenden Sie sich bitte an die im Impressum angegebene verantwortliche Stelle.",
+        text: "Soweit personenbezogene Daten an Dritte im Ausland, insbesondere außerhalb der Europäischen Union/EWR, übertragen werden (z. B. an Vercel Inc. oder Resend Inc. in den USA), geschieht dies auf Grundlage eines Angemessenheitsbeschlusses der EU-Kommission (EU-US Data Privacy Framework) oder auf Basis geeigneter Garantien, wie insbesondere EU-Standardvertragsklauseln. Bei Fragen hierzu wenden Sie sich bitte an die im Impressum angegebene verantwortliche Stelle.",
       },
     ],
   },

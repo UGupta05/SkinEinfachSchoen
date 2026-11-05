@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Impressum | SKIN einfach schön Kosmetikstudio Osnabrück',
+  title: 'Impressum',
   description: 'Rechtliche Angaben und Kontaktinformationen für die SKIN einfach schön GmbH in Osnabrück.',
   robots: 'noindex, follow',
 };

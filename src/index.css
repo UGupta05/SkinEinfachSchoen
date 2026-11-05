@@ -163,6 +163,28 @@
   animation: pageEntrance 0.4s var(--ease-luxury) forwards;
 }
 
+/* Hidden until ScrollReveal animates it in; only applies when JS runs. */
+html.js .reveal-pending {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal-pending {
+    opacity: 1;
+  }
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-scale-in,
+  .animate-blur-in,
+  .animate-page-entrance {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
 /* Nav links underline hover expansion effect */
 .nav-link-underline {
   position: relative;
