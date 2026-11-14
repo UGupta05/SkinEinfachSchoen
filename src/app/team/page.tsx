@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowDown, CheckCircle2, ExternalLink, FlaskConical, Heart, Quote, Star } from 'lucide-react';
 import { GOOGLE_REVIEWS_URL, REVIEWS } from '../../data/reviews';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
@@ -30,11 +31,11 @@ export default function TeamPage() {
             </p>
             <div className="pt-4">
               <a
-                className="inline-flex items-center gap-2 font-button-text text-button-text border border-slate-muted text-slate-muted px-8 py-4 uppercase hover:bg-soft-shell transition-colors"
+                className="btn gap-2 border border-primary text-primary hover:bg-soft-shell"
                 href="#experten"
               >
                 Unsere Experten entdecken{' '}
-                <span className="material-symbols-outlined">arrow_downward</span>
+                <ArrowDown className="w-5 h-5 shrink-0" aria-hidden="true" />
               </a>
             </div>
           </ScrollReveal>
@@ -108,33 +109,23 @@ export default function TeamPage() {
                     </h4>
                     <ul className="space-y-2">
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Ausbildung zur allgemeinen Heilpraktikerin mit Schwerpunkt Ästhetik</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Studium zur Pharmazieökonomin in Schmalkalden (2012-2014)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Betriebsleitung Skinsurfer (2013-2015)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Weiterbildung IPL &amp; Dermo-Fach-PTA (Düsseldorf)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Expertenwissen in Lasertherapie &amp; optischer Strahlung</span>
                       </li>
                     </ul>
@@ -183,27 +174,19 @@ export default function TeamPage() {
                     </h4>
                     <ul className="space-y-2">
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Medizinische Kosmetikerin bei SKIN einfach schön (seit 2023)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Derma-Kosmetikerin in Dermatologischen Praxen, Münster (2015-2023)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Leitung Kosmetikabteilung bei Marlies Möller, Hamburg (2009-2014)</span>
                       </li>
                       <li className="flex items-start gap-3 text-sm text-tertiary">
-                        <span className="material-symbols-outlined text-sky-accent text-lg mt-0.5">
-                          check_circle
-                        </span>
+                        <CheckCircle2 className="w-5 h-5 shrink-0 text-sky-accent mt-0.5" aria-hidden="true" />
                         <span>Beauty Therapist im Athenaeum Hotel Spa, London</span>
                       </li>
                     </ul>
@@ -231,9 +214,7 @@ export default function TeamPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade-in-up" delay={150} className="bg-soft-shell p-12 flex flex-col items-center text-center justify-center medical-glow transition-transform duration-500 hover:scale-[1.02]">
-              <span className="material-symbols-outlined text-5xl text-sky-accent mb-4">
-                biotech
-              </span>
+              <FlaskConical className="w-8 h-8 shrink-0 text-sky-accent mb-4" aria-hidden="true" />
               <h3 className="font-headline-sm text-headline-sm text-primary mb-2">
                 Modernste Technik
               </h3>
@@ -242,9 +223,7 @@ export default function TeamPage() {
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade-in-up" delay={300} className="bg-soft-shell p-12 flex flex-col items-center text-center justify-center medical-glow transition-transform duration-500 hover:scale-[1.02]">
-              <span className="material-symbols-outlined text-5xl text-sky-accent mb-4">
-                favorite
-              </span>
+              <Heart className="w-8 h-8 shrink-0 text-sky-accent mb-4" aria-hidden="true" />
               <h3 className="font-headline-sm text-headline-sm text-primary mb-2">
                 Herzlichkeit
               </h3>
@@ -286,17 +265,13 @@ export default function TeamPage() {
                 className="bg-pure-white p-8 medical-glow relative flex flex-col justify-between transition-transform duration-500 hover:scale-[1.02]"
               >
                 <div>
-                  <span className="material-symbols-outlined text-sky-accent/20 text-6xl absolute top-4 right-4">
-                    format_quote
-                  </span>
+                  <Quote className="w-12 h-12 shrink-0 text-sky-accent/20 absolute top-4 right-4" aria-hidden="true" />
                   <div className="flex items-center gap-4 mb-6">
                     <div>
-                      <h4 className="font-label-caps text-label-caps text-primary">{t.author}</h4>
+                      <h4 className="font-sans text-sm font-semibold text-primary">{t.author}</h4>
                       <div className="flex text-sky-accent text-[12px] mt-1">
                         {Array.from({ length: t.rating }, (_, i) => (
-                          <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
-                            star
-                          </span>
+                          <Star key={i} className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                         ))}
                       </div>
                     </div>
@@ -314,10 +289,10 @@ export default function TeamPage() {
               href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-label-caps text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
+              className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-primary hover:text-sky-accent transition-colors"
             >
               Alle Rezensionen auf Google ansehen
-              <span className="material-symbols-outlined text-sm">open_in_new</span>
+              <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -335,13 +310,13 @@ export default function TeamPage() {
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <Link
               href="/terminbuchung"
-              className="bg-slate-muted text-pure-white px-10 py-4 font-button-text text-button-text uppercase hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              className="btn bg-primary text-pure-white hover:bg-secondary"
             >
               Termin online buchen
             </Link>
             <Link
               href="/kontakt"
-              className="border border-slate-muted text-slate-muted px-10 py-4 font-button-text text-button-text uppercase hover:bg-soft-shell hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              className="btn border border-primary text-primary hover:bg-soft-shell"
             >
               Kontakt aufnehmen
             </Link>

@@ -7,9 +7,9 @@ export function LinkCard({ href, title, text }: { readonly href: string; readonl
   return (
     <Link
       href={href}
-      className="group block bg-soft-shell p-6 rounded-lg border border-outline-variant/10 hover:border-primary/30 hover:shadow-md transition-all h-full"
+      className="group block bg-pure-white p-6 rounded-2xl border border-outline-variant/50 hover:border-primary/25 hover-glow transition-all duration-300 h-full"
     >
-      <span className="font-display text-base font-bold text-primary flex items-center justify-between gap-3">
+      <span className="font-display text-xl text-primary flex items-center justify-between gap-3">
         {title}
         <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
       </span>

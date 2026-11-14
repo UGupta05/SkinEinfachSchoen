@@ -63,7 +63,16 @@ export const themePath = (slug: ThemeSlug) => `/${slug}`;
 /** Resolves a theme's treatment link, which may point at the ZO page. */
 export function resolveTreatmentLink(slug: TreatmentSlug | 'medical-kosmetik-zo') {
   if (slug === 'medical-kosmetik-zo') {
-    return { href: '/medical-kosmetik-zo', name: 'Medical Kosmetik ZO® Skin Health' };
+    return {
+      href: '/medical-kosmetik-zo',
+      name: 'Medical Kosmetik ZO® Skin Health',
+      image: {
+        src: '/images/studio/zo-skin-health.jpg',
+        alt: 'ZO® Skin Health Reinigungsprodukt in der Hand vor dem Produktregal im Studio',
+        width: 800,
+        height: 1000,
+      },
+    };
   }
-  return { href: treatmentPath(slug), name: TREATMENTS[slug].name };
+  return { href: treatmentPath(slug), name: TREATMENTS[slug].name, image: TREATMENTS[slug].image };
 }

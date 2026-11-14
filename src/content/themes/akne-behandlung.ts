@@ -125,10 +125,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/treatments/zo_skin_health_new.jpg',
-    alt: 'Pflegeprodukte von ZO Skin Health im Regal, die im Studio für die Akne-Behandlung in Osnabrück und die Pflege zu Hause empfohlen werden',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/gesichtsreinigung.jpg',
+    alt: 'Akne-Behandlung in Osnabrück: Maske bei der Gesichtsreinigung',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };

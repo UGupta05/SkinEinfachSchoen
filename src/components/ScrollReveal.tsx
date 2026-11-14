@@ -47,7 +47,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
           setIsIntersecting(false);
         }
       },
-      { threshold }
+      // Start slightly before the element scrolls in so fast scrolling never shows empty space.
+      { threshold, rootMargin: '0px 0px 15% 0px' }
     );
 
     observer.observe(currentRef);
@@ -65,7 +66,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   const animationClass = isIntersecting ? `animate-${variant}` : 'reveal-pending';
 
   const style: React.CSSProperties = {
-    animationDelay: `${delay}ms`,
+    // Long staggers feel sluggish; keep every item within a quick cascade.
+    animationDelay: `${Math.min(delay, 240)}ms`,
   };
 
   if (duration !== undefined) {

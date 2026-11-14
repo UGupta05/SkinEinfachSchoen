@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Clock, Tag } from 'lucide-react';
+import { Check, Clock, Tag } from 'lucide-react';
 import { ScrollReveal } from '../ScrollReveal';
 import { Breadcrumbs, type Crumb } from './Breadcrumbs';
 import { ContentSections } from './ContentSections';
 import { FaqList } from './FaqList';
+import { ImageLinkCard } from './ImageLinkCard';
 import { LinkCard } from './LinkCard';
 import { CtaBand } from './CtaBand';
 import { THEMES, TREATMENTS, themePath, treatmentPath, type TreatmentPage } from '../../content';
@@ -15,129 +16,133 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
 
   return (
     <>
-      <div className="py-10 md:py-14 max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-        <Breadcrumbs items={breadcrumbs} />
+      {/* Hero */}
+      <section className="bg-cream">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-8 pb-16 md:pt-10 md:pb-20">
+          <Breadcrumbs items={breadcrumbs} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
-          <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-            <span className="font-display text-xs font-bold text-sky-accent uppercase tracking-widest block">
-              {page.eyebrow}
-            </span>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-primary leading-tight">
-              {page.h1}
-            </h1>
-            <div className="space-y-4">
-              {page.intro.map((p, i) => (
-                <p key={i} className="font-sans text-base text-tertiary leading-relaxed">{p}</p>
-              ))}
-            </div>
-
-            {(page.duration || page.price) && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                {page.duration && (
-                  <div className="bg-soft-shell p-5 rounded-lg border border-outline-variant/10 flex items-center gap-4">
-                    <Clock className="w-7 h-7 text-primary shrink-0" aria-hidden="true" />
-                    <div>
-                      <p className="font-display text-xs font-bold uppercase tracking-wider text-primary">Behandlungsdauer</p>
-                      <p className="font-sans text-sm text-tertiary mt-1">{page.duration}</p>
-                    </div>
-                  </div>
-                )}
-                {page.price && (
-                  <div className="bg-soft-shell p-5 rounded-lg border border-outline-variant/10 flex items-center gap-4">
-                    <Tag className="w-7 h-7 text-primary shrink-0" aria-hidden="true" />
-                    <div>
-                      <p className="font-display text-xs font-bold uppercase tracking-wider text-primary">Preis</p>
-                      <p className="font-sans text-sm text-tertiary mt-1 whitespace-nowrap">{page.price}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="space-y-4 pt-4">
-              <h2 className="font-display text-lg font-bold text-primary">Ihre Vorteile</h2>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {page.benefits.map((b) => (
-                  <li key={b} className="flex items-center gap-2 font-sans text-sm text-tertiary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sky-accent shrink-0" aria-hidden="true"></span>
-                    <span>{b}</span>
-                  </li>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mt-8">
+            <div className="lg:col-span-7 space-y-6">
+              <span className="eyebrow text-sky-accent">{page.eyebrow}</span>
+              <h1 className="font-display text-4xl md:text-[3.25rem] md:leading-[1.08] text-primary">{page.h1}</h1>
+              <div className="space-y-4">
+                {page.intro.map((p, i) => (
+                  <p key={i} className="font-sans text-base md:text-lg text-tertiary leading-relaxed">{p}</p>
                 ))}
-              </ul>
+              </div>
+
+              {(page.duration || page.price) && (
+                <ul className="flex flex-wrap gap-3 pt-1">
+                  {page.duration && (
+                    <li className="inline-flex items-center gap-2 rounded-full bg-pure-white border border-outline-variant/60 px-4 py-2 font-sans text-sm text-on-surface-variant">
+                      <Clock className="w-4 h-4 text-sky-accent" aria-hidden="true" />
+                      <span><span className="sr-only">Behandlungsdauer: </span>{page.duration}</span>
+                    </li>
+                  )}
+                  {page.price && (
+                    <li className="inline-flex items-center gap-2 rounded-full bg-pure-white border border-outline-variant/60 px-4 py-2 font-sans text-sm text-on-surface-variant whitespace-nowrap">
+                      <Tag className="w-4 h-4 text-sky-accent" aria-hidden="true" />
+                      <span><span className="sr-only">Preis: </span>{page.price}</span>
+                    </li>
+                  )}
+                </ul>
+              )}
+
+              <div className="flex flex-wrap gap-3 pt-3">
+                <Link href="/terminbuchung" className="btn bg-primary text-pure-white medical-glow hover:bg-secondary">
+                  Termin buchen
+                </Link>
+                <Link href="/preise" className="btn border border-primary/40 text-primary hover:bg-primary/5">
+                  Alle Preise
+                </Link>
+              </div>
             </div>
 
-            <div className="pt-6 flex flex-wrap gap-4">
-              <Link
-                href="/terminbuchung"
-                className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-all text-center medical-glow"
+            <div className="lg:col-span-5">
+              <div
+                className={`relative overflow-hidden mx-auto medical-glow ${
+                  isLandscape ? 'rounded-3xl aspect-[4/3]' : 'arch aspect-[4/5] max-w-[340px] lg:max-w-[420px]'
+                }`}
               >
-                Termin buchen
-              </Link>
-              <Link
-                href="/preise"
-                className="border border-outline text-tertiary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-soft-shell transition-all text-center"
-              >
-                Alle Preise
-              </Link>
+                <Image
+                  src={page.image.src}
+                  alt={page.image.alt}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 420px, 90vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div
-            className={`lg:col-span-5 w-full overflow-hidden rounded-lg shadow-lg order-1 lg:order-2 ${
-              isLandscape ? '' : 'mx-auto max-w-[320px] lg:max-w-[340px]'
-            }`}
-          >
-            <Image
-              src={page.image.src}
-              alt={page.image.alt}
-              width={page.image.width}
-              height={page.image.height}
-              priority
-              sizes="(min-width: 1024px) 400px, 90vw"
-              className="w-full h-auto object-cover"
-            />
+      {/* Benefits */}
+      {page.benefits.length > 0 && (
+        <section className="bg-sand/60">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 md:py-14">
+            <h2 className="font-display text-2xl md:text-3xl text-primary mb-6">Ihre Vorteile</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {page.benefits.map((b) => (
+                <li key={b} className="flex items-center gap-3 rounded-2xl bg-pure-white px-5 py-4 font-sans text-[15px] text-on-surface-variant">
+                  <span className="w-7 h-7 rounded-full bg-sand flex items-center justify-center shrink-0">
+                    <Check className="w-4 h-4 text-sky-accent" aria-hidden="true" />
+                  </span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+        </section>
+      )}
+
+      {/* Long-form content */}
+      <div className="bg-cream">
+        <div className="max-w-3xl mx-auto px-margin-mobile md:px-gutter py-16 md:py-20">
+          <ContentSections sections={page.sections} />
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-margin-mobile md:px-gutter pb-16">
-        <ContentSections sections={page.sections} />
-      </div>
+      {page.relatedTreatments.length > 0 && (
+        <section className="bg-sand/60 py-16 md:py-20">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+            <h2 className="font-display text-3xl md:text-4xl text-primary mb-10">Verwandte Behandlungen</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {page.relatedTreatments.map((slug, i) => (
+                <ScrollReveal key={slug} variant="fade-in-up" delay={i * 70}>
+                  <ImageLinkCard
+                    href={treatmentPath(slug)}
+                    title={TREATMENTS[slug].name}
+                    text={TREATMENTS[slug].teaser}
+                    image={TREATMENTS[slug].image}
+                  />
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
-      {(page.relatedThemes.length > 0 || page.relatedTreatments.length > 0) && (
-        <section className="bg-soft-shell/40 border-y border-outline-variant/10 py-16">
-          <div className="max-w-5xl mx-auto px-margin-mobile md:px-gutter space-y-12">
-            {page.relatedThemes.length > 0 && (
-              <ScrollReveal variant="fade-in-up">
-                <h2 className="font-display text-2xl font-bold text-primary mb-6">Passende Hautanliegen</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {page.relatedThemes.map((slug) => (
-                    <LinkCard key={slug} href={themePath(slug)} title={THEMES[slug].name} text={THEMES[slug].teaser} />
-                  ))}
-                </div>
-              </ScrollReveal>
-            )}
-            {page.relatedTreatments.length > 0 && (
-              <ScrollReveal variant="fade-in-up">
-                <h2 className="font-display text-2xl font-bold text-primary mb-6">Verwandte Behandlungen</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {page.relatedTreatments.map((slug) => (
-                    <LinkCard key={slug} href={treatmentPath(slug)} title={TREATMENTS[slug].name} text={TREATMENTS[slug].teaser} />
-                  ))}
-                </div>
-              </ScrollReveal>
-            )}
+      {page.relatedThemes.length > 0 && (
+        <section className="bg-cream pt-16 md:pt-20">
+          <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+            <h2 className="font-display text-3xl md:text-4xl text-primary mb-8">Passende Hautanliegen</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {page.relatedThemes.map((slug) => (
+                <LinkCard key={slug} href={themePath(slug)} title={THEMES[slug].name} text={THEMES[slug].teaser} />
+              ))}
+            </div>
           </div>
         </section>
       )}
 
       {page.faqs.length > 0 && (
-        <section className="max-w-3xl mx-auto px-margin-mobile md:px-gutter py-16">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary mb-8">
-            Häufige Fragen zu {page.name}
-          </h2>
-          <FaqList items={page.faqs} />
+        <section className="bg-cream">
+          <div className="max-w-3xl mx-auto px-margin-mobile md:px-gutter py-16 md:py-20">
+            <h2 className="font-display text-3xl md:text-4xl text-primary mb-8">Häufige Fragen zu {page.name}</h2>
+            <FaqList items={page.faqs} />
+          </div>
         </section>
       )}
 

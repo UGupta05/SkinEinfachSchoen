@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
 import { RetinolNotice } from './RetinolNotice';
+import { SiteHeader } from './SiteHeader';
 
 export interface FooterLink {
   readonly name: string;
@@ -23,7 +23,7 @@ const footerLinkClass = 'font-sans text-sm text-tertiary hover:text-primary tran
 function FooterColumn({ title, links }: { readonly title: string; readonly links: readonly FooterLink[] }) {
   return (
     <div>
-      <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">{title}</h4>
+      <h4 className="font-sans text-xs font-semibold text-primary uppercase tracking-[0.16em] mb-6">{title}</h4>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.path}>
@@ -36,115 +36,16 @@ function FooterColumn({ title, links }: { readonly title: string; readonly links
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeLinks }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'instant' });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMobileMenuOpen(false);
   }, [pathname]);
-
-  const navLinks = [
-    { name: 'Leistungen', path: '/leistungen' },
-    { name: 'Medical Kosmetik ZO', path: '/medical-kosmetik-zo' },
-    { name: 'Orthomolekulare Medizin', path: '/orthomolekulare-medizin' },
-    { name: 'Team', path: '/team' },
-    { name: 'Kontakt', path: '/kontakt' }
-  ];
 
   return (
     <div className="min-h-screen bg-background text-on-surface flex flex-col font-sans selection:bg-primary/20">
-      {/* Header / Top Navigation */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b ${scrolled
-            ? 'bg-pure-white/95 backdrop-blur-md shadow-md border-outline-variant/20'
-            : 'bg-pure-white/90 backdrop-blur-sm shadow-sm border-outline-variant/15'
-          }`}
-      >
-        <nav className="flex justify-between items-center h-full px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full">
-          <Link href="/" className="flex items-center">
-            <img
-              src="/images/home/logo.png"
-              alt="SKIN einfach schön"
-              className="h-10 w-auto object-contain"
-            />
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.path;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  className={`font-display text-xs font-bold uppercase tracking-wider transition-colors hover:text-primary nav-link-underline ${isActive
-                      ? 'text-primary active'
-                      : 'text-tertiary'
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-4">
-
-
-            <Link
-              href="/terminbuchung"
-              className="hidden md:block bg-slate-muted text-pure-white px-6 py-3 font-display text-xs font-bold uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all"
-            >
-              Terminbuchung
-            </Link>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-primary focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </nav>
-      </header>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-20 z-45 bg-pure-white md:hidden flex flex-col p-8 transition-transform duration-300">
-          <nav className="flex flex-col space-y-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="font-display text-lg font-bold uppercase tracking-wider text-primary border-b border-outline-variant/10 pb-2"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              href="/terminbuchung"
-              onClick={() => setMobileMenuOpen(false)}
-              className="bg-primary text-pure-white py-4 text-center font-display text-xs font-bold uppercase tracking-wider hover:opacity-95 transition-all"
-            >
-              Terminbuchung
-            </Link>
-          </nav>
-        </div>
-      )}
+      <SiteHeader treatmentLinks={treatmentLinks} themeLinks={themeLinks} />
 
       {/* Main Page Area */}
       <main key={pathname} className="flex-1 pt-20 animate-page-entrance">
@@ -153,10 +54,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
       </main>
 
       {/* Footer */}
-      <footer className="w-full py-section-padding-sm bg-soft-shell border-t border-outline-variant/10">
+      <footer className="w-full py-section-padding-sm bg-sand border-t border-outline-variant/60">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 max-w-container-max mx-auto px-margin-mobile md:px-gutter">
           <div>
-            <h3 className="font-display text-lg text-primary mb-4 font-bold uppercase tracking-wider">SKIN</h3>
+            <h3 className="font-display text-lg text-primary mb-4 font-medium">SKIN</h3>
             <p className="font-sans text-sm text-tertiary mb-6">
               Medical Kosmetik &amp; Ästhetik auf höchstem Niveau.
             </p>
@@ -204,7 +105,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
           <FooterColumn title="Hautanliegen" links={themeLinks} />
 
           <div>
-            <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Navigation</h4>
+            <h4 className="font-sans text-xs font-semibold text-primary uppercase tracking-[0.16em] mb-6">Navigation</h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/leistungen" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Leistungen</Link>
@@ -228,7 +129,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
           </div>
 
           <div>
-            <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Rechtliches</h4>
+            <h4 className="font-sans text-xs font-semibold text-primary uppercase tracking-[0.16em] mb-6">Rechtliches</h4>
             <ul className="space-y-4">
               <li>
                 <Link href="/impressum" className="font-sans text-sm text-tertiary hover:text-primary transition-colors">Impressum</Link>
@@ -240,7 +141,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
           </div>
 
           <div>
-            <h4 className="font-display text-xs font-bold text-primary uppercase tracking-widest mb-6">Kontakt</h4>
+            <h4 className="font-sans text-xs font-semibold text-primary uppercase tracking-[0.16em] mb-6">Kontakt</h4>
             <p className="font-sans text-sm text-tertiary mb-2">Lotter Straße 33</p>
             <p className="font-sans text-sm text-tertiary mb-6">49078 Osnabrück</p>
             <a
@@ -254,7 +155,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
         </div>
 
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-16 pt-8 border-t border-outline-variant/10 text-center">
-          <p className="font-display text-[10px] text-tertiary uppercase tracking-wider">
+          <p className="font-sans text-[10px] text-tertiary uppercase tracking-wider">
             © 2026 SKIN einfach schön GmbH. Alle Rechte vorbehalten.
           </p>
         </div>

@@ -26,7 +26,7 @@ export default function MedicalKosmetikZOPage() {
       
       <div className="space-y-6 pt-2">
         <div className="border-l-2 border-sky-accent pl-4 py-1">
-          <h3 className="font-display font-bold text-primary text-base">
+          <h3 className="font-display font-medium text-primary text-base">
             Schritt 1: GSR™ – Getting Skin Ready
           </h3>
           <p className="mt-2 text-tertiary text-sm leading-relaxed">
@@ -35,7 +35,7 @@ export default function MedicalKosmetikZOPage() {
         </div>
         
         <div className="border-l-2 border-sky-accent pl-4 py-1">
-          <h3 className="font-display font-bold text-primary text-base">
+          <h3 className="font-display font-medium text-primary text-base">
             Schritt 2: Prevent & Correct (Therapie & Korrektur)
           </h3>
           <p className="mt-2 text-tertiary text-sm leading-relaxed">
@@ -44,7 +44,7 @@ export default function MedicalKosmetikZOPage() {
         </div>
 
         <div className="border-l-2 border-sky-accent pl-4 py-1">
-          <h3 className="font-display font-bold text-primary text-base">
+          <h3 className="font-display font-medium text-primary text-base">
             Schritt 3: Triple-Spectrum Protection
           </h3>
           <p className="mt-2 text-tertiary text-sm leading-relaxed">
@@ -71,7 +71,7 @@ export default function MedicalKosmetikZOPage() {
       "Schutz vor HEV-Licht (Blue Light) & IR-A",
       "Medizinisch fundierte Wirkstoffe (hohe Retinol-Dosis)"
     ],
-    image: "/images/treatments/zo_skin_health_new.jpg",
+    image: "/images/studio/zo-skin-health.jpg",
     imageAspectRatio: "portrait" as const
   };
 

@@ -13,8 +13,8 @@ export default function ImpressumPage() {
       {/* Hero */}
       <section className="bg-primary pt-32 pb-16">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <p className="font-display text-2xs text-sky-accent uppercase tracking-[0.2em] mb-3">Rechtliches</p>
-          <h1 className="font-display text-display-lg-mobile md:text-display-lg text-pure-white font-bold">
+          <p className="font-sans text-2xs text-sky-accent uppercase tracking-[0.2em] mb-3">Rechtliches</p>
+          <h1 className="font-display text-display-lg-mobile md:text-display-lg text-pure-white font-medium">
             Impressum
           </h1>
         </div>

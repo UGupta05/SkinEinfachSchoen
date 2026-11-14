@@ -2,16 +2,17 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { FaqAccordion } from '../components/FaqAccordion';
 import { JsonLd } from '../components/JsonLd';
 import { LinkCard } from '../components/content/LinkCard';
+import { ImageLinkCard } from '../components/content/ImageLinkCard';
 import { ReviewsSection } from '../components/ReviewsSection';
 import { YouTubeFacade } from '../components/YouTubeFacade';
 import { salonSchema } from '../lib/schema';
-import { THEME_LIST, themePath } from '../content';
-
+import { THEMES, THEME_LIST, TREATMENTS, themePath, treatmentPath } from '../content';
+import { GOOGLE_RATING } from '../data/reviews';
 
 export const metadata: Metadata = {
   alternates: {
@@ -19,311 +20,200 @@ export const metadata: Metadata = {
   },
 };
 
+// Built from the content registry so names, teasers and photos stay in sync with the treatment pages.
+const FEATURED_TREATMENTS = [
+  ...(['radiofrequenz-microneedling', 'jetpeel'] as const).map((slug) => ({
+    href: treatmentPath(slug),
+    title: TREATMENTS[slug].name,
+    text: TREATMENTS[slug].teaser,
+    image: TREATMENTS[slug].image,
+  })),
+  {
+    href: themePath('dauerhafte-haarentfernung'),
+    title: THEMES['dauerhafte-haarentfernung'].name,
+    text: THEMES['dauerhafte-haarentfernung'].teaser,
+    image: THEMES['dauerhafte-haarentfernung'].image,
+  },
+  {
+    href: treatmentPath('microneedling'),
+    title: TREATMENTS.microneedling.name,
+    text: TREATMENTS.microneedling.teaser,
+    image: TREATMENTS.microneedling.image,
+  },
+];
+
+const VIDEOS = [
+  {
+    id: 'W5CCNDCyFuw',
+    eyebrow: 'Über uns',
+    title: 'Wir sind SKIN einfach schön! Lerne uns kennen',
+    text: 'Willkommen in unserem Kosmetikstudio in Osnabrück. Lernen Sie unser Team und unsere Philosophie für wissenschaftlich fundierte Hautpflege kennen. Wir begleiten Sie auf Ihrem Weg zu einer gesunden, strahlenden Haut, mit modernen Technologien und persönlicher Betreuung in Wohlfühlatmosphäre.',
+    cta: { href: '/team', label: 'Unser Team kennenlernen' },
+  },
+  {
+    id: 'OLpqOJyt7I8',
+    eyebrow: 'Hautgesundheit',
+    title: 'Wie sich die Haut positiv verändert',
+    text: 'Schöne Haut braucht Zeit. In diesem Video erklären wir, wie sich Ihre Haut durch gezielte, regelmäßige Behandlungen, von sanftem Microneedling bis zur regenerativen Wirkstoffkosmetik, über die Jahre positiv verändert.',
+    cta: { href: '/terminbuchung', label: 'Beratungstermin buchen' },
+  },
+  {
+    id: 'Qc7Ay8-dTiY',
+    eyebrow: 'Behandlung im Fokus',
+    title: 'Ablauf der dauerhaften Haarentfernung',
+    text: 'Lästige Haare langfristig und schonend entfernen: Im Video zeigen wir Schritt für Schritt, wie die dauerhafte Haarentfernung in unserem Studio in Osnabrück abläuft, von der Beratung über den Schutz der Haut bis zum glatten Ergebnis. Wir arbeiten mit Diodenlaser, Alexandritlaser und IPL und wählen die Methode passend zu Ihrem Haut- und Haartyp.',
+    cta: { href: '/dauerhafte-haarentfernung', label: 'Zur dauerhaften Haarentfernung' },
+  },
+] as const;
+
+const formatRating = (rating: number) => rating.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
       <JsonLd data={salonSchema()} />
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            alt="Behandlungsraum von SKIN einfach schön in Osnabrück"
-            src="/images/home/home_hero_new_3.jpg"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
 
-        <div className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
-          <div className="max-w-2xl">
-            <ScrollReveal variant="fade-in-up" delay={100} immediate>
-              <h1 
-                className="font-display text-4xl md:text-5xl font-bold text-background mb-6 leading-tight"
-                style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.15)' }}
-              >
+      {/* Hero: full-bleed studio photo, oversized wordmark, compact copy block */}
+      <section className="relative isolate overflow-hidden bg-onyx-text text-cream min-h-[600px] h-[calc(100svh-11rem)] max-h-[900px]">
+        <Image
+          alt="Empfangslounge von SKIN einfach schön in Osnabrück mit Holzwand, Chesterfield-Sofa und Pampasgras"
+          src="/images/studio/hero-lounge.jpg"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[50%_55%] -z-10"
+        />
+        {/* Warm shading keeps the light type readable on every part of the photo. */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#1f1813]/65 via-[#1f1813]/20 to-[#1f1813]/85" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#1f1813]/55 via-[#1f1813]/15 to-transparent" aria-hidden="true" />
+        {/* On phones the copy block sits over the busy middle of the photo. */}
+        <div className="absolute inset-0 -z-10 bg-[#1f1813]/35 md:hidden" aria-hidden="true" />
+        {/* The bright shop windows on the right need extra shading. */}
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_left,rgba(31,24,19,0.8)_0%,rgba(31,24,19,0.55)_28%,transparent_55%)]" aria-hidden="true" />
+
+        <div className="max-w-container-max mx-auto h-full px-margin-mobile md:px-gutter pt-8 md:pt-12 pb-6 flex flex-col">
+          <ScrollReveal variant="fade-in-up" immediate>
+            <p className="font-display text-cream leading-[0.9] tracking-[-0.03em] text-[clamp(3.2rem,11.5vw,10rem)]" aria-hidden="true">
+              SKIN
+              <br />
+              einfach schön
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-auto grid grid-cols-1 md:grid-cols-12 gap-6">
+            <ScrollReveal variant="fade-in-up" delay={120} immediate className="md:col-start-7 lg:col-start-8 md:col-span-6 lg:col-span-5">
+              <h1 className="font-display text-2xl md:text-[2rem] leading-tight text-cream">
                 Ihr Kosmetikstudio in Osnabrück für eine gesunde, schöne Haut
               </h1>
-            </ScrollReveal>
-            
-            <ScrollReveal variant="fade-in-up" delay={250} immediate>
-              <p 
-                className="font-sans text-lg text-background mb-10 leading-relaxed"
-                style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15)' }}
-              >
-                Radiofrequenz-Microneedling, JetPeel, dauerhafte Haarentfernung und medizinische Kosmetik an der Lotter Straße. Jede Behandlung beginnt bei uns mit einer gründlichen Hautanalyse und ehrlicher Beratung.
+              <p className="font-sans text-base text-cream/80 leading-relaxed mt-4">
+                Radiofrequenz-Microneedling, JetPeel, dauerhafte Haarentfernung und medizinische Kosmetik. Jede Behandlung beginnt mit einer gründlichen Hautanalyse und ehrlicher Beratung.
               </p>
-            </ScrollReveal>
-            
-            <ScrollReveal variant="fade-in-up" delay={400} immediate>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/leistungen"
-                  className="bg-background text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:bg-background/90 hover:scale-[1.02] active:scale-95 transition-all text-center rounded-full duration-300"
-                >
-                  Behandlung finden
-                </Link>
-                <Link
-                  href="/terminbuchung"
-                  className="bg-background border border-primary text-primary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-background/90 hover:scale-[1.02] active:scale-95 transition-all text-center rounded-full duration-300"
-                >
-                  Beratungstermin
-                </Link>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Video-Einblicke & Routinen */}
-      <section className="py-section-padding-lg bg-soft-shell border-b border-outline-variant/10">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <ScrollReveal variant="blur-in" className="text-center mb-16">
-            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-              Erfahrungen &amp; Einblicke
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-              Lernen Sie uns und unsere Behandlungen kennen
-            </h2>
-          </ScrollReveal>
-
-          <div className="space-y-20">
-            {/* Video 1: Wir sind Skineinfachschoen! Lerne uns kennen */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <YouTubeFacade videoId="W5CCNDCyFuw" title="Wir sind SKIN einfach schön! Lerne uns kennen" />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Über Uns
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Wir sind SKIN einfach schön! Lerne uns kennen
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Willkommen in unserem Kosmetikinstitut in Osnabrück. Lernen Sie unser Team und unsere Philosophie für wissenschaftlich fundierte Hautpflege kennen. Wir begleiten Sie auf Ihrem Weg zu einer gesunden, strahlenden Haut – mit modernsten Technologien und individueller Betreuung in Wohlfühlatmosphäre.
-                </p>
-                <Link
-                  href="/team"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
-                >
-                  Unser Team treffen
-                </Link>
-              </ScrollReveal>
-            </div>
-
-            {/* Video 2: Wie sich die Haut positiv verändert */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 lg:order-2">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <YouTubeFacade videoId="OLpqOJyt7I8" title="Wie sich die Haut positiv verändert" />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal variant="fade-in-left" className="lg:col-span-6 lg:order-1 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Hautgesundheit
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Wie sich die Haut positiv verändert
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Hautgesundheit ist eine langfristige Reise. In diesem Video erklären wir, wie sich Ihre Haut durch gezielte, kontinuierliche Behandlungen (von sanftem Microneedling bis hin zur regenerativen Wirkstoffkosmetik) über die Jahre hinweg positiv verändert. Kontinuität und eine fundierte Hautanalyse sind der Schlüssel zur dauerhaften Schönheit.
-                </p>
-                <Link
-                  href="/terminbuchung"
-                  className="inline-block border border-primary text-primary px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest hover:bg-primary/5 hover:scale-105 active:scale-95 transition-all duration-300 text-center"
-                >
+              <div className="flex flex-wrap gap-3 mt-6">
+                <Link href="/terminbuchung" className="btn bg-cream text-primary hover:bg-pure-white">
                   Beratungstermin buchen
                 </Link>
-              </ScrollReveal>
-            </div>
-
-            {/* Video 3: So läuft die dauerhafte Haarentfernung bei uns ab SKIN einfachschoen */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <ScrollReveal variant="fade-in-left" className="lg:col-span-6">
-                <div className="relative aspect-video rounded-xl overflow-hidden medical-glow border border-outline-variant/10 transition-transform duration-500 hover:scale-[1.01]">
-                  <YouTubeFacade videoId="Qc7Ay8-dTiY" title="Ablauf der dauerhaften Haarentfernung" />
-                </div>
-              </ScrollReveal>
-              <ScrollReveal variant="fade-in-right" className="lg:col-span-6 space-y-6">
-                <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                  Behandlung im Fokus
-                </span>
-                <h3 className="font-display text-2xl font-bold text-primary leading-tight">
-                  Ablauf der dauerhaften Haarentfernung
-                </h3>
-                <p className="font-sans text-base text-tertiary leading-relaxed">
-                  Lästige Haare langfristig und schonend entfernen: Im Video zeigen wir Schritt für Schritt, wie die dauerhafte Haarentfernung in unserem Studio in Osnabrück abläuft, von der Beratung über den Schutz der Haut bis zum glatten Ergebnis. Wir arbeiten mit Diodenlaser, Alexandritlaser und IPL und wählen die Methode passend zu Ihrem Haut- und Haartyp.
-                </p>
-                <Link
-                  href="/dauerhafte-haarentfernung"
-                  className="inline-block bg-primary text-pure-white px-8 py-3.5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
-                >
-                  Zur dauerhaften Haarentfernung
+                <Link href="/leistungen" className="btn border border-cream/50 text-cream hover:bg-cream/10">
+                  Behandlung finden
                 </Link>
-              </ScrollReveal>
-            </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </div>
-      </section>
 
-      {/* Value Propositions */}
-      <section className="py-section-padding-lg bg-pure-white">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            
-            <ScrollReveal variant="fade-in-left" className="md:col-span-5 space-y-6">
-              <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase block">
-                Expertise
+          <div className="mt-8 pt-4 border-t border-cream/20 flex items-center justify-between gap-4 font-sans text-xs text-cream/75">
+            <span className="flex items-center gap-2">
+              <span className="flex text-gold" aria-hidden="true">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
               </span>
-              <h2 className="font-display text-3xl font-bold text-primary leading-tight">
-                Beratungskompetenz &amp; Ästhetische Exzellenz
-              </h2>
-              <p className="font-sans text-base text-tertiary leading-relaxed">
-                Jede Haut ist einzigartig. Deshalb beginnt Ihre Reise bei uns mit einer fundierten computergestützten Hautanalyse. Basierend auf medizinischen Fakten entwickeln wir Ihren individuellen Pflegeplan.
-              </p>
-              
-              <ul className="space-y-4">
-                <li className="flex items-center gap-3 font-sans text-base text-primary">
-                  <Sparkles className="w-5 h-5 text-sky-accent shrink-0" />
-                  <span>High-End Medical Beauty Equipment</span>
-                </li>
-                <li className="flex items-center gap-3 font-sans text-base text-primary">
-                  <CheckCircle2 className="w-5 h-5 text-sky-accent shrink-0" />
-                  <span>Nachhaltige &amp; wirksame Wirkstoffkosmetik</span>
-                </li>
-              </ul>
-            </ScrollReveal>
-
-            <ScrollReveal variant="fade-in-right" className="md:col-span-7 grid grid-cols-2 gap-4">
-              <div className="space-y-4 pt-12">
-                <div className="aspect-[3/4] overflow-hidden rounded-lg">
-                  <Image
-                    alt="Gesichtsbehandlung bei SKIN einfach schön"
-                    src="/images/home/treatment_closeup_new.jpg"
-                    width={576}
-                    height={1024}
-                    sizes="(min-width: 768px) 320px, 45vw"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="aspect-[3/4] overflow-hidden rounded-lg">
-                  <Image
-                    alt="Beratung im Studio von SKIN einfach schön"
-                    src="/images/home/consultation_team.jpg"
-                    width={695}
-                    height={1024}
-                    sizes="(min-width: 768px) 320px, 45vw"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                  />
-                </div>
-              </div>
-            </ScrollReveal>
-
+              {formatRating(GOOGLE_RATING.rating)} aus {GOOGLE_RATING.count} Google-Bewertungen
+            </span>
+            <span className="hidden sm:inline uppercase tracking-[0.18em]">Kosmetikstudio · Lotter Straße 33 · Osnabrück</span>
           </div>
         </div>
       </section>
 
-      {/* Services Bento Grid */}
-      <section className="py-section-padding-lg bg-soft-shell">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <ScrollReveal variant="blur-in" className="text-center mb-16">
-            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-              Unsere Leistungen
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-              Präzision für Ihre Haut
+      {/* Philosophy */}
+      <section className="py-section-padding-sm md:py-section-padding-lg bg-sand/60">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+          <ScrollReveal variant="fade-in-up" className="md:col-span-6 md:order-2 space-y-6">
+            <span className="eyebrow text-sky-accent">Unsere Haltung</span>
+            <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">
+              Zeit für Ihre Haut
             </h2>
+            <p className="font-sans text-base md:text-lg text-tertiary leading-relaxed">
+              Jede Haut ist einzigartig. Deshalb beginnt Ihr Weg bei uns mit einer gründlichen Hautanalyse und einem ehrlichen Gespräch. Erst dann entscheiden wir gemeinsam, welche Behandlung und welche Pflege wirklich zu Ihnen passen.
+            </p>
+            <ul className="space-y-3 pt-2">
+              {[
+                'Hautanalyse und persönliche Beratung vor jeder Behandlung',
+                'Moderne Geräte, etwa für Radiofrequenz-Microneedling und JetPeel',
+                'Wirkstoffkosmetik von ZO® Skin Health für zu Hause',
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3 font-sans text-base text-on-surface-variant">
+                  <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-sky-accent shrink-0" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-gutter">
-            {/* Bento Card 1: Anti Aging */}
-            <ScrollReveal variant="fade-in-up" delay={0} className="md:col-span-2 md:row-span-2 relative group overflow-hidden medical-glow rounded-lg min-h-[400px]">
+          <ScrollReveal variant="fade-in-up" delay={100} className="md:col-span-6 md:order-1 grid grid-cols-2 gap-4 md:gap-5">
+            <div className="aspect-[3/4] overflow-hidden arch-3-4 mt-12">
               <Image
-                alt="Radiofrequenz-Microneedling bei SKIN einfach schön in Osnabrück"
-                src="/images/home/mrf_microneedling.jpg"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                alt="Behandlungsraum mit Liege und Regal voller ZO® Skin Health Produkte bei SKIN einfach schön"
+                src="/images/studio/raum-2.jpg"
+                width={750}
+                height={1000}
+                sizes="(min-width: 768px) 300px, 45vw"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-onyx-text/80 via-onyx-text/20 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <span className="inline-block px-3 py-1 bg-sky-accent/20 text-pure-white font-display text-[10px] font-bold mb-4 backdrop-blur-sm rounded-full tracking-wider uppercase">
-                  Core Treatment
-                </span>
-                <h3 className="font-display text-2xl font-bold text-pure-white mb-4">
-                  Radiofrequenz-Microneedling (MRF)
-                </h3>
-                <p className="font-sans text-sm text-pure-white/80 mb-6">
-                  Microneedling kombiniert mit Radiofrequenz-Wärme: für straffere Haut, feinere Poren und ein glatteres Hautbild bei Falten und Aknenarben.
-                </p>
-                <Link
-                  href="/leistungen/radiofrequenz-microneedling"
-                  className="text-pure-white font-display text-xs font-bold flex items-center gap-2 group/link uppercase tracking-wider"
-                >
-                  Zum Radiofrequenz-Microneedling <span className="transition-transform group-hover/link:translate-x-2">→</span>
-                </Link>
-              </div>
-            </ScrollReveal>
+            </div>
+            <div className="aspect-[3/4] overflow-hidden rounded-2xl">
+              <Image
+                alt="Holzregale mit Pflegeprodukten vor dunkler Wand im Behandlungsraum von SKIN einfach schön"
+                src="/images/studio/raum-1.jpg"
+                width={800}
+                height={1000}
+                sizes="(min-width: 768px) 300px, 45vw"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
 
-            {/* Bento Card 2: Problemhaut */}
-            <ScrollReveal variant="fade-in-up" delay={150} className="md:col-span-2 bg-pure-white p-8 flex flex-col justify-between border border-outline-variant/10 medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-              <div>
-                <div className="w-12 h-12 bg-primary-fixed rounded-lg flex items-center justify-center text-primary mb-6">
-                  <ShieldCheck className="w-6 h-6" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-primary mb-3">
-                  Unreine Haut &amp; Akne
-                </h3>
-                <p className="font-sans text-sm text-tertiary">
-                  Gesichtsreinigung, Peelings und ZO Skin Health für ein klareres Hautbild, abgestimmt auf Ihre Haut.
-                </p>
-              </div>
-              <Link
-                href="/akne-behandlung"
-                className="text-primary font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-70 mt-6"
-              >
-                Zur Akne-Behandlung <span>+</span>
-              </Link>
-            </ScrollReveal>
+      {/* Featured treatments */}
+      <section className="py-section-padding-sm md:py-section-padding-lg bg-cream">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <ScrollReveal variant="fade-in-up" className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="max-w-xl">
+              <span className="eyebrow text-sky-accent mb-4">Unsere Leistungen</span>
+              <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">
+                Behandlungen, die wir besonders lieben
+              </h2>
+            </div>
+            <Link href="/leistungen" className="inline-flex items-center gap-2 font-sans text-sm font-medium text-primary hover:text-sky-accent transition-colors">
+              Alle Behandlungen ansehen <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </ScrollReveal>
 
-            {/* Bento Card 3: JetPeel Technology */}
-            <ScrollReveal variant="fade-in-up" delay={300} className="md:col-span-2 bg-primary text-pure-white p-8 flex flex-col justify-between medical-glow rounded-lg transition-transform duration-500 hover:scale-[1.02]">
-              <div>
-                <Sparkles className="text-sky-accent w-8 h-8 mb-6" />
-                <h3 className="font-display text-lg font-bold mb-3">
-                  JetPeel
-                </h3>
-                <p className="font-sans text-xs opacity-85">
-                  Nadelfreie Tiefenreinigung mit hochwertigen Seren als feiner Sprühnebel, für sofortigen Glow ohne Ausfallzeit.
-                </p>
-              </div>
-              <Link
-                href="/leistungen/jetpeel"
-                className="font-display text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:opacity-80 mt-4 text-sky-accent"
-              >
-                Zum JetPeel <span>↗</span>
-              </Link>
-            </ScrollReveal>
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {FEATURED_TREATMENTS.map((t, i) => (
+              <ScrollReveal key={t.href} variant="fade-in-up" delay={i * 70}>
+                <ImageLinkCard href={t.href} title={t.title} text={t.text} image={t.image} />
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Skin concerns: internal links to the theme landing pages */}
-      <section className="py-section-padding-lg bg-pure-white border-b border-outline-variant/10">
+      <section className="py-section-padding-sm md:py-section-padding-lg bg-sand/60">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <ScrollReveal variant="blur-in" className="text-center mb-12">
-            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-              Ihr Hautanliegen
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+          <ScrollReveal variant="fade-in-up" className="text-center mb-12 max-w-2xl mx-auto">
+            <span className="eyebrow text-sky-accent mb-4">Ihr Hautanliegen</span>
+            <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">
               Wobei können wir Ihnen helfen?
             </h2>
           </ScrollReveal>
@@ -340,41 +230,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Videos */}
+      <section className="py-section-padding-sm md:py-section-padding-lg bg-cream">
+        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+          <ScrollReveal variant="fade-in-up" className="text-center mb-14 max-w-2xl mx-auto">
+            <span className="eyebrow text-sky-accent mb-4">Erfahrungen &amp; Einblicke</span>
+            <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">
+              Lernen Sie uns und unsere Behandlungen kennen
+            </h2>
+          </ScrollReveal>
+
+          <div className="space-y-16 md:space-y-24">
+            {VIDEOS.map((v, i) => (
+              <div key={v.id} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <ScrollReveal variant="fade-in-up" className={`lg:col-span-7 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="relative aspect-video rounded-3xl overflow-hidden medical-glow">
+                    <YouTubeFacade videoId={v.id} title={v.title} />
+                  </div>
+                </ScrollReveal>
+                <ScrollReveal variant="fade-in-up" delay={80} className={`lg:col-span-5 space-y-5 ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <span className="eyebrow text-sky-accent">{v.eyebrow}</span>
+                  <h3 className="font-display text-2xl md:text-3xl text-primary leading-tight">{v.title}</h3>
+                  <p className="font-sans text-base text-tertiary leading-relaxed">{v.text}</p>
+                  <Link href={v.cta.href} className="inline-flex items-center gap-2 font-sans text-sm font-medium text-primary hover:text-sky-accent transition-colors">
+                    {v.cta.label} <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
+                </ScrollReveal>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <ReviewsSection />
 
-      {/* FAQ Section */}
-      <section className="py-section-padding-lg bg-soft-shell/20 border-t border-outline-variant/10">
+      {/* FAQ */}
+      <section className="py-section-padding-sm md:py-section-padding-lg bg-cream">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <div className="text-center mb-16">
-            <ScrollReveal variant="blur-in" className="max-w-xl mx-auto">
-              <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
-                Fragen & Antworten
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
-                Häufig gestellte Fragen (FAQ)
-              </h2>
-              <div className="w-16 h-1 bg-sky-accent mx-auto"></div>
-            </ScrollReveal>
-          </div>
+          <ScrollReveal variant="fade-in-up" className="text-center mb-12 max-w-xl mx-auto">
+            <span className="eyebrow text-sky-accent mb-4">Fragen &amp; Antworten</span>
+            <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">
+              Häufig gestellte Fragen
+            </h2>
+          </ScrollReveal>
           <FaqAccordion />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-section-padding-lg relative overflow-hidden bg-slate-muted">
-        <ScrollReveal variant="blur-in" className="max-w-container-max mx-auto px-margin-mobile md:px-gutter text-center relative z-10">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-pure-white mb-8">
-            Bereit für Ihre Hautveränderung?
-          </h2>
-          <p className="font-sans text-lg text-pure-white/90 max-w-2xl mx-auto mb-12 leading-relaxed">
-            Buchen Sie jetzt Ihr Erstgespräch inklusive professioneller Hautanalyse und starten Sie Ihre individuelle Reise zu einer gesünderen Ausstrahlung.
+      {/* CTA */}
+      <section className="px-margin-mobile md:px-gutter pb-section-padding-sm md:pb-section-padding-lg bg-cream">
+        <ScrollReveal
+          variant="fade-in-up"
+          className="max-w-container-max mx-auto rounded-3xl bg-primary text-pure-white px-6 py-14 md:px-16 md:py-20 text-center"
+        >
+          <h2 className="font-display text-3xl md:text-5xl text-pure-white">Lernen wir uns kennen</h2>
+          <p className="font-sans text-lg text-pure-white/85 max-w-2xl mx-auto mt-6 leading-relaxed">
+            Im Erstgespräch schauen wir uns Ihre Haut in Ruhe an, auf Wunsch mit Hautanalyse, und besprechen, was ihr wirklich guttut.
           </p>
-          <div className="flex justify-center">
-            <Link
-              href="/terminbuchung"
-              className="bg-pure-white text-primary px-12 py-5 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:scale-105 active:scale-95 transition-all duration-300 text-center"
-            >
+          <div className="flex flex-wrap justify-center gap-3 mt-10">
+            <Link href="/terminbuchung" className="btn bg-pure-white text-primary hover:bg-cream">
               Online Termin wählen
+            </Link>
+            <Link href="/kontakt" className="btn border border-pure-white/50 text-pure-white hover:bg-pure-white/10">
+              Kontakt aufnehmen
             </Link>
           </div>
         </ScrollReveal>

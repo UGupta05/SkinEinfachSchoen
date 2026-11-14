@@ -1,9 +1,19 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { Fraunces } from 'next/font/google';
 import '../index.css';
 import { Layout } from '../components/Layout';
 import { SITE_URL } from '../config/site';
 import { THEME_LIST, TREATMENT_LIST, themePath, treatmentPath } from '../content';
+
+// Headings. next/font downloads the files at build time and serves them from
+// our own domain, so visitors never contact Google.
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  axes: ['SOFT', 'opsz'],
+  display: 'swap',
+  variable: '--font-serif',
+});
 
 const TREATMENT_LINKS = TREATMENT_LIST.map((t) => ({ name: t.name, path: treatmentPath(t.slug) }));
 const THEME_LINKS = THEME_LIST.map((t) => ({ name: t.name, path: themePath(t.slug) }));
@@ -60,7 +70,7 @@ export default function RootLayout({
   return (
     // suppressHydrationWarning: the inline script below adds the "js" class
     // before React hydrates.
-    <html lang="de" suppressHydrationWarning>
+    <html lang="de" className={fraunces.variable} suppressHydrationWarning>
       <head>
         {/* Marks the document as JS-enabled before first paint so scroll
             animations can hide not-yet-revealed content without hiding it

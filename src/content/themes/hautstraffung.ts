@@ -85,10 +85,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/treatments/microneedling_new.jpg',
-    alt: 'Hautstraffung an der Stirn: Kundin mit Haarband während einer Radiofrequenz-Microneedling-Behandlung',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/radiofrequenz-microneedling.jpg',
+    alt: 'Hautstraffung in Osnabrück mit Radiofrequenz-Microneedling an der Stirn',
+    width: 800,
+    height: 1000,
   },
   treatments: [
     {

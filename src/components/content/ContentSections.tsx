@@ -6,7 +6,7 @@ export function ContentSections({ sections }: { readonly sections: readonly Cont
     <div className="space-y-12">
       {sections.map((section) => (
         <section key={section.heading} className="space-y-4">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary leading-tight">
+          <h2 className="font-display text-2xl md:text-3xl font-medium text-primary leading-tight">
             {section.heading}
           </h2>
           {section.paragraphs.map((p, i) => (

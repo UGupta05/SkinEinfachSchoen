@@ -118,10 +118,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/treatments/zo_skin_health_new.jpg',
-    alt: 'Pigmentflecken entfernen in Osnabrück: Pflegeprodukte von ZO® Skin Health im Regal des Studios',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/fruchtsaeure-peeling.jpg',
+    alt: 'Pigmentflecken mildern in Osnabrück: chemisches Peeling an der Stirn',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };

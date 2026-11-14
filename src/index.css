@@ -5,15 +5,69 @@
 @layer base {
   body {
     @apply bg-background text-on-surface font-sans selection:bg-primary/20;
+    -webkit-font-smoothing: antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    text-wrap: balance;
+  }
+
+  /* Soft, rounded serifs for every Fraunces heading. */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-variation-settings: "SOFT" 100;
+    letter-spacing: -0.01em;
   }
 }
 
+/* Warm, diffuse shadows: resting (cards, primary buttons) and hover. */
 .medical-glow {
-  box-shadow: 0px 4px 20px rgba(116, 150, 168, 0.08);
+  box-shadow: 0 12px 32px -14px rgba(94, 72, 50, 0.22);
+}
+.hover-glow:hover {
+  box-shadow: 0 12px 32px -16px rgba(94, 72, 50, 0.3);
+}
+
+@layer components {
+  /* Pill buttons. Colors stay on the element so each button can pick its own. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.875rem 1.75rem;
+    font-family: Inter, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    transition: background-color 0.25s var(--ease-luxury), color 0.25s var(--ease-luxury),
+      border-color 0.25s var(--ease-luxury), box-shadow 0.25s var(--ease-luxury), transform 0.15s ease-out;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Arch-shaped image frames. Percent radii keep the top a true half circle;
+     rounded-t-full would shrink the bottom radii to zero. The vertical radius
+     is half the width expressed as a share of the height (4:5 → 40 %, 3:4 → 37.5 %). */
+  .arch {
+    border-radius: 50% 50% 1.5rem 1.5rem / 40% 40% 1.5rem 1.5rem;
+  }
+  .arch-3-4 {
+    border-radius: 50% 50% 1.25rem 1.25rem / 37.5% 37.5% 1.25rem 1.25rem;
+  }
+
+  /* Small caps label above headings. */
+  .eyebrow {
+    display: block;
+    font-family: Inter, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
 }
 
 .glass-effect {
@@ -40,7 +94,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -51,7 +105,7 @@
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-16px);
+    transform: translateY(-12px);
   }
   to {
     opacity: 1;
@@ -62,7 +116,7 @@
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-16px);
+    transform: translateX(-12px);
   }
   to {
     opacity: 1;
@@ -73,7 +127,7 @@
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(16px);
+    transform: translateX(12px);
   }
   to {
     opacity: 1;
@@ -104,13 +158,11 @@
 @keyframes blurIn {
   from {
     opacity: 0;
-    filter: blur(8px);
-    transform: scale(0.99);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
@@ -130,7 +182,7 @@
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s var(--ease-luxury) forwards;
+  animation: fadeInUp 0.5s var(--ease-luxury) forwards;
   opacity: 0;
 }
 
@@ -155,7 +207,7 @@
 }
 
 .animate-blur-in {
-  animation: blurIn 0.7s var(--ease-luxury) forwards;
+  animation: blurIn 0.5s var(--ease-luxury) forwards;
   opacity: 0;
 }
 

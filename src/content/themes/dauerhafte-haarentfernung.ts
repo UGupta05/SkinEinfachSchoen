@@ -136,10 +136,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/treatments/ipl_new1.jpg',
-    alt: 'Kundin mit Schutzbrille während der dauerhaften Haarentfernung am Hals im Studio SKIN einfach schön in Osnabrück',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/diodenlaser.jpg',
+    alt: 'Dauerhafte Haarentfernung in Osnabrück: Behandlung am Hals, Kundin mit Schutzbrille',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };
