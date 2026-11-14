@@ -85,59 +85,59 @@ export default function Home() {
     <div className="overflow-x-hidden">
       <JsonLd data={salonSchema()} />
 
-      {/* Hero */}
-      <section className="relative bg-cream">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter pt-10 pb-16 md:pt-20 md:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-6">
-            <ScrollReveal variant="fade-in-up" immediate>
-              <span className="eyebrow text-sky-accent mb-5">Lotter Straße 33 · Osnabrück</span>
-              <h1 className="font-display text-[2.6rem] leading-[1.08] md:text-6xl md:leading-[1.05] text-primary">
+      {/* Hero: full-bleed studio photo, oversized wordmark, compact copy block */}
+      <section className="relative isolate overflow-hidden bg-onyx-text text-cream min-h-[600px] h-[calc(100svh-11rem)] max-h-[900px]">
+        <Image
+          alt="Behandlungsraum von SKIN einfach schön in Osnabrück mit Holzregalen vor dunkler Kupferwand"
+          src="/images/studio/hero-raum.jpg"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[62%_45%] -z-10"
+        />
+        {/* Warm shading keeps the light type readable on every part of the photo. */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#1f1813]/65 via-[#1f1813]/20 to-[#1f1813]/85" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#1f1813]/55 via-[#1f1813]/15 to-[#1f1813]/45" aria-hidden="true" />
+
+        <div className="max-w-container-max mx-auto h-full px-margin-mobile md:px-gutter pt-8 md:pt-12 pb-6 flex flex-col">
+          <ScrollReveal variant="fade-in-up" immediate>
+            <p className="font-display text-cream leading-[0.88] tracking-[-0.03em] text-[clamp(3.6rem,13vw,11rem)]" aria-hidden="true">
+              einfach
+              <br />
+              schön
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-auto grid grid-cols-1 md:grid-cols-12 gap-6">
+            <ScrollReveal variant="fade-in-up" delay={120} immediate className="md:col-start-7 lg:col-start-8 md:col-span-6 lg:col-span-5">
+              <h1 className="font-display text-2xl md:text-[2rem] leading-tight text-cream">
                 Ihr Kosmetikstudio in Osnabrück für eine gesunde, schöne Haut
               </h1>
-            </ScrollReveal>
-            <ScrollReveal variant="fade-in-up" delay={120} immediate>
-              <p className="font-sans text-lg text-tertiary leading-relaxed mt-6 max-w-xl">
-                Radiofrequenz-Microneedling, JetPeel, dauerhafte Haarentfernung und medizinische Kosmetik an der Lotter Straße. Jede Behandlung beginnt bei uns mit einer gründlichen Hautanalyse und ehrlicher Beratung.
+              <p className="font-sans text-base text-cream/80 leading-relaxed mt-4">
+                Radiofrequenz-Microneedling, JetPeel, dauerhafte Haarentfernung und medizinische Kosmetik. Jede Behandlung beginnt mit einer gründlichen Hautanalyse und ehrlicher Beratung.
               </p>
-            </ScrollReveal>
-            <ScrollReveal variant="fade-in-up" delay={220} immediate>
-              <div className="flex flex-wrap gap-3 mt-9">
-                <Link href="/terminbuchung" className="btn bg-primary text-pure-white medical-glow hover:bg-secondary">
+              <div className="flex flex-wrap gap-3 mt-6">
+                <Link href="/terminbuchung" className="btn bg-cream text-primary hover:bg-pure-white">
                   Beratungstermin buchen
                 </Link>
-                <Link href="/leistungen" className="btn border border-primary/40 text-primary hover:bg-primary/5">
+                <Link href="/leistungen" className="btn border border-cream/50 text-cream hover:bg-cream/10">
                   Behandlung finden
                 </Link>
               </div>
-              <p className="flex items-center gap-2 mt-8 font-sans text-sm text-tertiary">
-                <span className="flex text-sky-accent" aria-hidden="true">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </span>
-                <span>
-                  <strong className="font-semibold text-on-surface">{formatRating(GOOGLE_RATING.rating)}</strong> aus {GOOGLE_RATING.count} Google-Bewertungen
-                </span>
-              </p>
             </ScrollReveal>
           </div>
 
-          <ScrollReveal variant="fade-in" immediate className="lg:col-span-6 relative">
-            <div className="relative mx-auto max-w-[520px] aspect-[4/5] arch overflow-hidden medical-glow">
-              <Image
-                alt="Kosmetikerin von SKIN einfach schön lächelt während einer Gesichtsbehandlung im Studio in Osnabrück"
-                src="/images/studio/hero-behandlung.jpg"
-                fill
-                priority
-                sizes="(min-width: 1024px) 520px, 90vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="hidden sm:block absolute -bottom-6 left-0 lg:-left-6 bg-pure-white rounded-2xl px-6 py-5 medical-glow max-w-[260px]">
-              <p className="font-display text-lg text-primary leading-snug">Persönliche Beratung</p>
-              <p className="font-sans text-sm text-tertiary mt-1">auf Wunsch mit VISIA® 3D-Hautanalyse</p>
-            </div>
-          </ScrollReveal>
+          <div className="mt-8 pt-4 border-t border-cream/20 flex items-center justify-between gap-4 font-sans text-xs text-cream/75">
+            <span className="flex items-center gap-2">
+              <span className="flex text-gold" aria-hidden="true">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                ))}
+              </span>
+              {formatRating(GOOGLE_RATING.rating)} aus {GOOGLE_RATING.count} Google-Bewertungen
+            </span>
+            <span className="hidden sm:inline uppercase tracking-[0.18em]">Kosmetikstudio · Lotter Straße 33 · Osnabrück</span>
+          </div>
         </div>
       </section>
 
