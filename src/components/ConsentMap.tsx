@@ -39,7 +39,7 @@ export function ConsentMap({ iframeClassName = '' }: ConsentMapProps) {
     <div className="w-full h-full flex flex-col items-center justify-center gap-5 bg-surface-container px-6 text-center">
       <MapPin className="w-8 h-8 text-primary" aria-hidden="true" />
       <div className="space-y-2 max-w-sm">
-        <p className="font-display text-sm font-bold text-on-surface uppercase tracking-widest">
+        <p className="font-sans text-sm font-semibold text-on-surface uppercase tracking-[0.16em]">
           Karte anzeigen
         </p>
         <p className="font-sans text-xs text-tertiary leading-relaxed">
@@ -54,7 +54,7 @@ export function ConsentMap({ iframeClassName = '' }: ConsentMapProps) {
       <button
         type="button"
         onClick={() => setLoaded(true)}
-        className="bg-primary text-pure-white font-display text-xs font-bold uppercase tracking-widest px-6 py-3 rounded hover:opacity-90 transition-opacity"
+        className="btn bg-primary text-pure-white hover:bg-secondary"
       >
         Karte laden
       </button>

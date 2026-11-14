@@ -32,10 +32,10 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
         
         {/* Info Column */}
         <ScrollReveal variant="fade-in-left" immediate className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-          <span className="font-display text-xs font-bold text-sky-accent uppercase tracking-widest block">
+          <span className="font-sans text-xs font-semibold text-sky-accent uppercase tracking-[0.16em] block">
             {category}
           </span>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-primary leading-tight">
+          <h1 className="font-display text-3xl md:text-5xl font-medium text-primary leading-tight">
             {title}
           </h1>
           <div className="font-sans text-base text-tertiary leading-relaxed">
@@ -48,7 +48,7 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
                 <div className="bg-soft-shell p-6 rounded-lg border border-outline-variant/10 flex items-center gap-4">
                   <Clock className="w-8 h-8 text-primary shrink-0" />
                   <div>
-                    <h4 className="font-display text-xs font-bold uppercase tracking-wider text-primary">Behandlungsdauer</h4>
+                    <h4 className="font-sans text-xs font-semibold uppercase tracking-wider text-primary">Behandlungsdauer</h4>
                     <p className="font-sans text-sm text-tertiary mt-1">{duration}</p>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
                 <div className="bg-soft-shell p-6 rounded-lg border border-outline-variant/10 flex items-center gap-4">
                   <Shield className="w-8 h-8 text-primary shrink-0" />
                   <div>
-                    <h4 className="font-display text-xs font-bold uppercase tracking-wider text-primary">Preis ab</h4>
+                    <h4 className="font-sans text-xs font-semibold uppercase tracking-wider text-primary">Preis ab</h4>
                     <p className="font-sans text-sm text-tertiary mt-1 whitespace-nowrap">{price}</p>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
           )}
 
           <div className="space-y-4 pt-6">
-            <h3 className="font-display text-lg font-bold text-primary">Ihre Vorteile</h3>
+            <h3 className="font-display text-lg font-medium text-primary">Ihre Vorteile</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {points.map((pt, i) => (
                 <li key={i} className="flex items-center gap-2 font-sans text-sm text-tertiary">
@@ -80,13 +80,13 @@ export const TreatmentTemplate: React.FC<TreatmentTemplateProps> = ({
           <div className="pt-8 flex flex-wrap gap-4">
             <Link
               href="/terminbuchung"
-              className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-all text-center medical-glow"
+              className="btn bg-primary text-pure-white medical-glow hover:bg-secondary"
             >
               Termin Buchen
             </Link>
             <Link
               href="/leistungen"
-              className="border border-outline text-tertiary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-soft-shell transition-all text-center"
+              className="btn border border-outline text-tertiary hover:bg-soft-shell"
             >
               Alle Leistungen
             </Link>

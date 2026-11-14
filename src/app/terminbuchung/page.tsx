@@ -18,7 +18,7 @@ export default function TerminbuchungPage() {
   return (
     <Suspense fallback={
       <div className="min-h-[75vh] flex items-center justify-center">
-        <p className="text-sm font-display font-bold uppercase tracking-wider text-primary">Terminbuchung wird geladen...</p>
+        <p className="text-sm font-sans font-semibold uppercase tracking-wider text-primary">Terminbuchung wird geladen...</p>
       </div>
     }>
       <TerminbuchungPageClient />

@@ -8,14 +8,14 @@ const formatRating = (rating: number) => rating.toLocaleString('de-DE', { minimu
 /** Homepage testimonials, hand-copied from the Google Business Profile. */
 export function ReviewsSection() {
   return (
-    <section className="py-section-padding-lg bg-pure-white">
+    <section className="py-section-padding-sm md:py-section-padding-lg bg-sand/60">
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <ScrollReveal variant="blur-in" className="max-w-xl">
-            <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase mb-4 block">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <ScrollReveal variant="fade-in-up" className="max-w-xl">
+            <span className="eyebrow text-sky-accent mb-4">
               Stimmen
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">Was unsere Kundinnen und Kunden sagen</h2>
+            <h2 className="font-display text-3xl md:text-[2.75rem] md:leading-tight text-primary">Was unsere Kundinnen und Kunden sagen</h2>
           </ScrollReveal>
           <p className="font-sans text-sm text-tertiary flex items-center gap-2">
             <Star className="w-5 h-5 text-sky-accent fill-current" aria-hidden="true" />
@@ -33,27 +33,27 @@ export function ReviewsSection() {
               <ScrollReveal
                 key={`${r.author}-${idx}`}
                 variant="fade-in-up"
-                delay={idx * 150}
-                className={`p-10 medical-glow rounded-lg flex flex-col justify-between transition-transform duration-500 hover:scale-[1.02] ${
-                  highlighted ? 'bg-primary text-pure-white' : 'bg-soft-shell text-primary'
+                delay={idx * 80}
+                className={`p-8 md:p-10 rounded-3xl flex flex-col justify-between ${
+                  highlighted ? 'bg-primary text-pure-white medical-glow' : 'bg-pure-white text-primary'
                 }`}
               >
                 <figure className="flex flex-col h-full justify-between">
                   <div>
-                    <div className="flex gap-1 mb-6 text-sky-accent" aria-label={`${r.rating} von 5 Sternen`}>
+                    <div className={`flex gap-1 mb-6 ${highlighted ? 'text-[#E6C9A0]' : 'text-sky-accent'}`} aria-label={`${r.rating} von 5 Sternen`}>
                       {Array.from({ length: r.rating }, (_, i) => (
                         <Star key={i} className="w-5 h-5 fill-current" aria-hidden="true" />
                       ))}
                     </div>
-                    <blockquote className={`font-sans text-base italic mb-8 leading-relaxed whitespace-pre-line ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
+                    <blockquote className={`font-display text-lg leading-relaxed mb-8 whitespace-pre-line ${highlighted ? 'text-pure-white' : 'text-on-surface'}`}>
                       „{r.text}“
                     </blockquote>
                   </div>
-                  <figcaption className="mt-4 border-t border-outline-variant/10 pt-4">
-                    <p className={`font-display text-xs font-bold uppercase tracking-wider ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
+                  <figcaption className={`mt-4 border-t pt-4 ${highlighted ? 'border-pure-white/20' : 'border-outline-variant/50'}`}>
+                    <p className={`font-sans text-sm font-semibold ${highlighted ? 'text-pure-white' : 'text-primary'}`}>
                       {r.author}
                     </p>
-                    <p className={`text-[10px] font-display font-bold uppercase tracking-widest mt-1 ${highlighted ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
+                    <p className={`text-xs font-sans mt-1 ${highlighted ? 'text-primary-fixed-dim' : 'text-tertiary'}`}>
                       Google-Rezension · {r.date}
                     </p>
                   </figcaption>
@@ -68,7 +68,7 @@ export function ReviewsSection() {
             href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
+            className="inline-flex items-center gap-2 font-sans text-sm font-medium text-primary hover:text-sky-accent transition-colors"
           >
             Alle Rezensionen auf Google ansehen
             <ExternalLink className="w-4 h-4" aria-hidden="true" />

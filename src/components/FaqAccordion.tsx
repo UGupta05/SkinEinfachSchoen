@@ -44,14 +44,14 @@ export function FaqAccordion() {
             key={idx}
             variant="fade-in-up"
             delay={idx * 100}
-            className="bg-soft-shell/40 rounded-xl border border-outline-variant/10 overflow-hidden transition-all duration-300"
+            className="bg-pure-white rounded-2xl border border-outline-variant/50 overflow-hidden transition-all duration-300"
           >
             <button
               onClick={() => toggleItem(idx)}
-              className="w-full py-5 px-6 flex justify-between items-center text-left hover:bg-soft-shell/60 transition-colors"
+              className="w-full py-5 px-6 flex justify-between items-center text-left hover:bg-cream transition-colors"
               aria-expanded={isOpen}
             >
-              <span className="font-display text-sm md:text-base font-bold text-primary">
+              <span className="font-sans text-base font-medium text-on-surface">
                 {item.question}
               </span>
               <ChevronDown
@@ -65,7 +65,7 @@ export function FaqAccordion() {
                 isOpen ? 'max-h-60 border-t border-outline-variant/5' : 'max-h-0'
               }`}
             >
-              <div className="p-6 font-sans text-sm text-tertiary leading-relaxed bg-pure-white">
+              <div className="px-6 pb-6 font-sans text-[15px] text-tertiary leading-relaxed bg-pure-white">
                 {item.answer}
               </div>
             </div>

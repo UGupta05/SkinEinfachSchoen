@@ -35,7 +35,7 @@ export default function PreisePage() {
       <JsonLd data={breadcrumbSchema(breadcrumbs)} />
       <section className="max-w-4xl mx-auto px-margin-mobile md:px-gutter py-10 md:py-14">
         <Breadcrumbs items={breadcrumbs} />
-        <h1 className="font-display text-3xl md:text-5xl font-bold text-primary leading-tight mt-8">
+        <h1 className="font-display text-3xl md:text-5xl font-medium text-primary leading-tight mt-8">
           Preise unserer Behandlungen in Osnabrück
         </h1>
         <p className="font-sans text-base text-tertiary leading-relaxed mt-6">
@@ -49,9 +49,9 @@ export default function PreisePage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-outline-variant/30">
-                <th scope="col" className="py-3 pr-4 font-display text-xs font-bold uppercase tracking-wider text-primary">Behandlung</th>
-                <th scope="col" className="py-3 pr-4 font-display text-xs font-bold uppercase tracking-wider text-primary">Dauer</th>
-                <th scope="col" className="py-3 font-display text-xs font-bold uppercase tracking-wider text-primary text-right">Preis</th>
+                <th scope="col" className="py-3 pr-4 font-sans text-xs font-semibold uppercase tracking-wider text-primary">Behandlung</th>
+                <th scope="col" className="py-3 pr-4 font-sans text-xs font-semibold uppercase tracking-wider text-primary">Dauer</th>
+                <th scope="col" className="py-3 font-sans text-xs font-semibold uppercase tracking-wider text-primary text-right">Preis</th>
               </tr>
             </thead>
             <tbody>

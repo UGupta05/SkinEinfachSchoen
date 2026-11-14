@@ -228,8 +228,8 @@ export default function DatenschutzPage() {
       {/* Hero */}
       <section className="bg-primary pt-32 pb-16">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <p className="font-display text-2xs text-sky-accent uppercase tracking-[0.2em] mb-3">Rechtliches</p>
-          <h1 className="font-display text-display-lg-mobile md:text-display-lg text-pure-white font-bold">
+          <p className="font-sans text-2xs text-sky-accent uppercase tracking-[0.2em] mb-3">Rechtliches</p>
+          <h1 className="font-display text-display-lg-mobile md:text-display-lg text-pure-white font-medium">
             Datenschutzerklärung
           </h1>
           <p className="font-sans text-body-md text-sky-accent/80 mt-4 max-w-xl">
@@ -241,7 +241,7 @@ export default function DatenschutzPage() {
       {/* Table of Contents */}
       <section className="bg-soft-shell border-b border-outline-variant/20 py-8">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-          <p className="font-display text-xs text-primary uppercase tracking-widest font-bold mb-4">Inhaltsverzeichnis</p>
+          <p className="font-sans text-xs text-primary uppercase tracking-[0.16em] font-semibold mb-4">Inhaltsverzeichnis</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
             {sections.map((s) => (
               <a

@@ -90,10 +90,10 @@ export function KontaktClient() {
       <section className="relative pt-16 pb-24 px-margin-mobile md:px-gutter max-w-container-max mx-auto overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
           <ScrollReveal variant="fade-in-left" className="md:col-span-7 z-10">
-            <span className="font-display text-xs font-bold text-slate-muted mb-4 block uppercase tracking-widest">
+            <span className="font-sans text-xs font-semibold text-slate-muted mb-4 block uppercase tracking-[0.16em]">
               Wir freuen uns auf Sie
             </span>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-6 text-primary">
+            <h1 className="font-display text-4xl md:text-5xl font-medium mb-6 text-primary">
               Kontaktieren Sie uns
             </h1>
             <p className="font-sans text-lg text-tertiary max-w-2xl leading-relaxed">
@@ -117,7 +117,7 @@ export function KontaktClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Form Canvas */}
             <ScrollReveal variant="fade-in-left" className="bg-pure-white p-8 md:p-12 medical-glow rounded-lg border border-outline-variant/10">
-              <h2 className="font-display text-2xl md:text-3xl font-bold mb-8 text-primary">
+              <h2 className="font-display text-2xl md:text-3xl font-medium mb-8 text-primary">
                 Senden Sie uns eine Nachricht
               </h2>
               <form onSubmit={handleSubmit} className="space-y-8">
@@ -136,7 +136,7 @@ export function KontaktClient() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative">
-                    <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                    <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                       Vorname
                     </label>
                     <input
@@ -149,7 +149,7 @@ export function KontaktClient() {
                     />
                   </div>
                   <div className="relative">
-                    <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                    <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                       Nachname
                     </label>
                     <input
@@ -165,7 +165,7 @@ export function KontaktClient() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative">
-                    <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                    <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                       E-Mail Adresse
                     </label>
                     <input
@@ -178,7 +178,7 @@ export function KontaktClient() {
                     />
                   </div>
                   <div className="relative">
-                    <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                    <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                       Telefonnummer
                     </label>
                     <input
@@ -192,7 +192,7 @@ export function KontaktClient() {
                 </div>
 
                 <div className="relative">
-                  <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                  <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                     Wie können wir helfen?
                   </label>
                   <select
@@ -209,7 +209,7 @@ export function KontaktClient() {
                 </div>
 
                 <div className="relative">
-                  <label className="font-display text-2xs font-bold text-slate-muted block mb-2 uppercase tracking-widest">
+                  <label className="font-sans text-2xs font-semibold text-slate-muted block mb-2 uppercase tracking-[0.16em]">
                     Ihre Nachricht
                   </label>
                   <textarea
@@ -243,7 +243,7 @@ export function KontaktClient() {
 
                 <button
                   disabled={status !== 'idle'}
-                  className={`w-full text-pure-white font-display text-xs font-bold py-5 uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-2 rounded ${
+                  className={`w-full text-pure-white font-sans text-[15px] font-medium py-4 transition-all shadow-md flex items-center justify-center gap-2 rounded-full ${
                     status === 'success'
                       ? 'bg-secondary'
                       : 'bg-primary hover:opacity-95 active:scale-95 duration-150'
@@ -277,7 +277,7 @@ export function KontaktClient() {
               <div className="h-[500px] w-full bg-surface-container overflow-hidden rounded-lg border border-outline-variant/10 medical-glow relative group">
                 <ConsentMap iframeClassName="grayscale hover:grayscale-0 transition-all duration-700" />
                 <div className="absolute bottom-6 left-6 right-6 bg-pure-white/95 backdrop-blur-md p-6 border border-outline-variant/20 rounded shadow-md pointer-events-none select-none">
-                  <p className="font-display text-[10px] font-bold text-primary mb-1 uppercase tracking-widest">
+                  <p className="font-sans text-[10px] font-semibold text-primary mb-1 uppercase tracking-[0.16em]">
                     UNSER STANDORT
                   </p>
                   <p className="font-sans text-xs text-on-surface leading-relaxed">
@@ -286,7 +286,7 @@ export function KontaktClient() {
                 </div>
               </div>
               <div className="bg-primary/5 p-8 border-l-4 border-primary rounded-r">
-                <h4 className="font-display text-lg font-bold text-primary mb-4">Anfahrt &amp; Parken</h4>
+                <h4 className="font-display text-lg font-medium text-primary mb-4">Anfahrt &amp; Parken</h4>
                 <p className="text-tertiary font-sans text-sm leading-relaxed">
                   Sie finden uns in der Nähe des Westerberg-Viertels. Kostenfreie Parkmöglichkeiten stehen unseren Patienten während der Behandlung direkt auf dem Hof zur Verfügung. Die Bushaltestelle &quot;Lotter Straße&quot; befindet sich nur 50 Meter entfernt.
                 </p>
@@ -303,7 +303,7 @@ export function KontaktClient() {
           <ScrollReveal variant="fade-in-up" delay={0} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg flex flex-col justify-between hover:scale-[1.02] duration-300">
             <div>
               <MapPin className="text-primary w-10 h-10 mb-6" />
-              <h3 className="font-display text-xl font-bold mb-4 text-primary">Anschrift</h3>
+              <h3 className="font-display text-xl font-medium mb-4 text-primary">Anschrift</h3>
               <address className="not-italic text-tertiary font-sans text-base leading-relaxed">
                 Lotter Straße 33<br />
                 49078 Osnabrück<br />
@@ -311,7 +311,7 @@ export function KontaktClient() {
               </address>
             </div>
             <a
-              className="inline-block mt-8 font-display text-xs font-bold text-primary border-b border-primary hover:text-secondary hover:border-secondary transition-colors uppercase tracking-wider self-start"
+              className="inline-block mt-8 font-sans text-sm font-medium text-primary border-b border-primary hover:text-secondary hover:border-secondary transition-colors self-start"
               href="https://www.google.com/maps/dir/?api=1&destination=Lotter+Stra%C3%9Fe+33,+49078+Osnabr%C3%BCck"
               target="_blank"
               rel="noopener noreferrer"
@@ -323,16 +323,16 @@ export function KontaktClient() {
           {/* Info Card 2: Contact */}
           <ScrollReveal variant="fade-in-up" delay={150} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg hover:scale-[1.02] duration-300">
             <Phone className="text-primary w-10 h-10 mb-6" />
-            <h3 className="font-display text-xl font-bold mb-4 text-primary">Direktkontakt</h3>
+            <h3 className="font-display text-xl font-medium mb-4 text-primary">Direktkontakt</h3>
             <div className="space-y-4">
               <div>
-                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">Telefon</p>
+                <p className="font-sans text-[10px] font-semibold text-slate-muted uppercase tracking-[0.16em] mb-1">Telefon</p>
                 <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="tel:+4917655132650">
                   +49 (0) 176 55132650
                 </a>
               </div>
               <div>
-                <p className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-1">E-Mail</p>
+                <p className="font-sans text-[10px] font-semibold text-slate-muted uppercase tracking-[0.16em] mb-1">E-Mail</p>
                 <a className="text-tertiary font-sans text-base hover:text-primary transition-colors block" href="mailto:info@skin-einfachschoen.de">
                   info@skin-einfachschoen.de
                 </a>
@@ -343,7 +343,7 @@ export function KontaktClient() {
           {/* Info Card 3: Hours */}
           <ScrollReveal variant="fade-in-up" delay={300} className="bg-pure-white p-10 medical-glow border border-outline-variant/10 group hover:border-primary/20 transition-all rounded-lg hover:scale-[1.02] duration-300">
             <Clock className="text-primary w-10 h-10 mb-6" />
-            <h3 className="font-display text-xl font-bold mb-4 text-primary">Öffnungszeiten</h3>
+            <h3 className="font-display text-xl font-medium mb-4 text-primary">Öffnungszeiten</h3>
             <ul className="space-y-3 text-tertiary font-sans text-sm">
               <li className="flex justify-between">
                 <span>Mo – Do:</span>

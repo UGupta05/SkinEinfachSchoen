@@ -34,10 +34,10 @@ export function ShopClient() {
       <section className="relative bg-soft-shell py-16 md:py-24 overflow-hidden border-b border-outline-variant/10">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
           <div className="z-10">
-            <span className="font-display text-xs font-bold text-slate-muted mb-4 block uppercase tracking-widest">
+            <span className="font-sans text-xs font-semibold text-slate-muted mb-4 block uppercase tracking-[0.16em]">
               EXKLUSIVE PFLEGE
             </span>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+            <h1 className="font-display text-4xl md:text-5xl font-medium text-primary mb-6 leading-tight">
               Wissenschaft für Ihre Haut.
             </h1>
             <p className="font-sans text-lg text-tertiary max-w-lg mb-8 leading-relaxed">
@@ -49,13 +49,13 @@ export function ShopClient() {
                   const element = document.getElementById('shop-grid');
                   element?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="bg-primary text-pure-white px-8 py-4 font-display text-xs font-bold uppercase tracking-widest medical-glow hover:opacity-95 active:scale-95 transition-all rounded"
+                className="btn bg-primary text-pure-white medical-glow hover:bg-secondary"
               >
                 Jetzt Shoppen
               </button>
               <a
                 href="/terminbuchung"
-                className="border border-slate-muted text-slate-muted px-8 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-slate-muted/5 active:scale-95 transition-all text-center rounded"
+                className="btn border border-primary text-primary hover:bg-primary/5"
               >
                 Beratung vereinbaren
               </a>
@@ -82,7 +82,7 @@ export function ShopClient() {
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                  className={`px-4 py-2 rounded-full font-sans text-xs font-medium transition-colors shrink-0 ${
                     isActive
                       ? 'bg-primary text-pure-white'
                       : 'bg-sky-accent/10 text-primary hover:bg-sky-accent/20'
@@ -107,7 +107,7 @@ export function ShopClient() {
             </div>
             <button className="flex items-center gap-2 text-tertiary hover:text-primary transition-colors cursor-pointer">
               <SlidersHorizontal className="w-4 h-4" />
-              <span className="font-display text-xs font-bold uppercase tracking-wider">Filter</span>
+              <span className="font-sans text-xs font-semibold uppercase tracking-wider">Filter</span>
             </button>
           </div>
         </div>
@@ -123,7 +123,7 @@ export function ShopClient() {
                 setSelectedCategory('Alle');
                 setSearchQuery('');
               }}
-              className="mt-4 text-primary font-display text-xs font-bold uppercase tracking-wider underline underline-offset-4"
+              className="mt-4 text-primary font-sans text-sm font-medium underline underline-offset-4"
             >
               Filter zurücksetzen
             </button>
@@ -142,7 +142,7 @@ export function ShopClient() {
                     src={product.image}
                   />
                   {product.bestseller && (
-                    <span className="absolute top-4 left-4 bg-primary text-pure-white font-display text-[10px] font-bold px-2 py-1 tracking-wider uppercase rounded">
+                    <span className="btn absolute top-4 left-4 bg-primary text-pure-white text-[10px] hover:bg-secondary">
                       BESTSELLER
                     </span>
                   )}
@@ -161,10 +161,10 @@ export function ShopClient() {
                 
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="font-display text-[10px] font-bold text-slate-muted uppercase tracking-widest mb-2 block">
+                    <span className="font-sans text-[10px] font-semibold text-slate-muted uppercase tracking-[0.16em] mb-2 block">
                       {product.category}
                     </span>
-                    <h3 className="font-display text-lg font-bold text-primary mb-2 line-clamp-1">
+                    <h3 className="font-display text-lg font-medium text-primary mb-2 line-clamp-1">
                       {product.name}
                     </h3>
                     <p className="font-sans text-xs text-tertiary mb-4 line-clamp-2">
@@ -173,7 +173,7 @@ export function ShopClient() {
                   </div>
                   
                   <div className="flex justify-between items-center mt-auto">
-                    <span className="font-display text-lg font-bold text-primary whitespace-nowrap">
+                    <span className="font-display text-lg font-medium text-primary whitespace-nowrap">
                       {product.priceFormatted}
                     </span>
                     <div className="flex text-sky-accent gap-0.5">
@@ -202,28 +202,28 @@ export function ShopClient() {
               <div className="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center mb-4">
                 <Shield className="w-6 h-6 text-sky-accent" />
               </div>
-              <h4 className="font-display text-xs font-bold mb-2 uppercase tracking-wider text-pure-white">Medizinisch geprüft</h4>
+              <h4 className="font-sans text-xs font-semibold mb-2 uppercase tracking-wider text-pure-white">Medizinisch geprüft</h4>
               <p className="text-xs text-primary-fixed/80">Alle Produkte sind klinisch getestet.</p>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center mb-4">
                 <Truck className="w-6 h-6 text-sky-accent" />
               </div>
-              <h4 className="font-display text-xs font-bold mb-2 uppercase tracking-wider text-pure-white">Schneller Versand</h4>
+              <h4 className="font-sans text-xs font-semibold mb-2 uppercase tracking-wider text-pure-white">Schneller Versand</h4>
               <p className="text-xs text-primary-fixed/80">Kostenlos ab 50€ Bestellwert.</p>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center mb-4">
                 <Leaf className="w-6 h-6 text-sky-accent" />
               </div>
-              <h4 className="font-display text-xs font-bold mb-2 uppercase tracking-wider text-pure-white">Nachhaltig</h4>
+              <h4 className="font-sans text-xs font-semibold mb-2 uppercase tracking-wider text-pure-white">Nachhaltig</h4>
               <p className="text-xs text-primary-fixed/80">Verantwortungsvolle Verpackungen.</p>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="w-12 h-12 bg-pure-white/10 rounded-full flex items-center justify-center mb-4">
                 <MessageSquare className="w-6 h-6 text-sky-accent" />
               </div>
-              <h4 className="font-display text-xs font-bold mb-2 uppercase tracking-wider text-pure-white">Expertenberatung</h4>
+              <h4 className="font-sans text-xs font-semibold mb-2 uppercase tracking-wider text-pure-white">Expertenberatung</h4>
               <p className="text-xs text-primary-fixed/80">Wir beraten Sie jederzeit online.</p>
             </div>
           </div>

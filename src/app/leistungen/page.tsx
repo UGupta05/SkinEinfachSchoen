@@ -21,10 +21,10 @@ export default function LeistungenOverviewPage() {
       <section className="px-margin-mobile md:px-gutter py-12 lg:py-16 bg-soft-shell overflow-hidden">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
           <ScrollReveal variant="fade-in-left" immediate className="flex-1 space-y-6">
-            <span className="font-display text-xs font-bold text-primary uppercase tracking-widest block">
+            <span className="font-sans text-xs font-semibold text-primary uppercase tracking-[0.16em] block">
               Kosmetikstudio in Osnabrück
             </span>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-primary leading-tight">
+            <h1 className="font-display text-3xl md:text-5xl font-medium text-primary leading-tight">
               Unsere Behandlungen
             </h1>
             <p className="font-sans text-base text-tertiary leading-relaxed">
@@ -49,7 +49,7 @@ export default function LeistungenOverviewPage() {
       </section>
 
       <section className="px-margin-mobile md:px-gutter py-16 max-w-5xl mx-auto">
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-primary mb-10">Behandlungen von A bis Z</h2>
+        <h2 className="font-display text-2xl md:text-3xl font-medium text-primary mb-10">Behandlungen von A bis Z</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
           {TREATMENT_LIST.map((t, i) => (
             <ScrollReveal key={t.slug} variant="fade-in-up" delay={(i % 2) * 150} className="group">
@@ -63,10 +63,10 @@ export default function LeistungenOverviewPage() {
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                 </div>
-                <span className="font-display text-2xs font-bold text-slate-muted uppercase tracking-wider">{t.eyebrow}</span>
-                <h3 className="font-display text-xl font-bold text-primary mt-2">{t.name}</h3>
+                <span className="font-sans text-2xs font-semibold text-slate-muted uppercase tracking-wider">{t.eyebrow}</span>
+                <h3 className="font-display text-xl font-medium text-primary mt-2">{t.name}</h3>
                 <p className="font-sans text-sm text-tertiary mt-4 leading-relaxed">{t.teaser}</p>
-                <span className="mt-6 font-display text-xs font-bold text-primary flex items-center gap-2 uppercase tracking-wider">
+                <span className="mt-6 font-sans text-sm font-medium text-primary flex items-center gap-2">
                   Zu {t.name} <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </Link>
@@ -78,7 +78,7 @@ export default function LeistungenOverviewPage() {
       <section className="bg-soft-shell/40 border-y border-outline-variant/10 py-16">
         <div className="max-w-5xl mx-auto px-margin-mobile md:px-gutter space-y-12">
           <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary mb-3">Behandlung nach Hautanliegen</h2>
+            <h2 className="font-display text-2xl md:text-3xl font-medium text-primary mb-3">Behandlung nach Hautanliegen</h2>
             <p className="font-sans text-base text-tertiary mb-8">
               Sie suchen eine Lösung für ein bestimmtes Anliegen? Hier sehen Sie, welche Behandlungen dafür in Frage kommen.
             </p>
@@ -89,7 +89,7 @@ export default function LeistungenOverviewPage() {
             </div>
           </div>
           <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary mb-8">Wirkstoffkosmetik &amp; Zellgesundheit</h2>
+            <h2 className="font-display text-2xl md:text-3xl font-medium text-primary mb-8">Wirkstoffkosmetik &amp; Zellgesundheit</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <LinkCard
                 href="/medical-kosmetik-zo"

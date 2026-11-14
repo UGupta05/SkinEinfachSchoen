@@ -34,10 +34,10 @@ export const Terminbuchung: React.FC = () => {
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
         {/* Booking Header */}
         <div className="mb-12 text-center space-y-4">
-          <span className="font-display text-xs font-bold tracking-widest text-sky-accent uppercase">
+          <span className="font-sans text-xs font-semibold tracking-[0.16em] text-sky-accent uppercase">
             Online-Buchung
           </span>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-primary tracking-tight">
+          <h1 className="font-display text-3xl md:text-5xl font-medium text-primary tracking-tight">
             Ihr Wunschtermin bei SKiN
           </h1>
           <p className="text-tertiary font-sans text-base md:text-lg max-w-2xl mx-auto leading-relaxed">

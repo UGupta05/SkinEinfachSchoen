@@ -30,7 +30,7 @@ export default function TeamPage() {
             </p>
             <div className="pt-4">
               <a
-                className="inline-flex items-center gap-2 font-button-text text-button-text border border-slate-muted text-slate-muted px-8 py-4 uppercase hover:bg-soft-shell transition-colors"
+                className="btn gap-2 border border-primary text-primary hover:bg-soft-shell"
                 href="#experten"
               >
                 Unsere Experten entdecken{' '}
@@ -314,7 +314,7 @@ export default function TeamPage() {
               href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-label-caps text-xs font-bold uppercase tracking-widest text-primary hover:text-sky-accent transition-colors"
+              className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-primary hover:text-sky-accent transition-colors"
             >
               Alle Rezensionen auf Google ansehen
               <span className="material-symbols-outlined text-sm">open_in_new</span>
@@ -335,13 +335,13 @@ export default function TeamPage() {
           <div className="flex flex-col md:flex-row justify-center gap-4">
             <Link
               href="/terminbuchung"
-              className="bg-slate-muted text-pure-white px-10 py-4 font-button-text text-button-text uppercase hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              className="btn bg-primary text-pure-white hover:bg-secondary"
             >
               Termin online buchen
             </Link>
             <Link
               href="/kontakt"
-              className="border border-slate-muted text-slate-muted px-10 py-4 font-button-text text-button-text uppercase hover:bg-soft-shell hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              className="btn border border-primary text-primary hover:bg-soft-shell"
             >
               Kontakt aufnehmen
             </Link>

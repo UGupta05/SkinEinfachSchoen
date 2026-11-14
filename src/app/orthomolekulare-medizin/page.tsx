@@ -26,7 +26,7 @@ export default function OrthomolekulareMedizinPage() {
       
       <div className="space-y-6 pt-2">
         <div className="border-l-2 border-sky-accent pl-4 py-1">
-          <h3 className="font-display font-bold text-primary text-base">
+          <h3 className="font-display font-medium text-primary text-base">
             Daten & Diagnostik
           </h3>
           <p className="mt-2 text-tertiary text-sm leading-relaxed">
@@ -35,7 +35,7 @@ export default function OrthomolekulareMedizinPage() {
         </div>
         
         <div className="border-l-2 border-sky-accent pl-4 py-1">
-          <h3 className="font-display font-bold text-primary text-base">
+          <h3 className="font-display font-medium text-primary text-base">
             Zellwissenschaft (Cellular Science)
           </h3>
           <p className="mt-2 text-tertiary text-sm leading-relaxed">

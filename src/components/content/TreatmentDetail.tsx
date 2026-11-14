@@ -20,10 +20,10 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
           <div className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-            <span className="font-display text-xs font-bold text-sky-accent uppercase tracking-widest block">
+            <span className="font-sans text-xs font-semibold text-sky-accent uppercase tracking-[0.16em] block">
               {page.eyebrow}
             </span>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-primary leading-tight">
+            <h1 className="font-display text-3xl md:text-5xl font-medium text-primary leading-tight">
               {page.h1}
             </h1>
             <div className="space-y-4">
@@ -38,7 +38,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
                   <div className="bg-soft-shell p-5 rounded-lg border border-outline-variant/10 flex items-center gap-4">
                     <Clock className="w-7 h-7 text-primary shrink-0" aria-hidden="true" />
                     <div>
-                      <p className="font-display text-xs font-bold uppercase tracking-wider text-primary">Behandlungsdauer</p>
+                      <p className="font-sans text-xs font-semibold uppercase tracking-wider text-primary">Behandlungsdauer</p>
                       <p className="font-sans text-sm text-tertiary mt-1">{page.duration}</p>
                     </div>
                   </div>
@@ -47,7 +47,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
                   <div className="bg-soft-shell p-5 rounded-lg border border-outline-variant/10 flex items-center gap-4">
                     <Tag className="w-7 h-7 text-primary shrink-0" aria-hidden="true" />
                     <div>
-                      <p className="font-display text-xs font-bold uppercase tracking-wider text-primary">Preis</p>
+                      <p className="font-sans text-xs font-semibold uppercase tracking-wider text-primary">Preis</p>
                       <p className="font-sans text-sm text-tertiary mt-1 whitespace-nowrap">{page.price}</p>
                     </div>
                   </div>
@@ -56,7 +56,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
             )}
 
             <div className="space-y-4 pt-4">
-              <h2 className="font-display text-lg font-bold text-primary">Ihre Vorteile</h2>
+              <h2 className="font-display text-lg font-medium text-primary">Ihre Vorteile</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {page.benefits.map((b) => (
                   <li key={b} className="flex items-center gap-2 font-sans text-sm text-tertiary">
@@ -70,13 +70,13 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
             <div className="pt-6 flex flex-wrap gap-4">
               <Link
                 href="/terminbuchung"
-                className="bg-primary text-pure-white px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:opacity-95 transition-all text-center medical-glow"
+                className="btn bg-primary text-pure-white medical-glow hover:bg-secondary"
               >
                 Termin buchen
               </Link>
               <Link
                 href="/preise"
-                className="border border-outline text-tertiary px-10 py-4 font-display text-xs font-bold uppercase tracking-widest hover:bg-soft-shell transition-all text-center"
+                className="btn border border-outline text-tertiary hover:bg-soft-shell"
               >
                 Alle Preise
               </Link>
@@ -110,7 +110,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
           <div className="max-w-5xl mx-auto px-margin-mobile md:px-gutter space-y-12">
             {page.relatedThemes.length > 0 && (
               <ScrollReveal variant="fade-in-up">
-                <h2 className="font-display text-2xl font-bold text-primary mb-6">Passende Hautanliegen</h2>
+                <h2 className="font-display text-2xl font-medium text-primary mb-6">Passende Hautanliegen</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {page.relatedThemes.map((slug) => (
                     <LinkCard key={slug} href={themePath(slug)} title={THEMES[slug].name} text={THEMES[slug].teaser} />
@@ -120,7 +120,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
             )}
             {page.relatedTreatments.length > 0 && (
               <ScrollReveal variant="fade-in-up">
-                <h2 className="font-display text-2xl font-bold text-primary mb-6">Verwandte Behandlungen</h2>
+                <h2 className="font-display text-2xl font-medium text-primary mb-6">Verwandte Behandlungen</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {page.relatedTreatments.map((slug) => (
                     <LinkCard key={slug} href={treatmentPath(slug)} title={TREATMENTS[slug].name} text={TREATMENTS[slug].teaser} />
@@ -134,7 +134,7 @@ export function TreatmentDetail({ page, breadcrumbs }: { readonly page: Treatmen
 
       {page.faqs.length > 0 && (
         <section className="max-w-3xl mx-auto px-margin-mobile md:px-gutter py-16">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary mb-8">
+          <h2 className="font-display text-2xl md:text-3xl font-medium text-primary mb-8">
             Häufige Fragen zu {page.name}
           </h2>
           <FaqList items={page.faqs} />

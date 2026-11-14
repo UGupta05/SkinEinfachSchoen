@@ -37,7 +37,7 @@ export function LeistungenShell({
             </div>
             <div>
               <Link href="/leistungen" className="hover:opacity-85 transition-opacity">
-                <span className="font-display text-sm font-bold text-primary leading-none block">Leistungen</span>
+                <span className="font-sans text-sm font-semibold text-primary leading-none block">Leistungen</span>
               </Link>
               <p className="text-[10px] text-tertiary uppercase tracking-wider mt-1">Exzellenz in Ästhetik</p>
             </div>
@@ -51,7 +51,7 @@ export function LeistungenShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center py-3 gap-3 transition-all font-display text-xs font-bold uppercase tracking-wider border-l-4 ${
+                className={`flex items-center py-3 gap-3 transition-all font-sans text-sm font-medium border-l-2 ${
                   isActive
                     ? 'bg-surface-container text-primary border-primary pl-5 pr-6'
                     : 'text-tertiary hover:bg-surface-container hover:text-primary border-transparent pl-5 pr-6'
@@ -70,7 +70,7 @@ export function LeistungenShell({
         <div className="flex items-center gap-2 overflow-x-auto px-margin-mobile no-scrollbar w-full">
           <Link
             href="/leistungen"
-            className={`px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase tracking-wider transition-colors shrink-0 ${
+            className={`px-4 py-2 rounded-full font-sans text-xs font-medium transition-colors shrink-0 ${
               pathname === '/leistungen'
                 ? 'bg-primary text-pure-white'
                 : 'bg-sky-accent/10 text-primary hover:bg-sky-accent/20'
@@ -84,7 +84,7 @@ export function LeistungenShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-full font-display text-[10px] font-bold uppercase tracking-wider transition-colors shrink-0 ${
+                className={`px-4 py-2 rounded-full font-sans text-xs font-medium transition-colors shrink-0 ${
                   isActive
                     ? 'bg-primary text-pure-white'
                     : 'bg-sky-accent/10 text-primary hover:bg-sky-accent/20'
