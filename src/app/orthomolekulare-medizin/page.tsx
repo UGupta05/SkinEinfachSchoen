@@ -62,7 +62,7 @@ export default function OrthomolekulareMedizinPage() {
       "Zellwissenschaft: Nährstoff-Cocktails",
       "Wissenschaftlich fundiert & perfekt abgestimmt"
     ],
-    image: "/images/treatments/orthomolekulare_medizin.jpg",
+    image: "/images/studio/orthomolekulare-medizin.jpg",
     imageAspectRatio: "landscape" as const
   };
 

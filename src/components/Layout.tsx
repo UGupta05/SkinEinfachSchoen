@@ -68,7 +68,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeL
       {/* Header / Top Navigation */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b ${scrolled
-            ? 'bg-cream/95 backdrop-blur-md shadow-[0_8px_24px_-16px_rgba(94,72,50,0.25)] border-outline-variant/50'
+            ? 'bg-cream/95 backdrop-blur-md medical-glow border-outline-variant/50'
             : 'bg-cream/90 backdrop-blur-sm border-transparent'
           }`}
       >

@@ -40,7 +40,7 @@ export function ReviewsSection() {
               >
                 <figure className="flex flex-col h-full justify-between">
                   <div>
-                    <div className={`flex gap-1 mb-6 ${highlighted ? 'text-[#E6C9A0]' : 'text-sky-accent'}`} aria-label={`${r.rating} von 5 Sternen`}>
+                    <div className={`flex gap-1 mb-6 ${highlighted ? 'text-gold' : 'text-sky-accent'}`} aria-label={`${r.rating} von 5 Sternen`}>
                       {Array.from({ length: r.rating }, (_, i) => (
                         <Star key={i} className="w-5 h-5 fill-current" aria-hidden="true" />
                       ))}

@@ -71,7 +71,7 @@ export default function MedicalKosmetikZOPage() {
       "Schutz vor HEV-Licht (Blue Light) & IR-A",
       "Medizinisch fundierte Wirkstoffe (hohe Retinol-Dosis)"
     ],
-    image: "/images/treatments/zo_skin_health_new.jpg",
+    image: "/images/studio/zo-skin-health.jpg",
     imageAspectRatio: "portrait" as const
   };
 

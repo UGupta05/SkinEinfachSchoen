@@ -90,7 +90,7 @@ export default function PreisePage() {
                     <li key={r.href}>
                       <Link
                         href={r.href}
-                        className="group flex flex-col justify-between h-full rounded-2xl bg-pure-white p-5 md:p-6 border border-transparent hover:border-primary/20 hover:shadow-[0_12px_32px_-16px_rgba(94,72,50,0.3)] transition-all duration-300"
+                        className="group flex flex-col justify-between h-full rounded-2xl bg-pure-white p-5 md:p-6 border border-transparent hover:border-primary/20 hover-glow transition-all duration-300"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <h3 className="font-display text-xl text-primary leading-snug">{r.name}</h3>

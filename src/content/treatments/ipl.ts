@@ -112,7 +112,7 @@ export const page: TreatmentPage = {
   ],
   image: {
     src: '/images/studio/ipl.jpg',
-    alt: 'IPL-Haarentfernung in Osnabrück: Handstück am Kiefer, Kundin mit Schutzbrille',
+    alt: 'Dauerhafte Haarentfernung in Osnabrück: Behandlung am Kiefer, Kundin mit Schutzbrille',
     width: 800,
     height: 1000,
   },

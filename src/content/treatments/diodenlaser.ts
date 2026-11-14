@@ -110,7 +110,7 @@ export const page: TreatmentPage = {
   ],
   image: {
     src: '/images/studio/diodenlaser.jpg',
-    alt: 'Haarentfernung mit Diodenlaser in Osnabrück: Behandlung am Hals, Kundin mit Schutzbrille',
+    alt: 'Dauerhafte Haarentfernung in Osnabrück: Behandlung am Hals, Kundin mit Schutzbrille',
     width: 800,
     height: 1000,
   },

@@ -7,7 +7,7 @@ export function LinkCard({ href, title, text }: { readonly href: string; readonl
   return (
     <Link
       href={href}
-      className="group block bg-pure-white p-6 rounded-2xl border border-outline-variant/50 hover:border-primary/25 hover:shadow-[0_12px_32px_-16px_rgba(94,72,50,0.3)] transition-all duration-300 h-full"
+      className="group block bg-pure-white p-6 rounded-2xl border border-outline-variant/50 hover:border-primary/25 hover-glow transition-all duration-300 h-full"
     >
       <span className="font-display text-xl text-primary flex items-center justify-between gap-3">
         {title}

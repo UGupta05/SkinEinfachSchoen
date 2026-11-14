@@ -14,15 +14,18 @@
   }
 
   /* Soft, rounded serifs for every Fraunces heading. */
-  .font-display {
+  h1, h2, h3, h4, h5, h6, .font-display {
     font-variation-settings: "SOFT" 100;
     letter-spacing: -0.01em;
   }
 }
 
-/* Warm, diffuse shadow for cards and primary buttons. */
+/* Warm, diffuse shadows: resting (cards, primary buttons) and hover. */
 .medical-glow {
   box-shadow: 0 12px 32px -14px rgba(94, 72, 50, 0.22);
+}
+.hover-glow:hover {
+  box-shadow: 0 12px 32px -16px rgba(94, 72, 50, 0.3);
 }
 
 @layer components {

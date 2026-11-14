@@ -11,7 +11,7 @@ import { ImageLinkCard } from '../components/content/ImageLinkCard';
 import { ReviewsSection } from '../components/ReviewsSection';
 import { YouTubeFacade } from '../components/YouTubeFacade';
 import { salonSchema } from '../lib/schema';
-import { THEME_LIST, themePath } from '../content';
+import { THEMES, THEME_LIST, TREATMENTS, themePath, treatmentPath } from '../content';
 import { GOOGLE_RATING } from '../data/reviews';
 
 export const metadata: Metadata = {
@@ -20,32 +20,27 @@ export const metadata: Metadata = {
   },
 };
 
+// Built from the content registry so names, teasers and photos stay in sync with the treatment pages.
 const FEATURED_TREATMENTS = [
+  ...(['radiofrequenz-microneedling', 'jetpeel'] as const).map((slug) => ({
+    href: treatmentPath(slug),
+    title: TREATMENTS[slug].name,
+    text: TREATMENTS[slug].teaser,
+    image: TREATMENTS[slug].image,
+  })),
   {
-    href: '/leistungen/radiofrequenz-microneedling',
-    title: 'Radiofrequenz-Microneedling',
-    text: 'Feine Nadeln und Radiofrequenz-Wärme für straffere Haut, feinere Poren und ein glatteres Hautbild.',
-    image: { src: '/images/studio/radiofrequenz-microneedling.jpg', width: 800, height: 1000, alt: 'Radiofrequenz-Microneedling an der Stirn einer Kundin bei SKIN einfach schön in Osnabrück' },
+    href: themePath('dauerhafte-haarentfernung'),
+    title: THEMES['dauerhafte-haarentfernung'].name,
+    text: THEMES['dauerhafte-haarentfernung'].teaser,
+    image: THEMES['dauerhafte-haarentfernung'].image,
   },
   {
-    href: '/leistungen/jetpeel',
-    title: 'JetPeel',
-    text: 'Nadelfreie Tiefenreinigung mit hochwertigen Seren als feiner Sprühnebel, für sofortigen Glow ohne Ausfallzeit.',
-    image: { src: '/images/studio/jetpeel.jpg', width: 800, height: 1000, alt: 'JetPeel-Behandlung an der Nase im Studio SKIN einfach schön' },
+    href: treatmentPath('microneedling'),
+    title: TREATMENTS.microneedling.name,
+    text: TREATMENTS.microneedling.teaser,
+    image: TREATMENTS.microneedling.image,
   },
-  {
-    href: '/dauerhafte-haarentfernung',
-    title: 'Dauerhafte Haarentfernung',
-    text: 'Mit Diodenlaser, Alexandritlaser oder IPL, passend zu Ihrem Haut- und Haartyp.',
-    image: { src: '/images/studio/diodenlaser.jpg', width: 800, height: 1000, alt: 'Dauerhafte Haarentfernung am Hals mit Schutzbrille im Studio SKIN einfach schön in Osnabrück' },
-  },
-  {
-    href: '/leistungen/microneedling',
-    title: 'Microneedling',
-    text: 'Regt die hauteigene Erneuerung an, bei feinen Linien, Narben und unebener Hautstruktur.',
-    image: { src: '/images/studio/microneedling.jpg', width: 800, height: 1000, alt: 'Microneedling mit dem Dermapen an der Stirn im Studio SKIN einfach schön' },
-  },
-] as const;
+];
 
 const VIDEOS = [
   {
