@@ -88,12 +88,12 @@ export default function Home() {
       {/* Hero: full-bleed studio photo, oversized wordmark, compact copy block */}
       <section className="relative isolate overflow-hidden bg-onyx-text text-cream min-h-[600px] h-[calc(100svh-11rem)] max-h-[900px]">
         <Image
-          alt="Behandlungsraum von SKIN einfach schön in Osnabrück mit Holzregalen vor dunkler Kupferwand"
-          src="/images/studio/hero-raum.jpg"
+          alt="Empfangslounge von SKIN einfach schön in Osnabrück mit Holzwand, Chesterfield-Sofa und Pampasgras"
+          src="/images/studio/hero-lounge.jpg"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[62%_45%] -z-10"
+          className="object-cover object-[50%_55%] -z-10"
         />
         {/* Warm shading keeps the light type readable on every part of the photo. */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#1f1813]/65 via-[#1f1813]/20 to-[#1f1813]/85" aria-hidden="true" />
@@ -101,10 +101,10 @@ export default function Home() {
 
         <div className="max-w-container-max mx-auto h-full px-margin-mobile md:px-gutter pt-8 md:pt-12 pb-6 flex flex-col">
           <ScrollReveal variant="fade-in-up" immediate>
-            <p className="font-display text-cream leading-[0.88] tracking-[-0.03em] text-[clamp(3.6rem,13vw,11rem)]" aria-hidden="true">
-              einfach
+            <p className="font-display text-cream leading-[0.9] tracking-[-0.03em] text-[clamp(3.2rem,11.5vw,10rem)]" aria-hidden="true">
+              SKIN
               <br />
-              schön
+              einfach schön
             </p>
           </ScrollReveal>
 
