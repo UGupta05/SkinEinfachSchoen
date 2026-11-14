@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
 import { RetinolNotice } from './RetinolNotice';
+import { SiteHeader } from './SiteHeader';
 
 export interface FooterLink {
   readonly name: string;
@@ -36,115 +36,16 @@ function FooterColumn({ title, links }: { readonly title: string; readonly links
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children, treatmentLinks, themeLinks }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     // Scroll to top on route change
     window.scrollTo({ top: 0, behavior: 'instant' });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMobileMenuOpen(false);
   }, [pathname]);
-
-  const navLinks = [
-    { name: 'Leistungen', path: '/leistungen' },
-    { name: 'Medical Kosmetik ZO', path: '/medical-kosmetik-zo' },
-    { name: 'Orthomolekulare Medizin', path: '/orthomolekulare-medizin' },
-    { name: 'Team', path: '/team' },
-    { name: 'Kontakt', path: '/kontakt' }
-  ];
 
   return (
     <div className="min-h-screen bg-background text-on-surface flex flex-col font-sans selection:bg-primary/20">
-      {/* Header / Top Navigation */}
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b ${scrolled
-            ? 'bg-cream/95 backdrop-blur-md medical-glow border-outline-variant/50'
-            : 'bg-cream/90 backdrop-blur-sm border-transparent'
-          }`}
-      >
-        <nav className="flex justify-between items-center h-full px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full">
-          <Link href="/" className="flex items-center">
-            <img
-              src="/images/home/logo.png"
-              alt="SKIN einfach schön"
-              className="h-10 w-auto object-contain"
-            />
-          </Link>
-
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-7">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.path;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.path}
-                  className={`font-sans text-[15px] font-medium transition-colors hover:text-primary nav-link-underline ${isActive
-                      ? 'text-primary active'
-                      : 'text-tertiary'
-                    }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-4">
-
-
-            <Link
-              href="/terminbuchung"
-              className="btn hidden md:inline-flex bg-primary text-pure-white hover:bg-secondary"
-            >
-              Terminbuchung
-            </Link>
-
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden text-primary focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </nav>
-      </header>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 top-20 z-45 bg-cream md:hidden flex flex-col p-8 transition-transform duration-300">
-          <nav className="flex flex-col space-y-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                onClick={() => setMobileMenuOpen(false)}
-                className="font-display text-2xl text-primary border-b border-outline-variant/50 pb-3"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              href="/terminbuchung"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn bg-primary text-pure-white hover:bg-secondary mt-2"
-            >
-              Terminbuchung
-            </Link>
-          </nav>
-        </div>
-      )}
+      <SiteHeader treatmentLinks={treatmentLinks} themeLinks={themeLinks} />
 
       {/* Main Page Area */}
       <main key={pathname} className="flex-1 pt-20 animate-page-entrance">

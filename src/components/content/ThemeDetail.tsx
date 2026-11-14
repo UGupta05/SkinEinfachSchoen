@@ -51,7 +51,7 @@ export function ThemeDetail({ page, breadcrumbs }: { readonly page: ThemePage; r
       </section>
 
       {/* Matching treatments, photo-led */}
-      <section id="behandlungen" className="bg-sand/60 py-16 md:py-20 scroll-mt-36">
+      <section id="behandlungen" className="bg-sand/60 py-16 md:py-20 scroll-mt-24">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
           <h2 className="font-display text-3xl md:text-4xl text-primary mb-10">Passende Behandlungen: {page.name}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
