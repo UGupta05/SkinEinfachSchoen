@@ -20,37 +20,25 @@ export const metadata: Metadata = {
   },
 };
 
-// Names and teasers come from the content registry; the homepage uses its own
-// people-free photos (devices, products) instead of the treatment-page portraits.
-const img = (src: string, alt: string) => ({ src, alt, width: 800, height: 1000 });
-
+// Built from the content registry so names, teasers and photos stay in sync with the treatment pages.
 const FEATURED_TREATMENTS = [
-  {
-    href: treatmentPath('radiofrequenz-microneedling'),
-    title: TREATMENTS['radiofrequenz-microneedling'].name,
-    text: TREATMENTS['radiofrequenz-microneedling'].teaser,
-    image: img('/images/studio/geraet-lapio.jpg', 'Touchscreen des LapiO-Geräts für Radiofrequenz-Microneedling im Studio SKIN einfach schön'),
-  },
-  {
-    href: treatmentPath('jetpeel'),
-    title: TREATMENTS.jetpeel.name,
-    text: TREATMENTS.jetpeel.teaser,
-    image: img('/images/studio/geraet-jetpeel.jpg', 'JetPeel-Gerät: Serum wird vor der Behandlung in das Handstück gefüllt'),
-  },
+  ...(['radiofrequenz-microneedling', 'jetpeel'] as const).map((slug) => ({
+    href: treatmentPath(slug),
+    title: TREATMENTS[slug].name,
+    text: TREATMENTS[slug].teaser,
+    image: TREATMENTS[slug].image,
+  })),
   {
     href: themePath('dauerhafte-haarentfernung'),
     title: THEMES['dauerhafte-haarentfernung'].name,
     text: THEMES['dauerhafte-haarentfernung'].teaser,
-    image: img('/images/studio/geraet-haarentfernung.jpg', 'Display des Geräts zur dauerhaften Haarentfernung mit Einstellungen für Hauttyp und Energie'),
+    image: THEMES['dauerhafte-haarentfernung'].image,
   },
   {
-    href: treatmentPath('fruchtsaeure-peeling'),
-    title: TREATMENTS['fruchtsaeure-peeling'].name,
-    text: TREATMENTS['fruchtsaeure-peeling'].teaser,
-    image: {
-      ...img('/images/studio/produkte-peeling.jpg', 'Peeling-Lösungen, Glasschale und Pinsel vorbereitet für ein chemisches Peeling'),
-      width: 750,
-    },
+    href: treatmentPath('microneedling'),
+    title: TREATMENTS.microneedling.name,
+    text: TREATMENTS.microneedling.teaser,
+    image: TREATMENTS.microneedling.image,
   },
 ];
 
