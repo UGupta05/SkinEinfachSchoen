@@ -20,25 +20,37 @@ export const metadata: Metadata = {
   },
 };
 
-// Built from the content registry so names, teasers and photos stay in sync with the treatment pages.
+// Names and teasers come from the content registry; the homepage uses its own
+// people-free photos (devices, products) instead of the treatment-page portraits.
+const img = (src: string, alt: string) => ({ src, alt, width: 800, height: 1000 });
+
 const FEATURED_TREATMENTS = [
-  ...(['radiofrequenz-microneedling', 'jetpeel'] as const).map((slug) => ({
-    href: treatmentPath(slug),
-    title: TREATMENTS[slug].name,
-    text: TREATMENTS[slug].teaser,
-    image: TREATMENTS[slug].image,
-  })),
+  {
+    href: treatmentPath('radiofrequenz-microneedling'),
+    title: TREATMENTS['radiofrequenz-microneedling'].name,
+    text: TREATMENTS['radiofrequenz-microneedling'].teaser,
+    image: img('/images/studio/geraet-lapio.jpg', 'Touchscreen des LapiO-Geräts für Radiofrequenz-Microneedling im Studio SKIN einfach schön'),
+  },
+  {
+    href: treatmentPath('jetpeel'),
+    title: TREATMENTS.jetpeel.name,
+    text: TREATMENTS.jetpeel.teaser,
+    image: img('/images/studio/geraet-jetpeel.jpg', 'JetPeel-Gerät: Serum wird vor der Behandlung in das Handstück gefüllt'),
+  },
   {
     href: themePath('dauerhafte-haarentfernung'),
     title: THEMES['dauerhafte-haarentfernung'].name,
     text: THEMES['dauerhafte-haarentfernung'].teaser,
-    image: THEMES['dauerhafte-haarentfernung'].image,
+    image: img('/images/studio/geraet-haarentfernung.jpg', 'Display des Geräts zur dauerhaften Haarentfernung mit Einstellungen für Hauttyp und Energie'),
   },
   {
-    href: treatmentPath('microneedling'),
-    title: TREATMENTS.microneedling.name,
-    text: TREATMENTS.microneedling.teaser,
-    image: TREATMENTS.microneedling.image,
+    href: treatmentPath('fruchtsaeure-peeling'),
+    title: TREATMENTS['fruchtsaeure-peeling'].name,
+    text: TREATMENTS['fruchtsaeure-peeling'].teaser,
+    image: {
+      ...img('/images/studio/produkte-peeling.jpg', 'Peeling-Lösungen, Glasschale und Pinsel vorbereitet für ein chemisches Peeling'),
+      width: 750,
+    },
   },
 ];
 
@@ -157,8 +169,8 @@ export default function Home() {
           <ScrollReveal variant="fade-in-up" delay={100} className="md:col-span-6 md:order-1 grid grid-cols-2 gap-4 md:gap-5">
             <div className="aspect-[3/4] overflow-hidden arch-3-4 mt-12">
               <Image
-                alt="Persönliche Beratung im Studio SKIN einfach schön"
-                src="/images/studio/beratung.jpg"
+                alt="Behandlungsraum mit Liege und Regal voller ZO® Skin Health Produkte bei SKIN einfach schön"
+                src="/images/studio/raum-2.jpg"
                 width={750}
                 height={1000}
                 sizes="(min-width: 768px) 300px, 45vw"
@@ -167,10 +179,10 @@ export default function Home() {
             </div>
             <div className="aspect-[3/4] overflow-hidden rounded-2xl">
               <Image
-                alt="Beratung im Studio von SKIN einfach schön"
-                src="/images/home/consultation_team.jpg"
-                width={695}
-                height={1024}
+                alt="Holzregale mit Pflegeprodukten vor dunkler Wand im Behandlungsraum von SKIN einfach schön"
+                src="/images/studio/raum-1.jpg"
+                width={800}
+                height={1000}
                 sizes="(min-width: 768px) 300px, 45vw"
                 className="w-full h-full object-cover"
               />
