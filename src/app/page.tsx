@@ -97,7 +97,11 @@ export default function Home() {
         />
         {/* Warm shading keeps the light type readable on every part of the photo. */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#1f1813]/65 via-[#1f1813]/20 to-[#1f1813]/85" aria-hidden="true" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#1f1813]/55 via-[#1f1813]/15 to-[#1f1813]/45" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#1f1813]/55 via-[#1f1813]/15 to-transparent" aria-hidden="true" />
+        {/* On phones the copy block sits over the busy middle of the photo. */}
+        <div className="absolute inset-0 -z-10 bg-[#1f1813]/35 md:hidden" aria-hidden="true" />
+        {/* The bright shop windows on the right need extra shading. */}
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_left,rgba(31,24,19,0.8)_0%,rgba(31,24,19,0.55)_28%,transparent_55%)]" aria-hidden="true" />
 
         <div className="max-w-container-max mx-auto h-full px-margin-mobile md:px-gutter pt-8 md:pt-12 pb-6 flex flex-col">
           <ScrollReveal variant="fade-in-up" immediate>
