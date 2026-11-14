@@ -126,10 +126,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/treatments/peeling_new.jpg',
-    alt: 'Porenverkleinerung in Osnabrück: Kosmetikerin trägt mit einem Fächerpinsel ein Peeling auf die Stirn einer Kundin auf',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/jetpeel.jpg',
+    alt: 'Porenverkleinerung in Osnabrück: JetPeel-Tiefenreinigung an der Nase',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };

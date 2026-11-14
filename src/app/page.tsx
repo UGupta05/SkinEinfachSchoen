@@ -7,6 +7,7 @@ import { ScrollReveal } from '../components/ScrollReveal';
 import { FaqAccordion } from '../components/FaqAccordion';
 import { JsonLd } from '../components/JsonLd';
 import { LinkCard } from '../components/content/LinkCard';
+import { ImageLinkCard } from '../components/content/ImageLinkCard';
 import { ReviewsSection } from '../components/ReviewsSection';
 import { YouTubeFacade } from '../components/YouTubeFacade';
 import { salonSchema } from '../lib/schema';
@@ -201,24 +202,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {FEATURED_TREATMENTS.map((t, i) => (
               <ScrollReveal key={t.href} variant="fade-in-up" delay={i * 70}>
-                <Link href={t.href} className="group block h-full">
-                  <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-sand">
-                    <Image
-                      alt={t.image.alt}
-                      src={t.image.src}
-                      width={t.image.width}
-                      height={t.image.height}
-                      sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <h3 className="font-display text-2xl text-primary mt-5">{t.title}</h3>
-                  <p className="font-sans text-sm text-tertiary leading-relaxed mt-2">{t.text}</p>
-                  <span className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-primary mt-3">
-                    Mehr erfahren
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </span>
-                </Link>
+                <ImageLinkCard href={t.href} title={t.title} text={t.text} image={t.image} />
               </ScrollReveal>
             ))}
           </div>

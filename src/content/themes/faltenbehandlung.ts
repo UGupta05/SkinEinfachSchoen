@@ -123,10 +123,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/home/treatment_closeup_new.jpg',
-    alt: 'Faltenbehandlung in Osnabrück: Kosmetikerin behandelt die Augenpartie einer Kundin mit einem feinen Handstück',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/microneedling.jpg',
+    alt: 'Faltenbehandlung in Osnabrück mit Microneedling an der Stirn',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };

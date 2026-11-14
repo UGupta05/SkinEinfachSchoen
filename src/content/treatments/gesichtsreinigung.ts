@@ -123,10 +123,10 @@ export const page: TreatmentPage = {
   relatedThemes: ['akne-behandlung', 'porenverkleinerung'],
   relatedTreatments: ['jetpeel', 'fruchtsaeure-peeling', 'visia'],
   image: {
-    src: '/images/treatments/klassische_kosmetik_new.jpg',
-    alt: 'Gesichtsreinigung in Osnabrück: Kosmetikerin nimmt eine Maske mit dem Pinsel aus der Glasschale, im Hintergrund die liegende Kundin',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/gesichtsreinigung.jpg',
+    alt: 'Gesichtsreinigung in Osnabrück: Maske wird mit dem Pinsel aus einer Schale aufgetragen',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-10-20',
 };

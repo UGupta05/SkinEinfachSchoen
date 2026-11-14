@@ -101,10 +101,10 @@ export const page: ThemePage = {
     },
   ],
   image: {
-    src: '/images/home/treatment_closeup_new.jpg',
-    alt: 'Nahaufnahme einer Narbenbehandlung im Gesicht: feiner Applikator an der Augenbraue einer Kundin',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/meso-bb-glow.jpg',
+    alt: 'Narbenbehandlung in Osnabrück mit dem Dermapen',
+    width: 800,
+    height: 1000,
   },
   treatments: [
     {

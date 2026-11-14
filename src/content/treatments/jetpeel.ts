@@ -138,10 +138,10 @@ export const page: TreatmentPage = {
   relatedThemes: ['porenverkleinerung', 'akne-behandlung'],
   relatedTreatments: ['gesichtsreinigung', 'fruchtsaeure-peeling', 'meso-bb-glow', 'visia'],
   image: {
-    src: '/images/treatments/jetpeel_new.jpg',
-    alt: 'JetPeel in Osnabrück: Kosmetikerin führt das Handstück mit feinem Sprühnebel über die Stirn einer entspannten Kundin',
-    width: 576,
-    height: 1024,
+    src: '/images/studio/jetpeel.jpg',
+    alt: 'JetPeel in Osnabrück: feiner Sprühnebel an der Nase einer entspannten Kundin',
+    width: 800,
+    height: 1000,
   },
   updatedAt: '2026-11-03',
 };
