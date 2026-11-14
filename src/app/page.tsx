@@ -24,25 +24,25 @@ const FEATURED_TREATMENTS = [
     href: '/leistungen/radiofrequenz-microneedling',
     title: 'Radiofrequenz-Microneedling',
     text: 'Feine Nadeln und Radiofrequenz-Wärme für straffere Haut, feinere Poren und ein glatteres Hautbild.',
-    image: { src: '/images/home/mrf_microneedling.jpg', width: 1024, height: 576, alt: 'Radiofrequenz-Microneedling bei SKIN einfach schön in Osnabrück' },
+    image: { src: '/images/studio/radiofrequenz-microneedling.jpg', width: 800, height: 1000, alt: 'Radiofrequenz-Microneedling an der Stirn einer Kundin bei SKIN einfach schön in Osnabrück' },
   },
   {
     href: '/leistungen/jetpeel',
     title: 'JetPeel',
     text: 'Nadelfreie Tiefenreinigung mit hochwertigen Seren als feiner Sprühnebel, für sofortigen Glow ohne Ausfallzeit.',
-    image: { src: '/images/treatments/jetpeel_new.jpg', width: 576, height: 1024, alt: 'JetPeel-Behandlung im Studio SKIN einfach schön' },
+    image: { src: '/images/studio/jetpeel.jpg', width: 800, height: 1000, alt: 'JetPeel-Behandlung an der Nase im Studio SKIN einfach schön' },
   },
   {
     href: '/dauerhafte-haarentfernung',
     title: 'Dauerhafte Haarentfernung',
     text: 'Mit Diodenlaser, Alexandritlaser oder IPL, passend zu Ihrem Haut- und Haartyp.',
-    image: { src: '/images/treatments/ipl_new1.jpg', width: 576, height: 1024, alt: 'Dauerhafte Haarentfernung im Studio SKIN einfach schön in Osnabrück' },
+    image: { src: '/images/studio/diodenlaser.jpg', width: 800, height: 1000, alt: 'Dauerhafte Haarentfernung am Hals mit Schutzbrille im Studio SKIN einfach schön in Osnabrück' },
   },
   {
     href: '/leistungen/microneedling',
     title: 'Microneedling',
     text: 'Regt die hauteigene Erneuerung an, bei feinen Linien, Narben und unebener Hautstruktur.',
-    image: { src: '/images/treatments/microneedling_new.jpg', width: 576, height: 1024, alt: 'Microneedling-Behandlung im Studio SKIN einfach schön' },
+    image: { src: '/images/studio/microneedling.jpg', width: 800, height: 1000, alt: 'Microneedling mit dem Dermapen an der Stirn im Studio SKIN einfach schön' },
   },
 ] as const;
 
@@ -117,8 +117,8 @@ export default function Home() {
           <ScrollReveal variant="fade-in" immediate className="lg:col-span-6 relative">
             <div className="relative mx-auto max-w-[520px] aspect-[4/5] arch overflow-hidden medical-glow">
               <Image
-                alt="Behandlungsraum von SKIN einfach schön in Osnabrück"
-                src="/images/home/home_hero_new_3.jpg"
+                alt="Kosmetikerin von SKIN einfach schön lächelt während einer Gesichtsbehandlung im Studio in Osnabrück"
+                src="/images/studio/hero-behandlung.jpg"
                 fill
                 priority
                 sizes="(min-width: 1024px) 520px, 90vw"
@@ -161,10 +161,10 @@ export default function Home() {
           <ScrollReveal variant="fade-in-up" delay={100} className="md:col-span-6 md:order-1 grid grid-cols-2 gap-4 md:gap-5">
             <div className="aspect-[3/4] overflow-hidden arch-3-4 mt-12">
               <Image
-                alt="Gesichtsbehandlung bei SKIN einfach schön"
-                src="/images/home/treatment_closeup_new.jpg"
-                width={576}
-                height={1024}
+                alt="Persönliche Beratung im Studio SKIN einfach schön"
+                src="/images/studio/beratung.jpg"
+                width={750}
+                height={1000}
                 sizes="(min-width: 768px) 300px, 45vw"
                 className="w-full h-full object-cover"
               />
